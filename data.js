@@ -95,11 +95,17 @@ window.NOVA = {
 
     { id: "zirbus", name: "Zirbus Technology", cat: "sterile", country: "Germany", since: "1984",
       url: "https://www.zirbus.com",
-      about: ["German manufacturer since 1984 with a strong global reputation.",
-              "Specialized in autoclaves and freeze dryers.",
-              "Highly customized, hand-crafted equipment made exclusively in Germany.",
-              "Trusted partner for the pharmaceutical, food, research, and medical sectors."],
-      products: ["Autoclaves", "Freeze Dryers", "Thermal Systems"] },
+      about: ["German manufacturer of autoclaves and freeze dryers since 1984, in Bad Grund (Harz) — all construction, welding, assembly, programming and testing in house.",
+              "Certified quality: DIN EN ISO 9001 with risk management, ASME and PED Module H.",
+              "From bench-top lab units to GMP production autoclaves up to 18,000 L and freeze dryers up to 65 m² / 1,200 kg ice.",
+              "Installed in Egypt at MEVAC Pharma (vaccines), Cairo, Alexandria, Benha and Fayoum universities, and CMRDI.",
+              "Production freeze dryers running at Farmhispania, Samyang Biopharma, Contipro, Lactina and others worldwide."],
+      groups: [
+        { t: "Laboratory", items: ["LabStar table-top autoclaves 25–200 L", "LVSA vertical autoclaves 80–153 L", "VaCo freeze dryers 2–15 kg/24 h"] },
+        { t: "Pilot & production freeze dryers", items: ["Sublimator pilot 5–40 kg", "Production freeze dryers to 65 m² / 1,200 kg", "EKS / EKS-R bulk and food dryers", "Special dryers and isolators"] },
+        { t: "Production autoclaves", items: ["HST floor-standing 150–1,033 L", "Large standing 568–5,060 L", "Production autoclaves to 18,000 L", "High-pressure autoclaves to 20 bar"] },
+        { t: "Thermal systems & service", items: ["Steamboy steam generators", "Vacuum and tray dryers", "Media preparator, waste-water sterilisers", "ServTec service and validation"] }
+      ] },
 
     { id: "tm", name: "TM – Fluid Dispensing Technology", cat: "sterile", country: "Italy", since: "Early 2000s",
       url: "https://www.tm-italia.it/",
@@ -110,23 +116,43 @@ window.NOVA = {
 
     { id: "pluemat", name: "Plümat", cat: "sterile", country: "Germany", since: "1975",
       url: "https://www.pluemat.info/en",
-      about: ["German manufacturer since 1975 — over 45 years of expertise in filling and sealing technology, supported by in-house R&D.",
-              "Innovator in pharmaceutical packaging lines with numerous patented technologies.",
-              "Manufacturer of polyolefin bags and advanced packaging solutions."],
-      products: ["Form, Fill & Seal Lines for IV Solution Bags", "Blow, Fill & Seal Lines for IV Bottles", "Customized Machines"] },
+      about: ["Founded in 1975 in Espelkamp, Germany — a family-owned company now run by the second generation, with about 250 employees and ~90% export.",
+              "More than 2,700 filling and bag-making lines delivered worldwide; the leader in polyolefin (PP) IV-bag technology.",
+              "Pioneer of form-fill-seal for IV bags since 1996, now in its third generation (FFS 991 / 992).",
+              "Group includes Colpitt (HF-welding for IV and blood bags, since 2011) and Plümat Packaging Systems (bags, ports and components).",
+              "Applications: standard IV solutions, nutrition (TPN), antibiotics, plasma and blood products, contrast media, amino acids and dialysis."],
+      groups: [
+        { t: "Form Fill Seal lines", items: ["FFS 991 / 992 SFC-Port (2,300 / 4,200 bags/h)", "FFS 3000 / 6000 Port", "FFS 3000 / 6000 Tube"] },
+        { t: "Filling & sealing", items: ["BFM 007 modular bag filler (50–5,000 ml)", "PLÜMATEX-F 014 CF canister filler", "Bag making, overwrapping and aseptic machines"] },
+        { t: "Bottles, inspection & components", items: ["Bottle filling and sealing (plastic and glass)", "Isolators, leak detection, customised machines", "SFC / MFC ports, empty bags, packaging consulting"] }
+      ] },
 
     { id: "mpa", name: "MPA Technical Devices", cat: "sterile", country: "Italy", since: "1998",
       url: "https://mpaitaly.com/en/",
-      about: ["Leading manufacturer since 1998 of advanced filling solutions for the pharmaceutical industry.",
-              "Super finishing — tube internal surfaces honed to Ra < 0.4 µm.",
-              "Manufactured from 316L stainless steel, Hastelloy C-22 or plastics including Ketron Peek®."],
-      products: ["Metering Pumps, Needles, Manifolds", "Stopper Guide Tubes, Plungers, Distributors, Screw Conveyors", "Rotary Valves, Fluid Nozzles, Format Parts, Filter Housings", "Blowers, Molds, Dispensers, Protection & Storage"] },
+      about: ["Italian specialist since 1998 in high-precision dosing components for pharmaceutical filling machines, based in Tuscany's pharma packaging district.",
+              "OEM-equivalent pumps, needles and parts for the leading filling-machine brands — 16 of the world's top 20 pharma companies are customers.",
+              "Part of the Arventia Group since 2023; about 45 people and a new production facility under development.",
+              "Works in 316L, titanium, Hastelloy C-22, ceramics and FDA plastics (PEEK, PVDF, Delrin); internal finish down to Ra < 0.2 µm.",
+              "Full traceability (EN 10204 3.1), GMP / FDA / EU compliant, with repair and refurbishing of existing parts."],
+      groups: [
+        { t: "Dosing pumps", items: ["Stainless steel volumetric pumps (CIP/SIP, differential, micro)", "Ceramic pumps (alumina / zirconia)", "DLC-AM chrome-free coating", "Peristaltic pump head and stand-alone filler"] },
+        { t: "Filling needles", items: ["Filling, washing, nitrogen and gassing needles (316L / PEEK)", "Single-use 3D-printed needles"] },
+        { t: "Format & machine parts", items: ["Manifolds, tanks and connections", "Stopper guide tubes, screw conveyors", "Star wheels, grippers, custom parts", "Autoclave and storage cases"] }
+      ] },
 
     { id: "am", name: "AM Instruments", cat: "sterile", country: "Italy", since: "1990",
       url: "https://www.aminstruments.com/en/",
-      about: ["Italian company founded in 1990, specializing in contamination control solutions for cleanrooms.",
-              "Serves pharmaceutical, life sciences, and laboratory industries with GMP-compliant products and services."],
-      products: ["Pharmaclean®", "Zherox® Environmental Biodecontamination", "LAF – Laminar Flow", "Particle & Microbiological Monitoring Systems", "Smoke Generators for Airflow Visualization", "Air Showers & Dust Collectors", "Transfer Systems with Continuous Particle Monitoring"] },
+      about: ["Italian company founded in 1990 in Limbiate (Milan), specialised in contamination control for cleanrooms — ISO 9001 certified by DNV.",
+              "Pharmaclean® consumables made and packed in its own Grade C cleanroom (EU GMP Annex 1).",
+              "Zherox® HPE bio-decontamination: 7.8% ionised hydrogen peroxide — portable, mobile, fixed and pass-box systems.",
+              "AM Tech designs and builds LAF modules, transfer trolleys, pass-boxes, air showers and RABS in house.",
+              "Environmental monitoring systems, SmartProbe®, MyFog® smoke studies and PAMAS liquid particle counters."],
+      groups: [
+        { t: "Pharmaclean® consumables", items: ["Tyvek® bags, covers and needle bags", "Peelable bags and reels", "Integra® bags, MyWipe® wipes, mats, cleaning tools"] },
+        { t: "Zherox® HPE bio-decontamination", items: ["Zherox® b-pack (portable)", "Zherox® Light (up to 300 m³)", "Zherox® Fixed System (27 nozzles)", "MyBox® HPE pass-box"] },
+        { t: "Laminar flow & transfer", items: ["LAFSPC custom and Multiplo® LAF modules", "LAF cabinets, LAF trolleys, CART2COUNT", "Air showers, dynamic pass-boxes, RABS"] },
+        { t: "Monitoring", items: ["Particle and microbiological monitoring systems", "SmartProbe®, MyFog®, PAMAS"] }
+      ] },
 
     // ---------- NON-STERILE ----------
     { id: "freund", name: "Freund", cat: "nonsterile", country: "Italy / USA", since: "1964",
