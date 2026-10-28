@@ -530,8 +530,8 @@ ul.dots li{margin:4px 0}
 .pdh p{margin:8px 0 0;color:rgba(255,255,255,.82);font-size:14px;position:relative;z-index:1}
 .pdph{background:#fff;border-bottom:1px solid var(--line);height:170px;display:flex;align-items:center;justify-content:center;padding:10px}
 .pdph img{max-height:100%;max-width:100%;object-fit:contain}
-.pdph.pdimg{height:260px;padding:0;background:#141414}.pdph.pdimg img{height:100%;width:100%;object-fit:contain}
-.ci .cith{width:46px;height:46px;border-radius:9px;object-fit:cover;flex:none;background:#141414}
+.pdph.pdimg{height:260px;padding:0;background:#fff}.pdph.pdimg.dark{background:#141414}.pdph.pdimg img{height:100%;width:100%;object-fit:contain}
+.ci .cith{width:46px;height:46px;border-radius:9px;object-fit:cover;flex:none;background:#fff;border:1px solid var(--line)}
 .pdov{font-size:15px;line-height:1.6;margin:0}
 .pdf{display:grid;gap:8px;margin:0;padding:0;list-style:none}
 .pdf li{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:var(--bg);border:1px solid var(--line);font-size:14px;line-height:1.4}
@@ -937,7 +937,7 @@ function product(a){
     <h1>${esc(x[0])}</h1>
     ${x[1] ? `<p>${esc(x[1])}</p>` : ''}
   </div>
-  ${x[4] ? `<div class="pdph pdimg"><img src="img/${x[4]}" alt="${esc(x[0])}"></div>` : p.id !== 'techniconsult' ? `<div class="pdph"><img src="img/photo_${p.id}.jpg" alt="${esc(p.name)} equipment"></div>` : ''}
+  ${x[4] ? `<div class="pdph pdimg${x[4].startsWith('prod_andock') ? ' dark' : ''}"><img src="img/${x[4]}" alt="${esc(x[0])}"></div>` : p.id !== 'techniconsult' ? `<div class="pdph"><img src="img/photo_${p.id}.jpg" alt="${esc(p.name)} equipment"></div>` : ''}
   <div class="wrap">
     ${d.o ? `<div class="card"><div class="eyebrow">Overview</div><p class="pdov">${esc(d.o)}</p></div>` : ''}
     ${d.f && d.f.length ? `<div class="card"><div class="eyebrow">Key features</div><ul class="pdf">${d.f.map((f, i) => `<li><i>${i + 1}</i><span>${esc(f)}</span></li>`).join('')}</ul></div>` : ''}

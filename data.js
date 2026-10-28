@@ -66,22 +66,31 @@ window.NOVA = {
 
   partners: [
     // ---------- STERILE ----------
-    { id: "adam", name: "Adam Fabriwerk", cat: "sterile", country: "India", since: "40+ years",
+    { id: "adam", name: "Adam Fabriwerk", cat: "sterile", country: "India", since: "1982",
       url: "https://adamfabriwerk.com/",
-      about: ["Indian leader operating for over 40 years in the pharma market.",
-              "Advanced engineering solutions for pharma & biotech manufacturing.",
-              "Specialists in customized process systems and automation — from concept to commissioning, complete turnkey execution.",
-              "Committed to quality, compliance, and long-term customer support."],
-      products: ["Mobile Skids", "Integrated Skids", "Ointment & Cream Processing Systems", "Liquid Oral Processing Systems"] },
-
-    { id: "steriline", name: "Steriline", cat: "sterile", country: "Italy",
-      url: "https://www.steriline.it/en/home/",
-      about: ["Italian specialist in aseptic processing lines for vials and nested containers, from washing to filling, capping and decontamination."],
+      about: ["Established in 1982 — over 35 years designing customised process systems for pharmaceutical and biopharmaceutical plants.",
+              "Turnkey solutions for aseptic mixing and blending, ointment and cream manufacturing, and liquid oral plants.",
+              "8,000 m² manufacturing, assembly and testing facility in Nashik, India, with a dedicated FAT area and 200+ employees.",
+              "Designed to US FDA, EU GMP, cGMP, ASME BPE and PED, with S88 / GAMP 5 automation compliant with 21 CFR Part 11.",
+              "Full support: design, engineering, manufacturing, FAT, installation, commissioning, validation, training and service."],
       groups: [
-        { t: "Standard Range", items: ["Rotary Washing Machine RA-RC", "Depyrogenation Tunnel ST", "Filling Machines VFM", "Vial Capping Machines VCM", "External Decontamination Machines EDM", "Ancillary Equipment"] },
-        { t: "Robotic Range", items: ["Vial Filling Machines RVFM", "Vial Capping Machines RVCM", "External Decontamination Machines", "Tray Loader RTL", "Pulsed Light Sterilizer RPLS1", "Nest Filling Line RNFM"] },
-        { t: "Barrier Systems", items: ["LAF and oRABS", "In-line cRABS and Isolator"] },
-        { t: "Aseptic Compounding", items: ["Aseptic Compounding System"] }
+        { t: "Process skids", items: ["Mobile skids, 5–500 L", "Integrated skids, 5–30,000 L", "Super skids — complete plants shipped assembled", "CIP modules"] },
+        { t: "Processing systems", items: ["Sterile & biopharma (SVP, IV fluids, vaccines, insulin, mAb)", "Ointment & cream systems, 5–20,000 kg", "Liquid oral systems, 50–30,000 L"] },
+        { t: "Services", items: ["Intelligent automation (PLC-SCADA, EBR)", "Project management, quality & validation (DQ–PQ)"] }
+      ] },
+
+    { id: "steriline", name: "Steriline", cat: "sterile", country: "Italy", since: "1989",
+      url: "https://www.steriline.it/en/home/",
+      about: ["Founded in 1989 near Lake Como, Italy — a specialist in complete lines for the aseptic processing of injectable products.",
+              "Single-source supplier from washing and depyrogenation to filling, capping, external decontamination and barrier systems.",
+              "Pioneer of robotics in aseptic processing since 2014, with VHP-resistant Stäubli robots and zero-loss, format-free machines.",
+              "Over 1,300 machines installed in Europe, Asia and the USA; active in more than 50 countries with about 90% export.",
+              "Handles vials, ampoules, cartridges and syringes — liquid, lyophilised or powder, toxic or non-toxic — all cGMP, GAMP and 21 CFR Part 11 compliant."],
+      groups: [
+        { t: "Standard range", items: ["Rotary washing machine RA-RC (24,000 pcs/h)", "Depyrogenation tunnel ST (STC25–ST20)", "Filling machine VFM (24,000 pcs/h)", "Ampoule filling machine AFM", "Capping machine VCM", "External decontamination EDM (48,000 pcs/h)", "Ancillary equipment"] },
+        { t: "Robotic range", items: ["Vial filling RVFM", "Vial capping RVCM", "Nest filling RNFM (RTU syringes, vials, cartridges)", "Tray loader RTL", "Tub decontamination RTDS2", "External decontamination EDM-RHP"] },
+        { t: "Containment & isolation", items: ["LAF and oRABS", "In-line cRABS and isolator (OEB 5)", "Stand-alone isolator"] },
+        { t: "Other", items: ["Intelligent compounding system (ICS)", "SaniCO room sanitisation", "After-sales & laboratory services"] }
       ] },
 
     { id: "zirbus", name: "Zirbus Technology", cat: "sterile", country: "Germany", since: "1984",
