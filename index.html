@@ -555,6 +555,167 @@ ul.dots li{margin:4px 0}
 .pdnav a b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pdnav a.r{text-align:right}
 .pdnote{font-size:12px;color:var(--muted);margin:12px 2px 0}
+.ttLines{display:flex;gap:6px;overflow-x:auto;padding:12px 16px 0;scrollbar-width:none}
+.ttLines button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;cursor:pointer;display:flex;gap:6px;align-items:center}
+.ttLines button small{font-size:11px;color:var(--muted);font-weight:700}
+.ttLines button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.ttLines button.on small{color:var(--gold)}
+.ttLines button.add{border-style:dashed;color:var(--navy)}
+.ttHalf{margin-top:14px;border:1px solid var(--line);border-radius:16px;padding:12px;background:var(--card);border-top:4px solid var(--navy)}
+.ttHalf.agg{border-top-color:var(--gold)}
+.ttHalfH{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.ttHalfH span{font-size:18px;color:var(--gold)}
+.ttHalfH b{font-size:16px}
+.ttHalfH small{margin-left:auto;color:var(--muted);font-size:12px}
+.ttLvGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ttLvGrid button{text-align:left;border:2px solid var(--line);background:var(--bg);border-radius:12px;padding:10px;cursor:pointer;color:var(--ink);font:inherit;position:relative}
+.ttLvGrid button b{display:block;font-size:14px}
+.ttLvGrid button span{font-size:11.5px;color:var(--muted)}
+.ttLvGrid button.on{border-color:var(--gold);background:var(--gold-soft)}
+.ttLvGrid button.on:after{content:"✓";position:absolute;top:8px;right:10px;color:#2fa36b;font-weight:800}
+.ttPoint{margin-top:10px;background:var(--gold-soft);border:1px solid var(--gold);border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.45}
+.ttSt{display:inline-block;font-size:10.5px;font-weight:700;color:var(--c);border:1px solid var(--c);border-radius:999px;padding:1px 7px;margin-top:4px}
+.ttMk .ttSt{display:table;margin-top:6px}
+/* ---------- Track & Trace builder ---------- */
+.ttHot{display:flex;align-items:center;gap:12px;margin:16px 0 0;padding:16px 14px 14px;border-radius:18px;color:#fff;position:relative;overflow:hidden;isolation:isolate;
+  background:linear-gradient(120deg,#a50f2a,#e23a2a 50%,#f7a12c);box-shadow:0 0 0 2px rgba(255,210,120,.65),0 12px 30px rgba(230,60,40,.45);animation:ttGlowB 2.2s ease-in-out infinite}
+.ttHot .glow{position:absolute;inset:-40%;z-index:-1;background:conic-gradient(from 0deg,transparent,rgba(255,230,150,.55),transparent 30%);animation:ttSpin 4s linear infinite}
+.ttHot:before{content:"";position:absolute;inset:2px;border-radius:16px;z-index:-1;background:linear-gradient(120deg,#a50f2a,#e23a2a 50%,#f7a12c)}
+.ttHot:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-100%);animation:ttShine 2.6s ease-in-out infinite}
+.ttHot .rib{position:absolute;top:0;right:0;background:#fff;color:#c0182f;font-size:10.5px;font-weight:900;letter-spacing:.12em;padding:5px 10px 5px 12px;border-bottom-left-radius:12px;animation:ttPulse 1.2s infinite}
+.ttHot .fl{position:relative;width:58px;height:58px;border-radius:16px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;flex:none}
+.ttHot .bolt{position:absolute;right:-8px;bottom:-8px;font-style:normal;font-size:22px;animation:ttFlick 1s ease-in-out infinite;filter:drop-shadow(0 0 6px #ffd36b)}
+.ttHot .tx{flex:1;position:relative}
+.ttHot .tx b{display:block;font-size:17px;letter-spacing:.01em;text-shadow:0 1px 8px rgba(0,0,0,.25)}
+.ttHot .tx span{display:block;font-size:12.5px;color:#fff3e8;margin-top:2px;line-height:1.35}
+.ttHot .tx em{display:inline-block;margin-top:8px;font-style:normal;font-weight:800;font-size:12.5px;background:#fff;color:#c0182f;padding:5px 11px;border-radius:999px;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.ttHot.land{animation:ttLand .7s cubic-bezier(.2,1.6,.4,1),ttGlowB 2.2s ease-in-out .7s infinite}
+@keyframes ttGlowB{0%,100%{box-shadow:0 0 0 2px rgba(255,210,120,.6),0 12px 30px rgba(230,60,40,.45)}50%{box-shadow:0 0 0 3px rgba(255,230,150,.95),0 0 34px rgba(255,140,60,.85)}}
+@keyframes ttSpin{to{transform:rotate(360deg)}}
+@keyframes ttLand{0%{transform:scale(.6)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+.ttFab{position:fixed;right:14px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:40;display:flex;align-items:center;gap:8px;padding:11px 14px 11px 11px;border-radius:999px;color:#fff;font-weight:800;font-size:14px;
+  background:linear-gradient(120deg,#c0182f,#ef5a2a 60%,#f7a12c);box-shadow:0 10px 26px rgba(192,24,47,.5),0 0 0 2px rgba(255,220,140,.8);animation:ttPop .7s cubic-bezier(.2,1.6,.4,1) both, ttBob 2.4s ease-in-out .8s infinite}
+.ttFab .ttRingO{position:absolute;inset:0;border-radius:999px;border:2px solid #ff7a3d;animation:ttRingOut 1.8s ease-out infinite}
+.ttFab .ttRingO.p2{animation-delay:.9s}
+.ttFab .e{width:34px;height:34px;border-radius:50%;background:#fff;color:#c0182f;display:flex;align-items:center;justify-content:center;font-size:19px;animation:ttFlick 1.2s ease-in-out infinite}
+.ttFab small{display:block;font-size:10px;font-weight:900;letter-spacing:.14em;opacity:.9}
+.ttFab .x{margin-left:4px;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:12px;line-height:1;position:relative}
+@keyframes ttRingOut{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.35,1.8);opacity:0}}
+.ttBoom{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;pointer-events:auto;overflow:hidden;background:rgba(10,14,40,.55);animation:ttBgIn .25s both}
+.ttBoom.out{animation:ttBgOut .45s both}
+.ttBoom .fx{position:absolute;width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,#fff 0,#ffe39a 30%,#ff7a3d 60%,transparent 70%);animation:ttFlash .9s ease-out .25s both}
+.ttBoom .rg{position:absolute;width:60px;height:60px;border-radius:50%;border:4px solid #ffd36b;opacity:0;animation:ttWave 1.1s ease-out .35s both}
+.ttBoom .rg.r2{border-color:#ff7a3d;animation-delay:.5s}
+.ttBoom .rg.r3{border-color:#fff;border-width:2px;animation-delay:.7s}
+.ttBoom .sp{position:absolute;width:6px;height:16px;border-radius:3px;background:var(--c);opacity:0;transform:rotate(var(--a));animation:ttSpark .9s ease-out both}
+.ttBoom .lt{position:absolute;width:44px;height:130px;fill:#ffe27a;filter:drop-shadow(0 0 12px #ffd36b);opacity:0;animation:ttBolt .5s steps(2) both}
+.ttBoom .l1{left:14%;top:12%;animation-delay:.1s;transform:rotate(-12deg)}
+.ttBoom .l2{right:12%;top:20%;animation-delay:.22s;transform:rotate(14deg) scaleX(-1)}
+.ttBoom .bd{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:20px 26px;border-radius:24px;color:#fff;text-align:center;
+  background:linear-gradient(135deg,#a50f2a,#e23a2a 55%,#f7a12c);box-shadow:0 0 0 3px #ffd36b,0 0 60px rgba(255,150,60,.9);animation:ttBadge 2.4s cubic-bezier(.2,1.4,.4,1) .45s both}
+.ttBoom .bd .e{font-size:44px;animation:ttFlick .8s ease-in-out infinite}
+.ttBoom .bd b{font-size:24px}
+.ttBoom .bd small{font-size:11px;font-weight:900;letter-spacing:.2em;color:#ffe9c9}
+@keyframes ttBgIn{from{opacity:0}to{opacity:1}}
+@keyframes ttBgOut{to{opacity:0;visibility:hidden}}
+@keyframes ttFlash{0%{transform:scale(0);opacity:1}40%{transform:scale(14);opacity:1}100%{transform:scale(22);opacity:0}}
+@keyframes ttWave{0%{transform:scale(.2);opacity:1}100%{transform:scale(9);opacity:0}}
+@keyframes ttSpark{0%{opacity:1;transform:rotate(var(--a)) translateY(0)}100%{opacity:0;transform:rotate(var(--a)) translateY(calc(-1*var(--d)))}}
+@keyframes ttBolt{0%,100%{opacity:0}50%{opacity:1}}
+@keyframes ttBadge{0%{transform:scale(0) rotate(-12deg);opacity:0}25%{transform:scale(1.15) rotate(3deg);opacity:1}35%,80%{transform:scale(1) rotate(0)}100%{transform:translate(28vw,38vh) scale(.25);opacity:0}}
+
+@keyframes ttFlick{0%,100%{transform:scale(1) rotate(-4deg)}50%{transform:scale(1.12) rotate(4deg)}}
+@keyframes ttPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes ttShine{0%,60%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes ttPop{0%{transform:scale(0) translateY(40px);opacity:0}100%{transform:none;opacity:1}}
+@keyframes ttBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.ttTop{background:linear-gradient(135deg,var(--navy-2),var(--navy));color:#fff;padding:18px 16px 16px;position:relative;overflow:hidden}
+.ttTop h1{margin:2px 0 4px;font-size:22px}
+.ttTop p{margin:0;color:#c9cfe6;font-size:13.5px}
+.ttScore{display:flex;align-items:center;gap:14px;margin-top:14px;background:rgba(255,255,255,.08);border-radius:14px;padding:10px 12px}
+.ttRing{--p:0;width:58px;height:58px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;
+  background:conic-gradient(var(--gold) calc(var(--p)*1%),rgba(255,255,255,.14) 0);position:relative;transition:--p .6s}
+.ttRing:before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--navy-2)}
+.ttRing span{position:relative}
+.ttScore b{display:block;font-size:14.5px}
+.ttScore small{color:#c9cfe6;font-size:12px}
+.ttXp{margin-left:auto;text-align:right}
+.ttXp b{color:var(--gold);font-size:18px}
+.ttBadges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.ttBadge{font-size:11.5px;padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.1);color:#c9cfe6}
+.ttBadge.ok{background:#2fa36b;color:#fff}
+.ttSteps{display:flex;gap:6px;padding:12px 16px 0;position:sticky;top:0;z-index:5;background:var(--bg)}
+.ttSteps a{flex:1;text-align:center;font-size:12px;font-weight:600;padding:9px 4px;border-radius:10px;background:var(--chip);color:var(--muted)}
+.ttSteps a.on{background:var(--navy);color:#fff}
+.ttSteps a.done{color:var(--ink)}
+.ttSteps a.done:before{content:"✓ ";color:#2fa36b}
+.ttSec{padding:12px 16px}
+.ttOpt{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ttOpt button{text-align:left;border:2px solid var(--line);background:var(--card);border-radius:14px;padding:12px;cursor:pointer;color:var(--ink);font:inherit}
+.ttOpt button b{display:block;font-size:14px;margin:6px 0 2px}
+.ttOpt button span{font-size:12px;color:var(--muted)}
+.ttOpt button.on{border-color:var(--gold);background:var(--gold-soft)}
+.ttOpt .em{font-size:24px}
+.ttMk{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ttMk button{position:relative;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:14px;padding:12px 12px 10px;cursor:pointer;color:var(--ink);font:inherit;transition:transform .15s}
+.ttMk button:active{transform:scale(.97)}
+.ttMk button.on{border-color:var(--gold);background:var(--gold-soft)}
+.ttMk button.on:after{content:"✓";position:absolute;top:8px;right:10px;width:20px;height:20px;border-radius:50%;background:#2fa36b;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center}
+.ttMk .fl2{font-size:26px;line-height:1}
+.ttMk b{display:block;font-size:14px;margin-top:6px}
+.ttMk span{font-size:11.5px;color:var(--muted)}
+.ttFacts{margin-top:10px}
+.ttFacts details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px}
+.ttFacts summary{font-weight:600;font-size:14px;cursor:pointer}
+.ttFacts ul{margin:8px 0 0;padding-left:18px;font-size:13px;color:var(--ink)}
+.ttFacts li{margin:4px 0}
+.ttTray{position:fixed;left:0;right:0;bottom:calc(58px + env(safe-area-inset-bottom));z-index:6;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -8px 20px rgba(20,30,70,.12);padding:8px 0 8px}
+.ttTabs{display:flex;gap:6px;align-items:center;padding:0 12px 6px}
+.ttTabs button{border:0;background:var(--chip);color:var(--ink);font:inherit;font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;cursor:pointer}
+.ttTabs button.on{background:var(--navy);color:#fff}
+.ttTabs span{margin-left:auto;font-size:11px;color:var(--gold);font-weight:700;animation:ttBob 2s ease-in-out infinite}
+.ttLib{display:flex;gap:8px;overflow-x:auto;padding:0 12px;scrollbar-width:none}
+.ttLib::-webkit-scrollbar{display:none}
+.ttLib .ttTile{flex:none;width:92px}
+.ttPad{height:170px}
+.ttTile{touch-action:pan-x;user-select:none;-webkit-user-select:none;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px;text-align:center;cursor:grab;position:relative}
+.ttTile img{width:100%;height:56px;object-fit:contain;background:#fff;border-radius:8px;pointer-events:none}
+.ttTile .ph{height:56px;border-radius:8px;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-size:22px}
+.ttTile b{display:block;font-size:11px;line-height:1.25;margin-top:4px}
+.ttTile.used{opacity:.55}
+.ttTile.used:after{content:"✓";position:absolute;top:4px;right:6px;color:#2fa36b;font-weight:800}
+.ttCat{font-size:12px;font-weight:700;color:var(--muted);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.08em}
+.ttGhost{position:fixed;z-index:999;pointer-events:none;width:96px;transform:translate(-50%,-60%) rotate(-4deg) scale(1.08);box-shadow:0 14px 30px rgba(0,0,0,.25);opacity:.95}
+.ttBoard{display:flex;flex-direction:column;gap:8px}
+.ttLane{border:2px dashed var(--line);border-radius:14px;padding:8px 10px;background:var(--card);transition:all .15s}
+.ttLane.hot{border-color:var(--gold);background:var(--gold-soft);transform:scale(1.01)}
+.ttLane.bad{border-color:#d93a3a}
+.ttLaneH{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}
+.ttLaneH .n{width:22px;height:22px;border-radius:7px;background:var(--navy);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center}
+.ttLaneH small{margin-left:auto;font-weight:500;color:var(--muted)}
+.ttDrop{display:flex;flex-wrap:wrap;gap:6px;min-height:34px;margin-top:6px;align-items:center}
+.ttDrop .hint{font-size:12px;color:var(--muted)}
+.ttChip{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;border-radius:999px;padding:5px 6px 5px 10px;font-size:12px;font-weight:600;animation:ttPop .35s cubic-bezier(.2,1.6,.4,1)}
+.ttChip button{border:0;background:rgba(255,255,255,.2);color:#fff;width:20px;height:20px;border-radius:50%;cursor:pointer;font-size:12px;line-height:1}
+.ttReq{list-style:none;margin:8px 0 0;padding:0}
+.ttReq li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line);font-size:13px}
+.ttReq li:first-child{border-top:0}
+.ttReq .st{width:22px;height:22px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;background:#f6d9d9;color:#b3122e}
+.ttReq li.ok .st{background:#d6f1e3;color:#1f8a55}
+.ttReq li b{display:block;font-size:13.5px}
+.ttReq li span{color:var(--muted);font-size:12px}
+.ttReq .fix{margin-left:auto;flex:none;border:0;background:var(--gold);color:#1a2350;font-weight:700;font-size:11.5px;padding:6px 9px;border-radius:8px;cursor:pointer}
+.ttNav{display:flex;gap:10px;padding:8px 16px 18px}
+.ttNav .btn{flex:1}
+.ttConf{position:fixed;inset:0;pointer-events:none;z-index:998;overflow:hidden}
+.ttConf i{position:absolute;top:-12px;width:8px;height:14px;border-radius:2px;animation:ttFall 1.8s ease-in forwards}
+@keyframes ttFall{to{transform:translateY(110vh) rotate(540deg);opacity:.7}}
+.ttToast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#1a2350;color:#fff;padding:10px 14px;border-radius:12px;font-size:13px;z-index:999;box-shadow:0 8px 20px rgba(0,0,0,.25);animation:ttPop .3s both}
+.ttLinks a{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink)}
+.ttLinks a:first-child{border-top:0}
+.ttLinks a svg{width:16px;height:16px;flex:none;color:var(--muted)}
+.ttLinks a .ic{width:34px;height:34px;border-radius:10px;background:#e7f1ea;color:#1f6b45;display:flex;align-items:center;justify-content:center;flex:none;font-weight:800;font-size:11px}
+@media (prefers-reduced-motion: reduce){.ttHot,.ttHot .glow,.ttHot .rib,.ttHot .bolt,.ttHot:after,.ttFab,.ttFab .ttRingO,.ttFab .e,.ttChip{animation:none}}
 </style>
 </head>
 <body>
@@ -796,9 +957,11 @@ function home(){
       <a class="btn gold" href="#quote">${svg('send')}Request a proposal</a>
       <a class="btn ghost" href="#partners">Our partners</a>
     </div>
+    ${ttHome()}
   </section>
   <div class="stats">${D.company.stats.map(s => `<div class="stat"><b>${esc(s.n)}</b><span>${esc(s.l)}</span></div>`).join('')}</div>
   ${evTile()}
+  ${ttFab()}
 
   <div class="sec">
     <a class="ursCta" href="#urs">
@@ -2138,6 +2301,437 @@ ${c.note ? '\nNotes:\n' + c.note + '\n' : ''}
   setTimeout(() => { location.hash = 'quote-done'; }, 350);
 }
 
+// [id, flag, name, region, status, system/authority, data elements, aggregation(yes|no|check), reporting, date, note, crypto?]
+// status: in = in force · ph = phased / partial · set = deadline set · plan = planned or under discussion · none = no national serialisation mandate
+const TT_MKRAW = [
+  ['eg','🇪🇬','Egypt','mea','in','EDA – EPTTS','GS1 DataMatrix (01) GTIN, (21) serial, (17) expiry, (10) batch + human-readable text on the saleable pack','yes','Commissioning, aggregation, shipping and receiving to EPTTS (Phase 1: CSV upload, max 50,000 serials per file)','Imports shipped from 1 Feb 2026; local products from 1 Aug 2026','EDA Decrees 475/2025 and 804/2025. Aggregation to SSCC at bundle, carton, pallet and container level.'],
+  ['sa','🇸🇦','Saudi Arabia','mea','in','SFDA – RSD','2D DataMatrix with GTIN-14, serial, batch and expiry','yes','Supply, import, dispatch, accept, export, return and deactivate to RSD','Serialisation since Mar 2017; aggregation since Aug 2020','GLN registration for factories and warehouses.'],
+  ['ae','🇦🇪','UAE','mea','in','MoHAP – Tatmeen','GS1 DataMatrix with GTIN, serial, batch and expiry; SSCC on cases and pallets','yes','Commissioning, aggregation, shipping, receiving and import clearance to Tatmeen','Serialisation Jun 2022; aggregation & full reporting Dec 2022',''],
+  ['bh','🇧🇭','Bahrain','mea','in','NHRA – track & trace system','GS1 DataMatrix with GTIN, serial, batch and expiry','yes','Supply-chain events reported to the NHRA system','In force for imported human medicines',''],
+  ['om','🇴🇲','Oman','mea','in','Ministry of Health','GS1 DataMatrix with GTIN, serial, batch and expiry','no','No central serialisation reporting','Serialisation since Mar 2019',''],
+  ['jo','🇯🇴','Jordan','mea','ph','JFDA','GS1 DataMatrix with GTIN, serial, batch and expiry','check','Pilot / phased programme','Timelines extended — confirm current scope with JFDA',''],
+  ['lb','🇱🇧','Lebanon','mea','ph','MoPH – Medicine Barcode System','GS1 DataMatrix with GTIN, batch and expiry (serial optional)','no','Central verification platform','Identification required since 2019–2023',''],
+  ['iq','🇮🇶','Iraq','mea','ph','Ministry of Health','GS1 DataMatrix for selected medicines','check','Verification / authentication','Phased roll-out, public sector first',''],
+  ['qa','🇶🇦','Qatar','mea','plan','MoPH','GS1 barcodes in tender / supply requirements','check','No national serialisation reporting yet','Consultation stage',''],
+  ['kw','🇰🇼','Kuwait','mea','plan','Ministry of Health','Expected GS1 DataMatrix','check','To be defined','Consultation 2026–2027',''],
+  ['tr','🇹🇷','Türkiye','mea','in','TİTCK – İTS','GS1 DataMatrix with GTIN, serial, batch and expiry; SSCC for logistic units','yes','All movements reported to İTS','Serialisation since 2010; aggregation since 2012',''],
+  ['ir','🇮🇷','Iran','mea','in','IFDA – TTAC','GS1 DataMatrix with GTIN, batch, expiry and unique ID','check','Reporting to TTAC','Since 2015',''],
+  ['dz','🇩🇿','Algeria','mea','plan','Ministry of Health','Expected DataMatrix with GTIN and other elements','check','To be defined','Draft regulation',''],
+  ['tn','🇹🇳','Tunisia','mea','plan','DPM','To be defined','check','To be defined','Targeting 2027–2028',''],
+  ['ng','🇳🇬','Nigeria','mea','ph','NAFDAC','GS1 DataMatrix; moving to full serialisation','check','Authentication / traceability system evolving','Phased since 2014 (antimalarials, antibiotics)',''],
+  ['et','🇪🇹','Ethiopia','mea','ph','EFDA','GS1-based identification and traceability','check','EFDA traceability system','Regulation in force Feb 2025, phased',''],
+  ['rw','🇷🇼','Rwanda','mea','set','Rwanda FDA','GS1-based national traceability','check','National traceability system','Deadline Aug 2026',''],
+  ['ke','🇰🇪','Kenya','mea','plan','PPB','To be defined','check','To be defined','Framework being drafted',''],
+  ['za','🇿🇦','South Africa','mea','none','SAHPRA','Labelling rules only — no serialisation','no','None','No national serialisation mandate',''],
+  ['eu','🇪🇺','European Union + EEA','eu','in','FMD – EMVS (EU Hub + national systems)','2D DataMatrix: product code, serial (≤ 20 characters, randomised), batch, expiry (+ national reimbursement number where required)','no','Serials uploaded to EMVS; verified and decommissioned at dispensing','In force since 9 Feb 2019; Greece & Belgium joined 2025; Italy from 9 Feb 2027','Delegated Regulation (EU) 2016/161. Anti-tampering device required on every pack.'],
+  ['ch','🇨🇭','Switzerland','eu','plan','SMVS (FMD-like)','GS1 DataMatrix with GTIN, serial, batch and expiry','no','SMVS verification for participating companies','Currently voluntary — mandatory scope under discussion',''],
+  ['gb','🇬🇧','United Kingdom','eu','none','MHRA','No serialisation requirement','no','None','FMD safety features disapplied in Northern Ireland from 1 Jan 2025 (Windsor Framework)',''],
+  ['ua','🇺🇦','Ukraine','eu','set','State Service on Medicines','Expected GS1 DataMatrix serialisation','check','National system planned','Postponed to Jan 2028',''],
+  ['by','🇧🇾','Belarus','eu','plan','Ministry of Health','Framework drafted','check','To be defined','On hold',''],
+  ['ru','🇷🇺','Russia','cis','in','CRPT – Chestny ZNAK / MDLP','DataMatrix: (01) GTIN, (21) 13-character serial, (91) 4-character key, (92) 44-character crypto code — codes issued by the operator','yes','All movements reported to MDLP','Mandatory since 1 Jul 2020','',1],
+  ['kz','🇰🇿','Kazakhstan','cis','in','National marking system (EAEU-aligned)','DataMatrix: GTIN, serial, crypto key and crypto code issued by the operator','check','Reporting to the national system','Phased Jul 2022 – Jul 2023','',1],
+  ['uz','🇺🇿','Uzbekistan','cis','in','Asl Belgisi','DataMatrix: GTIN, serial, crypto key and crypto code issued by the operator','yes','Reporting to Asl Belgisi','Since 2022','',1],
+  ['am','🇦🇲','Armenia','cis','in','e-Mark (EAEU-aligned)','GS1 DataMatrix with crypto code','check','National system','From Jan 2026','',1],
+  ['kg','🇰🇬','Kyrgyzstan','cis','ph','National marking system (EAEU-aligned)','DataMatrix with crypto code','check','National system','Phased 2023–2024','',1],
+  ['az','🇦🇿','Azerbaijan','cis','plan','DVTIS (pilot)','To be defined','check','Pilot','Under review',''],
+  ['us','🇺🇸','USA','am','in','FDA – DSCSA','2D DataMatrix product identifier: NDC/GTIN, serial, lot and expiry','check','Interoperable electronic tracing between trading partners (EPCIS)','Enhanced requirements since Nov 2023; exemptions ended 2025 for manufacturers','Aggregation not mandated by law but widely used to make tracing practical.'],
+  ['ca','🇨🇦','Canada','am','none','Health Canada','No serialisation requirement','no','None','No national serialisation mandate',''],
+  ['br','🇧🇷','Brazil','am','none','ANVISA','Batch, manufacturing date, expiry and QR code to the digital leaflet','no','Batch-level distribution tracking by the registration holder','Law 14,338/2022 revoked unit serialisation (SNCM)','Check ANVISA for any new rules.'],
+  ['ar','🇦🇷','Argentina','am','in','ANMAT – national traceability system','GTIN and serial (GS1-128, DataMatrix or RFID) for listed products','no','Movements reported to the ANMAT traceability system','In force since 2011 for listed products',''],
+  ['pe','🇵🇪','Peru','am','plan','DIGEMID','To be defined','check','To be defined','On hold',''],
+  ['cn','🇨🇳','China','ap','in','NMPA – drug traceability code','Traceability code (20-digit code or GS1 GTIN + serial) as barcode / DataMatrix / RFID','yes','Marketing authorisation holder runs a traceability system; data shared with authorities','Phased since 2019; vaccines first',''],
+  ['in','🇮🇳','India (export)','ap','in','DGFT – iVEDA','GS1 barcodes with GTIN, serial, batch and expiry on secondary and tertiary packs; SSCC for shippers','yes','Parent–child data uploaded to iVEDA for exported drugs','In force for exports; domestic QR codes on top-300 brands since Aug 2023',''],
+  ['kr','🇰🇷','South Korea','ap','in','MFDS – KPIS','GS1 DataMatrix, GS1-128 or RFID with GTIN, serial, batch and expiry','check','Supply reporting to KPIS','Serialisation since Jan 2016',''],
+  ['id','🇮🇩','Indonesia','ap','ph','BPOM','2D code: identification (GTIN, batch, expiry); authentication adds serial','check','Reporting to BPOM','Identification Dec 2023; authentication phased 2025 – 2027','BPOM Regulation 22/2022.'],
+  ['pk','🇵🇰','Pakistan','ap','set','DRAP','GS1 DataMatrix with GTIN, serial, batch and expiry','yes','Reporting to the DRAP portal','Regulation published; calendar being finalised',''],
+  ['lk','🇱🇰','Sri Lanka','ap','in','NMRA','2D DataMatrix on imported products','no','Authentication repository','From Dec 2025',''],
+  ['my','🇲🇾','Malaysia','ap','set','NPRA','Serialisation planned (Meditag hologram today)','check','To be defined','Planned 2027',''],
+  ['vn','🇻🇳','Vietnam','ap','plan','DAV','To be defined','check','Pilot programmes','Under discussion',''],
+  ['ph','🇵🇭','Philippines','ap','plan','FDA Philippines','Draft circular','check','To be defined','No binding calendar',''],
+  ['jp','🇯🇵','Japan','ap','none','MHLW','GS1 barcode with GTIN, expiry and batch — no serial','no','None','No serialisation mandate',''],
+  ['au','🇦🇺','Australia','ap','none','TGA','No serialisation requirement','no','None','No national serialisation mandate','']
+];
+const TT_REG = [['all','All'],['mea','Middle East & Africa'],['eu','Europe'],['cis','CIS & Central Asia'],['am','Americas'],['ap','Asia-Pacific']];
+const TT_ST = { in:['In force','#1f8a55'], ph:['Phased','#2f78c4'], set:['Deadline set','#c27a12'], plan:['Planned','#7a7f99'], none:['No mandate','#9aa0b5'] };
+const TT_MK = TT_MKRAW.map(([id,fl,t,reg,st,sys,data,agg,rep,date,note,crypto]) => {
+  const serial = /serial|crypto|unique ID|traceability code/i.test(data) && st !== 'none';
+  const req = ['print'];
+  if(serial){ req.push('ser','ver','l2'); }
+  if(agg === 'yes') req.push('agg');
+  if(serial && rep && !/^None|No central|To be defined/i.test(rep)) req.push('rep');
+  if(crypto) req.push('crypto');
+  if(id === 'eu') req.push('tamper');
+  const facts = ['Status: ' + TT_ST[st][0] + ' — ' + date, 'Code: ' + data, 'Aggregation: ' + (agg === 'yes' ? 'required' : agg === 'no' ? 'not required' : 'check with the authority'), 'Reporting: ' + rep].concat(note ? [note] : []);
+  return { id, fl, t, reg, st, s: sys, req, facts, agg };
+});
+
+/* ---------- Track & Trace builder (game) ---------- */
+const TT_LV = [
+  { id:'carton',    t:'Carton',     s:'Packs → carton' },
+  { id:'bundle',    t:'Bundle',     s:'Cartons → bundle' },
+  { id:'case',      t:'Case',       s:'→ shipping case (SSCC)' },
+  { id:'supercase', t:'Super case', s:'Cases → super case (SSCC)' },
+  { id:'pallet',    t:'Pallet',     s:'Manual with handheld scanners' }
+];
+const TT_LANES = [{ id:'unit', t:'Serialisation', s:'Print & verify every saleable pack' }].concat(TT_LV.filter(l => l.id !== 'pallet'), [{ id:'sw', t:'Software L2 – L5', s:'Line, plant, enterprise, regulator' }]);
+const ttLaneT = id => (TT_LANES.concat(TT_LV).find(x => x.id === id) || {}).t || id;
+const TT_REQ = {
+  print:  ['Print variable data on each pack', 'Batch, expiry and codes printed in line'],
+  ser:    ['Unit serialisation', 'A unique serial number in a 2D DataMatrix on every saleable pack'],
+  ver:    ['Code verification', 'A camera reads and grades every code and rejects bad packs'],
+  tamper: ['Anti-tampering device', 'Tamper-evident label or seal on each pack'],
+  agg_carton:   ['Carton aggregation', 'Link packs to their carton'],
+  agg_bundle:   ['Bundle aggregation', 'Link packs or cartons to their bundle'],
+  agg_case:     ['Case aggregation (SSCC)', 'Link packs / bundles to each case label'],
+  agg_supercase:['Super-case aggregation (SSCC)', 'Link cases to each super-case label'],
+  agg_pallet:   ['Pallet aggregation (SSCC)', 'Manual: operators scan cases with handheld scanners and print the pallet label'],
+  l2:     ['Line software (Level 2)', 'Manages serial numbers and work orders on the line'],
+  rep:    ['Reporting to the authority (L3 – L5)', 'Plant / enterprise software that sends events to the national system'],
+  crypto: ['Crypto codes from the operator', 'Codes are issued by the system operator and must be imported into the line software']
+};
+const TT_MOD = [
+  ['sp',   '0.1', 'Print & Check SP',        ['unit'], ['print','ser','ver']],
+  ['evo',  '0.2', 'Print & Check EVO',       ['unit'], ['print','ser','ver']],
+  ['adv',  '0.3', 'Print & Check Advanced',  ['unit'], ['print','ser','ver']],
+  ['cw',   '0.4', 'Print & Check CW',        ['unit'], ['print','ser','ver']],
+  ['3ts',  '0.5', 'Print & Check 3T S',      ['unit'], ['print','ser','ver','tamper']],
+  ['aio',  '0.6', 'Print & Check AIO XS',    ['unit'], ['print','ser','ver','tamper']],
+  ['flex', '0.7', 'Print & Check FLEX',      ['unit'], ['print','ser','ver','tamper']],
+  ['fc',   '0.8', 'Flat Carton (off-line)',  ['unit'], ['print','ser','ver']],
+  ['omni', '1.0', 'Omnivision (bottles)',    ['unit'], ['print','ser','ver']],
+  ['sent', '1.4', 'Sentinel reader',         ['unit','carton','bundle','case','supercase'], ['ver']],
+  ['pab',  '1.2', 'Print & Apply Bundle',    ['bundle'], ['agg']],
+  ['mat',  '1.6', 'Matrix Station',          ['carton','bundle'], ['agg']],
+  ['scp',  '1.1', 'Semi-auto Case Packer',   ['case'], ['agg']],
+  ['pac',  '1.3', 'Print & Apply Case',      ['case','supercase'], ['agg']],
+  ['mtv',  '1.5', 'Matrix Top View',         ['carton','case'], ['agg']],
+  ['man',  '1.7', 'Manual Station',          ['carton','bundle','case','supercase'], ['agg']],
+  ['mms',  '1.8', 'Multiple Manual Station', ['case','supercase'], ['agg']],
+  ['dl',   '2.0', 'DIAMIND Line (L2)',       ['sw'], ['l2']],
+  ['eco',  '2.1', 'DIAMIND L3 – L5',         ['sw'], ['rep','crypto']],
+  ['clr',  '2.2', 'Smart Clearance',         ['sw'], []]
+];
+const TT_CATS = [['Serialisation', ['sp','evo','adv','cw','3ts','aio','flex','fc','omni','sent']], ['Aggregation', ['pab','mat','scp','pac','mtv','man','mms']], ['Software', ['dl','eco','clr']]];
+const ttMod = k => TT_MOD.find(m => m[0] === k);
+const ttProd = m => { const [g,i] = m[1].split('.'); const G = (window.NOVA_PRODUCTS.antares||[])[+g]; return G && G[1][+i]; };
+const ttMk = id => TT_MK.find(x => x.id === id);
+const TT_EDA = [
+  ['EDA', 'Egyptian Drug Authority – official website', 'https://www.edaegypt.gov.eg/'],
+  ['PDF', 'EDA Decree 475/2025 – National Track & Trace System (English)', 'https://www.edaegypt.gov.eg/media/o0hnfrts/475-2025_en.pdf'],
+  ['PDF', 'EPTTS Technical FAQ v3 (2026) – data carrier, aggregation, CSV reporting', 'https://www.edaegypt.gov.eg/media/fs1folht/egyptian-track-trace-for-pharmaceutical-eptts-technical-faq-v3_20262.pdf'],
+  ['PDF', 'EPTTS Technical FAQ – Phase 1 (2026)', 'https://www.edaegypt.gov.eg/media/paif1cpf/egyptian-track-trace-for-pharmaceutical-eptts-technical-faq-phase-1-_2026.pdf']
+];
+const ttNewLine = n => ({ id: 'L' + Date.now().toString(36) + Math.floor(Math.random()*99), name: 'Line ' + n, setup:'', oem:{}, aggSetup:'', aggOem:{}, pack:'Carton', speed:'', levels:['case','pallet'], line:{} });
+function ttState(){
+  const s = Object.assign({ step:1, cur:0, markets:['eg'], c:{}, cat:0, reg:'all', q:'' }, store.get('nova.tt', {}));
+  if(!Array.isArray(s.lines) || !s.lines.length){
+    const L = ttNewLine(1);
+    if(s.setup){ L.setup = s.setup; L.oem = s.oem || {}; L.pack = s.pack || 'Carton';
+      L.levels = (s.levels || []).filter(x => x !== 'unit'); L.line = s.line || {}; delete L.line.pallet; }
+    s.lines = [L]; ['setup','oem','pack','levels','line'].forEach(k => delete s[k]);
+  }
+  s.markets = s.markets.filter(ttMk); if(s.cur >= s.lines.length) s.cur = 0;
+  return s;
+}
+let TT = null;
+const ttSave = () => store.set('nova.tt', TT);
+const ttL = () => TT.lines[TT.cur];
+function ttReqs(L){
+  L = L || ttL(); const need = new Set();
+  TT.markets.forEach(id => { const m = ttMk(id); m && m.req.forEach(r => { if(r === 'agg') L.levels.forEach(l => need.add('agg_' + l)); else need.add(r); }); });
+  return [...need];
+}
+function ttCaps(L){
+  L = L || ttL(); const have = new Set();
+  Object.entries(L.line).forEach(([lane, keys]) => (keys||[]).forEach(k => { const m = ttMod(k); if(!m) return; m[4].forEach(c => have.add(c === 'agg' ? 'agg_' + lane : c)); }));
+  if(L.levels.includes('pallet')) have.add('agg_pallet');
+  return have;
+}
+function ttScore(L){
+  L = L || ttL(); const req = ttReqs(L), have = ttCaps(L), met = req.filter(r => have.has(r));
+  const pct = req.length ? Math.round(met.length / req.length * 100) : 0;
+  const placed = TT.lines.reduce((n, x) => n + Object.values(x.line).reduce((a, b) => a + (b||[]).length, 0), 0);
+  return { req, have, met, pct, xp: placed * 10 + met.length * 25 + TT.markets.length * 15 + (TT.lines.length - 1) * 30 };
+}
+const ttRank = p => p >= 100 ? 'Compliance Master 🏆' : p >= 75 ? 'Expert' : p >= 40 ? 'Line Builder' : p > 0 ? 'Rookie' : 'Start building';
+function ttHome(){
+  return `<a class="ttHot" href="#tt" id="ttHot"><span class="glow"></span>
+    <span class="rib">🔥 HOT · NEW</span>
+    <span class="fl"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20v.01M17 20h4M20 17v3"/></svg><i class="bolt">⚡</i></span>
+    <span class="tx"><b>Track & Trace Builder</b><span>EDA serialisation is live in Egypt. Build your compliant line in minutes.</span><em>Start now →</em></span></a>`;
+}
+function ttFab(){
+  try{ if(sessionStorage.getItem('ttFabX')) return ''; }catch(e){}
+  return `<a class="ttFab" id="ttFab" href="#tt"><span class="ttRingO"></span><span class="ttRingO p2"></span><span class="e">🔥</span><span><small>HOT TOPIC</small>Track & Trace</span><span class="x" id="ttFabX" aria-label="Hide">✕</span></a>`;
+}
+function ttBoom(){
+  try{ if(sessionStorage.getItem('ttBoom')) return; sessionStorage.setItem('ttBoom','1'); }catch(e){}
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const go = () => {
+    const w = document.createElement('div'); w.className = 'ttBoom';
+    const sparks = Array.from({length:22}, (_, i) => { const a = i / 22 * 360, d = 120 + Math.random() * 110;
+      return `<i class="sp" style="--a:${a}deg;--d:${d}px;--c:${['#ffd36b','#ff7a3d','#fff','#ff4d4d'][i%4]};animation-delay:${.32 + Math.random()*.12}s"></i>`; }).join('');
+    w.innerHTML = `<div class="fx"></div><div class="rg"></div><div class="rg r2"></div><div class="rg r3"></div>${sparks}
+      <svg class="lt l1" viewBox="0 0 40 120"><path d="M24 0 8 58h14L12 120 34 44H20L30 0z"/></svg><svg class="lt l2" viewBox="0 0 40 120"><path d="M24 0 8 58h14L12 120 34 44H20L30 0z"/></svg>
+      <div class="bd"><span class="e">🔥</span><b>Track & Trace</b><small>HOT IN EGYPT</small></div>`;
+    document.body.appendChild(w);
+    const end = () => { w.classList.add('out'); setTimeout(() => w.remove(), 500); const t = $('#ttHot'); t && t.classList.add('land'); };
+    w.addEventListener('click', end); setTimeout(end, 2600);
+  };
+  const wait = () => document.getElementById('intro') ? setTimeout(wait, 200) : setTimeout(go, 250);
+  wait();
+}
+function ttHead(){
+  const s = ttScore();
+  return `<div class="ttTop"><div class="eyebrow">Track & Trace Builder · Egypt & export</div>
+    <h1>Build your T&T lines</h1><p>Set up serialisation and aggregation, pick your markets, then drag machines and software onto each line. Reach 100 % to become a Compliance Master.</p>
+    <div class="ttScore"><div class="ttRing" id="ttRing" style="--p:${s.pct}"><span>${s.pct}%</span></div>
+      <div><b id="ttRank">${ttRank(s.pct)}</b><small id="ttMet">${esc(ttL().name)} · ${s.met.length} of ${s.req.length} requirements met</small></div>
+      <div class="ttXp"><small>XP</small><br><b id="ttXp">${s.xp}</b></div></div>
+    <div class="ttBadges" id="ttBadges">${ttBadges()}</div></div>
+  <div class="ttSteps">${['Line','Markets','Build','Report'].map((t,i) => `<a href="#tt-${i+1}" class="${TT.step===i+1?'on':''} ${ttDone(i+1)?'done':''}">${i+1}. ${t}</a>`).join('')}</div>`;
+}
+function ttBadges(){
+  const have = ttCaps(), L = ttL();
+  const sel = TT.markets.map(id => { const m = ttMk(id); const r = [];
+    m.req.forEach(k => k === 'agg' ? L.levels.forEach(l => r.push('agg_' + l)) : r.push(k));
+    const ok = r.every(k => have.has(k)); return `<span class="ttBadge ${ok?'ok':''}">${m.fl} ${esc(m.t)}${ok?' ✓':''}</span>`; });
+  return sel.length > 8 ? sel.slice(0, 8).join('') + `<span class="ttBadge">+${sel.length - 8} more</span>` : sel.join('') || '<span class="ttBadge">Pick your markets</span>';
+}
+const ttDone = n => n === 1 ? TT.lines.every(L => L.setup && (L.setup === 'alone' || L.oem.name) && (!L.levels.some(l => l !== 'pallet') || L.aggSetup === 'alone' || (L.aggSetup === 'oem' && (L.aggOem||{}).name))) : n === 2 ? TT.markets.length > 0 : n === 3 ? TT.lines.every(L => ttScore(L).pct === 100) : false;
+function ttLineBar(){
+  return `<div class="ttLines">${TT.lines.map((L,i) => { const p = ttScore(L).pct;
+    return `<button class="${i===TT.cur?'on':''}" data-line="${i}">${esc(L.name)}<small>${p}%</small></button>`; }).join('')}
+    <button class="add" id="ttAddLine">＋ Add line</button></div>`;
+}
+function tt(a){
+  setBar('Track & Trace Builder'); setTab('home');
+  TT = ttState(); const n = +a; if(n >= 1 && n <= 4){ TT.step = n; ttSave(); }
+  const L = ttL(), o = L.oem, ao = L.aggOem || {}, v = k => esc(o[k] || '');
+  let body = '';
+  if(TT.step === 1){
+    body = `${ttLineBar()}<div class="ttSec">
+      <div class="form"><label style="margin-top:0">Line name</label><input id="ttName" value="${esc(L.name)}">${TT.lines.length > 1 ? `<button class="btn line block" id="ttDelLine" style="margin-top:8px">Remove this line</button>` : ''}</div>
+      <div class="ttHalf"><div class="ttHalfH"><span>①</span><b>Serialisation</b><small>Print & verify each saleable pack</small></div>
+      <div class="ttOpt">
+        <button data-setup="alone" class="${L.setup==='alone'?'on':''}"><span class="em">🧩</span><b>Stand-alone</b><span>Separate T&T units with their own conveyor</span></button>
+        <button data-setup="oem" class="${L.setup==='oem'?'on':''}"><span class="em">🔗</span><b>Integrated with OEM</b><span>Printers, cameras and reject built into a cartoner, labeller or blister line</span></button>
+      </div>
+      <div class="form">
+        <div id="ttOem" style="${L.setup==='oem'?'':'display:none'}"><div class="eyebrow" style="margin-top:14px">OEM machine data</div>
+        <label>OEM manufacturer *</label><input data-o="name" value="${v('name')}" placeholder="e.g. Marchesini, IMA, Uhlmann">
+        <label>Machine type</label><select data-o="type">${['','Cartoner','Blister line','Labeller','Bottle filler / capper','Case packer','Tube filler','Other'].map(x => `<option ${o.type===x?'selected':''}>${x}</option>`).join('')}</select>
+        <label>Model and serial number</label><input data-o="model" value="${v('model')}">
+        <label>Communication interface</label><select data-o="iface">${['','OPC UA','PROFINET','EtherNet/IP','Modbus TCP','Digital I/O','To be defined'].map(x => `<option ${o.iface===x?'selected':''}>${x}</option>`).join('')}</select>
+        <label>Where can codes be printed and checked?</label><input data-o="where" value="${v('where')}" placeholder="e.g. carton side, after closing station">
+        <label>Space available for T&T units (mm)</label><input data-o="space" value="${v('space')}">
+        <label>Reject station on OEM machine?</label><select data-o="reject">${['','Yes – can be used','Yes – needs upgrade','No'].map(x => `<option ${o.reject===x?'selected':''}>${x}</option>`).join('')}</select></div>
+        <label>Saleable pack</label><select id="ttPack">${['Carton','Bottle','Vial tray','Blister wallet','Tube','Pouch / sachet','Other'].map(x => `<option ${L.pack===x?'selected':''}>${x}</option>`).join('')}</select>
+        <label>Line speed (packs/min)</label><input id="ttSpeed" inputmode="numeric" value="${esc(L.speed||'')}">
+      </div></div>
+      <div class="ttHalf agg"><div class="ttHalfH"><span>②</span><b>Aggregation</b><small>Which levels do you need?</small></div>
+        <div class="ttLvGrid">${TT_LV.map(l => `<button type="button" data-lv="${l.id}" class="${L.levels.includes(l.id)?'on':''}"><b>${l.t}</b><span>${l.s}</span></button>`).join('')}</div>
+        ${L.levels.some(l => l !== 'pallet') ? `<div class="eyebrow" style="margin-top:14px">Carton / bundle / case aggregation set-up</div>
+        <div class="ttOpt">
+          <button data-aggsetup="alone" class="${L.aggSetup==='alone'?'on':''}"><span class="em">🧩</span><b>Stand-alone</b><span>Separate aggregation stations (manual, semi-auto or automatic)</span></button>
+          <button data-aggsetup="oem" class="${L.aggSetup==='oem'?'on':''}"><span class="em">🔗</span><b>Integrated with OEM</b><span>Cameras and label printers built into a bundler, case packer or palletiser</span></button>
+        </div>
+        <div class="form" style="${L.aggSetup==='oem'?'':'display:none'}"><div class="eyebrow" style="margin-top:14px">OEM aggregation machine data</div>
+          <label>OEM manufacturer *</label><input data-ao="name" value="${esc(ao.name||'')}" placeholder="e.g. Schubert, Cama, Marchesini">
+          <label>Machine type</label><select data-ao="type">${['','Bundler / banding','Case packer','Shrink wrapper','Robot cell','Palletiser','Other'].map(x => `<option ${ao.type===x?'selected':''}>${x}</option>`).join('')}</select>
+          <label>Model and serial number</label><input data-ao="model" value="${esc(ao.model||'')}">
+          <label>Aggregation levels handled by this machine</label><input data-ao="levels" value="${esc(ao.levels||'')}" placeholder="e.g. bundle and case">
+          <label>Communication interface</label><select data-ao="iface">${['','OPC UA','PROFINET','EtherNet/IP','Modbus TCP','Digital I/O','To be defined'].map(x => `<option ${ao.iface===x?'selected':''}>${x}</option>`).join('')}</select>
+          <label>Where can codes be read and labels applied?</label><input data-ao="where" value="${esc(ao.where||'')}" placeholder="e.g. before case sealing">
+          <label>Reject / rework station?</label><select data-ao="reject">${['','Yes – can be used','Yes – needs upgrade','No'].map(x => `<option ${ao.reject===x?'selected':''}>${x}</option>`).join('')}</select>
+        </div>` : ''}
+        <p class="muted small" style="margin:10px 0 0">${L.levels.length ? 'Hierarchy: ' + esc([L.pack].concat(L.levels.map(ttLaneT)).join(' → ')) : 'No aggregation selected — serialisation only.'}</p>
+        ${L.levels.includes('pallet') ? '<div class="ttPoint">📦 Pallet aggregation is done manually: operators scan the cases with handheld scanners and print the SSCC pallet label. It is included automatically.</div>' : ''}
+      </div></div>`;
+  } else if(TT.step === 2){
+    const q = (TT.q||'').toLowerCase();
+    const list = TT_MK.filter(m => (TT.reg === 'all' || m.reg === TT.reg) && (!q || (m.t + ' ' + m.s).toLowerCase().includes(q)));
+    body = `<div class="ttSec"><div class="eyebrow">Step 2 · Markets</div><h3 style="margin:0 0 10px">Where will your products be sold?</h3>
+      <div class="form"><input id="ttQ" value="${esc(TT.q||'')}" placeholder="Search ${TT_MK.length} markets…" style="margin-bottom:8px"></div>
+      <div class="qchips" style="margin:0 0 10px">${TT_REG.map(([id,t]) => `<button type="button" class="qchip ${TT.reg===id?'on':''}" data-reg="${id}">${t}</button>`).join('')}</div>
+      <p class="muted small" style="margin:0 0 8px">${TT.markets.length} selected · ${Object.entries(TT_ST).map(([k,[t,c]]) => `<span class="ttSt" style="--c:${c}">${t}</span>`).join(' ')}</p>
+      <div class="ttMk">${list.map(m => `<button data-mk="${m.id}" class="${TT.markets.includes(m.id)?'on':''}"><span class="fl2">${m.fl}</span><b>${esc(m.t)}</b><span>${esc(m.s)}</span><span class="ttSt" style="--c:${TT_ST[m.st][1]}">${TT_ST[m.st][0]}</span></button>`).join('') || '<p class="muted">No market found.</p>'}</div>
+      <div class="ttFacts">${TT.markets.map(ttMk).map(m => `<details ${TT.markets.length===1?'open':''}><summary>${m.fl} ${esc(m.t)} — ${esc(m.s)}</summary><ul>${m.facts.map(f => `<li>${esc(f)}</li>`).join('')}</ul></details>`).join('')}</div>
+      <p class="muted small" style="margin-top:10px">Summaries from authority documents and industry overviews (2023 – 2026). Rules change often — confirm with the authority before design freeze.</p>
+      ${ttEdaCard()}</div>`;
+  } else if(TT.step === 3){
+    const used = new Set(Object.values(L.line).flat());
+    const lanes = TT_LANES.filter(l => l.id === 'unit' || l.id === 'sw' || L.levels.includes(l.id));
+    body = `${ttLineBar()}<div class="ttSec"><div class="eyebrow">Step 3 · Build · ${esc(L.name)}</div><h3 style="margin:0 0 4px">Drag machines and software onto your line</h3>
+      <p class="muted small" style="margin:0 0 6px">Drag a card up from the tray onto a level, or tap it to place it automatically. Tap ✕ to remove.</p>
+      <div class="ttBoard" id="ttBoard">${lanes.map((l,i) => `
+        <div class="ttLane" data-lane="${l.id}"><div class="ttLaneH"><span class="n">${l.id==='sw'?'L2+':i+1}</span>${l.t}<small>${l.s}</small></div>
+        <div class="ttDrop">${(L.line[l.id]||[]).map(k => `<span class="ttChip">${esc(ttMod(k)[2])}<button data-rm="${l.id}:${k}" aria-label="Remove">✕</button></span>`).join('') || '<span class="hint">Drop here</span>'}</div></div>`).join('')}
+        ${L.levels.includes('pallet') ? `<div class="ttPoint">📦 <b>Pallet aggregation</b> — manual with handheld scanners and an SSCC label printer. Included automatically.</div>` : ''}</div>
+      <div class="card" style="margin-top:12px"><div class="eyebrow">Requirements</div><ul class="ttReq" id="ttReq">${ttReqList()}</ul></div>
+      <p class="muted small" style="margin-top:10px">Library from the <a href="#p-antares">Antares Vision catalogue</a>. Open Partners → Antares Vision for full specs.</p></div>
+      <div class="ttTray"><div class="ttTabs">${TT_CATS.map(([c],i) => `<button class="${(TT.cat||0)===i?'on':''}" data-cat="${i}">${c}</button>`).join('')}<span>↑ drag up</span></div>
+        <div class="ttLib">${TT_CATS[TT.cat||0][1].map(k => { const m = ttMod(k), p = ttProd(m);
+        return `<div class="ttTile ${used.has(k)?'used':''}" data-mod="${k}">${p && p[4] ? `<img src="img/${p[4]}" alt="">` : `<div class="ph">${(TT.cat||0)===2?'💻':'📦'}</div>`}<b>${esc(m[2])}</b></div>`; }).join('')}</div></div>`;
+  } else {
+    const c = Object.assign({}, store.get('nova.profile', {}), TT.c);
+    const open = TT.lines.reduce((n, x) => { const s = ttScore(x); return n + s.req.length - s.met.length; }, 0);
+    body = `<div class="ttSec"><div class="eyebrow">Step 4 · Your T&T requirement</div><h3 style="margin:0 0 8px">${open ? 'Almost there — ' + open + ' requirement(s) still open' : 'All lines meet every selected requirement 🎉'}</h3>
+      <div class="card"><div class="eyebrow">Markets</div><p style="margin:0">${TT.markets.map(id => { const m = ttMk(id); return m.fl + ' ' + esc(m.t); }).join(', ') || '—'}</p></div>
+      ${TT.lines.map(x => { const s = ttScore(x); return `<div class="card" style="margin-top:10px"><div class="eyebrow">${esc(x.name)} · ${s.pct}%</div>
+        <p style="margin:0 0 6px"><b>Serialisation:</b> ${x.setup==='oem' ? 'Integrated with OEM — ' + esc([x.oem.name,x.oem.type,x.oem.model].filter(Boolean).join(', ')) : x.setup==='alone' ? 'Stand-alone' : '—'} · ${esc(x.pack)}${x.speed ? ' · ' + esc(x.speed) + ' packs/min' : ''}</p>
+        <p style="margin:0 0 6px"><b>Aggregation:</b> ${x.levels.length ? esc(x.levels.map(ttLaneT).join(' → ')) + (x.aggSetup==='oem' ? ' · integrated with OEM — ' + esc([(x.aggOem||{}).name,(x.aggOem||{}).type].filter(Boolean).join(', ')) : x.aggSetup==='alone' ? ' · stand-alone stations' : '') + (x.levels.includes('pallet') ? ' (pallet manual, handheld scanners)' : '') : 'None'}</p>
+        <p style="margin:0 0 6px"><b>Equipment:</b> ${Object.entries(x.line).filter(([,a]) => a && a.length).map(([l,a]) => ttLaneT(l) + ': ' + a.map(k => ttMod(k)[2]).join(', ')).map(esc).join(' · ') || '—'}</p>
+        <ul class="ttReq">${ttReqList(true, x)}</ul></div>`; }).join('')}
+      <div class="form"><div class="card" style="margin-top:10px"><div class="eyebrow">Your details</div>
+        <label>Name *</label><input data-c="name" value="${esc(c.name||'')}">
+        <label>Company *</label><input data-c="company" value="${esc(c.company||'')}">
+        <label>Phone / WhatsApp</label><input data-c="phone" inputmode="tel" value="${esc(c.phone||'')}">
+        <label>Email</label><input data-c="email" inputmode="email" value="${esc(c.email||'')}">
+        <label>Notes (products, start date, existing serialisation)</label><textarea data-c="note">${esc(c.note||'')}</textarea></div></div>
+      <div class="uact" style="margin-top:12px"><button class="btn navy" id="ttPdf">${svg('doc')}Save as PDF</button><button class="btn line" id="ttShare">${svg('send')}Share Word file</button></div>
+      <button class="btn gold block" id="ttSend" style="margin-top:10px">${svg('send')}Send to NOVA for a proposal</button>
+      <button class="btn line block" id="ttReset" style="margin-top:10px">Start a new project</button>
+      ${ttEdaCard()}</div>`;
+  }
+  const prev = TT.step > 1 ? `<a class="btn line" href="#tt-${TT.step-1}">${svg('back')}Back</a>` : '';
+  const next = TT.step < 4 ? `<a class="btn navy" href="#tt-${TT.step+1}">Next${svg('chev')}</a>` : '';
+  return ttHead() + body + `<div class="ttNav">${prev}${next}</div>` + (TT.step === 3 ? '<div class="ttPad"></div>' : '');
+}
+function ttEdaCard(){
+  return `<div class="card ttLinks" style="margin-top:12px"><div class="eyebrow">EDA requirements – official documents</div>
+    ${TT_EDA.map(([ic,t,u]) => `<a href="${u}" target="_blank" rel="noopener"><span class="ic">${ic}</span><span style="flex:1">${esc(t)}</span>${svg('ext')}</a>`).join('')}
+    <a href="#lib-tnt"><span class="ic" style="background:var(--gold-soft);color:var(--navy)">📖</span><span style="flex:1">NOVA article: Track & Trace in Egypt</span>${svg('chev')}</a></div>`;
+}
+function ttReqList(text, L){
+  L = L || ttL(); const s = ttScore(L);
+  if(!s.req.length) return '<li><span class="muted">Select at least one market in step 2.</span></li>';
+  const sugg = r => r === 'tamper' ? '3ts' : r === 'agg_bundle' ? 'pab' : r === 'agg_carton' ? 'mat' : r === 'agg_case' ? 'pac' : r === 'agg_supercase' ? 'mms' : r === 'l2' ? 'dl' : (r === 'rep' || r === 'crypto') ? 'eco' : 'evo';
+  return s.req.map(r => { const ok = s.have.has(r);
+    const who = TT.markets.filter(id => { const m = ttMk(id); return m.req.includes(r) || (r.startsWith('agg_') && m.req.includes('agg')); }).map(id => ttMk(id).fl);
+    const w = who.length > 6 ? who.slice(0, 6).join(' ') + ' +' + (who.length - 6) : who.join(' ');
+    const fix = !ok && !text && r !== 'agg_pallet' ? `<button class="fix" data-fix="${r}:${sugg(r)}">+ ${esc(ttMod(sugg(r))[2])}</button>` : '';
+    return `<li class="${ok?'ok':''}"><span class="st">${ok?'✓':'!'}</span><span style="flex:1"><b>${esc(TT_REQ[r][0])} ${w}</b><span>${esc(TT_REQ[r][1])}</span></span>${fix}</li>`; }).join('');
+}
+function ttPlace(lane, k){
+  const m = ttMod(k), L = ttL(); if(!m) return false;
+  const okLane = l => l === 'unit' || l === 'sw' || L.levels.includes(l);
+  if(!lane || !m[3].includes(lane) || !okLane(lane)) lane = m[3].find(okLane);
+  if(!lane){ ttToast('Add the ' + m[3].map(ttLaneT).join(' / ') + ' level in step 1 first'); return false; }
+  L.line[lane] = L.line[lane] || [];
+  if(L.line[lane].includes(k)){ ttToast(m[2] + ' is already on ' + ttLaneT(lane)); return false; }
+  const before = ttScore().pct;
+  L.line[lane].push(k); ttSave();
+  const after = ttScore();
+  ttToast('+10 XP · ' + m[2] + ' → ' + ttLaneT(lane) + (after.req.length ? ' · ' + after.pct + '%' : ''));
+  if(after.pct === 100 && before < 100) ttConfetti();
+  return true;
+}
+function ttToast(t){ const o = document.querySelector('.ttToast'); o && o.remove(); const d = document.createElement('div'); d.className = 'ttToast'; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 1800); }
+function ttConfetti(){
+  const w = document.createElement('div'); w.className = 'ttConf';
+  const cols = ['#c8a75e','#24306a','#2fa36b','#ef5a2a','#5aa0ff'];
+  w.innerHTML = Array.from({length:70}, (_, i) => `<i style="left:${Math.random()*100}%;background:${cols[i%5]};animation-delay:${Math.random()*.6}s;animation-duration:${1.4+Math.random()}s"></i>`).join('');
+  document.body.appendChild(w); setTimeout(() => w.remove(), 3200);
+  setTimeout(() => ttToast('🏆 Compliance Master! ' + ttL().name + ' meets all selected requirements'), 300);
+}
+function bindTT(){
+  const rerender = () => { const y = scrollY; route(); scrollTo(0, y); };
+  const L = ttL();
+  document.querySelectorAll('[data-line]').forEach(b => b.addEventListener('click', () => { TT.cur = +b.dataset.line; ttSave(); rerender(); }));
+  const al = $('#ttAddLine'); al && al.addEventListener('click', () => { TT.lines.push(ttNewLine(TT.lines.length + 1)); TT.cur = TT.lines.length - 1; ttSave(); ttToast('+30 XP · ' + ttL().name + ' added'); location.hash = 'tt-1'; route(); });
+  const dl = $('#ttDelLine'); dl && dl.addEventListener('click', () => { TT.lines.splice(TT.cur, 1); TT.cur = 0; ttSave(); rerender(); });
+  const nm = $('#ttName'); nm && nm.addEventListener('input', () => { L.name = nm.value || 'Line'; ttSave(); const b = document.querySelector('[data-line="' + TT.cur + '"]'); if(b) b.firstChild.textContent = L.name; });
+  document.querySelectorAll('[data-setup]').forEach(b => b.addEventListener('click', () => { L.setup = b.dataset.setup; ttSave(); rerender(); }));
+  document.querySelectorAll('[data-o]').forEach(i => i.addEventListener('input', () => { L.oem[i.dataset.o] = i.value; ttSave(); }));
+  document.querySelectorAll('[data-aggsetup]').forEach(b => b.addEventListener('click', () => { L.aggSetup = b.dataset.aggsetup; L.aggOem = L.aggOem || {}; ttSave(); rerender(); }));
+  document.querySelectorAll('[data-ao]').forEach(i => i.addEventListener('input', () => { L.aggOem = L.aggOem || {}; L.aggOem[i.dataset.ao] = i.value; ttSave(); }));
+  document.querySelectorAll('[data-c]').forEach(i => i.addEventListener('input', () => { TT.c[i.dataset.c] = i.value; ttSave(); }));
+  const pk = $('#ttPack'); pk && pk.addEventListener('change', () => { L.pack = pk.value; ttSave(); rerender(); });
+  const sp = $('#ttSpeed'); sp && sp.addEventListener('input', () => { L.speed = sp.value; ttSave(); });
+  document.querySelectorAll('[data-lv]').forEach(b => b.addEventListener('click', () => { const l = b.dataset.lv;
+    L.levels = L.levels.includes(l) ? L.levels.filter(x => x !== l) : TT_LV.map(x => x.id).filter(x => x === l || L.levels.includes(x));
+    if(!L.levels.includes(l)) delete L.line[l]; ttSave(); rerender(); }));
+  document.querySelectorAll('[data-reg]').forEach(b => b.addEventListener('click', () => { TT.reg = b.dataset.reg; ttSave(); rerender(); }));
+  const q = $('#ttQ'); if(q){ let t; q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { TT.q = q.value; ttSave(); rerender(); const n = $('#ttQ'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }, 250); }); }
+  document.querySelectorAll('[data-mk]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.mk;
+    TT.markets = TT.markets.includes(id) ? TT.markets.filter(x => x !== id) : [...TT.markets, id]; ttSave(); rerender(); }));
+  document.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => { TT.cat = +b.dataset.cat; ttSave(); rerender(); }));
+  document.querySelectorAll('[data-rm]').forEach(b => b.addEventListener('click', () => { const [l,k] = b.dataset.rm.split(':'); L.line[l] = (L.line[l]||[]).filter(x => x !== k); ttSave(); rerender(); }));
+  document.querySelectorAll('[data-fix]').forEach(b => b.addEventListener('click', () => { const [r,k] = b.dataset.fix.split(':'); const lane = r.startsWith('agg_') ? r.slice(4) : null; if(ttPlace(lane, k)) rerender(); }));
+  document.querySelectorAll('.ttTile').forEach(t => t.addEventListener('pointerdown', e => {
+    const k = t.dataset.mod, sx = e.clientX, sy = e.clientY; let ghost = null, hot = null;
+    const lanes = [...document.querySelectorAll('.ttLane')];
+    const laneAt = (x, y) => lanes.find(l => { const r = l.getBoundingClientRect(); return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom; });
+    const move = ev => {
+      if(!ghost && Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
+      if(!ghost){ ghost = t.cloneNode(true); ghost.classList.add('ttGhost'); document.body.appendChild(ghost);
+        const ok = ttMod(k)[3]; lanes.forEach(l => l.classList.toggle('bad', !ok.includes(l.dataset.lane))); }
+      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+      const l = laneAt(ev.clientX, ev.clientY); if(l !== hot){ hot && hot.classList.remove('hot'); hot = l; hot && hot.classList.add('hot'); }
+      if(ev.clientY < 90) window.scrollBy(0, -14); else if(ev.clientY > innerHeight - 260 && ev.clientY < innerHeight - 200) window.scrollBy(0, 10);
+    };
+    const up = ev => {
+      document.removeEventListener('pointermove', move); document.removeEventListener('pointerup', up); document.removeEventListener('pointercancel', up);
+      lanes.forEach(l => l.classList.remove('hot','bad'));
+      if(ghost){ ghost.remove(); const l = laneAt(ev.clientX, ev.clientY);
+        if(l){ const lane = l.dataset.lane; if(!ttMod(k)[3].includes(lane)){ ttToast(ttMod(k)[2] + ' belongs on: ' + ttMod(k)[3].map(ttLaneT).join(' / ')); return; }
+          if(ttPlace(lane, k)) rerender(); } }
+      else if(ev.type === 'pointerup' && ttPlace(null, k)) rerender();
+    };
+    document.addEventListener('pointermove', move); document.addEventListener('pointerup', up); document.addEventListener('pointercancel', up);
+  }));
+  const doc = () => ttDoc(), fn = () => 'TT-Requirement_' + (TT.c.company || 'NOVA').replace(/[^\w.-]+/g,'_');
+  const pdf = $('#ttPdf'); pdf && pdf.addEventListener('click', () => { const h = doc();
+    if(window.NovaApp && NovaApp.printHtml){ NovaApp.printHtml(fn(), h); return; }
+    const w = window.open('', '_blank'); if(w){ w.document.write(h); w.document.close(); w.focus(); w.print(); } });
+  const sh = $('#ttShare'); sh && sh.addEventListener('click', () => { const h = doc();
+    if(window.NovaApp && NovaApp.shareFile){ NovaApp.shareFile(JSON.stringify({ name: fn() + '.doc', mime:'application/msword', data: b64utf8(h), subject:'Track & Trace requirement' })); return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([h], {type:'application/msword'})); a.download = fn() + '.doc'; a.click(); });
+  const sd = $('#ttSend'); sd && sd.addEventListener('click', () => {
+    const c = TT.c; if(!c.name || !c.company){ ttToast('Please add your name and company'); document.querySelector('[data-c="' + (!c.name?'name':'company') + '"]').focus(); return; }
+    store.set('nova.profile', Object.assign(store.get('nova.profile', {}), { name:c.name, company:c.company, phone:c.phone||'', email:c.email||'' }));
+    const subject = 'Track & Trace requirement – ' + c.company;
+    const body = `TRACK & TRACE REQUIREMENT (NOVA app builder)\n\n${ttText()}\n\nCONTACT\n${c.name}\n${c.company}\n${c.phone||''}\n${c.email||''}\n${c.note ? '\nNotes:\n' + c.note : ''}\n\n— Sent from the NOVA Engineering app · Track & Trace Builder`;
+    let sent = false; try{ if(window.NovaApp && NovaApp.sendEmail){ NovaApp.sendEmail(JSON.stringify({ to:C.sales, subject, body, images:[], files:[{ name: fn() + '.doc', mime:'application/msword', data: b64utf8(doc()) }] })); sent = true; } }catch(e){}
+    if(!sent) location.href = `mailto:${C.sales}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    ttToast('Thank you — NOVA will contact you'); });
+  const rs = $('#ttReset'); rs && rs.addEventListener('click', () => { store.set('nova.tt', { c: TT.c }); TT = null; location.hash = 'tt-1'; route(); });
+}
+function ttText(){
+  const out = [`MARKETS: ${TT.markets.map(id => { const m = ttMk(id); return m.t + ' (' + m.s + ')'; }).join(', ')}`];
+  TT.lines.forEach(L => { const o = L.oem, s = ttScore(L);
+    out.push('', `=== ${L.name} — compliance ${s.pct}% (${s.met.length}/${s.req.length}) ===`,
+      `SERIALISATION: ${L.setup==='oem' ? 'Integrated with OEM' : L.setup==='alone' ? 'Stand-alone' : '-'} | Pack: ${L.pack}${L.speed ? ' | ' + L.speed + ' packs/min' : ''}`,
+      L.setup==='oem' ? `OEM: ${o.name||'-'} | Type: ${o.type||'-'} | Model: ${o.model||'-'} | Interface: ${o.iface||'-'} | Print/inspect: ${o.where||'-'} | Space: ${o.space||'-'} mm | Reject: ${o.reject||'-'}` : '',
+      `AGGREGATION: ${L.levels.length ? L.levels.map(ttLaneT).join(' > ') + (L.levels.includes('pallet') ? ' (pallet manual with handheld scanners)' : '') : 'none'}`,
+      L.aggSetup ? `AGGREGATION SET-UP: ${L.aggSetup==='oem' ? 'Integrated with OEM' : 'Stand-alone stations'}` : '',
+      L.aggSetup==='oem' ? `AGG OEM: ${(L.aggOem||{}).name||'-'} | Type: ${(L.aggOem||{}).type||'-'} | Model: ${(L.aggOem||{}).model||'-'} | Levels: ${(L.aggOem||{}).levels||'-'} | Interface: ${(L.aggOem||{}).iface||'-'} | Read/label: ${(L.aggOem||{}).where||'-'} | Reject: ${(L.aggOem||{}).reject||'-'}` : '',
+      'EQUIPMENT:', ...Object.entries(L.line).filter(([,a]) => a && a.length).map(([l,a]) => ` - ${ttLaneT(l)}: ${a.map(k => ttMod(k)[2]).join(', ')}`),
+      'REQUIREMENTS:', ...s.req.map(r => ` [${s.have.has(r)?'OK':'OPEN'}] ${TT_REQ[r][0]}`)); });
+  return out.filter(x => x !== '').join('\n').replace(/\n===/g, '\n\n===');
+}
+function ttDoc(){
+  const c = TT.c, d = new Date();
+  const row = (a, b) => `<tr><td style="width:34%;background:#f4f5fa"><b>${esc(a)}</b></td><td>${b}</td></tr>`;
+  return `<html><head><meta charset="utf-8"><title>Track & Trace requirement</title><style>body{font-family:Arial,sans-serif;font-size:11pt;color:#1a2350;margin:24px}h1{font-size:18pt;margin:0}h2{font-size:13pt;border-bottom:2px solid #c8a75e;padding-bottom:4px;margin-top:22px}h3{font-size:12pt;margin:16px 0 6px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #cfd3e3;padding:6px 8px;vertical-align:top;text-align:left}th{background:#24306a;color:#fff}.ok{color:#1f8a55;font-weight:bold}.open{color:#b3122e;font-weight:bold}small{color:#666}</style></head><body>
+  <h1>Track & Trace — User Requirements</h1><small>Prepared with the NOVA Engineering app · ${d.toLocaleDateString()} · ${esc(c.company||'')}</small>
+  <h2>1. Project</h2><table>${row('Company', esc(c.company||'-'))}${row('Contact', esc([c.name,c.phone,c.email].filter(Boolean).join(' · ')||'-'))}${row('Number of lines', String(TT.lines.length))}${c.note ? row('Notes', esc(c.note)) : ''}</table>
+  <h2>2. Target markets</h2><table><tr><th>Market</th><th>Requirements</th></tr>${TT.markets.map(id => { const m = ttMk(id); return `<tr><td><b>${esc(m.t)}</b><br><small>${esc(m.s)}</small></td><td><ul style="margin:0;padding-left:16px">${m.facts.map(f => `<li>${esc(f)}</li>`).join('')}</ul></td></tr>`; }).join('')}</table>
+  ${TT.lines.map((L, i) => { const o = L.oem, s = ttScore(L); return `<h2>${3 + i}. ${esc(L.name)}</h2>
+    <h3>Serialisation</h3><table>${row('Configuration', L.setup==='oem' ? 'Integrated into an OEM machine' : L.setup==='alone' ? 'Stand-alone serialisation unit' : '-')}${row('Saleable pack', esc(L.pack))}${row('Line speed', esc((L.speed||'-') + ' packs/min'))}${L.setup==='oem' ? row('OEM manufacturer', esc(o.name||'-')) + row('Machine type', esc(o.type||'-')) + row('Model / serial no.', esc(o.model||'-')) + row('Communication interface', esc(o.iface||'-')) + row('Print / inspection position', esc(o.where||'-')) + row('Space available', esc((o.space||'-') + ' mm')) + row('Reject station', esc(o.reject||'-')) : ''}</table>
+    <h3>Aggregation</h3><table>${row('Levels', L.levels.length ? esc([L.pack].concat(L.levels.map(ttLaneT)).join(' → ')) : 'None')}${L.aggSetup ? row('Configuration', L.aggSetup==='oem' ? 'Integrated into an OEM machine' : 'Stand-alone aggregation stations') : ''}${L.aggSetup==='oem' ? row('OEM manufacturer', esc((L.aggOem||{}).name||'-')) + row('Machine type', esc((L.aggOem||{}).type||'-')) + row('Model / serial no.', esc((L.aggOem||{}).model||'-')) + row('Levels handled', esc((L.aggOem||{}).levels||'-')) + row('Communication interface', esc((L.aggOem||{}).iface||'-')) + row('Read / label position', esc((L.aggOem||{}).where||'-')) + row('Reject / rework', esc((L.aggOem||{}).reject||'-')) : ''}${L.levels.includes('pallet') ? row('Pallet aggregation', 'Manual — handheld scanners and SSCC label printer') : ''}</table>
+    <h3>Required functions</h3><table><tr><th>Requirement</th><th>Description</th><th>Status</th></tr>${s.req.map(r => `<tr><td>${esc(TT_REQ[r][0])}</td><td>${esc(TT_REQ[r][1])}</td><td class="${s.have.has(r)?'ok':'open'}">${s.have.has(r)?'Covered':'Open'}</td></tr>`).join('')}</table>
+    <h3>Proposed configuration (Antares Vision)</h3><table><tr><th>Level</th><th>Equipment / software</th></tr>${TT_LANES.filter(l => (L.line[l.id]||[]).length).map(l => `<tr><td>${esc(l.t)}</td><td>${L.line[l.id].map(k => { const p = ttProd(ttMod(k)); return '<b>' + esc(ttMod(k)[2]) + '</b>' + (p ? ' — ' + esc(p[1]) : ''); }).join('<br>')}</td></tr>`).join('')}${L.levels.includes('pallet') ? '<tr><td>Pallet</td><td>Manual aggregation with handheld scanners</td></tr>' : ''}</table>
+    <p><b>Compliance coverage: ${s.pct}%</b> (${s.met.length} of ${s.req.length} requirements).</p>`; }).join('')}
+  <h2>References</h2><ul>${TT_EDA.map(([,t,u]) => `<li>${esc(t)} — ${esc(u)}</li>`).join('')}</ul>
+  <p><small>Planning aid prepared by NOVA Engineering. Market summaries come from authority documents and industry overviews (2023 – 2026); official regulations always take precedence and must be confirmed for each market before design freeze.</small></p></body></html>`;
+}
+function bindHome(){
+  const x = $('#ttFabX'); x && x.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); try{ sessionStorage.setItem('ttFabX','1'); }catch(err){} const f = $('#ttFab'); f && f.remove(); });
+  ttBoom();
+}
+
 /* ---------- router ---------- */
 function route(){
   const h = (location.hash || '#home').slice(1), cut = h.indexOf('-');
@@ -2164,7 +2758,8 @@ function route(){
   else if(r === 'ticket'){ html = ticket(a); }
   else if(r === 'contact'){ html = contact(); }
   else if(r === 'quote'){ html = quote(a); after = bindQuote; }
-  else { html = home(); }
+  else if(r === 'tt'){ html = tt(a); after = bindTT; }
+  else { html = home(); after = bindHome; }
   const app = $('#app');
   app.innerHTML = `<div class="view">${html}</div>`;
   if(!(r === 'company' && a)) window.scrollTo(0, 0);

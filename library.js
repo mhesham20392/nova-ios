@@ -47,7 +47,7 @@ window.NOVA_LIB = {
 </ul>
 
 <h3>Freeze dryers (paragraph 8.123)</h3>
-<p>Partially stoppered containers moving to and from the lyophiliser must stay under Grade A conditions throughout. Manual loading of open product is strongly discouraged. This is the paragraph that came into force in 2024, and it pushed many sites to automated loading systems.</p>
+<p>Lyophilisers and their loading and unloading areas should be designed to keep operator intervention to a minimum. A lyophiliser that is <b>loaded or unloaded manually without barrier separation must be sterilised before each load</b>. For automated loading or closed barrier systems, the sterilisation frequency must be justified in the CCS. This is the paragraph that came into force on 25 August 2024, and it pushed many sites towards automated loading systems.</p>
 
 <h3>Utilities</h3>
 <ul>
@@ -70,6 +70,259 @@ window.NOVA_LIB = {
       ["EU GMP Annex 1 (2022) — official text", "https://health.ec.europa.eu/system/files/2022-08/20220825_gmp-an1_en_0.pdf"],
       ["PIC/S — entry into force of revised Annex 1", "https://picscheme.org/en/news/entry-into-force-of-revised-annex-i-pics-gmp-guide-pe-009-17"]
     ] },
+
+  /* ------------------------------------------------------------------ */
+  { id: "annex1guide", tag: "Sterile", title: "Annex 1 (2022) section by section: the requirements and numbers you need",
+    summary: "A structured walk through all ten sections of EU GMP Annex 1, with the key limits, frequencies and paragraph numbers taken from the official text.",
+    minutes: 12, partners: ["tema","rigel","abc","steriline","am","elettracqua","zirbus","cora","techniconsult"],
+    body: `
+<p class="lead">This guide follows the structure of the official text — <b>EU GMP Annex 1, Manufacture of Sterile Medicinal Products</b> (European Commission, C(2022) 5938, 22 August 2022). Paragraph numbers are given in brackets so you can go straight to the source. Always check the official document before making a decision.</p>
+
+<div class="tblwrap"><table class="tbl">
+<thead><tr><th>Item</th><th>Detail</th></tr></thead><tbody>
+<tr><td>Replaces</td><td>The 2008 version of Annex 1 (in operation since 1 March 2009 / 2010)</td></tr>
+<tr><td>In force</td><td><b>25 August 2023</b></td></tr>
+<tr><td>Paragraph 8.123 (lyophilisers)</td><td><b>25 August 2024</b></td></tr>
+<tr><td>Prepared by</td><td>EU GMP/GDP Inspectors Working Group with PIC/S, together with WHO</td></tr>
+<tr><td>Length</td><td>10 sections + glossary, about 59 pages</td></tr>
+</tbody></table></div>
+
+<h3>1. Scope</h3>
+<p>Annex 1 covers all sterile products — active substances, excipients, primary packaging and finished dosage forms, from single units to large batches, manual to fully automated. Its principles, especially the Contamination Control Strategy, may also be applied to other products that must control microbial, particle and endotoxin contamination, such as some liquids, creams and ointments.</p>
+
+<h3>2. Principle</h3>
+<ul>
+<li>Facilities, equipment and processes must be designed, qualified and validated, and technologies such as <b>RABS, isolators, robotics, rapid methods and continuous monitoring</b> should be considered (2.1).</li>
+<li>Quality Risk Management drives priorities in this order: <b>design first, then procedures, then monitoring</b>. Monitoring or testing alone does not give assurance of sterility (2.2).</li>
+<li>A site-wide <b>Contamination Control Strategy (CCS)</b> must define all critical control points and assess the effectiveness of every control. It must be reviewed actively and form part of management review (2.3 – 2.6).</li>
+</ul>
+<div class="note">The CCS should cover, among other things: plant and process design, premises, equipment, personnel, utilities, raw materials, product containers, vendor approval, outsourced activities, risk assessment, process validation, preventive maintenance, cleaning and disinfection, monitoring, prevention mechanisms (trending, investigations, CAPA) and continuous improvement (2.5).</div>
+
+<h3>3. Pharmaceutical Quality System</h3>
+<p>The PQS must address sterile-specific risks: risk management across the life cycle and in the CCS, expert knowledge of products and equipment, proper root-cause analysis with CAPA, senior management oversight of the state of control, and release staff with sterile-manufacturing expertise (3.1). Sterility test failures, monitoring excursions and deviations must be investigated <b>before</b> batch certification (3.2).</p>
+
+<h3>4. Premises</h3>
+<p>Four cleanroom grades are defined (4.4):</p>
+<ul>
+<li><b>Grade A</b> — the critical zone: filling, stopper bowls, open primary packaging, aseptic connections, normally protected by unidirectional airflow inside RABS or isolators.</li>
+<li><b>Grade B</b> — background for Grade A in aseptic filling (not needed around an isolator). Pressure differences are monitored continuously.</li>
+<li><b>Grades C and D</b> — less critical steps, isolator backgrounds and terminally sterilised products.</li>
+</ul>
+<div class="tblwrap"><table class="tbl tnum">
+<thead><tr><th>Design value</th><th>Requirement</th><th>Para.</th></tr></thead><tbody>
+<tr><td>Pressure difference between adjacent grades</td><td>≥ 10 Pa (guidance)</td><td>4.14</td></tr>
+<tr><td>Unidirectional air speed at working position</td><td>0.36 – 0.54 m/s (guidance)</td><td>4.30</td></tr>
+<tr><td>Clean-up time to “at rest” limits</td><td>&lt; 20 minutes (guidance)</td><td>4.29</td></tr>
+<tr><td>Airlocks to Grade A/B</td><td>Interlocked doors</td><td>4.13</td></tr>
+<tr><td>Sinks and drains in Grade A/B</td><td>Prohibited</td><td>4.9</td></tr>
+<tr><td>Open isolator background</td><td>Minimum Grade C</td><td>4.20</td></tr>
+<tr><td>Closed isolator background</td><td>Minimum Grade D</td><td>4.20</td></tr>
+<tr><td>RABS background</td><td>Minimum Grade B</td><td>4.20</td></tr>
+</tbody></table></div>
+<p><b>Barrier technology (4.3, 4.18 – 4.22).</b> RABS or isolators should be considered in the CCS, and any alternative must be justified. Isolator interiors need an automated, validated bio-decontamination with a sporicidal agent (e.g. vaporised hydrogen peroxide). Glove systems:</p>
+<ul>
+<li><b>Isolators</b>: glove leak testing at defined intervals — generally at least at the <b>beginning and end of each batch or campaign</b> — plus visual inspection at each use (4.21).</li>
+<li><b>RABS</b>: gloves sterilised before installation and sterilised or bio-decontaminated before each campaign; visual check each use, integrity test at periodic intervals.</li>
+</ul>
+<p><b>Classification (4.23 – 4.36).</b> Cleanrooms are classified to ISO 14644-1 at rest and in operation, and requalified periodically: Grade A and B every <b>6 months</b>, Grade C and D every <b>12 months</b> at most. Requalification includes particle classification, final filter integrity, airflow volume, pressure difference and air velocity.</p>
+<div class="tblwrap"><table class="tbl tnum">
+<thead><tr><th rowspan="2">Grade</th><th colspan="2">≥ 0.5 µm / m³</th><th colspan="2">≥ 5 µm / m³</th></tr><tr><th>At rest</th><th>In operation</th><th>At rest</th><th>In operation</th></tr></thead><tbody>
+<tr><td><b>A</b></td><td>3 520</td><td>3 520</td><td>not specified</td><td>not specified</td></tr>
+<tr><td><b>B</b></td><td>3 520</td><td>352 000</td><td>not specified</td><td>2 930</td></tr>
+<tr><td><b>C</b></td><td>352 000</td><td>3 520 000</td><td>2 930</td><td>29 300</td></tr>
+<tr><td><b>D</b></td><td>3 520 000</td><td>set by risk</td><td>29 300</td><td>set by risk</td></tr>
+</tbody></table></div>
+<p class="small">Table 1 — classification limits. Microbial limits during qualification (Table 2): Grade A <b>no growth</b>; B 10 CFU/m³ air, 5 CFU/4 h settle plate, 5 CFU contact plate; C 100 / 50 / 25; D 200 / 100 / 50.</p>
+
+<h3>5. Equipment</h3>
+<p>Equipment must be designed for easy cleaning, disinfection or sterilisation, with a written description of critical design features. Parts in contact with sterile product must be sterilised; maintenance inside clean areas must not compromise them, and equipment taken out of service must be re-qualified or re-sterilised before return (5.1 – 5.8).</p>
+
+<h3>6. Utilities</h3>
+<ul>
+<li>Higher-risk utilities — those in contact with product, such as water, gases and steam — need tighter design, qualification and trending (6.1 – 6.5).</li>
+<li><b>WFI</b> must be made by distillation or an equivalent process, which may include reverse osmosis with EDI, ultrafiltration or nanofiltration, and stored to limit microbial growth, e.g. constant circulation above <b>70 °C</b> (6.10).</li>
+<li>WFI systems need continuous <b>TOC and conductivity</b> monitoring; at least one representative water sample should be tested every day (6.13 – 6.15).</li>
+<li>Pure steam used for sterilisation must be tested regularly (6.16 – 6.17). Gases in contact with product or used in aseptic processing must be filtered through a sterilising-grade filter that is integrity-tested (6.18 – 6.19).</li>
+</ul>
+
+<h3>7. Personnel</h3>
+<ul>
+<li>Only the minimum number of people in cleanrooms; the maximum number should be defined and justified (7.2).</li>
+<li>Gowning qualification for Grade A/B access, reassessed <b>at least annually</b>, with visual and microbial checks of gloved fingers, forearms, chest and hood (7.4).</li>
+<li>Unsupervised Grade A/B access only after passing gowning assessment <b>and</b> taking part in a successful APS (7.4). Systems for disqualification and requalification are required (7.6).</li>
+<li>No watches, make-up, jewellery or phones in clean areas (7.9). Grade B gowning: sterile suit, hood, mask, goggles, boots and a second pair of sterile gloves (7.13).</li>
+</ul>
+
+<h3>8. Production and specific technologies</h3>
+<ul>
+<li><b>Terminally sterilised products</b>: component preparation at least Grade D; filling at least Grade C (8.1 – 8.4).</li>
+<li><b>Aseptic processing</b>: aseptic connections in Grade A with Grade B background; an authorised list of qualified interventions; every intervention and stoppage recorded in the batch record (8.14 – 8.17).</li>
+<li><b>Sterilisation</b>: terminal sterilisation is preferred wherever possible (8.34). All cycles — moist heat, dry heat, radiation, ethylene oxide and filtration — need validated loading patterns and periodic revalidation (8.34 – 8.95).</li>
+<li><b>Sterilising filtration</b>: integrity test <b>after use</b> before removal from the housing, and <b>PUPSIT</b> (pre-use post-sterilisation) normally required. Where PUPSIT is not possible, a thorough risk assessment and compensating controls are needed (8.87).</li>
+<li><b>Form-fill-seal, blow-fill-seal, lyophilisation, closed and single-use systems</b> each have dedicated paragraphs (8.96 – 8.140).</li>
+<li><b>Lyophilisers (8.123)</b>: minimise interventions; manually loaded units without barrier separation must be sterilised <b>before each load</b>.</li>
+<li><b>Container closure and inspection</b>: glass ampoules, BFS units and fused containers ≤ 100 ml need <b>100 % integrity testing</b> by validated methods — visual inspection is not an integrity test; other containers are sampled. Every filled parenteral container must be inspected for particles and defects, with trending of rejects (8.22 – 8.33).</li>
+</ul>
+
+<h3>9. Environmental and process monitoring</h3>
+<p>The monitoring programme covers total particles, viable particles and aseptic process simulation. Alert levels and action limits must be set and trended (9.9 – 9.13).</p>
+<ul>
+<li>Grade A particles monitored <b>continuously</b> for the full duration of critical processing, including set-up, with a sample flow of at least <b>28 L/min (1 ft³/min)</b> (9.16 – 9.17). A similar system is recommended for Grade B (9.18).</li>
+<li>Continuous viable monitoring in Grade A (air sampling or settle plates) for the full critical process (9.24).</li>
+<li>Micro-organisms in Grade A and B identified to species level (9.31). Rapid methods may be used once validated (9.28).</li>
+</ul>
+<div class="tblwrap"><table class="tbl tnum">
+<thead><tr><th>Grade</th><th>Air CFU/m³</th><th>Settle plate 90 mm CFU/4 h</th><th>Contact plate 55 mm CFU</th><th>Glove print CFU/glove</th></tr></thead><tbody>
+<tr><td><b>A</b></td><td colspan="4">No growth — any growth must be investigated</td></tr>
+<tr><td><b>B</b></td><td>10</td><td>5</td><td>5</td><td>5</td></tr>
+<tr><td><b>C</b></td><td>100</td><td>50</td><td>25</td><td>–</td></tr>
+<tr><td><b>D</b></td><td>200</td><td>100</td><td>50</td><td>–</td></tr>
+</tbody></table></div>
+<p class="small">Table 6 — viable action limits. Monitoring particle limits (Table 5) match Table 1, but add ≥ 5 µm limits of 29/m³ for Grade A and 29 (at rest) / 2 930 (in operation) for Grade B.</p>
+<p><b>Aseptic process simulation (9.32 – 9.49):</b></p>
+<ul>
+<li>Initial validation: <b>at least three consecutive successful</b> APS covering all shifts (9.38).</li>
+<li>Revalidation: <b>twice a year</b> (about every six months) per process, filling line and shift; every operator in at least one successful APS per year (9.38).</li>
+<li>Typically <b>5 000 – 10 000 units</b> filled; for batches under 5 000, at least the batch size (9.40).</li>
+<li>Target: <b>zero growth</b>. Any contaminated unit means a failed APS and a full investigation (9.46).</li>
+</ul>
+
+<h3>10. Quality control</h3>
+<p>QC needs staff with microbiology and sterility-assurance expertise (10.1). A <b>bioburden assay on every batch</b>, with limits before the final sterilising filter or terminal sterilisation (10.3). The sterility test is only the last in a series of controls and cannot rescue a product that misses its design or validation parameters (10.5). Sterility samples must represent the whole batch and include the most at-risk units — for aseptic filling, containers from the beginning and end of the batch (10.6).</p>
+
+<h3>How NOVA partners help</h3>
+<ul>
+<li><b>Barrier systems and glove testing</b>: Tema Sinergie isolators, RABS and AGLTS glove testers; Steriline aseptic filling lines.</li>
+<li><b>Continuous monitoring</b>: Rigel IEMS Next and CLiMET counters with ≥ 28 L/min sampling.</li>
+<li><b>Transfers</b>: ABC Transfer alpha/beta ports and gloveless Ultra™ system.</li>
+<li><b>Water and freeze drying</b>: Elettracqua WFI and pure steam; Zirbus lyophilisers and loading systems.</li>
+<li><b>Engineering and qualification</b>: Techniconsult design, C&amp;Q and containment testing.</li>
+</ul>
+`,
+    sources: [["EU GMP Annex 1 — Manufacture of Sterile Medicinal Products, C(2022) 5938 final (22.8.2022)", "https://health.ec.europa.eu/system/files/2022-08/20220825_gmp-an1_en_0.pdf"],
+              ["EudraLex Volume 4 — EU GMP Guide", "https://health.ec.europa.eu/medicinal-products/eudralex/eudralex-volume-4_en"]] },
+
+  /* ------------------------------------------------------------------ */
+  { id: "areaclass", tag: "Sterile", title: "Cleanroom area classification: ISO 14644-1, EU GMP grades and FDA classes",
+    summary: "How cleanrooms are classified, how the ISO classes, EU GMP grades A–D and FDA classes relate, and how to plan a classification test step by step.",
+    minutes: 10, partners: ["rigel","techniconsult","cdz","delta","generalfilter","tema"],
+    body: `
+<p class="lead">Area classification proves that a cleanroom or clean-air device meets a defined level of airborne particle cleanliness. It is done when a room is qualified and repeated at fixed intervals. Three systems are used in pharma: the <b>ISO classes</b> of ISO 14644-1:2015, the <b>EU GMP grades A–D</b> of Annex 1 (2022), and the older <b>US FDA classes</b> (Class 100 to 100,000) used in the FDA 2004 aseptic processing guidance.</p>
+
+<h3>Classification is not monitoring</h3>
+<p>Annex 1 (4.24) requires classification to be kept clearly separate from routine environmental monitoring:</p>
+<ul>
+<li><b>Classification</b> (ISO 14644-1) — a formal test at defined times that shows the room <i>can</i> meet its class. Done at rest and in operation.</li>
+<li><b>Monitoring</b> (ISO 14644-2) — continuous or frequent measurements during production that show the room <i>stays</i> in control.</li>
+</ul>
+
+<h3>ISO 14644-1:2015 classes</h3>
+<p>Maximum concentration of particles equal to or larger than the stated size, per cubic metre of air (cumulative counts).</p>
+<div class="tblwrap"><table class="tbl tnum">
+<thead><tr><th>ISO class</th><th>≥ 0.1 µm</th><th>≥ 0.2 µm</th><th>≥ 0.3 µm</th><th>≥ 0.5 µm</th><th>≥ 1 µm</th><th>≥ 5 µm</th></tr></thead><tbody>
+<tr><td><b>1</b></td><td>10</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td><b>2</b></td><td>100</td><td>24</td><td>10</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td><b>3</b></td><td>1 000</td><td>237</td><td>102</td><td>35</td><td>–</td><td>–</td></tr>
+<tr><td><b>4</b></td><td>10 000</td><td>2 370</td><td>1 020</td><td>352</td><td>83</td><td>–</td></tr>
+<tr><td><b>5</b></td><td>100 000</td><td>23 700</td><td>10 200</td><td>3 520</td><td>832</td><td>(29)*</td></tr>
+<tr><td><b>6</b></td><td>1 000 000</td><td>237 000</td><td>102 000</td><td>35 200</td><td>8 320</td><td>293</td></tr>
+<tr><td><b>7</b></td><td>–</td><td>–</td><td>–</td><td>352 000</td><td>83 200</td><td>2 930</td></tr>
+<tr><td><b>8</b></td><td>–</td><td>–</td><td>–</td><td>3 520 000</td><td>832 000</td><td>29 300</td></tr>
+<tr><td><b>9</b></td><td>–</td><td>–</td><td>–</td><td>35 200 000</td><td>8 320 000</td><td>293 000</td></tr>
+</tbody></table></div>
+<p class="small">“–” means classification at that size is not appropriate (too few or too many particles to sample reliably). *For ISO 5 at ≥ 5 µm, the standard notes that sampling limitations make classification at this size inappropriate; the macroparticle (M) descriptor may be used together with another size. ISO 9 applies to the in-operation state only.</p>
+<p>The limits come from the formula <b>C<sub>n</sub> = 10<sup>N</sup> × (0.1 / D)<sup>2.08</sup></b>, where N is the ISO class number and D the particle size in µm. The 2015 edition presents the table as the reference and uses the formula only for intermediate classes and sizes.</p>
+
+<h3>EU GMP grades (Annex 1, 2022)</h3>
+<p>Annex 1 classifies by particles ≥ 0.5 µm and ≥ 5 µm, both <b>at rest</b> and <b>in operation</b> (Table 1, para. 4.27):</p>
+<div class="tblwrap"><table class="tbl tnum">
+<thead><tr><th rowspan="2">Grade</th><th colspan="2">≥ 0.5 µm / m³</th><th colspan="2">≥ 5 µm / m³</th><th rowspan="2">≈ ISO class (at rest / in operation)</th></tr><tr><th>At rest</th><th>In operation</th><th>At rest</th><th>In operation</th></tr></thead><tbody>
+<tr><td><b>A</b></td><td>3 520</td><td>3 520</td><td>not specified</td><td>not specified</td><td>ISO 5 / ISO 5</td></tr>
+<tr><td><b>B</b></td><td>3 520</td><td>352 000</td><td>not specified</td><td>2 930</td><td>ISO 5 / ISO 7</td></tr>
+<tr><td><b>C</b></td><td>352 000</td><td>3 520 000</td><td>2 930</td><td>29 300</td><td>ISO 7 / ISO 8</td></tr>
+<tr><td><b>D</b></td><td>3 520 000</td><td>not predetermined</td><td>29 300</td><td>not predetermined</td><td>ISO 8 / set by the site</td></tr>
+</tbody></table></div>
+<ul>
+<li><b>Grade A</b> — critical zone: filling, stopper bowls, open containers, aseptic connections; protected by unidirectional airflow, normally inside RABS or an isolator. Classification at 5 µm may be added if the CCS or trends indicate it.</li>
+<li><b>Grade B</b> — background for Grade A in aseptic processing (not needed around isolators).</li>
+<li><b>Grades C and D</b> — less critical steps, isolator backgrounds and preparation/filling of terminally sterilised products. For Grade D the site sets its own in-operation limits based on risk and data.</li>
+</ul>
+<p>Microbial limits during qualification (Annex 1 Table 2):</p>
+<div class="tblwrap"><table class="tbl tnum">
+<thead><tr><th>Grade</th><th>Air sample CFU/m³</th><th>Settle plate Ø 90 mm CFU/4 h</th><th>Contact plate Ø 55 mm CFU/plate</th></tr></thead><tbody>
+<tr><td><b>A</b></td><td colspan="3">No growth</td></tr>
+<tr><td><b>B</b></td><td>10</td><td>5</td><td>5</td></tr>
+<tr><td><b>C</b></td><td>100</td><td>50</td><td>25</td></tr>
+<tr><td><b>D</b></td><td>200</td><td>100</td><td>50</td></tr>
+</tbody></table></div>
+
+<h3>US FDA classes (2004 aseptic processing guidance)</h3>
+<p>The FDA guidance uses the old US Federal Standard names (particles ≥ 0.5 µm per cubic foot) next to ISO designations. All values are measured near exposed product <b>during activity</b>.</p>
+<div class="tblwrap"><table class="tbl tnum">
+<thead><tr><th>FDA class</th><th>ISO</th><th>≥ 0.5 µm / m³</th><th>Active air action level CFU/m³</th><th>Settle plates Ø 90 mm CFU/4 h</th></tr></thead><tbody>
+<tr><td><b>100</b></td><td>5</td><td>3 520</td><td>1</td><td>1</td></tr>
+<tr><td><b>1 000</b></td><td>6</td><td>35 200</td><td>7</td><td>3</td></tr>
+<tr><td><b>10 000</b></td><td>7</td><td>352 000</td><td>10</td><td>5</td></tr>
+<tr><td><b>100 000</b></td><td>8</td><td>3 520 000</td><td>100</td><td>50</td></tr>
+</tbody></table></div>
+<p class="small">Samples from Class 100 (ISO 5) areas should normally yield no micro-organisms. Settle plates are optional in the FDA guidance.</p>
+
+<h3>Design values that support the class</h3>
+<div class="tblwrap"><table class="tbl">
+<thead><tr><th>Parameter</th><th>EU GMP Annex 1 (2022)</th><th>FDA guidance (2004)</th></tr></thead><tbody>
+<tr><td>Pressure difference between adjacent grades</td><td>≥ 10 Pa (guidance, 4.14)</td><td>10 – 15 Pa; ≥ 12.5 Pa to unclassified areas</td></tr>
+<tr><td>Unidirectional air speed</td><td>0.36 – 0.54 m/s at working position (guidance, 4.30)</td><td>about 0.45 m/s ± 20 %</td></tr>
+<tr><td>Clean-up (recovery) to at-rest limits</td><td>&lt; 20 min (guidance, 4.29)</td><td>–</td></tr>
+</tbody></table></div>
+
+<h3>How to plan a classification test (ISO 14644-1:2015)</h3>
+<ol>
+<li><b>Define the target</b>: class, occupancy state (as-built, at rest or in operation) and particle sizes. Annex 1 requires at rest and in operation; initial classification should be done in simulated operations, and reclassification in simulated operations or during an aseptic process simulation (4.26).</li>
+<li><b>Number of sampling locations</b> — from the room area (Table A.1). If the area falls between two values, use the higher one.</li>
+<li><b>Place the locations</b> evenly over the area, at working height, and add locations at critical points (Annex 1 4.28 — e.g. point of fill, stopper bowls).</li>
+<li><b>Sample volume per location</b>: V<sub>s</sub> = (20 / C<sub>n,m</sub>) × 1000 litres, where C<sub>n,m</sub> is the class limit for the largest particle size considered. Each sample must be at least <b>2 litres</b> and at least <b>1 minute</b>.</li>
+<li><b>Measure</b> with a calibrated light-scattering particle counter (calibration to ISO 21501-4).</li>
+<li><b>Evaluate</b>: the average count at <b>every</b> location must be within the class limit. The 95 % upper confidence limit calculation of the 1999 edition was removed in 2015.</li>
+<li><b>Report</b> the result as, for example, “<i>ISO Class 5; in operation; ≥ 0.5 µm</i>”, with locations, counts, counter calibration and any deviations.</li>
+</ol>
+<div class="tblwrap"><table class="tbl tnum">
+<thead><tr><th>Area ≤ (m²)</th><th>Locations</th><th>Area ≤ (m²)</th><th>Locations</th><th>Area ≤ (m²)</th><th>Locations</th></tr></thead><tbody>
+<tr><td>2</td><td>1</td><td>52</td><td>10</td><td>148</td><td>19</td></tr>
+<tr><td>4</td><td>2</td><td>56</td><td>11</td><td>156</td><td>20</td></tr>
+<tr><td>6</td><td>3</td><td>64</td><td>12</td><td>192</td><td>21</td></tr>
+<tr><td>8</td><td>4</td><td>68</td><td>13</td><td>232</td><td>22</td></tr>
+<tr><td>10</td><td>5</td><td>72</td><td>14</td><td>276</td><td>23</td></tr>
+<tr><td>24</td><td>6</td><td>76</td><td>15</td><td>352</td><td>24</td></tr>
+<tr><td>28</td><td>7</td><td>104</td><td>16</td><td>436</td><td>25</td></tr>
+<tr><td>32</td><td>8</td><td>108</td><td>17</td><td>636</td><td>26</td></tr>
+<tr><td>36</td><td>9</td><td>116</td><td>18</td><td>1 000</td><td>27</td></tr>
+</tbody></table></div>
+<p class="small">ISO 14644-1:2015 Table A.1. Above 1 000 m²: N = 27 × (A / 1 000), rounded up.</p>
+<div class="note"><b>Worked example.</b> A 30 m² Grade B room classified at ≥ 0.5 µm and ≥ 5 µm in operation: 30 m² → <b>8 locations</b>. The largest size considered is 5 µm with a limit of 2 930/m³, so V<sub>s</sub> = 20 / 2 930 × 1000 ≈ <b>6.8 litres</b> per location — about 15 seconds at 28.3 L/min, so the 1-minute minimum applies (28.3 L).<br>For Grade A at ≥ 0.5 µm (3 520/m³): V<sub>s</sub> = 20 / 3 520 × 1000 ≈ 5.7 L — again the 1-minute minimum governs. This is also why Grade A is not classified at 5 µm: with a 29/m³ limit a single sample would need about 690 litres.</div>
+
+<h3>How often to repeat</h3>
+<ul>
+<li><b>Annex 1 (4.32)</b>: requalification at most every <b>6 months for Grades A and B</b> and every <b>12 months for Grades C and D</b>. It must include at least particle classification, final filter integrity, airflow volume, pressure differences between rooms and air velocity — required for unidirectional airflow; areas without unidirectional airflow use a recovery test instead.</li>
+<li><b>ISO 14644-2:2015</b>: particle classification at most every <b>6 months for ISO 5 and cleaner</b> and every <b>12 months for classes above ISO 5</b>, with continuous or frequent monitoring supporting the state of control.</li>
+<li>Reclassify after any change that could affect performance — HVAC modifications, layout changes, major repairs, or monitoring trends showing deterioration.</li>
+</ul>
+
+<h3>Not to be confused with hazardous area classification</h3>
+<p>“Area classification” is also used for <b>explosive atmospheres (ATEX)</b>, which is a separate safety topic: gas zones <b>0, 1 and 2</b> and dust zones <b>20, 21 and 22</b> under EU Directive 1999/92/EC and IEC 60079-10-1 / -10-2. Solvent handling, fluid-bed drying and powder milling areas may need both a cleanroom grade and an ATEX zone, and the equipment must suit both.</p>
+
+<h3>Common inspection findings</h3>
+<ul>
+<li>Classification and routine monitoring treated as the same exercise.</li>
+<li>In-operation classification done with fewer people or less activity than real production.</li>
+<li>Critical locations (point of fill, stopper bowl) missing from the sampling plan.</li>
+<li>Particle counters out of calibration, or sample tubing too long.</li>
+<li>No defined clean-up time, or recovery not verified.</li>
+</ul>
+`,
+    sources: [["EU GMP Annex 1 (2022), section 4 — Premises", "https://health.ec.europa.eu/system/files/2022-08/20220825_gmp-an1_en_0.pdf"],
+              ["ISO 14644-1:2015 — Classification of air cleanliness by particle concentration", "https://www.iso.org/standard/53394.html"],
+              ["ISO 14644-2:2015 — Monitoring to provide evidence of cleanroom performance", "https://www.iso.org/standard/53393.html"],
+              ["FDA Guidance: Sterile Drug Products Produced by Aseptic Processing (2004)", "https://www.fda.gov/media/71026/download"]] },
 
   /* ------------------------------------------------------------------ */
   { id: "gmp", tag: "GMP", title: "GMP essentials, and what is changing in 2025–2026",
