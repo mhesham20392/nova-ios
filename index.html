@@ -1,0 +1,2178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NOVA Engineering</title>
+<meta name="theme-color" content="#24306a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NOVA">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{
+  --navy:#24306a; --navy-2:#1a2350; --gold:#c8a75e; --gold-soft:#f4ecd9;
+  --bg:#f4f5f9; --card:#ffffff; --ink:#151a2e; --muted:#5d6480; --line:#e3e6ef;
+  --chip:#eceef6; --shadow:0 1px 2px rgba(20,28,60,.06),0 4px 14px rgba(20,28,60,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1220; --card:#181c2e; --ink:#eef0f7; --muted:#a4aac2; --line:#2a2f47;
+    --chip:#22273d; --gold-soft:#2c2718; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{--bg:#0f1220;--card:#181c2e;--ink:#eef0f7;--muted:#a4aac2;--line:#2a2f47;--chip:#22273d;--gold-soft:#2c2718;--shadow:none}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Roboto,"Segoe UI",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.5}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3{margin:0;line-height:1.25}
+
+/* app bar */
+.bar{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff;display:flex;align-items:center;gap:10px;
+  padding:calc(env(safe-area-inset-top) + 10px) 14px 10px;min-height:58px}
+.bar .back{width:38px;height:38px;border-radius:50%;display:none;align-items:center;justify-content:center;margin-left:-6px}
+.bar .back:active{background:rgba(255,255,255,.12)}
+.bar.sub .back{display:flex}
+.bar .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.06em;font-size:17px}
+.bar .brand small{display:block;font-size:9.5px;letter-spacing:.2em;color:var(--gold);font-weight:600;margin-top:-2px}
+.bar .title{font-size:17px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mark{width:30px;height:30px;border-radius:50%;border:3px solid var(--gold);border-right-color:transparent;transform:rotate(-30deg);flex:none}
+
+main{padding:0 0 calc(84px + env(safe-area-inset-bottom));min-height:100vh}
+.wrap{padding:16px}
+.view{animation:fade .18s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* bottom nav */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--card);border-top:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(5,1fr);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+nav.tabs a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;color:var(--muted);padding:4px 0;font-weight:500}
+nav.tabs a svg{width:24px;height:24px;padding:2px 12px;box-sizing:content-box;border-radius:16px}
+nav.tabs a.on{color:var(--navy)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) nav.tabs a.on{color:var(--gold)}}
+nav.tabs a.on svg{background:var(--gold-soft)}
+
+/* hero */
+.hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:22px 18px 26px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-70px;top:-50px;width:230px;height:230px;border-radius:50%;
+  border:14px solid var(--gold);border-right-color:transparent;opacity:.55;transform:rotate(-25deg)}
+.hero .logoCard{background:#fff;border-radius:16px;padding:10px 14px;width:190px;position:relative;z-index:1}
+.hero h1{font-size:23px;margin:18px 0 8px;font-weight:700;position:relative;z-index:1;max-width:320px}
+.hero p{margin:0;color:#c9cfe6;font-size:14px;position:relative;z-index:1;max-width:340px}
+.hero .cta{display:flex;gap:10px;margin-top:18px;position:relative;z-index:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:12px 16px;font-weight:600;font-size:14.5px;border:0;cursor:pointer}
+.btn.gold{background:var(--gold);color:#1a1a1a}
+.btn.ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.btn.navy{background:var(--navy);color:#fff}
+.btn.line{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn.block{width:100%}
+.btn svg{width:18px;height:18px}
+
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:-14px 16px 0;position:relative;z-index:2}
+.stat{background:var(--card);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.stat b{display:block;font-size:22px;color:var(--navy)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .stat b{color:var(--gold)}}
+.stat span{font-size:12.5px;color:var(--muted);line-height:1.3;display:block}
+
+.sec{margin:26px 16px 0}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.sec-h h2{font-size:18px}
+.sec-h a{color:var(--gold);font-weight:600;font-size:13.5px}
+.eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px}
+
+/* category grid */
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:112px}
+.cat:active{transform:scale(.98)}
+.cat .ic{width:38px;height:38px;border-radius:10px;background:var(--gold-soft);color:var(--gold);display:flex;align-items:center;justify-content:center}
+.cat .ic svg{width:21px;height:21px}
+.cat b{font-size:14px;line-height:1.3}
+.cat span{font-size:12px;color:var(--muted);margin-top:auto}
+
+/* logo strip */
+.strip{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;margin:0 -16px;padding-left:16px;padding-right:16px}
+.strip::-webkit-scrollbar{display:none}
+.strip a{flex:none;width:120px;height:72px;background:#fff;border-radius:12px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:10px}
+.strip img{max-height:100%;object-fit:contain}
+
+/* cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.card + .card{margin-top:10px}
+.card p{margin:0 0 10px;color:var(--ink)}
+.card p:last-child{margin-bottom:0}
+.muted{color:var(--muted)}
+
+/* partners list */
+.search{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 12px;height:46px}
+.search svg{width:20px;height:20px;color:var(--muted);flex:none}
+.search input{border:0;outline:0;background:transparent;font:inherit;color:var(--ink);width:100%;height:100%}
+.chips{display:flex;gap:8px;overflow-x:auto;margin:12px -16px 4px;padding:0 16px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 14px;border-radius:999px;background:var(--chip);font-size:13px;font-weight:500;color:var(--ink);border:1px solid transparent;cursor:pointer}
+.chip.on{background:var(--navy);color:#fff}
+.group-t{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:20px 0 8px}
+.plist{display:flex;flex-direction:column;gap:8px}
+.prow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
+.prow:active{background:var(--chip)}
+.prow .lg{width:84px;height:52px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:6px;flex:none;border:1px solid var(--line)}
+.prow .lg img{max-height:100%;object-fit:contain}
+.prow b{display:block;font-size:14.5px}
+.prow span{font-size:12.5px;color:var(--muted)}
+.prow .chev{margin-left:auto;color:var(--muted);flex:none}
+.empty{text-align:center;color:var(--muted);padding:40px 10px}
+
+/* detail */
+.dhero{background:#fff;border-bottom:1px solid var(--line)}
+.dhero .photo{height:230px;display:flex;align-items:center;justify-content:center;padding:12px;background:#fff}
+.dhero .photo img{max-height:100%;object-fit:contain}
+.dhead{padding:16px;display:flex;gap:12px;align-items:center}
+.dhead .lg{width:110px;height:64px;background:#fff;border:1px solid var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:8px;flex:none}
+.dhead .lg img{max-height:100%;object-fit:contain}
+.dhead h1{font-size:19px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:11.5px;background:var(--chip);border-radius:6px;padding:3px 8px;color:var(--muted);font-weight:500}
+.tag.g{background:var(--gold-soft);color:#8a6d2b}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag.g{color:var(--gold)}}
+ul.ticks{list-style:none;margin:0;padding:0}
+ul.ticks li{position:relative;padding:7px 0 7px 26px;border-bottom:1px solid var(--line)}
+ul.ticks li:last-child{border-bottom:0}
+ul.ticks li:before{content:"";position:absolute;left:4px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+ul.dots{margin:0;padding-left:18px}
+ul.dots li{margin:4px 0}
+.subh{font-weight:700;font-size:13.5px;color:var(--navy);margin:14px 0 4px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .subh{color:var(--gold)}}
+.subh:first-child{margin-top:0}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+
+/* company */
+.photoCard{border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.photoCard img{width:100%;height:190px;object-fit:cover}
+.mv{display:grid;gap:10px}
+.mv .card{border-left:4px solid var(--gold)}
+.mv h3{font-size:16px;margin-bottom:6px;color:var(--navy)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .mv h3{color:var(--gold)}}
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.svc .card{padding:14px}
+.svc .card + .card{margin-top:0}
+.svc b{display:block;font-size:14px;margin:8px 0 4px}
+.svc p{font-size:12.5px;color:var(--muted);margin:0;line-height:1.4}
+.num{width:28px;height:28px;border-radius:8px;background:var(--navy);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.teamgrid{display:grid;gap:10px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.pair img{border-radius:12px;height:110px;width:100%;object-fit:cover}
+.partnerLogos{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.partnerLogos .lg{height:56px;flex:1;background:#fff;border-radius:10px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:6px}
+.partnerLogos .lg img{max-height:100%;object-fit:contain}
+
+/* contact */
+.clist{display:flex;flex-direction:column;gap:8px}
+.crow{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.crow:active{background:var(--chip)}
+.crow .ic{width:42px;height:42px;border-radius:12px;background:var(--gold-soft);color:var(--gold);display:flex;align-items:center;justify-content:center;flex:none}
+.crow .ic svg{width:21px;height:21px}
+.crow small{display:block;color:var(--muted);font-size:12px}
+.crow b{font-weight:600;font-size:14.5px;word-break:break-word}
+.form label{display:block;font-size:12.5px;color:var(--muted);margin:12px 0 4px;font-weight:500}
+.form input,.form select,.form textarea{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:12px;font:inherit;outline:0}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--gold)}
+.form textarea{min-height:110px;resize:vertical}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin:26px 16px 0}
+
+/* support */
+.urgent{display:flex;align-items:center;gap:12px;background:#fdecec;border:1px solid #f3c4c4;color:#8f1d1d;border-radius:14px;padding:12px 14px;margin-bottom:12px}
+.urgent svg{width:22px;height:22px;flex:none}
+.urgent b{display:block;font-size:14px}.urgent span{font-size:12.5px}
+.fs-t{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--gold);margin:22px 0 2px;padding-top:16px;border-top:1px solid var(--line)}
+.form .fs-t:first-child{margin-top:0;padding-top:0;border-top:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.two>div{min-width:0}
+.prio{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pr{text-align:left;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:10px 12px;font:inherit;cursor:pointer;position:relative}
+.pr b{display:block;font-size:14px;padding-left:16px}.pr span{font-size:12px;color:var(--muted)}
+.pr:before{content:"";position:absolute;left:12px;top:16px;width:9px;height:9px;border-radius:50%;background:var(--dot)}
+.pr.on{border-color:var(--dot);background:var(--card);box-shadow:0 0 0 3px color-mix(in srgb,var(--dot) 18%,transparent)}
+.pr-critical{--dot:#d93a3a}.pr-high{--dot:#e8892c}.pr-normal{--dot:#3a7bd5}.pr-low{--dot:#3aa66b}
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.photos:empty{display:none}
+.ph{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;border:1px solid var(--line);max-width:100%}
+.ph img{width:100%;height:100%;object-fit:cover}
+.ph button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:16px;line-height:1;cursor:pointer}
+.addph{display:flex!important;align-items:center;justify-content:center;gap:8px;border:1.5px dashed var(--line);border-radius:12px;padding:14px;margin-top:8px!important;color:var(--ink)!important;font-weight:600;font-size:14px!important;cursor:pointer}
+.addph[hidden]{display:none!important}
+.addph svg{width:20px;height:20px;color:var(--gold)}
+.form .bad{border-color:#d93a3a!important;background:#fdf3f3}
+.err{background:#fdecec;color:#8f1d1d;border-radius:10px;padding:10px 12px;font-size:13px;margin-top:14px}
+.pdot{width:10px;height:10px;border-radius:50%;background:var(--dot);flex:none;margin:0 4px 0 6px}
+.tkrow b.ell{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tag.pt{background:var(--dot);color:#fff}
+.done-card{background:linear-gradient(160deg,var(--navy),var(--navy-2));color:#fff;border-radius:16px;padding:22px 18px;text-align:center}
+.done-card h2{font-size:19px;margin:12px 0 6px}.done-card p{margin:0;color:#d6dbef;font-size:14px}
+.tick{width:56px;height:56px;border-radius:50%;background:var(--gold);color:#1a1a1a;display:flex;align-items:center;justify-content:center;margin:0 auto}
+.tick svg{width:28px;height:28px}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.kv span{color:var(--muted);flex:none}.kv b{font-weight:600;text-align:right;min-width:0;overflow-wrap:anywhere}
+
+/* header info */
+.evBtn{margin-left:auto;position:relative;display:flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 10px;border-radius:999px;color:#1a2350;flex:none;
+  background:linear-gradient(110deg,#c8a75e 0%,#f1dca8 45%,#c8a75e 60%,#c8a75e 100%);background-size:250% 100%;animation:evShine 3s ease-in-out infinite;box-shadow:0 0 0 0 rgba(200,167,94,.6)}
+.evBtn svg{animation:evRing 3s ease-in-out infinite;transform-origin:50% 10%}
+.evBtn b{font-size:13px;font-weight:700}
+.evBtn i{position:absolute;top:-2px;right:-2px;width:10px;height:10px;border-radius:50%;background:#ff5a5f;border:2px solid var(--navy);animation:evLive 1.6s infinite}
+@keyframes evShine{0%{background-position:100% 0}60%,100%{background-position:-50% 0}}
+@keyframes evRing{0%,60%,100%{transform:rotate(0)}65%{transform:rotate(-16deg)}72%{transform:rotate(14deg)}79%{transform:rotate(-10deg)}86%{transform:rotate(6deg)}}
+.bar.sub .evBtn{display:none}
+.bar.sub .infoBtn{margin-left:auto}
+@media (prefers-reduced-motion: reduce){.evBtn,.evBtn svg,.evBtn i{animation:none}}
+.infoBtn{margin-left:6px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;opacity:.85;flex:none}
+.infoBtn:active{background:rgba(255,255,255,.12)}
+/* library */
+.small{font-size:12px}
+.ltag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tc,#5d6480);background:color-mix(in srgb,var(--tc,#5d6480) 12%,transparent);border-radius:6px;padding:3px 8px}
+.lcard-top{display:flex;align-items:center;gap:10px;justify-content:space-between}
+.lgrid{display:grid;gap:10px}
+.lcard{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.lcard:active{background:var(--chip)}
+.lcard b{display:block;font-size:15px;line-height:1.35;margin-top:8px}
+.lcard p{margin:4px 0 0;font-size:13px;color:var(--muted);line-height:1.45}
+.feat{display:block;margin-top:14px;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,var(--navy) 0%,#2f3d86 60%,var(--navy-2) 100%);color:#fff;position:relative}
+.feat:after{content:"";position:absolute;right:-60px;bottom:-80px;width:200px;height:200px;border-radius:50%;border:12px solid var(--gold);border-left-color:transparent;opacity:.5}
+.feat-in{padding:20px 18px;position:relative;z-index:1}
+.feat .ltag{--tc:#e6cf93;background:rgba(230,207,147,.16)}
+.feat h3{font-size:19px;margin:10px 0 6px;line-height:1.3}
+.feat p{margin:0;color:#c9cfe6;font-size:13.5px}
+.feat-cta{display:inline-flex;align-items:center;gap:4px;margin-top:14px;color:var(--gold);font-weight:600;font-size:13.5px}
+.feat-cta svg{width:16px;height:16px}
+.refgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.refc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;min-height:84px}
+.refc b{font-size:14px;line-height:1.3}
+.dic{width:40px;height:40px;border-radius:10px;background:var(--gold-soft);color:var(--gold);display:flex;align-items:center;justify-content:center;flex:none}
+.dic svg{width:20px;height:20px}
+.prow.doc b{font-size:14px}
+.prow.book{align-items:flex-start}
+.prow.book p{margin:4px 0 0;font-size:12.5px;color:var(--muted);line-height:1.4}
+.spine{width:8px;align-self:stretch;border-radius:3px;background:linear-gradient(var(--gold),#a8853d);flex:none}
+.art-h{font-size:23px;line-height:1.25;margin:0 0 14px;text-wrap:balance}
+.art{font-size:15px;line-height:1.65}
+.art .lead{font-size:16px;color:var(--ink);border-left:3px solid var(--gold);padding-left:12px;margin:0 0 6px}
+.art h3{font-size:17px;margin:22px 0 8px;color:var(--navy)}
+.art p{margin:0 0 10px}
+.art ul,.art ol{padding-left:20px;margin:0 0 10px}
+.art li{margin:5px 0}
+.art code{font-size:12.5px;background:var(--chip);padding:2px 6px;border-radius:5px;word-break:break-all}
+.art .note{background:var(--gold-soft);border-radius:10px;padding:10px 12px;font-size:13.5px;margin:10px 0}
+.art .note a,.art a{color:var(--navy);font-weight:600;text-decoration:underline}
+.tblwrap{overflow-x:auto;margin:0 0 12px}
+.art>.tbl,.art .tbl{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 12px;display:table}
+.art>.tbl{display:block;overflow-x:auto}
+.tbl th,.tbl td{border:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+.tbl th{background:var(--chip);font-weight:600;font-size:12px}
+.tbl.tnum td{font-variant-numeric:tabular-nums;white-space:nowrap}
+.gloss dt{font-weight:700;color:var(--navy);margin-top:10px}
+.gloss dd{margin:2px 0 0;color:var(--ink);font-size:14px}
+.srcs{list-style:none;padding:0;margin:0}
+.srcs li{border-bottom:1px solid var(--line)}.srcs li:last-child{border:0}
+.srcs a{display:flex;justify-content:space-between;gap:10px;padding:9px 0;font-size:14px;font-weight:500}
+.srcs svg{width:16px;height:16px;flex:none;color:var(--muted)}
+
+/* URS builder */
+.ursCta{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--gold-soft),var(--card));border:1px solid var(--gold);border-radius:16px;padding:14px}
+.ursCta .ic{width:44px;height:44px;border-radius:12px;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;flex:none}
+.ursCta .ic svg{width:22px;height:22px}
+.ursCta b{display:block;font-size:15.5px}.ursCta span{font-size:12.5px;color:var(--muted);line-height:1.35;display:block}
+.ursCta .chev{margin-left:auto;color:var(--gold)}
+.ursCta .chev svg{width:20px;height:20px}
+.ursHero{background:linear-gradient(160deg,var(--navy),var(--navy-2));color:#fff;border-radius:18px;padding:20px 18px}
+.ursHero h2{font-size:24px;margin:2px 0 8px}.ursHero p{color:#c9cfe6;margin:0 0 16px;font-size:14px}
+.steps3{display:grid;gap:10px}.steps3>div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:auto 1fr;column-gap:12px}
+.steps3 .num{grid-row:span 2}.steps3 b{font-size:14.5px}.steps3 p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+.ell{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.progress{height:6px;border-radius:6px;background:var(--chip);overflow:hidden}.progress>div{height:100%;background:var(--gold);width:0;transition:width .3s}
+.usec{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:8px;overflow:hidden}
+.usec summary{list-style:none;display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer}
+.usec summary::-webkit-details-marker{display:none}
+.usec summary:after{content:"";width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-left:auto;flex:none;transition:transform .2s}
+.usec[open] summary:after{transform:rotate(-135deg)}
+.usec summary b{display:block;font-size:14.5px}.usec summary small{color:var(--muted);font-size:12px}
+.snum{width:28px;height:28px;border-radius:8px;background:var(--gold-soft);color:#8a6d2b;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.usbody{padding:0 14px 14px;border-top:1px solid var(--line)}
+.usbody.form{padding-top:2px}
+.why{font-size:13px;color:var(--muted);background:var(--bg);border-radius:10px;padding:8px 10px;margin:12px 0 4px}
+.rlist{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.ri{display:flex;gap:10px;align-items:flex-start;padding:9px 8px;border:1px solid var(--line);border-radius:10px;background:var(--card);font-size:13.5px;line-height:1.45}
+.ri.off{opacity:.45;background:var(--bg)}.ri.off .rtxt{text-decoration:line-through}
+.rchk{width:22px;height:22px;border-radius:6px;border:2px solid var(--gold);background:var(--gold);color:#1a1a1a;display:flex;align-items:center;justify-content:center;flex:none;padding:0;margin-top:1px;cursor:pointer}
+.rchk svg{width:14px;height:14px}
+.ri.off .rchk{background:transparent}.ri.off .rchk svg{visibility:hidden}
+.rtxt{flex:1;min-width:0}
+.iv{border:0;border-bottom:1.5px dashed var(--gold);background:var(--gold-soft);color:var(--ink);font:inherit;font-weight:600;padding:0 4px;border-radius:4px;max-width:100%}
+.rmeta{display:flex;gap:6px;align-items:center;margin-top:6px;flex-wrap:wrap}
+.prc{border:0;border-radius:999px;padding:3px 10px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;display:inline-block}
+.pm{background:#fde2e2;color:#9b1c1c}.pd{background:#fdf0d5;color:#8a5a00}.po{background:#e3eefb;color:#1d4f91}
+.vtag{font-size:11px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+.rdel{border:0;background:none;color:#b42318;font-size:12px;cursor:pointer;margin-left:auto}
+.addreq{display:flex;gap:8px;margin-top:10px;align-items:stretch}
+.addreq textarea{flex:1;min-width:0;border:1px dashed var(--line);border-radius:10px;padding:8px 10px;font:inherit;font-size:13.5px;background:var(--bg);color:var(--ink);resize:vertical}
+.legend{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--muted);margin:14px 0}
+.ubar{position:sticky;bottom:calc(76px + env(safe-area-inset-bottom));display:grid;grid-template-columns:auto 1fr;gap:8px;background:var(--bg);padding:10px 0 4px;z-index:3}
+.uact{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.note2{background:#fdf0d5;color:#6b4a00;border-radius:12px;padding:10px 12px;font-size:13.5px;margin-bottom:12px}
+.note2 a{font-weight:700;text-decoration:underline}
+.docprev{background:#fff;color:#111;border:1px solid var(--line);border-radius:12px;padding:16px 14px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.45;overflow-x:auto;box-shadow:var(--shadow)}
+.docprev h1{font-size:18px;color:#24306a;margin:2px 0 4px}.docprev .dt{font-size:10px;letter-spacing:2px;color:#8a6d2b;font-weight:700}.docprev .sub{color:#555}
+.docprev h2{font-size:14px;color:#24306a;border-bottom:2px solid #c8a75e;padding-bottom:3px;margin:18px 0 8px}
+.docprev table{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:11.5px}
+.docprev th,.docprev td{border:1px solid #ccc;padding:5px 6px;vertical-align:top;text-align:left}
+.docprev th{background:#eef0f6}.docprev .req thead th{background:#24306a;color:#fff}
+.docprev .rid{white-space:nowrap;font-weight:700}.docprev .c{text-align:center}.docprev .na{color:#777;font-style:italic}.docprev .foot2{color:#888;font-size:10px;text-align:center;margin-top:16px}
+.docprev .sig td{height:22px}
+.rules{padding-left:20px}.rules li{margin:8px 0}.rules li b{display:block}.rules li span{color:var(--muted);font-size:14px}
+.bg{margin:8px 0;border-radius:10px;overflow:hidden;border:1px solid var(--line);font-size:14px}
+.bad1{background:#fdecec;color:#8f1d1d;padding:8px 10px}.good1{background:#e9f6ee;color:#14532d;padding:8px 10px}
+.life{display:flex;flex-direction:column;gap:6px;margin:8px 0 12px}
+.lstep{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.lstep>span{width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.lstep b{display:block;font-size:14px}.lstep small{color:var(--muted)}
+.mist{padding-left:20px}.mist li{margin:6px 0}
+
+/* ===== Proposal Desk ===== */
+.qx{--qbg:#0b0f24;--qcard:rgba(255,255,255,.045);--qline:rgba(255,255,255,.1);--qtxt:#eef0f8;--qmut:#9aa3c4;--qgold:#c8a75e;--qgold2:#e6cf93;
+  position:fixed;inset:0;z-index:60;background:radial-gradient(120% 60% at 85% -10%,rgba(200,167,94,.18),transparent 55%),radial-gradient(90% 60% at -10% 110%,rgba(64,86,190,.28),transparent 60%),var(--qbg);
+  color:var(--qtxt);display:flex;flex-direction:column;animation:qin .35s ease}
+@keyframes qin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.qtop{display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top) + 12px) 16px 10px}
+.qclose{width:38px;height:38px;border-radius:50%;border:1px solid var(--qline);display:flex;align-items:center;justify-content:center;color:var(--qtxt);flex:none}
+.qclose svg,.qbtn svg{width:18px;height:18px}
+.qtitle{flex:1;min-width:0}.qtitle span{display:block;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--qgold)}
+.qtitle b{font-weight:500;font-size:15px}
+.qcount{font-family:"Noto Serif",Georgia,serif;font-size:26px;color:var(--qgold2);font-variant-numeric:tabular-nums}.qcount i{font-style:normal;font-size:14px;color:var(--qmut)}
+.qrail{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:0 16px 6px}
+.qrail span{height:2px;border-radius:2px;background:var(--qline);transition:background .4s}.qrail span.on{background:linear-gradient(90deg,var(--qgold),var(--qgold2))}
+.qbody{flex:1;overflow-y:auto;padding:14px 16px 24px;-webkit-overflow-scrolling:touch}
+.qbody.center{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.qhead{margin:10px 0 22px}
+.qeye{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--qgold);font-weight:600;margin-bottom:8px}
+.qhead h1,.qdone h1{font-family:"Noto Serif",Georgia,"Times New Roman",serif;font-weight:400;font-size:34px;line-height:1.08;letter-spacing:-.01em;margin:0 0 12px;color:#fff}
+.qhead p,.qdone p{color:var(--qmut);font-size:14.5px;margin:0;line-height:1.55;max-width:420px}
+.qapps{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qapp{text-align:left;background:var(--qcard);border:1px solid var(--qline);border-radius:16px;padding:14px;color:var(--qtxt);font:inherit;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-height:128px;transition:all .2s;position:relative}
+.qapp b{font-weight:600;font-size:14px;line-height:1.3}.qapp small{color:var(--qmut);font-size:12px;line-height:1.35}
+.qapp.on{border-color:var(--qgold);background:linear-gradient(160deg,rgba(200,167,94,.16),rgba(200,167,94,.03));box-shadow:0 0 0 1px var(--qgold) inset,0 10px 30px -12px rgba(200,167,94,.5)}
+.qai{width:36px;height:36px;border-radius:10px;border:1px solid rgba(200,167,94,.4);color:var(--qgold2);display:flex;align-items:center;justify-content:center;flex:none}
+.qai svg{width:19px;height:19px}
+.qq{margin:0 0 18px}.qq>label{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--qmut);margin-bottom:8px}
+.qchips{display:flex;flex-wrap:wrap;gap:8px}
+.qq>label em{font-style:normal;letter-spacing:.04em;text-transform:none;opacity:.75}
+.qsep{height:1px;background:var(--qline);margin:4px 0 20px}
+.qtip{display:flex;gap:12px;align-items:flex-start;border:1px solid rgba(200,167,94,.35);background:rgba(200,167,94,.08);border-radius:16px;padding:14px;margin:0 0 16px}
+.qtip b{display:block;font-size:14px;margin-bottom:3px}.qtip small{display:block;color:var(--qmut);font-size:12.5px;line-height:1.5}
+.qtip .qai{flex:none}
+.qchip{background:transparent;border:1px solid var(--qline);color:var(--qtxt);border-radius:999px;padding:9px 14px;font:inherit;font-size:13px;cursor:pointer;transition:all .2s}
+.qchip.on{background:var(--qgold);border-color:var(--qgold);color:#14161f;font-weight:600}
+.qrec{margin-top:26px;padding-top:20px;border-top:1px solid var(--qline)}
+.qnova{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;border:1px solid var(--qline);background:var(--qcard);cursor:pointer;margin-bottom:10px}
+.qnova input{position:absolute;opacity:0;pointer-events:none}
+.qnova b{display:block;font-size:14.5px}.qnova small{color:var(--qmut);font-size:12.5px}
+.qnova.on{border-color:var(--qgold)}
+.qtick{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--qline);display:flex;align-items:center;justify-content:center;flex:none;color:transparent;transition:all .2s}
+.qtick svg{width:12px;height:12px}
+.on>.qtick,.qnova.on .qtick{background:var(--qgold);border-color:var(--qgold);color:#14161f}
+.qpartners{display:flex;flex-direction:column;gap:8px}
+.qp{display:flex;align-items:center;gap:12px;text-align:left;background:var(--qcard);border:1px solid var(--qline);border-radius:14px;padding:10px;color:var(--qtxt);font:inherit;cursor:pointer}
+.qp.on{border-color:var(--qgold)}
+.qplogo{width:76px;height:46px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;padding:5px;flex:none}
+.qplogo img{max-height:100%;object-fit:contain}
+.qptxt{flex:1;min-width:0}.qptxt b{display:block;font-size:14px}.qptxt small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--qmut);font-size:12px;line-height:1.35}
+.qhint{color:var(--qmut);font-size:12.5px;margin:10px 0 0}.qhint.center{text-align:center;display:flex;gap:6px;align-items:center;justify-content:center;margin-top:18px}.qhint svg{width:14px;height:14px}
+.qopt{border:1px solid var(--qline);border-radius:18px;background:var(--qcard);margin-bottom:10px;overflow:hidden;transition:all .25s}
+.qopt.on{border-color:var(--qgold);background:linear-gradient(170deg,rgba(200,167,94,.1),rgba(255,255,255,.03))}
+.qoh{width:100%;display:flex;gap:12px;align-items:center;text-align:left;background:none;border:0;color:var(--qtxt);font:inherit;padding:14px;cursor:pointer}
+.qoh>span:nth-child(2){flex:1;min-width:0}.qoh b{display:block;font-size:14.5px}.qoh small{color:var(--qmut);font-size:12.5px}
+.qradio{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--qline);flex:none;position:relative}
+.qopt.on .qradio{border-color:var(--qgold)}.qopt.on .qradio:after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--qgold)}
+.qoi{display:none;padding:0 14px 16px}.qopt.on .qoi{display:block;animation:qin .3s ease}
+.qdrop{display:flex;align-items:center;justify-content:center;gap:10px;border:1.5px dashed rgba(200,167,94,.55);border-radius:14px;padding:18px;color:var(--qgold2);font-weight:600;cursor:pointer}
+.qdrop svg{width:18px;height:18px;transform:rotate(-45deg)}
+.qfiles{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}.qfiles:empty{display:none}
+.qf{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border-radius:12px;padding:8px 10px}
+.qfi{width:38px;height:38px;border-radius:8px;background:var(--qgold);color:#14161f;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.qf div{flex:1;min-width:0}.qf b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qf small{color:var(--qmut);font-size:11.5px}
+.qf button{background:none;border:0;color:var(--qmut);padding:6px;cursor:pointer}.qf button svg{width:16px;height:16px}
+.qerr{color:#ffb4a8;font-size:12.5px;margin:6px 0}
+.qurs{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.qursi{display:grid;grid-template-columns:1fr auto;text-align:left;background:rgba(255,255,255,.05);border:1px solid var(--qline);border-radius:12px;padding:10px 12px;color:var(--qtxt);font:inherit;cursor:pointer}
+.qursi b{font-size:13.5px}.qursi small{color:var(--qmut);font-size:12px;grid-column:1}.qursi .qtick{grid-row:1/3;grid-column:2;align-self:center}
+.qursi.on{border-color:var(--qgold)}
+.qlab{display:block;font-size:12px;color:var(--qmut);margin:12px 0 4px}.qlab i{color:var(--qgold);font-style:normal}
+.qin{width:100%;background:transparent;border:0;border-bottom:1px solid var(--qline);color:var(--qtxt);font:inherit;font-size:14.5px;padding:6px 0 8px;outline:0;resize:none;overflow:hidden;transition:border-color .2s}
+.qin:focus{border-color:var(--qgold)}.qin::placeholder,.qin2::placeholder{color:rgba(154,163,196,.55)}
+.qform{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;margin-bottom:12px}
+.qfield{position:relative;padding-top:20px;margin-bottom:8px;min-width:0}
+.qin2{width:100%;background:transparent;border:0;border-bottom:1px solid var(--qline);color:var(--qtxt);font:inherit;font-size:15px;padding:8px 0;outline:0;resize:vertical}
+.qin2:focus{border-color:var(--qgold)}
+.qfield label{position:absolute;left:0;top:29px;font-size:14px;color:var(--qmut);pointer-events:none;transition:all .2s;white-space:nowrap}
+.qin2:focus+label,.qin2:not(:placeholder-shown)+label{top:2px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--qgold)}
+.qcard{border:1px solid var(--qline);border-radius:18px;background:var(--qcard);padding:4px 14px}
+.qsum{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:12px 0;border-bottom:1px solid var(--qline)}
+.qsum:last-child{border:0}.qsum span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--qmut)}
+.qsum b{grid-column:1;font-weight:500;font-size:14px;overflow-wrap:anywhere}.qsum a{grid-row:1/3;grid-column:2;align-self:center;color:var(--qgold);font-size:12.5px}
+.qnext{margin-top:22px}
+.qns{display:flex;gap:12px;padding:10px 0;position:relative}
+.qns>span{width:28px;height:28px;border-radius:50%;border:1px solid var(--qgold);color:var(--qgold2);font-family:"Noto Serif",Georgia,serif;display:flex;align-items:center;justify-content:center;flex:none;background:var(--qbg);z-index:1}
+.qns:not(:last-child):before{content:"";position:absolute;left:13.5px;top:38px;bottom:-8px;width:1px;background:var(--qline)}
+.qns b{display:block;font-size:14px;font-weight:600}.qns small{color:var(--qmut);font-size:12.5px}
+.qnav{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:12px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--qline);background:rgba(11,15,36,.86);backdrop-filter:blur(10px)}
+.qbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;padding:15px 18px;font:inherit;font-weight:600;font-size:15px;border:0;cursor:pointer;color:inherit;text-decoration:none}
+.qbtn.gold{background:linear-gradient(135deg,var(--qgold2),var(--qgold) 60%,#a8853d);color:#14161f;box-shadow:0 10px 26px -10px rgba(200,167,94,.7)}
+.qbtn.gold:disabled{background:rgba(255,255,255,.08);color:rgba(238,240,248,.35);box-shadow:none;cursor:not-allowed}
+.qbtn.ghost{width:54px;border:1px solid var(--qline);background:transparent;color:var(--qtxt)}
+.qbtn.line{border:1px solid var(--qline);background:rgba(255,255,255,.04);color:var(--qtxt);width:100%}
+.qbtn.wide{width:100%;max-width:340px;margin-top:22px}
+.qseal{width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--qgold2),var(--qgold) 55%,#8a6d2b);display:flex;align-items:center;justify-content:center;color:#14161f;margin:0 auto 22px;box-shadow:0 0 0 10px rgba(200,167,94,.12),0 0 0 22px rgba(200,167,94,.06);animation:seal .7s cubic-bezier(.2,1.4,.4,1)}
+.qseal svg{width:38px;height:38px}
+@keyframes seal{from{transform:scale(.3);opacity:0}to{transform:none;opacity:1}}
+.qref{font-family:"Noto Serif",Georgia,serif;font-size:24px;color:var(--qgold2);letter-spacing:.06em;margin-bottom:16px}
+.qdone p{margin:0 auto 10px}
+.qdirect{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:340px}
+.qcta{display:block;position:relative;overflow:hidden;border-radius:20px;padding:22px 18px 20px;color:#eef0f8;margin-bottom:6px;
+  background:radial-gradient(120% 90% at 100% 0,rgba(200,167,94,.28),transparent 55%),linear-gradient(160deg,#141a3d,#0b0f24)}
+.qcta .qeye{color:#c8a75e}
+.qcta b{display:block;font-family:"Noto Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.15;margin:0 0 8px}
+.qcta>span:not(.qeye):not(.qcta-go){display:block;color:#9aa3c4;font-size:13.5px;max-width:300px}
+.qcta-go{display:inline-flex;align-items:center;gap:6px;margin-top:16px;background:#c8a75e;color:#14161f;font-weight:700;border-radius:999px;padding:9px 16px;font-size:13.5px}
+.qcta-go svg{width:16px;height:16px}
+.qret{display:flex;gap:12px;align-items:center;background:linear-gradient(160deg,#141a3d,#0b0f24);color:#eef0f8;border-radius:16px;padding:14px;margin-bottom:12px}
+.qret div{flex:1}.qret b{display:block;font-size:14px}.qret small{color:#9aa3c4;font-size:12px}
+.qret .qbtn{padding:11px 14px;font-size:13.5px;--qgold:#c8a75e;--qgold2:#e6cf93}
+@media (max-width:360px){.qhead h1{font-size:29px}.qform{grid-template-columns:1fr}}
+
+/* product catalogue */
+.pmatch{display:flex !important;align-items:center;gap:4px;color:#8a6d2b !important;font-size:12px !important;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pmatch svg{width:12px;height:12px;flex:none}
+.catalog{padding-bottom:12px}
+.cat-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cat-n{font-size:12px;font-weight:700;color:var(--navy);background:var(--gold-soft);border-radius:999px;padding:3px 10px}
+.cg{border-top:1px solid var(--line)}
+.cg summary{list-style:none;display:flex;align-items:center;gap:8px;padding:11px 0;cursor:pointer}
+.cg summary::-webkit-details-marker{display:none}
+.cg summary b{flex:1;font-size:14px}
+.cg summary span{font-size:12px;color:var(--muted);background:var(--chip);border-radius:999px;padding:1px 8px}
+.cg summary:after{content:"";width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin:0 4px 3px 2px;transition:transform .2s}
+.cg[open] summary:after{transform:rotate(-135deg);margin-bottom:-3px}
+.cgl{display:flex;flex-direction:column;gap:6px;padding-bottom:10px}
+.ci{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;background:var(--bg);border:1px solid var(--line)}
+.ci:active{background:var(--chip)}
+.ci div{flex:1;min-width:0}
+.ci b{display:block;font-size:13.5px;line-height:1.3}
+.ci small{display:block;color:var(--muted);font-size:12px;line-height:1.35;margin-top:2px}
+.ci svg{width:15px;height:15px;color:var(--muted);flex:none}
+
+/* ===== Events ===== */
+.evCta{position:relative;display:flex;align-items:center;gap:14px;margin:4px 16px 6px;padding:14px 14px 14px 12px;border-radius:20px;color:#fff;overflow:hidden;
+  background:linear-gradient(120deg,#1a2350 0%,#24306a 55%,#3a2f6e 100%);box-shadow:0 10px 30px rgba(26,35,80,.35)}
+.evCta:before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent 0 70%,rgba(200,167,94,.55) 80%,transparent 90%);animation:evSweep 4.5s linear infinite}
+.evCta:after{content:"";position:absolute;inset:2px;border-radius:18px;background:linear-gradient(120deg,#1a2350 0%,#24306a 55%,#33296a 100%)}
+.evCta>*{position:relative;z-index:1}
+@keyframes evSweep{to{transform:rotate(360deg)}}
+.evIc{position:relative;width:58px;height:58px;flex:none}
+.evIc .ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold);opacity:0;animation:evPulse 2.4s ease-out infinite}
+.evIc .ring.r2{animation-delay:1.2s}
+@keyframes evPulse{0%{transform:scale(.7);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+.evCal span{display:block}.evCal{position:absolute;left:9px;top:8px;width:40px;height:42px;border-radius:9px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.3);overflow:hidden;animation:evBob 3s ease-in-out infinite;perspective:120px}
+@keyframes evBob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-3px) rotate(4deg)}}
+.evCal .top{height:12px;background:linear-gradient(90deg,#c8a75e,#e3c98c);font:700 7.5px/12px Roboto,sans-serif;color:#1a2350;text-align:center;letter-spacing:.08em}
+.evCal .day{font:800 19px/28px Roboto,sans-serif;color:#1a2350;text-align:center}
+.evCal .flip{position:absolute;left:0;right:0;top:12px;height:30px;background:#f4ecd9;transform-origin:top;animation:evFlip 3.6s ease-in-out infinite;backface-visibility:hidden}
+@keyframes evFlip{0%,70%{transform:rotateX(90deg);opacity:0}78%{transform:rotateX(0);opacity:1}92%{transform:rotateX(-90deg);opacity:.6}100%{transform:rotateX(-90deg);opacity:0}}
+.evIc .spark{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);animation:evTw 2s ease-in-out infinite}
+.evIc .s1{right:2px;top:4px}.evIc .s2{left:0;bottom:8px;animation-delay:.7s;width:4px;height:4px}.evIc .s3{right:6px;bottom:0;animation-delay:1.3s;width:5px;height:5px}
+@keyframes evTw{0%,100%{transform:scale(.3);opacity:.2}50%{transform:scale(1);opacity:1}}
+.evTxt{flex:1;min-width:0}
+.evTxt small{display:flex;align-items:center;gap:6px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.evTxt small i{width:7px;height:7px;border-radius:50%;background:#ff5a5f;box-shadow:0 0 0 0 rgba(255,90,95,.7);animation:evLive 1.6s infinite}
+@keyframes evLive{70%{box-shadow:0 0 0 7px rgba(255,90,95,0)}100%{box-shadow:0 0 0 0 rgba(255,90,95,0)}}
+.evTxt b{display:block;font-size:16px;margin-top:2px}
+.evTxt span{display:block;font-size:12.5px;color:#c9cfe6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.evCd{flex:none;text-align:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:6px 9px}
+.evCd b{display:block;font-size:20px;line-height:1;color:var(--gold)}.evCd span{font-size:10px;color:#c9cfe6;letter-spacing:.08em;text-transform:uppercase}
+@media (prefers-reduced-motion: reduce){.evCta:before,.evIc *,.evTxt small i{animation:none!important}.evIc .ring{opacity:0}}
+
+.evHero{background:linear-gradient(160deg,var(--navy),var(--navy-2));color:#fff;padding:20px 16px 22px;position:relative;overflow:hidden}
+.evHero:after{content:"";position:absolute;right:-50px;top:-50px;width:180px;height:180px;border-radius:50%;border:24px solid rgba(200,167,94,.14)}
+.evHero h1{font-size:24px;margin:4px 0 6px;position:relative}.evHero p{margin:0;color:#c9cfe6;font-size:14px;position:relative}
+.evHero .btn{margin-top:14px;position:relative;background:#0a66c2;color:#fff}
+.evNext{display:flex;gap:12px;align-items:stretch;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow);margin-bottom:12px}
+.evDate{flex:none;align-self:flex-start;min-height:78px;width:62px;border-radius:14px;background:linear-gradient(160deg,var(--gold),#a88a45);color:#1a1a1a;text-align:center;padding:8px 4px;display:flex;flex-direction:column;justify-content:center}
+.evDate small{font-size:11px;font-weight:700;letter-spacing:.1em}.evDate b{font-size:24px;line-height:1.1}.evDate span{font-size:10.5px;font-weight:600}
+.evNext h3{margin:0 0 3px;font-size:16px}.evMeta{font-size:12.5px;color:var(--muted);display:flex;gap:5px;align-items:flex-start;margin-top:3px}.evMeta svg{width:14px;height:14px;flex:none;margin-top:2px}
+.evTag{display:inline-block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:3px}
+.evChip{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:12px;font-weight:600;background:var(--gold-soft);color:#8a6d2c;border-radius:999px;padding:3px 10px}
+.evChip svg{width:13px;height:13px}
+.evAct{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:10px}
+.evAct a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11.5px;font-weight:600;padding:8px 4px;border-radius:12px;background:var(--chip);color:var(--ink);text-align:center}
+.evAct svg{width:18px;height:18px;color:var(--navy)}
+.evPast{display:block;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow)}
+.evPast .ph{width:100%;height:170px;background:#1a2350 center/cover no-repeat;position:relative}
+.evPast .ph.none{background:linear-gradient(135deg,#24306a,#1a2350);display:flex;align-items:center;justify-content:center;color:var(--gold);font:800 22px/1.15 Roboto,sans-serif;letter-spacing:.02em;text-align:center;padding:16px}
+.evPast .ph em{position:absolute;left:12px;top:12px;font-style:normal;font-size:11px;font-weight:700;background:rgba(10,14,35,.75);color:#fff;border-radius:999px;padding:4px 10px}
+.evPast .bd{padding:12px 14px 14px}.evPast h3{margin:0;font-size:16px}
+.evLogos{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}.evLogos img{height:26px;width:54px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:7px;padding:2px 4px}
+.evGal{display:grid;grid-template-columns:1fr;gap:8px;margin:0 0 12px}.evGal img{width:100%;border-radius:14px}
+
+/* product detail */
+.pdh{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:18px 16px 22px;position:relative;overflow:hidden}
+.pdh:after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;border:26px solid rgba(200,167,94,.13)}
+.pdh .crumb{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.7);position:relative;z-index:1}
+.pdh .crumb img{width:44px;height:26px;object-fit:contain;background:#fff;border-radius:6px;padding:2px 4px}
+.pdh .eyebrow{margin:14px 0 4px;position:relative;z-index:1}
+.pdh h1{font-size:23px;line-height:1.2;margin:0;position:relative;z-index:1}
+.pdh p{margin:8px 0 0;color:rgba(255,255,255,.82);font-size:14px;position:relative;z-index:1}
+.pdph{background:#fff;border-bottom:1px solid var(--line);height:170px;display:flex;align-items:center;justify-content:center;padding:10px}
+.pdph img{max-height:100%;max-width:100%;object-fit:contain}
+.pdov{font-size:15px;line-height:1.6;margin:0}
+.pdf{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.pdf li{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:var(--bg);border:1px solid var(--line);font-size:14px;line-height:1.4}
+.pdf li i{flex:none;width:20px;height:20px;border-radius:50%;background:var(--gold-soft);color:var(--gold);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11px;font-weight:700}
+.pds{width:100%;border-collapse:collapse;font-size:13.5px}
+.pds td{padding:9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.pds tr:last-child td{border-bottom:0}
+.pds td:first-child{color:var(--muted);width:44%;padding-right:12px}
+.pds td:last-child{font-weight:600;font-variant-numeric:tabular-nums}
+.pda{display:flex;flex-wrap:wrap;gap:8px}
+.pda span{background:var(--chip);border-radius:999px;padding:6px 12px;font-size:13px}
+.pdcta{background:linear-gradient(150deg,var(--navy),var(--navy-2));color:#fff;border-radius:18px;padding:18px;margin-top:14px}
+.pdcta h3{margin:0 0 4px;font-size:17px}.pdcta p{margin:0 0 14px;color:rgba(255,255,255,.78);font-size:13.5px}
+.pdcta .btn{width:100%;justify-content:center}
+.pdcta .btn.gold{background:var(--gold);color:#1a1a1a}
+.pdcta .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.pdcta .row2 .btn{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.22)}
+.pdnav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.pdnav a{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
+.pdnav a small{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.pdnav a b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pdnav a.r{text-align:right}
+.pdnote{font-size:12px;color:var(--muted);margin:12px 2px 0}
+</style>
+</head>
+<body>
+<!-- ===== INTRO: animated NOVA logo, assembled from parts. Tap the logo to enter. ===== -->
+<style>
+#intro{position:fixed;inset:0;z-index:100;background:radial-gradient(120% 80% at 50% 45%,#1d2752 0%,#0c1029 55%,#05070f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;
+  transition:opacity .7s ease .15s, visibility 0s linear .85s;cursor:pointer;user-select:none;-webkit-user-select:none}
+#intro.gone{opacity:0;visibility:hidden;pointer-events:none}
+#intro canvas{position:absolute;inset:0;width:100%;height:100%}
+#intro .stage{position:relative;width:min(88vw,520px);transition:transform .9s cubic-bezier(.7,0,.3,1),filter .9s}
+#intro.leave .stage{transform:scale(1.25);filter:blur(6px)}
+#intro svg{width:100%;height:auto;display:block;overflow:visible}
+#intro .p{transform-box:view-box;opacity:0;will-change:transform,opacity,filter}
+#intro.go .p{animation:assemble 1.25s cubic-bezier(.16,.84,.24,1) forwards}
+#intro.done .p{animation:none;opacity:1;transform:none;filter:none}
+#intro .c1{--tf:translate(-330px,-260px) rotate(-150deg) scale(.6);transform-origin:610px 380px;animation-delay:.25s!important}
+#intro .c2{--tf:translate(330px,260px) rotate(150deg) scale(.6);transform-origin:610px 380px;animation-delay:.25s!important}
+#intro .n{--tf:translate(-520px,40px) skewX(-25deg);transform-origin:570px 380px;animation-delay:.75s!important}
+#intro .o{--tf:translateY(-380px) scale(2.6);transform-origin:688px 383px;animation-delay:.9s!important}
+#intro .v{--tf:translateY(380px) rotate(25deg);transform-origin:842px 383px;animation-delay:1.05s!important}
+#intro .a{--tf:translate(520px,-40px) skewX(25deg);transform-origin:951px 383px;animation-delay:1.2s!important}
+#intro .e{--tf:translateX(140px) scaleX(1.8);transform-origin:858px 438px;animation-delay:1.55s!important}
+@keyframes assemble{
+  0%{opacity:0;transform:var(--tf);filter:blur(10px)}
+  35%{opacity:1}
+  100%{opacity:1;transform:none;filter:blur(0)}
+}
+#intro .glow{opacity:0;transition:opacity .6s}
+#intro.lit .glow{animation:glow 2.6s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:.35}50%{opacity:.9}}
+#intro .shine{transform:translateX(-500px)}
+#intro.lit .shine{animation:shine 1.3s cubic-bezier(.5,0,.3,1) .05s forwards}
+@keyframes shine{to{transform:translateX(700px)}}
+#intro .ring{fill:none;stroke:#c8a75e;stroke-width:2;opacity:0;transform-box:view-box;transform-origin:610px 380px}
+#intro.lit .ring{animation:ring 2.6s ease-out .6s infinite}
+@keyframes ring{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(1.45)}}
+#intro .tagline{color:#c9cfe6;font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;margin-top:14px;text-align:center;
+  opacity:0;transform:translateY(10px);transition:all .8s ease;padding:0 24px;line-height:1.8}
+#intro .tap{position:absolute;bottom:calc(46px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#c8a75e;
+  font-size:12px;letter-spacing:.35em;font-weight:600;opacity:0;transition:opacity .8s}
+#intro .tap span{display:inline-block;animation:tapPulse 1.8s ease-in-out infinite}
+@keyframes tapPulse{0%,100%{opacity:.45}50%{opacity:1}}
+#intro.lit .tagline{opacity:1;transform:none}
+#intro.lit .tap{opacity:1}
+#intro .flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(200,167,94,.45),transparent 55%);opacity:0;pointer-events:none}
+#intro.lit .flash{animation:flash 1s ease-out}
+@keyframes flash{0%{opacity:0}15%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){#intro .p{animation:none!important;opacity:1;transform:none;filter:none}}
+</style>
+
+<div id="intro" role="button" aria-label="Enter NOVA Engineering app" tabindex="0">
+  <canvas id="introFx"></canvas>
+  <div class="flash"></div>
+  <div class="stage">
+    <svg viewBox="400 180 620 400" aria-hidden="true">
+      <defs>
+        <clipPath id="ciTop"><rect x="380" y="150" width="500" height="230"/></clipPath>
+        <clipPath id="ciBot"><rect x="380" y="380" width="500" height="230"/></clipPath>
+        <path id="crescent" fill-rule="evenodd" d="M610,195a185,185 0 1,0 0.01,0zM628,214a166,166 0 1,0 0.01,0z"/>
+        <linearGradient id="goldG" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#e6cf93"/><stop offset=".5" stop-color="#c8a75e"/><stop offset="1" stop-color="#a8853d"/>
+        </linearGradient>
+        <linearGradient id="shineG" x1="0" x2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter>
+        <g id="word">
+          <!-- N, O, V, A drawn as thick strokes, matching the brand wordmark -->
+          <polyline points="522,415 567,348 607,409 649,348" fill="none" stroke-width="19" stroke-linejoin="round" stroke-linecap="round"/>
+          <rect x="671" y="353" width="114" height="59" rx="11" fill="none" stroke-width="19"/>
+          <polyline points="815,348 857,409 900,348" fill="none" stroke-width="19" stroke-linejoin="round" stroke-linecap="round"/>
+          <polyline points="910,415 951,350 992,415" fill="none" stroke-width="19" stroke-linejoin="round" stroke-linecap="round"/>
+        </g>
+        <mask id="logoMask">
+          <use href="#crescent" fill="#fff"/>
+          <use href="#word" stroke="#fff"/>
+          <text x="992" y="452" text-anchor="end" font-size="23" font-weight="700" fill="#fff" font-family="Roboto,Arial,sans-serif" textLength="180" lengthAdjust="spacingAndGlyphs">ENGINEERING</text>
+        </mask>
+      </defs>
+
+      <circle class="ring" cx="610" cy="380" r="187"/>
+      <!-- soft gold glow behind the crescent once assembled -->
+      <use class="glow" href="#crescent" fill="#c8a75e" filter="url(#soft)"/>
+
+      <!-- the parts -->
+      <g class="p c1" clip-path="url(#ciTop)"><use href="#crescent" fill="url(#goldG)"/></g>
+      <g class="p c2" clip-path="url(#ciBot)"><use href="#crescent" fill="url(#goldG)"/></g>
+      <g stroke="#ffffff">
+        <polyline class="p n" points="522,415 567,348 607,409 649,348" fill="none" stroke-width="19" stroke-linejoin="round" stroke-linecap="round"/>
+        <rect class="p o" x="671" y="353" width="114" height="59" rx="11" fill="none" stroke-width="19"/>
+        <polyline class="p v" points="815,348 857,409 900,348" fill="none" stroke-width="19" stroke-linejoin="round" stroke-linecap="round"/>
+        <polyline class="p a" points="910,415 951,350 992,415" fill="none" stroke-width="19" stroke-linejoin="round" stroke-linecap="round"/>
+      </g>
+      <text class="p e" x="992" y="452" text-anchor="end" font-size="23" font-weight="700" fill="#c9cfe6" font-family="Roboto,Arial,sans-serif" letter-spacing="1" textLength="180" lengthAdjust="spacingAndGlyphs">ENGINEERING</text>
+
+      <!-- light sweep across the finished logo -->
+      <g mask="url(#logoMask)"><rect class="shine" x="380" y="170" width="160" height="320" fill="url(#shineG)" transform="skewX(-20)"/></g>
+    </svg>
+    <div class="tagline">Your right partner for<br>comprehensive industrial solutions</div>
+  </div>
+  <div class="tap"><span>TAP THE LOGO TO ENTER</span></div>
+</div>
+
+<script>
+(function(){
+  const intro = document.getElementById('intro');
+  if(!intro) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let ready = false, left = false;
+
+  /* gold dust: drifts in toward the logo, bursts when it locks together */
+  const cv = document.getElementById('introFx'), cx = cv.getContext('2d');
+  let W, H, dpr = Math.min(2, window.devicePixelRatio || 1), parts = [], run = true;
+  function size(){ W = cv.clientWidth; H = cv.clientHeight; cv.width = W*dpr; cv.height = H*dpr; cx.setTransform(dpr,0,0,dpr,0,0); }
+  size(); addEventListener('resize', size);
+  const rnd = (a,b) => a + Math.random()*(b-a);
+  for(let i=0;i<70;i++) parts.push({x:rnd(0,W), y:rnd(0,H), r:rnd(.4,1.6), a:rnd(.15,.6), vx:0, vy:0, mode:'in'});
+  function burst(){
+    const ox = W/2, oy = H*.45;
+    for(let i=0;i<90;i++){ const t=rnd(0,Math.PI*2), s=rnd(1.5,6.5);
+      parts.push({x:ox+rnd(-60,60), y:oy+rnd(-30,30), r:rnd(.6,2.2), a:1, vx:Math.cos(t)*s, vy:Math.sin(t)*s, mode:'burst'}); }
+  }
+  function tick(){
+    if(!run) return;
+    cx.clearRect(0,0,W,H);
+    const ox = W/2, oy = H*.45;
+    parts.forEach(p => {
+      if(p.mode==='in'){ p.vx += (ox-p.x)*0.00025; p.vy += (oy-p.y)*0.00025; p.vx*=.97; p.vy*=.97; if(ready){p.mode='float';} }
+      else if(p.mode==='float'){ p.vx = p.vx*.98 + rnd(-.03,.03); p.vy = p.vy*.98 - 0.01; }
+      else { p.vx*=.95; p.vy*=.95; p.a*=.975; }
+      p.x+=p.vx; p.y+=p.vy;
+      cx.globalAlpha = p.a; cx.fillStyle = '#e2c789';
+      cx.beginPath(); cx.arc(p.x,p.y,p.r,0,7); cx.fill();
+    });
+    parts = parts.filter(p => p.a > .03 && p.x>-20 && p.x<W+20 && p.y>-20 && p.y<H+20);
+    requestAnimationFrame(tick);
+  }
+  if(!reduce) tick();
+
+  function finish(){
+    if(ready) return; ready = true;
+    intro.classList.add('done','lit'); if(!reduce) burst();
+  }
+  // start the assembly
+  requestAnimationFrame(() => intro.classList.add('go'));
+  setTimeout(finish, reduce ? 50 : 2950);
+
+  function enter(){
+    if(!ready){ finish(); return; }          // first tap during the animation skips to the finished logo
+    if(left) return; left = true;
+    intro.classList.add('leave','gone');
+    try{ window.NovaApp && NovaApp.introDone(); }catch(e){}
+    setTimeout(() => { run = false; intro.remove(); }, 1000);
+  }
+  intro.addEventListener('click', enter);
+  intro.addEventListener('keydown', e => { if(e.key==='Enter' || e.key===' ') { e.preventDefault(); enter(); } });
+})();
+</script>
+<!-- ===== /INTRO ===== -->
+
+<header class="bar" id="bar">
+  <a class="back" id="back" aria-label="Back" href="javascript:history.back()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></a>
+  <div id="barContent"></div>
+  <a class="evBtn" id="evBtn" href="#events" aria-label="Events"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><i></i><b>Events</b></a>
+  <a class="infoBtn" href="#company" aria-label="About NOVA"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></a>
+</header>
+<main id="app"></main>
+<nav class="tabs" id="tabs"></nav>
+
+<script src="data.js"></script>
+<script src="library.js"></script>
+<script src="urs.js"></script>
+<script src="products.js"></script>
+<script>
+(function(){
+const D = window.NOVA, C = D.contact, $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const I = {
+  home:'<path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+  phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
+  mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+  pin:'<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>',
+  link:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/>',
+  chat:'<path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12z"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',
+  chev:'<path d="M9 6l6 6-6 6"/>',
+  ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+  send:'<path d="M4 12l16-8-6 16-2.5-6.5z"/>',
+  tool:'<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>',
+  drop:'<path d="M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11z"/>',
+  pill:'<rect x="3" y="8.5" width="18" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="M9.2 8.1l5.6 7.8"/>',
+  box:'<path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5L12 12l9-4.5M12 12v9"/>',
+  wind:'<path d="M3 8h11a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h7"/>',
+  building:'<rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1"/>',
+  shield:'<path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+  camera:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  book:'<path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 2h13v-4M8 7h7"/>',
+  doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+  chip:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
+  x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  back:'<path d="M15 18l-6-6 6-6"/>',
+  flask:'<path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/>'
+};
+const svg = (k, sw=1.9) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${I[k]}</svg>`;
+const catById = id => D.categories.find(c => c.id === id);
+const pById = id => D.partners.find(p => p.id === id);
+const mailto = (to, subject, body='') => `mailto:${to}?subject=${encodeURIComponent(subject)}${body?'&body='+encodeURIComponent(body):''}`;
+
+const TABS = [['home','Home','home'],['partners','Partners','grid'],['library','Library','book'],['support','Support','tool'],['contact','Contact','phone']];
+$('#tabs').innerHTML = TABS.map(([r,l,i]) => `<a href="#${r}" data-r="${r}">${svg(i)}<span>${l}</span></a>`).join('');
+
+function setBar(title){
+  const bar = $('#bar');
+  if(title){ bar.classList.add('sub'); $('#barContent').innerHTML = `<div class="title">${esc(title)}</div>`; }
+  else { bar.classList.remove('sub'); $('#barContent').innerHTML = `<div class="brand"><span class="mark"></span><div>NOVA<small>ENGINEERING</small></div></div>`; }
+}
+function setTab(r){ document.querySelectorAll('#tabs a').forEach(a => a.classList.toggle('on', a.dataset.r === r)); }
+
+/* ---------- views ---------- */
+function home(){
+  setBar(); setTab('home');
+  const counts = id => D.partners.filter(p => p.cat === id).length;
+  return `
+  <section class="hero">
+    <div class="logoCard"><img src="img/nova_logo.jpg" alt="NOVA Engineering"></div>
+    <h1>${esc(D.company.tagline)}</h1>
+    <p>Machines, complete production lines and turnkey projects for the pharmaceutical, chemical and cosmetics industries.</p>
+    <div class="cta">
+      <a class="btn gold" href="#quote">${svg('send')}Request a proposal</a>
+      <a class="btn ghost" href="#partners">Our partners</a>
+    </div>
+  </section>
+  <div class="stats">${D.company.stats.map(s => `<div class="stat"><b>${esc(s.n)}</b><span>${esc(s.l)}</span></div>`).join('')}</div>
+  ${evTile()}
+
+  <div class="sec">
+    <a class="ursCta" href="#urs">
+      <div class="ic">${svg('doc')}</div>
+      <div><b>URS Builder</b><span>Write the User Requirement Specification for your next machine — free, step by step.</span></div>
+      <span class="chev">${svg('chev')}</span>
+    </a>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h"><h2>Solutions</h2><a href="#partners">View all</a></div>
+    <div class="cats">${D.categories.map(c => `
+      <a class="cat" href="#partners-${c.id}"><div class="ic">${svg(c.icon)}</div><b>${esc(c.name)}</b><span>${counts(c.id)} partner${counts(c.id)>1?'s':''}</span></a>`).join('')}
+      <a class="cat" href="#support" style="background:var(--navy);color:#fff;border-color:var(--navy)"><div class="ic" style="background:rgba(255,255,255,.12)">${svg('tool')}</div><b>Report a machine issue</b><span style="color:#c9cfe6">Open a support ticket</span></a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h"><h2>Technology partners</h2><a href="#partners">${D.partners.length}+</a></div>
+    <div class="strip">${D.partners.map(p => `<a href="#p-${p.id}"><img loading="lazy" src="img/logo_${p.id}.jpg" alt="${esc(p.name)}"></a>`).join('')}</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h"><h2>From the Library</h2><a href="#library">All articles</a></div>
+    <div class="lgrid">${window.NOVA_LIB.articles.slice(0,3).map(a => `<a class="lcard" href="#lib-${a.id}"><div class="lcard-top"><span class="ltag">${esc(a.tag)}</span><span class="muted small">${a.minutes} min read</span></div><b>${esc(a.title)}</b></a>`).join('')}</div>
+  </div>
+
+  <div class="sec">
+    <a class="card" href="#company" style="display:flex;gap:14px;align-items:center">
+      <div style="flex:1"><div class="eyebrow">About NOVA</div><b>Mission, team, services and our offices in Egypt, KSA, UAE & Italy</b></div>
+      <span class="btn line">${svg('chev')}</span>
+    </a>
+  </div>
+
+  <div class="sec">
+    <div class="card" style="display:flex;gap:14px;align-items:center">
+      <div style="flex:1"><div class="eyebrow">Presence in Europe</div><b>Sister company SORGENTE SRL in Milan</b><p class="muted" style="margin:4px 0 0;font-size:13px">Original spare parts, 0% customs, fast delivery.</p></div>
+      <a class="btn line" href="#p-sorgente">${svg('chev')}</a>
+    </div>
+  </div>
+  <p class="foot">© ${new Date().getFullYear()} NOVA Engineering · New Cairo, Egypt</p>`;
+}
+
+function partners(cat){
+  setBar(cat ? catById(cat).name : 'Partners'); if(!cat) setBar(); setTab('partners');
+  return `<div class="wrap">
+    <div class="search">${svg('search')}<input id="q" type="search" placeholder="Search partners or machines…" autocomplete="off"></div>
+    <div class="chips" id="chips">
+      <button class="chip ${!cat?'on':''}" data-c="">All</button>
+      ${D.categories.map(c => `<button class="chip ${cat===c.id?'on':''}" data-c="${c.id}">${esc(c.short)}</button>`).join('')}
+    </div>
+    <div id="plist"></div>
+  </div>`;
+}
+const catOf = id => (window.NOVA_PRODUCTS || {})[id] || [];
+const catCount = id => catOf(id).reduce((a, g) => a + g[1].length, 0);
+function partnerText(p){ return [p.name, p.country, ...(p.about||[]), ...(p.products||[]), ...((p.groups||[]).flatMap(g=>[g.t,...g.items])), ...catOf(p.id).flatMap(g => [g[0], ...g[1].map(x => x[0] + ' ' + x[1])])].join(' ').toLowerCase(); }
+function catMatches(p, q){ if(!q) return []; const all = catOf(p.id).flatMap(g => g[1]); const byName = all.filter(x => x[0].toLowerCase().includes(q)); const byDesc = all.filter(x => !x[0].toLowerCase().includes(q) && x[1].toLowerCase().includes(q)); return byName.concat(byDesc).map(x => x[0]).slice(0, 3); }
+function renderList(cat, q){
+  q = (q||'').trim().toLowerCase();
+  const cats = cat ? [catById(cat)] : D.categories;
+  let html = '';
+  cats.forEach(c => {
+    const ps = D.partners.filter(p => p.cat === c.id && (!q || partnerText(p).includes(q)));
+    if(!ps.length) return;
+    html += `<div class="group-t">${esc(c.name)}</div><div class="plist">${ps.map(p => `
+      <a class="prow" href="#p-${p.id}">
+        <div class="lg"><img loading="lazy" src="img/logo_${p.id}.jpg" alt=""></div>
+        <div style="min-width:0"><b>${esc(p.name)}</b><span>${esc(p.country)}${p.since?' · since '+esc(p.since):''}${catCount(p.id) ? ' · ' + catCount(p.id) + ' products' : ''}</span>${q && catMatches(p, q).length ? `<span class="pmatch">${svg('search')}${catMatches(p, q).map(esc).join(' · ')}</span>` : ''}</div>
+        <span class="chev">${svg('chev')}</span>
+      </a>`).join('')}</div>`;
+  });
+  $('#plist').innerHTML = html || `<div class="empty">No partner matches “${esc(q)}”.<br>Try another word, or <a href="#contact" style="color:var(--gold);font-weight:600">ask our team</a>.</div>`;
+}
+function bindPartners(cat){
+  let cur = cat || '';
+  const q = $('#q');
+  renderList(cur, '');
+  q.addEventListener('input', () => renderList(cur, q.value));
+  $('#chips').addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if(!b) return;
+    cur = b.dataset.c;
+    document.querySelectorAll('#chips .chip').forEach(x => x.classList.toggle('on', x === b));
+    history.replaceState(null, '', cur ? '#partners-'+cur : '#partners');
+    renderList(cur, q.value);
+  });
+}
+
+function partner(id){
+  const p = pById(id); if(!p) return partners();
+  const c = catById(p.cat);
+  setBar(p.name); setTab('partners');
+  const prod = p.groups
+    ? p.groups.map(g => `<div class="subh">${esc(g.t)}</div><ul class="ticks">${g.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`).join('')
+    : `<ul class="ticks">${p.products.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`;
+  const subj = `Quote request – ${p.name}`;
+  const body = `Hello NOVA team,\n\nI'm interested in ${p.name} equipment.\n\nProduct / machine:\nCompany:\nCountry:\nPhone:\n\nThank you.`;
+  return `
+  <div class="dhero">
+    ${p.id !== 'techniconsult' ? `<div class="photo"><img src="img/photo_${p.id}.jpg" alt="${esc(p.name)} equipment"></div>` : ''}
+  </div>
+  <div class="dhead">
+    <div class="lg"><img src="img/logo_${p.id}.jpg" alt=""></div>
+    <div><h1>${esc(p.name)}</h1>
+      <div class="tags"><span class="tag">${esc(p.country)}</span>${p.since?`<span class="tag">Since ${esc(p.since)}</span>`:''}<span class="tag g">${esc(c.short)}</span></div>
+    </div>
+  </div>
+  <div class="wrap" style="padding-top:0">
+    <div class="card"><div class="eyebrow">About</div><ul class="dots">${p.about.map(a=>`<li>${esc(a)}</li>`).join('')}</ul></div>
+    ${catCount(p.id) ? `<div class="card catalog"><div class="cat-h"><div class="eyebrow" style="margin:0">Product catalogue</div><span class="cat-n">${catCount(p.id)} products</span></div>
+      ${catOf(p.id).map((g, gi) => `<details class="cg" ${gi === 0 ? 'open' : ''}><summary><b>${esc(g[0])}</b><span>${g[1].length}</span></summary>
+        <div class="cgl">${g[1].map((x, ii) => `<a class="ci" href="#prod-${p.id}.${gi}.${ii}"><div><b>${esc(x[0])}</b>${x[1] || x[3] ? `<small>${esc(x[1] || x[3].o)}</small>` : ''}</div>${svg('chev')}</a>`).join('')}</div></details>`).join('')}
+      <p class="muted small" style="margin:10px 0 0">Tap a product for its overview, features and technical data.</p>
+    </div>` : ''}
+    <div class="card"><div class="eyebrow">Key product lines</div>${prod}</div>
+    <div class="actions">
+      <a class="btn navy" href="#quote-p-${p.id}">${svg('send')}Request a proposal</a>
+      <a class="btn line" href="tel:${C.mobile}">${svg('phone')}Call sales</a>
+    </div>
+    <a class="btn line block" style="margin-top:10px" href="#urs-new">${svg('doc')}Write a URS for your project</a>
+    <a class="btn line block" style="margin-top:10px" href="#support-${p.id}">${svg('tool')}Report an issue with a ${esc(p.name.split(' ')[0])} machine</a>
+  </div>`;
+}
+
+function product(a){
+  const [pid, gi, ii] = (a || '').split('.'), p = pById(pid), g = catOf(pid)[+gi], x = g && g[1][+ii];
+  if(!p || !x) return partner(pid);
+  setBar(p.name); setTab('partners');
+  const d = x[3] || {}, all = catOf(pid).flatMap((gg, gj) => gg[1].map((y, ij) => [gj, ij, y])), k = all.findIndex(z => z[0] == gi && z[1] == ii);
+  const prev = all[k - 1], next = all[k + 1];
+  const wa = 'https://wa.me/' + C.mobile.replace('+','') + '?text=' + encodeURIComponent(`Hello NOVA, I'd like more information about ${p.name} – ${x[0]}.`);
+  return `
+  <div class="pdh">
+    <a class="crumb" href="#p-${p.id}"><img src="img/logo_${p.id}.jpg" alt="">${esc(p.name)} · ${esc(p.country)}</a>
+    <div class="eyebrow">${esc(g[0])}</div>
+    <h1>${esc(x[0])}</h1>
+    ${x[1] ? `<p>${esc(x[1])}</p>` : ''}
+  </div>
+  ${p.id !== 'techniconsult' ? `<div class="pdph"><img src="img/photo_${p.id}.jpg" alt="${esc(p.name)} equipment"></div>` : ''}
+  <div class="wrap">
+    ${d.o ? `<div class="card"><div class="eyebrow">Overview</div><p class="pdov">${esc(d.o)}</p></div>` : ''}
+    ${d.f && d.f.length ? `<div class="card"><div class="eyebrow">Key features</div><ul class="pdf">${d.f.map((f, i) => `<li><i>${i + 1}</i><span>${esc(f)}</span></li>`).join('')}</ul></div>` : ''}
+    ${d.s && d.s.length ? `<div class="card"><div class="eyebrow">Technical data</div><table class="pds">${d.s.map(r => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join('')}</table></div>` : ''}
+    ${d.a && d.a.length ? `<div class="card"><div class="eyebrow">Applications</div><div class="pda">${d.a.map(t => `<span>${esc(t)}</span>`).join('')}</div></div>` : ''}
+    <div class="pdcta">
+      <h3>Interested in ${esc(x[0])}?</h3>
+      <p>Get the full datasheet, layout and a proposal matched to your requirements from NOVA's engineers.</p>
+      <a class="btn gold" href="#quote-p-${p.id}~${gi}.${ii}">${svg('send')}Request a proposal</a>
+      <div class="row2"><a class="btn" href="${wa}">${svg('chat')}WhatsApp</a><a class="btn" href="tel:${C.mobile}">${svg('phone')}Call</a></div>
+    </div>
+    <a class="btn line block" style="margin-top:10px" href="#urs-new">${svg('doc')}Write a URS for this machine</a>
+    <div class="pdnav">
+      ${prev ? `<a href="#prod-${pid}.${prev[0]}.${prev[1]}"><small>‹ Previous</small><b>${esc(prev[2][0])}</b></a>` : '<span></span>'}
+      ${next ? `<a class="r" href="#prod-${pid}.${next[0]}.${next[1]}"><small>Next ›</small><b>${esc(next[2][0])}</b></a>` : '<span></span>'}
+    </div>
+    <p class="pdnote">Product ${k + 1} of ${all.length} from ${esc(p.name)}. Specifications are indicative; final data is confirmed in NOVA's proposal.</p>
+  </div>`;
+}
+
+/* ===== Events ===== */
+const MON = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+const evD = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+const evToday = () => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); };
+const evDays = e => Math.round((evD(e.start) - evToday()) / 864e5);
+const evLive = e => evToday() >= evD(e.start) && evToday() <= evD(e.end);
+function evRange(e){ const a = evD(e.start), b = evD(e.end), M = x => x.toLocaleString('en', {month:'short'});
+  return a.getMonth() === b.getMonth() ? `${a.getDate()}–${b.getDate()} ${M(b)} ${b.getFullYear()}` : `${a.getDate()} ${M(a)} – ${b.getDate()} ${M(b)} ${b.getFullYear()}`; }
+function evLists(){ const all = D.events || [];
+  const up = all.filter(e => evD(e.end) >= evToday()).sort((a,b) => evD(a.start) - evD(b.start));
+  const past = all.filter(e => evD(e.end) < evToday()).sort((a,b) => evD(b.start) - evD(a.start));
+  return { up, past }; }
+function evTile(){
+  const { up, past } = evLists(); const e = up[0] || past[0]; if(!e) return '';
+  const live = evLive(e), n = evDays(e), d = evD(e.start);
+  return `<a class="evCta" href="#events" aria-label="Events">
+    <span class="evIc"><span class="ring"></span><span class="ring r2"></span>
+      <span class="evCal"><span class="top">${MON[d.getMonth()]}</span><span class="day">${d.getDate()}</span><span class="flip"></span></span>
+      <span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span></span>
+    <span class="evTxt"><small><i></i>${live ? 'Happening now' : up.length ? 'Events · next up' : 'Events'}</small><b>${esc(e.t)}</b><span>${esc(evRange(e))} · ${esc(e.city)}</span></span>
+    ${!live && up.length && n >= 0 ? `<span class="evCd"><b>${n}</b><span>${n === 1 ? 'day' : 'days'}</span></span>` : `<span class="chev" style="color:#fff">${svg('chev')}</span>`}
+  </a>`;
+}
+function evGcal(e){ const f = s => s.replace(/-/g,''), end = evD(e.end); end.setDate(end.getDate() + 1);
+  const p = x => String(x).padStart(2,'0'), en = `${end.getFullYear()}${p(end.getMonth()+1)}${p(end.getDate())}`;
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(e.t) + '&dates=' + f(e.start) + '/' + en + '&location=' + encodeURIComponent(e.venue + ', ' + e.city) + '&details=' + encodeURIComponent(e.summary + '\n\nNOVA Engineering · ' + C.mobile); }
+const evMap = e => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(e.venue + ', ' + e.city);
+const evWa = e => 'https://wa.me/' + C.mobile.replace('+','') + '?text=' + encodeURIComponent(`Hello NOVA, I'd like to book a meeting with your team at ${e.t} (${evRange(e)}).`);
+function events(){
+  setBar('Events'); setTab('home');
+  const { up, past } = evLists();
+  return `<div class="evHero"><div class="eyebrow">Events & exhibitions</div><h1>Meet NOVA</h1>
+      <p>Where to find our team and partners — and highlights from the shows we've been part of.</p>
+      <a class="btn" href="${esc(C.linkedin)}">${svg('link')}Follow NOVA on LinkedIn</a></div>
+    <div class="wrap">
+      ${up.length ? `<div class="sec-h" style="margin-top:4px"><h2>Coming up</h2></div>${up.map(e => { const d = evD(e.start), n = evDays(e);
+        return `<div class="evNext"><div class="evDate"><small>${MON[d.getMonth()]}</small><b>${d.getDate()}</b><span>${d.getFullYear()}</span></div>
+          <div style="min-width:0;flex:1"><span class="evTag">${esc(e.kind)}</span><h3>${esc(e.t)}</h3>
+            <div class="evMeta">${svg('cal')}${esc(evRange(e))}</div><div class="evMeta">${svg('pin')}${esc(e.venue)}, ${esc(e.city)}</div>
+            ${e.booth ? `<div class="evMeta">${svg('grid')}${esc(e.booth)}</div>` : ''}
+            <span class="evChip">${svg('clock')}${evLive(e) ? 'Happening now' : n === 0 ? 'Starts today' : `In ${n} day${n===1?'':'s'}`}</span>
+            <p class="small" style="margin:10px 0 0">${esc(e.summary)}</p>
+            <div class="evAct"><a href="${evGcal(e)}">${svg('cal')}Add to calendar</a><a href="${evWa(e)}">${svg('chat')}Book a meeting</a><a href="${evMap(e)}">${svg('pin')}Directions</a></div>
+          </div></div>`; }).join('')}` : ''}
+      ${past.length ? `<div class="sec-h" style="margin-top:18px"><h2>Where we've been</h2></div>${past.map(e => `
+        <a class="evPast" href="#event-${e.id}">
+          ${e.img ? `<div class="ph" style="background-image:url('img/${e.img}')"><em>${esc(e.kind)}</em></div>` : `<div class="ph none">${esc(e.t)}<em>${esc(e.kind)}</em></div>`}
+          <div class="bd"><h3>${esc(e.t)}</h3><div class="evMeta">${svg('cal')}${esc(evRange(e))} · ${esc(e.city)}</div>
+            ${e.booth ? `<div class="evMeta">${svg('grid')}${esc(e.booth)}</div>` : ''}
+            <p class="small" style="margin:8px 0 0">${esc(e.summary)}</p>
+            ${(e.partners||[]).length ? `<div class="evLogos">${e.partners.map(id => `<img src="img/logo_${id}.jpg" alt="">`).join('')}</div>` : ''}
+          </div></a>`).join('')}` : ''}
+      <a class="card" href="${esc(C.linkedin)}" style="display:flex;gap:12px;align-items:center;margin-top:6px">
+        <div style="flex:1"><div class="eyebrow">Latest news</div><b>Follow NOVA Engineering on LinkedIn for event announcements, booth news and photos.</b></div><span class="btn line">${svg('ext')}</span></a>
+    </div>`;
+}
+function eventItem(id){
+  const e = (D.events || []).find(x => x.id === id); if(!e) return events();
+  setBar(e.t); setTab('home');
+  const ps = (e.partners || []).map(pById).filter(Boolean);
+  return `${e.img ? `<div class="pdph" style="height:220px;padding:0;background:#1a2350"><img src="img/${e.img}" alt="${esc(e.t)}" style="width:100%;height:100%;object-fit:cover"></div>` : ''}
+    <div class="wrap">
+      <span class="evTag">${esc(e.kind)}</span><h2 style="font-size:22px;margin:0 0 6px">${esc(e.t)}</h2>
+      <div class="evMeta">${svg('cal')}${esc(evRange(e))}</div><div class="evMeta">${svg('pin')}${esc(e.venue)}, ${esc(e.city)}</div>
+      ${e.booth ? `<div class="evMeta">${svg('grid')}${esc(e.booth)}</div>` : ''}
+      <div class="card" style="margin-top:14px"><p class="pdov">${esc(e.summary)}</p></div>
+      ${(e.highlights||[]).length ? `<div class="card"><div class="eyebrow">Highlights</div><ul class="pdf">${e.highlights.map((h,i) => `<li><i>${i+1}</i><span>${esc(h)}</span></li>`).join('')}</ul></div>` : ''}
+      ${(e.gallery||[]).length ? `<div class="evGal">${e.gallery.map(g => `<img src="img/${g}" alt="">`).join('')}</div>` : ''}
+      ${ps.length ? `<div class="card"><div class="eyebrow">Partners with NOVA</div><div class="plist">${ps.map(p => `<a class="prow" href="#p-${p.id}"><div class="lg"><img src="img/logo_${p.id}.jpg" alt=""></div><div style="min-width:0"><b>${esc(p.name)}</b><span>${esc(p.country)}</span></div><span class="chev">${svg('chev')}</span></a>`).join('')}</div></div>` : ''}
+      <a class="btn navy block" href="#events">${svg('cal')}All events</a>
+      <a class="btn line block" style="margin-top:10px" href="${esc(C.linkedin)}">${svg('link')}Photos & news on LinkedIn</a>
+    </div>`;
+}
+
+function company(section){
+  setBar(); setTab('company');
+  const co = D.company;
+  setTimeout(() => { if(section){ const el = document.getElementById(section); el && el.scrollIntoView({behavior:'smooth'}); } }, 60);
+  return `<div class="wrap">
+    <div class="eyebrow">About our company</div>
+    <h2 style="font-size:21px;margin-bottom:12px">Trusted partners in industrial automation</h2>
+    <div class="photoCard"><img src="img/about.jpg" alt="NOVA team at an exhibition"></div>
+    <div class="card" style="margin-top:12px">${co.about.map(t=>`<p>${esc(t)}</p>`).join('')}</div>
+
+    <div class="sec" style="margin:24px 0 0"><div class="sec-h"><h2>Mission & Vision</h2></div>
+      <div class="mv">
+        <div class="card"><h3>Our Mission</h3><p>${esc(co.mission)}</p></div>
+        <div class="card"><h3>Our Vision</h3><p>${esc(co.vision)}</p></div>
+      </div>
+    </div>
+
+    <div class="sec" style="margin:24px 0 0" id="team"><div class="sec-h"><h2>Partners & Team</h2></div>
+      <p class="muted" style="margin:0 0 12px">${esc(co.teamIntro)}</p>
+      <div class="teamgrid">${co.team.map(t => `<div class="card"><div class="subh">${esc(t.t)}</div><ul class="dots">${t.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`).join('')}</div>
+      <div class="pair"><img src="img/expo2.jpg" alt=""><img src="img/expo3.jpg" alt=""></div>
+    </div>
+
+    <div class="sec" style="margin:24px 0 0" id="services"><div class="sec-h"><h2>Technical Support & Services</h2></div>
+      <p class="muted" style="margin:0 0 12px">We keep track of every detail. Our after-sales and technical support departments work around the clock to serve every project.</p>
+      <div class="svc">${co.services.map((s,i) => `<div class="card"><div class="num">${i+1}</div><b>${esc(s.t)}</b><p>${esc(s.d)}</p></div>`).join('')}</div>
+      <a class="btn navy block" style="margin-top:12px" href="#support">${svg('tool')}Open a support ticket</a>
+    </div>
+
+    <div class="sec" style="margin:24px 0 0" id="europe"><div class="sec-h"><h2>Strategic Partnership</h2></div>
+      <div class="card">
+        <div class="eyebrow">Our sister company in Milano, Italy</div>
+        <div class="partnerLogos"><div class="lg"><img src="img/nova_logo.jpg" alt="NOVA"></div><div class="lg"><img src="img/logo_sorgente.jpg" alt="Sorgente"></div></div>
+        ${co.sorgente.map(t=>`<p>${esc(t)}</p>`).join('')}
+      </div>
+    </div>
+
+    <div class="sec" style="margin:24px 0 0"><div class="sec-h"><h2>Markets we serve</h2></div>
+      <div class="chips" style="flex-wrap:wrap;margin:0">${co.markets.map(m=>`<span class="chip">${esc(m)}</span>`).join('')}</div>
+    </div>
+  </div>`;
+}
+
+function contact(){
+  setBar(); setTab('contact');
+  const rows = [
+    ['phone','Mobile', C.mobileLabel, 'tel:'+C.mobile],
+    ['phone','Office', C.phoneLabel, 'tel:'+C.phone],
+    ['chat','WhatsApp', C.mobileLabel, 'https://wa.me/'+C.mobile.replace('+','')],
+    ['mail','Sales', C.sales, 'mailto:'+C.sales],
+    ['tool','Technical support', 'Open a support ticket', '#support'],
+    ['pin','Head office', C.address, C.map],
+    ['link','LinkedIn', 'NOVA Engineering', C.linkedin],
+    ['globe','Website', 'www.nova-egi.com', C.website]
+  ];
+  return `<div class="wrap">
+    <div class="eyebrow">Let's stay in touch</div>
+    <h2 style="font-size:21px;margin-bottom:14px">How can we help?</h2>
+    <a class="qcta" href="#quote">
+      <span class="qeye">Proposal Desk</span>
+      <b>Request a tailored proposal</b>
+      <span>Share your URS or technical data. Our engineers recommend the right solution from 29+ technology partners.</span>
+      <span class="qcta-go">Start ${svg('chev',2.4)}</span>
+    </a>
+    <div class="clist" style="margin-top:14px">${rows.map(([i,l,v,h]) => `
+      <a class="crow" href="${esc(h)}"><div class="ic">${svg(i)}</div><div><small>${esc(l)}</small><b>${esc(v)}</b></div></a>`).join('')}
+    </div>
+  </div>`;
+}
+
+/* ---------- support tickets ---------- */
+const ISSUE_TYPES = ['Machine breakdown / stopped','Performance or quality problem','Alarm or error message','Spare parts request','Preventive maintenance','Installation / commissioning','Training request','Qualification / validation','Other'];
+const PRIORITIES = [
+  {id:'Critical', d:'Production stopped'},
+  {id:'High', d:'Production affected'},
+  {id:'Normal', d:'Needs attention'},
+  {id:'Low', d:'Question or planning'}
+];
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+let ticketPhotos = [];   // {name, data(dataURL)}
+
+function support(machineId){
+  setBar(); setTab('support');
+  const prof = store.get('nova.profile', {});
+  const draft = store.get('nova.draft', {});
+  const tickets = store.get('nova.tickets', []);
+  const pre = machineId && pById(machineId) ? pById(machineId).name : (draft.machine || '');
+  const v = (k) => esc(draft[k] != null ? draft[k] : (prof[k] || ''));
+  ticketPhotos = [];
+  const opt = (list, cur) => list.map(x => `<option ${x===cur?'selected':''}>${esc(x)}</option>`).join('');
+  return `<div class="wrap">
+    <div class="eyebrow">Technical support</div>
+    <h2 style="font-size:21px;margin-bottom:4px">Report an issue</h2>
+    <p class="muted" style="margin:0 0 14px;font-size:13.5px">Tell us what's wrong and our service team will contact you. For a stopped production line, also call us.</p>
+    <a class="urgent" href="tel:${C.mobile}">${svg('phone')}<div><b>Production stopped?</b><span>Call 24/7: ${esc(C.mobileLabel)}</span></div></a>
+
+    <form id="tk" class="card form" novalidate>
+      <div class="fs-t">1 · Your company</div>
+      <label for="tCompany">Company name *</label><input id="tCompany" required autocomplete="organization" value="${v('company')}">
+      <label for="tName">Contact person *</label><input id="tName" required autocomplete="name" value="${v('name')}">
+      <div class="two">
+        <div><label for="tPhone">Phone / WhatsApp *</label><input id="tPhone" type="tel" required autocomplete="tel" value="${v('phone')}"></div>
+        <div><label for="tEmail">Email</label><input id="tEmail" type="email" autocomplete="email" value="${v('email')}"></div>
+      </div>
+      <label for="tSite">Plant / site location</label><input id="tSite" placeholder="e.g. 6th of October, Factory 2 – Sterile area" value="${v('site')}">
+
+      <div class="fs-t">2 · The machine</div>
+      <label for="tMachine">Machine brand *</label>
+      <select id="tMachine" required><option value="">Choose…</option>${opt(D.partners.map(p=>p.name).sort(), pre)}<option ${pre==='Other / not sure'?'selected':''}>Other / not sure</option></select>
+      <div class="two">
+        <div><label for="tModel">Model</label><input id="tModel" placeholder="e.g. VFM 12" value="${v('model')}"></div>
+        <div><label for="tSerial">Serial number</label><input id="tSerial" placeholder="On the machine plate" value="${v('serial')}"></div>
+      </div>
+
+      <div class="fs-t">3 · The issue</div>
+      <label for="tType">Type of request *</label>
+      <select id="tType" required><option value="">Choose…</option>${opt(ISSUE_TYPES, draft.type)}</select>
+      <label>Priority *</label>
+      <div class="prio" id="tPrio">${PRIORITIES.map(p => `<button type="button" class="pr pr-${p.id.toLowerCase()} ${ (draft.priority||'Normal')===p.id?'on':''}" data-p="${p.id}"><b>${p.id}</b><span>${p.d}</span></button>`).join('')}</div>
+      <label for="tSubject">Short title *</label><input id="tSubject" required maxlength="90" placeholder="e.g. Capping head not torquing correctly" value="${v('subject')}">
+      <label for="tDesc">What happened? *</label>
+      <textarea id="tDesc" required placeholder="What you see, when it started, alarm codes on the screen, what you already tried…">${v('desc')}</textarea>
+      <label for="tSince">When did it start?</label><input id="tSince" type="date" value="${v('since')}">
+
+      <div class="fs-t">4 · Photos or video stills</div>
+      <p class="muted" style="font-size:12.5px;margin:0 0 8px">Alarm screens, the machine plate and the faulty part help us a lot. Up to 4 photos.</p>
+      <div class="photos" id="tPhotos"></div>
+      <label class="addph" for="tFile">${svg('camera')}<span>Add photos</span></label>
+      <input id="tFile" type="file" accept="image/*" multiple hidden>
+
+      <div class="fs-t">5 · How should we reach you?</div>
+      <div class="chips" id="tContactBy" style="margin:0;flex-wrap:wrap">${['Phone call','WhatsApp','Email'].map(x=>`<button type="button" class="chip ${(draft.contactBy||'Phone call')===x?'on':''}" data-v="${x}">${x}</button>`).join('')}</div>
+
+      <div class="err" id="tErr" hidden></div>
+      <button class="btn gold block" type="submit" style="margin-top:18px">${svg('send')}Submit ticket</button>
+      <p class="muted" style="font-size:12px;margin:8px 0 0;text-align:center">The ticket opens in your email app addressed to ${esc(C.support)}. Tap Send there to submit it.</p>
+    </form>
+
+    ${tickets.length ? `<div class="sec" style="margin:24px 0 0"><div class="sec-h"><h2>My tickets</h2><span class="muted" style="font-size:12.5px">on this phone</span></div>
+      <div class="plist">${tickets.slice(0,20).map(ticketRow).join('')}</div></div>` : ''}
+  </div>`;
+}
+function ticketRow(t){
+  return `<a class="prow tkrow" href="#ticket-${esc(t.id)}">
+    <span class="pdot pr-${t.priority.toLowerCase()}"></span>
+    <div style="min-width:0"><b class="ell">${esc(t.subject)}</b><span>${esc(t.id)} · ${esc(t.machine)} · ${new Date(t.at).toLocaleDateString()}</span></div>
+    <span class="chev">${svg('chev')}</span></a>`;
+}
+
+function shrink(file){  // resize photos so the email stays small
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onerror = rej;
+    r.onload = () => { const im = new Image(); im.onerror = rej; im.onload = () => {
+      const k = Math.min(1, 1600 / Math.max(im.width, im.height));
+      const c = document.createElement('canvas'); c.width = Math.round(im.width*k); c.height = Math.round(im.height*k);
+      c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+      res({ name: file.name || 'photo.jpg', data: c.toDataURL('image/jpeg', .82) });
+    }; im.src = r.result; };
+    r.readAsDataURL(file);
+  });
+}
+function drawPhotos(){
+  $('#tPhotos').innerHTML = ticketPhotos.map((p,i) => `<div class="ph"><img src="${p.data}" alt="Photo ${i+1}"><button type="button" data-i="${i}" aria-label="Remove photo">×</button></div>`).join('');
+  $('.addph').hidden = ticketPhotos.length >= 4;
+}
+
+function bindSupport(){
+  const f = $('#tk');
+  const fields = ['company','name','phone','email','site','machine','model','serial','type','subject','desc','since'];
+  const ids = {company:'tCompany',name:'tName',phone:'tPhone',email:'tEmail',site:'tSite',machine:'tMachine',model:'tModel',serial:'tSerial',type:'tType',subject:'tSubject',desc:'tDesc',since:'tSince'};
+  const val = () => { const o = {}; fields.forEach(k => o[k] = $('#'+ids[k]).value.trim());
+    o.priority = $('#tPrio .on').dataset.p; o.contactBy = $('#tContactBy .on').dataset.v; return o; };
+  const saveDraft = () => store.set('nova.draft', val());
+  f.addEventListener('input', e => {
+    saveDraft();
+    if(e.target.classList.contains('bad') && e.target.value.trim()) e.target.classList.remove('bad');
+    if(!f.querySelector('.bad')) $('#tErr').hidden = true;
+  });
+  $('#tPrio').addEventListener('click', e => { const b = e.target.closest('.pr'); if(!b) return;
+    document.querySelectorAll('#tPrio .pr').forEach(x => x.classList.toggle('on', x===b)); saveDraft(); });
+  $('#tContactBy').addEventListener('click', e => { const b = e.target.closest('.chip'); if(!b) return;
+    document.querySelectorAll('#tContactBy .chip').forEach(x => x.classList.toggle('on', x===b)); saveDraft(); });
+  $('#tFile').addEventListener('change', async e => {
+    const files = [...e.target.files].slice(0, 4 - ticketPhotos.length);
+    for(const file of files){ try{ ticketPhotos.push(await shrink(file)); }catch(err){} }
+    e.target.value = ''; drawPhotos();
+  });
+  $('#tPhotos').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return; ticketPhotos.splice(+b.dataset.i,1); drawPhotos(); });
+
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    const t = val(), err = $('#tErr');
+    const missing = [['company','Company name'],['name','Contact person'],['phone','Phone'],['machine','Machine brand'],['type','Type of request'],['subject','Short title'],['desc','What happened']].filter(([k]) => !t[k]);
+    document.querySelectorAll('#tk .bad').forEach(x => x.classList.remove('bad'));
+    if(missing.length){
+      missing.forEach(([k]) => $('#'+ids[k]).classList.add('bad'));
+      err.textContent = 'Please fill in: ' + missing.map(m => m[1]).join(', ') + '.';
+      err.hidden = false; $('#'+ids[missing[0][0]]).focus(); return;
+    }
+    if(t.email && !/^\S+@\S+\.\S+$/.test(t.email)){ $('#tEmail').classList.add('bad'); err.textContent = 'The email address looks incomplete.'; err.hidden = false; return; }
+    err.hidden = true;
+
+    const d = new Date(), pad = n => String(n).padStart(2,'0');
+    t.id = `NV${String(d.getFullYear()).slice(2)}${pad(d.getMonth()+1)}${pad(d.getDate())}-${Math.floor(1000+Math.random()*9000)}`;
+    t.at = d.toISOString(); t.photos = ticketPhotos.length;
+    const subject = `[${t.priority}] Support ticket ${t.id} – ${t.company} – ${t.machine}`;
+    const body =
+`SUPPORT TICKET ${t.id}
+Priority: ${t.priority} (${PRIORITIES.find(p=>p.id===t.priority).d})
+Submitted: ${d.toLocaleString()}
+
+COMPANY
+Company: ${t.company}
+Contact: ${t.name}
+Phone / WhatsApp: ${t.phone}
+Email: ${t.email || '-'}
+Site: ${t.site || '-'}
+Preferred contact: ${t.contactBy}
+
+MACHINE
+Brand: ${t.machine}
+Model: ${t.model || '-'}
+Serial no.: ${t.serial || '-'}
+
+ISSUE
+Type: ${t.type}
+Title: ${t.subject}
+Started: ${t.since || '-'}
+
+${t.desc}
+
+Photos attached: ${t.photos}
+— Sent from the NOVA Engineering app`;
+
+    let withPhotos = false;
+    try{
+      if(window.NovaApp && NovaApp.sendEmail){
+        NovaApp.sendEmail(JSON.stringify({to:C.support, cc:C.sales, subject, body, images: ticketPhotos.map(p => p.data.split(',')[1])}));
+        withPhotos = true;
+      }
+    }catch(e){}
+    if(!withPhotos) location.href = `mailto:${C.support}?cc=${encodeURIComponent(C.sales)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    t.attached = withPhotos;
+
+    store.set('nova.tickets', [t, ...store.get('nova.tickets', [])].slice(0, 50));
+    store.set('nova.profile', {company:t.company, name:t.name, phone:t.phone, email:t.email, site:t.site});
+    store.set('nova.draft', {});
+    setTimeout(() => { location.hash = 'ticket-' + t.id; }, 400);
+  });
+  drawPhotos();
+}
+
+function ticket(id){
+  const t = store.get('nova.tickets', []).find(x => x.id === id);
+  setBar(t ? t.id : 'Ticket'); setTab('support');
+  if(!t) return `<div class="wrap"><div class="empty">This ticket isn't saved on this phone.<br><a href="#support" style="color:var(--gold);font-weight:600">Open support</a></div></div>`;
+  const fresh = Date.now() - new Date(t.at).getTime() < 10*60*1000;
+  const row = (k, v) => v ? `<div class="kv"><span>${k}</span><b>${esc(v)}</b></div>` : '';
+  return `<div class="wrap">
+    ${fresh ? `<div class="done-card">
+      <div class="tick">${svg('check', 2.6)}</div>
+      <h2>Ticket ${esc(t.id)} is ready</h2>
+      <p>Your email app opened with the ticket${t.photos ? (t.attached ? ' and ' + t.photos + ' photo' + (t.photos>1?'s':'') + ' attached' : '') : ''}. <b>Tap Send</b> there to submit it to our service team.</p>
+      ${t.photos && !t.attached ? `<p style="margin-top:6px">Please attach your ${t.photos} photo${t.photos>1?'s':''} to the email before sending.</p>` : ''}
+    </div>` : ''}
+    <div class="card" style="margin-top:12px">
+      <div class="tags" style="margin:0 0 10px"><span class="tag pt pr-${t.priority.toLowerCase()}">${esc(t.priority)}</span><span class="tag">${esc(t.type)}</span></div>
+      <h3 style="font-size:17px;margin-bottom:10px">${esc(t.subject)}</h3>
+      ${row('Ticket', t.id)}${row('Created', new Date(t.at).toLocaleString())}${row('Machine', [t.machine, t.model].filter(Boolean).join(' · '))}${row('Serial no.', t.serial)}
+      ${row('Company', t.company)}${row('Contact', t.name + ' · ' + t.phone)}${row('Site', t.site)}${row('Reach me by', t.contactBy)}${row('Photos', t.photos ? String(t.photos) : '')}
+      <div class="subh" style="margin-top:12px">Description</div><p style="white-space:pre-wrap;margin:0">${esc(t.desc)}</p>
+    </div>
+    <div class="actions">
+      <a class="btn navy" href="tel:${C.mobile}">${svg('phone')}Call support</a>
+      <a class="btn line" href="https://wa.me/${C.mobile.replace('+','')}?text=${encodeURIComponent('Hello NOVA support, regarding ticket ' + t.id + ': ' + t.subject)}">${svg('chat')}WhatsApp</a>
+    </div>
+    <a class="btn line block" style="margin-top:10px" href="#support">${svg('send')}New ticket</a>
+  </div>`;
+}
+
+/* ---------- library ---------- */
+const L = window.NOVA_LIB;
+const TAGC = {'Sterile':'#2f6fb3','GMP':'#6a4fb3','Track & Trace':'#b3742f'};
+const tagChip = t => `<span class="ltag" style="--tc:${TAGC[t]||'#5d6480'}">${esc(t)}</span>`;
+const artCard = a => `<a class="lcard" href="#lib-${a.id}">
+    <div class="lcard-top">${tagChip(a.tag)}<span class="muted small">${a.minutes} min read</span></div>
+    <b>${esc(a.title)}</b><p>${esc(a.summary)}</p></a>`;
+
+function library(){
+  setBar(); setTab('library');
+  const feat = L.articles[0];
+  const tags = [...new Set(L.articles.map(a => a.tag))];
+  return `<div class="wrap">
+    <div class="eyebrow">NOVA Library</div>
+    <h2 style="font-size:21px;margin-bottom:4px">Knowledge for pharma manufacturing</h2>
+    <p class="muted" style="margin:0 0 14px;font-size:13.5px">Practical articles, reference tables and official documents. Updated ${esc(L.updated)}.</p>
+    <div class="search">${svg('search')}<input id="lq" type="search" placeholder="Search: Annex 1, PUPSIT, DataMatrix…" autocomplete="off"></div>
+    <div id="lres"></div>
+    <div id="lhome">
+      <a class="ursCta" href="#urs" style="margin-top:14px"><div class="ic">${svg('doc')}</div><div><b>Tool: URS Builder</b><span>Create a complete URS for any machine.</span></div><span class="chev">${svg('chev')}</span></a>
+      <a class="feat" href="#lib-${feat.id}">
+        <div class="feat-in">${tagChip(feat.tag)}<h3>${esc(feat.title)}</h3><p>${esc(feat.summary)}</p><span class="feat-cta">Read article · ${feat.minutes} min ${svg('chev')}</span></div>
+      </a>
+
+      <div class="sec" style="margin:24px 0 0"><div class="sec-h"><h2>Articles</h2></div>
+        <div class="chips" id="ltags" style="margin:0 -16px 10px"><button class="chip on" data-t="">All</button>${tags.map(t=>`<button class="chip" data-t="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+        <div class="lgrid" id="larts">${L.articles.slice(1).map(artCard).join('')}</div>
+      </div>
+
+      <div class="sec" style="margin:24px 0 0"><div class="sec-h"><h2>Reference data</h2></div>
+        <div class="refgrid">${L.reference.map(r => `<a class="refc" href="#lib-ref-${r.id}"><span class="muted small">${esc(r.tag)}</span><b>${esc(r.title)}</b></a>`).join('')}</div>
+      </div>
+
+      <div class="sec" style="margin:24px 0 0"><div class="sec-h"><h2>Official documents</h2><span class="muted small">free, opens online</span></div>
+        <div class="plist">${L.documents.map(d => `<a class="prow doc" href="${esc(d.url)}"><div class="dic">${svg('doc')}</div><div style="min-width:0"><b>${esc(d.t)}</b><span>${esc(d.by)} · ${esc(d.d)}</span></div><span class="chev">${svg('ext')}</span></a>`).join('')}</div>
+      </div>
+
+      <div class="sec" style="margin:24px 0 0"><div class="sec-h"><h2>Recommended books</h2></div>
+        <div class="plist">${L.books.map(b => `<div class="prow book"><div class="spine"></div><div style="min-width:0"><b>${esc(b.t)}</b><span>${esc(b.a)} · ${esc(b.p)}</span><p>${esc(b.d)}</p></div></div>`).join('')}</div>
+        <p class="muted small" style="margin-top:8px">Available from the publishers and major bookstores.</p>
+      </div>
+      <p class="muted small" style="margin-top:22px">Articles are written by NOVA Engineering as practical summaries. The official regulatory texts always take precedence.</p>
+    </div>
+  </div>`;
+}
+function bindLibrary(){
+  const q = $('#lq'), res = $('#lres'), home = $('#lhome');
+  const strip = h => h.replace(/<[^>]+>/g,' ');
+  q.addEventListener('input', () => {
+    const s = q.value.trim().toLowerCase();
+    if(!s){ res.innerHTML=''; home.hidden=false; return; }
+    home.hidden = true;
+    const arts = L.articles.filter(a => (a.title+' '+a.summary+' '+strip(a.body)).toLowerCase().includes(s));
+    const refs = L.reference.filter(r => (r.title+' '+strip(r.html)).toLowerCase().includes(s));
+    const docs = L.documents.filter(d => (d.t+' '+d.d+' '+d.by).toLowerCase().includes(s));
+    res.innerHTML = (arts.length||refs.length||docs.length) ? `
+      ${arts.length?`<div class="group-t">Articles</div><div class="lgrid">${arts.map(artCard).join('')}</div>`:''}
+      ${refs.length?`<div class="group-t">Reference data</div><div class="refgrid">${refs.map(r=>`<a class="refc" href="#lib-ref-${r.id}"><span class="muted small">${esc(r.tag)}</span><b>${esc(r.title)}</b></a>`).join('')}</div>`:''}
+      ${docs.length?`<div class="group-t">Documents</div><div class="plist">${docs.map(d=>`<a class="prow doc" href="${esc(d.url)}"><div class="dic">${svg('doc')}</div><div style="min-width:0"><b>${esc(d.t)}</b><span>${esc(d.by)}</span></div><span class="chev">${svg('ext')}</span></a>`).join('')}</div>`:''}`
+      : `<div class="empty">Nothing found for “${esc(q.value)}”.<br>Ask our team: <a href="#contact" style="color:var(--gold);font-weight:600">contact us</a></div>`;
+  });
+  $('#ltags').addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if(!b) return;
+    document.querySelectorAll('#ltags .chip').forEach(x => x.classList.toggle('on', x===b));
+    const t = b.dataset.t;
+    $('#larts').innerHTML = L.articles.filter(a => t ? a.tag===t : a !== L.articles[0]).map(artCard).join('');
+  });
+}
+
+function libItem(id){
+  setTab('library');
+  if(id.startsWith('ref-')){
+    const r = L.reference.find(x => x.id === id.slice(4));
+    if(!r){ setBar('Library'); return `<div class="wrap"><div class="empty">Not found. <a href="#library">Back to Library</a></div></div>`; }
+    setBar(r.title);
+    return `<div class="wrap"><div class="eyebrow">${esc(r.tag)}</div><h2 style="font-size:20px;margin-bottom:12px">${esc(r.title)}</h2>
+      <div class="card art">${r.html}</div>
+      <a class="btn line block" style="margin-top:12px" href="#library">${svg('book')}More in the Library</a></div>`;
+  }
+  const a = L.articles.find(x => x.id === id);
+  if(!a){ setBar('Library'); return `<div class="wrap"><div class="empty">Not found. <a href="#library">Back to Library</a></div></div>`; }
+  setBar(a.tag);
+  const more = L.articles.filter(x => x.id !== a.id).slice(0, 3);
+  return `<article class="wrap">
+    <div class="lcard-top" style="margin-bottom:8px">${tagChip(a.tag)}<span class="muted small">${a.minutes} min read · Updated ${esc(L.updated)}</span></div>
+    <h1 class="art-h">${esc(a.title)}</h1>
+    <div class="art">${a.body}</div>
+
+    ${a.partners && a.partners.length ? `<div class="card" style="margin-top:18px"><div class="eyebrow">Related NOVA solutions</div>
+      <div class="strip" style="margin:6px 0 0;padding:0">${a.partners.map(id => pById(id)).filter(Boolean).map(p => `<a href="#p-${p.id}"><img loading="lazy" src="img/logo_${p.id}.jpg" alt="${esc(p.name)}"></a>`).join('')}</div>
+      <a class="btn navy block" style="margin-top:12px" href="#contact">${svg('send')}Ask our engineers</a></div>` : ''}
+
+    <div class="card" style="margin-top:10px"><div class="eyebrow">Sources & official texts</div>
+      <ul class="srcs">${a.sources.map(([t,u]) => `<li><a href="${esc(u)}">${esc(t)} ${svg('ext')}</a></li>`).join('')}</ul>
+      <p class="muted small" style="margin:8px 0 0">This article is a practical summary by NOVA Engineering. The official texts always take precedence.</p>
+    </div>
+
+    <div class="sec" style="margin:24px 0 0"><div class="sec-h"><h2>Keep reading</h2></div><div class="lgrid">${more.map(artCard).join('')}</div></div>
+  </article>`;
+}
+
+/* ---------- URS builder ---------- */
+const U = window.NOVA_URS;
+const ursAll = () => store.get('nova.urs', []);
+const ursGet = id => ursAll().find(x => x.id === id);
+const ursSave = u => { u.updated = new Date().toISOString(); const all = ursAll().filter(x => x.id !== u.id); store.set('nova.urs', [u, ...all].slice(0, 30)); };
+const machineById = id => U.machines.find(m => m.id === id) || U.machines[0];
+const PRC = {M:'pm', D:'pd', O:'po'};
+
+// all requirement items for a URS, per section (standard + machine template + user's own)
+function ursSections(u){
+  const m = machineById(u.machine);
+  return U.sections.map(s => {
+    const base = s.items.concat((m.extra && m.extra[s.id]) || []);
+    const own = (u.custom || []).filter(c => c.sec === s.id).map(c => [c.id, c.text, c.pr, c.ver || 'OQ', true]);
+    return { s, items: base.concat(own) };
+  });
+}
+const itemState = (u, it) => Object.assign({ on: true, pr: it[2] }, (u.items || {})[it[0]] || {});
+function fillText(text, vals){ let i = 0; return text.replace(/\[([^\]]+)\]/g, (m0, d) => { const v = vals && vals[i] != null && vals[i] !== '' ? vals[i] : d; i++; return v; }); }
+
+function ursHub(){
+  setBar(); setTab('');
+  const drafts = ursAll();
+  return `<div class="wrap">
+    <div class="ursHero">
+      <div class="eyebrow" style="color:var(--gold)">Free tool</div>
+      <h2>URS Builder</h2>
+      <p>Write a complete User Requirement Specification for any pharmaceutical machine — process, mechanical, electrical, safety, automation, documentation and validation — in minutes.</p>
+      <a class="btn gold" href="#urs-new">${svg('doc')}Start a new URS</a>
+    </div>
+
+    ${drafts.length ? `<div class="sec" style="margin:22px 0 0"><div class="sec-h"><h2>My URS documents</h2><span class="muted small">on this phone</span></div>
+      <div class="plist">${drafts.map(d => { const m = machineById(d.machine); return `
+        <a class="prow" href="#urs-edit-${d.id}"><div class="dic">${svg(m.icon || 'doc')}</div>
+          <div style="min-width:0"><b class="ell">${esc(d.info.project || m.name)}</b><span>${esc(d.info.docNo || 'Draft')} · Rev ${esc(d.info.rev || '0')} · ${new Date(d.updated).toLocaleDateString()}</span></div>
+          <span class="chev">${svg('chev')}</span></a>`; }).join('')}</div></div>` : ''}
+
+    <div class="sec" style="margin:22px 0 0"><div class="sec-h"><h2>How it works</h2></div>
+      <div class="steps3">
+        <div><span class="num">1</span><b>Choose the machine</b><p>14 templates, from filling lines to water systems.</p></div>
+        <div><span class="num">2</span><b>Tick and adjust</b><p>~110 ready requirements across 13 sections. Edit values, set priorities, add your own.</p></div>
+        <div><span class="num">3</span><b>Get your document</b><p>Numbered URS with verification method for each point. Save as PDF, share, or send to NOVA for a quotation.</p></div>
+      </div>
+    </div>
+
+    <div class="sec" style="margin:22px 0 0"><div class="sec-h"><h2>URS guide</h2></div>
+      <div class="refgrid">
+        <a class="refc" href="#urs-guide-rules"><span class="muted small">8 rules</span><b>How to write good requirements</b></a>
+        <a class="refc" href="#urs-guide-life"><span class="muted small">Annex 15</span><b>Where the URS fits: DQ → PQ</b></a>
+        <a class="refc" href="#urs-guide-team"><span class="muted small">Who</span><b>Who should write it</b></a>
+        <a class="refc" href="#urs-guide-std"><span class="muted small">15 areas</span><b>Standards to reference</b></a>
+        <a class="refc" href="#urs-guide-mistakes"><span class="muted small">Avoid</span><b>Common mistakes</b></a>
+        <a class="refc" href="#urs-guide-sections"><span class="muted small">13 sections</span><b>What a URS must cover</b></a>
+      </div>
+    </div>
+  </div>`;
+}
+
+function ursGuide(part){
+  setBar('URS guide'); setTab('');
+  const G = U.guide;
+  const blocks = {
+    rules: `<h3>How to write good requirements</h3><ol class="rules">${G.rules.map(r => `<li><b>${esc(r[0])}</b><span>${esc(r[1])}</span></li>`).join('')}</ol>
+      <h3>Bad vs good</h3>${G.examples.map(e => `<div class="bg"><div class="bad1">✕ ${esc(e[0])}</div><div class="good1">✓ ${esc(e[1])}</div></div>`).join('')}
+      <h3>Priorities</h3><div class="tblwrap"><table class="tbl">${Object.entries(U.priorities).map(([k,p]) => `<tr><td><span class="prc ${PRC[k]}">${p.label}</span></td><td>${esc(p.d)}</td></tr>`).join('')}</table></div>`,
+    life: `<h3>Where the URS fits</h3><p>EU GMP Annex 15 says the URS is the reference point for the whole qualification lifecycle, and its requirements must be verified during Design Qualification.</p>
+      <div class="life">${G.lifecycle.map((l,i) => `<div class="lstep"><span>${i+1}</span><div><b>${esc(l[0])}</b><small>${esc(l[1])}</small></div></div>`).join('')}</div>
+      <h3>Verification methods</h3><div class="tblwrap"><table class="tbl">${Object.entries(U.verification).map(([k,v]) => `<tr><td><b>${k}</b></td><td>${esc(v)}</td></tr>`).join('')}</table></div>`,
+    team: `<h3>Who should write the URS</h3><p>A good URS is a team document, approved by Quality Assurance.</p><div class="tblwrap"><table class="tbl">${G.team.map(t => `<tr><td><b>${esc(t[0])}</b></td><td>${esc(t[1])}</td></tr>`).join('')}</table></div>`,
+    std: `<h3>Standards & guidelines to reference</h3><div class="tblwrap"><table class="tbl">${G.standards.map(t => `<tr><td><b>${esc(t[0])}</b></td><td>${esc(t[1])}</td></tr>`).join('')}</table></div><p class="muted small">Standards are listed for reference. Buy the current edition from the issuing body (IEC, ISO, ASTM, ISPE, ASME).</p>`,
+    mistakes: `<h3>Common mistakes</h3><ul class="mist">${G.mistakes.map(m => `<li>${esc(m)}</li>`).join('')}</ul>`,
+    sections: `<h3>What a URS must cover</h3>${U.sections.map((s,i) => `<div class="card" style="margin-bottom:8px"><b>${i+1}. ${esc(s.title)}</b><p class="muted" style="margin:4px 0 0;font-size:13.5px">${esc(s.why)}</p></div>`).join('')}`
+  };
+  const order = ['rules','life','team','std','mistakes','sections'];
+  const first = order.includes(part) ? part : 'rules';
+  return `<div class="wrap"><div class="chips" style="margin:0 -16px 6px">${order.map(k => `<a class="chip ${k===first?'on':''}" href="#urs-guide-${k}">${{rules:'Writing rules',life:'Lifecycle',team:'Team',std:'Standards',mistakes:'Mistakes',sections:'Sections'}[k]}</a>`).join('')}</div>
+    <div class="art">${blocks[first]}</div>
+    <a class="btn gold block" style="margin-top:16px" href="#urs-new">${svg('doc')}Start a new URS</a></div>`;
+}
+
+function ursNew(){
+  setBar('Choose the machine'); setTab('');
+  return `<div class="wrap"><p class="muted" style="margin:0 0 12px">Pick the closest machine type. You get the general requirements plus points specific to that machine.</p>
+    <div class="plist">${U.machines.map(m => `<a class="prow" href="#urs-create-${m.id}"><div class="dic">${svg(m.icon || 'tool')}</div><div style="min-width:0"><b>${esc(m.name)}</b><span>${Object.values(m.extra||{}).reduce((a,b)=>a+b.length,0) ? Object.values(m.extra).reduce((a,b)=>a+b.length,0)+' machine-specific requirements' : 'General requirements for any equipment'}</span></div><span class="chev">${svg('chev')}</span></a>`).join('')}</div></div>`;
+}
+function ursCreate(mid){
+  const prof = store.get('nova.profile', {});
+  const m = machineById(mid);
+  const d = new Date();
+  const u = { id: 'u' + Date.now().toString(36), machine: m.id, created: d.toISOString(), updated: d.toISOString(),
+    info: { company: prof.company || '', site: prof.site || '', project: m.id === 'generic' ? '' : m.name, docNo: 'URS-' + String(d.getFullYear()).slice(2) + String(d.getMonth()+1).padStart(2,'0') + '-' + Math.floor(100+Math.random()*900), rev: '0', author: prof.name || '', reviewer: '', approver: '', dept: '' },
+    fields: {}, items: {}, custom: [] };
+  ursSave(u);
+  location.replace('#urs-edit-' + u.id);
+  return '';
+}
+
+function ursEdit(id){
+  const u = ursGet(id);
+  if(!u){ setBar('URS'); return `<div class="wrap"><div class="empty">This URS isn't on this phone. <a href="#urs">Open URS Builder</a></div></div>`; }
+  const m = machineById(u.machine);
+  setBar(u.info.docNo || 'URS'); setTab('');
+  const inp = (k, label, ph) => `<div><label for="ui_${k}">${label}</label><input id="ui_${k}" data-info="${k}" value="${esc(u.info[k]||'')}" placeholder="${esc(ph||'')}"></div>`;
+  const field = f => {
+    const [k, label, type, opt] = f; const v = u.fields[k] || '';
+    if(type === 'select') return `<label for="uf_${k}">${esc(label)}</label><select id="uf_${k}" data-field="${k}"><option value="">Choose…</option>${opt.map(o => `<option ${o===v?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
+    if(type === 'textarea') return `<label for="uf_${k}">${esc(label)}</label><textarea id="uf_${k}" data-field="${k}" rows="2" placeholder="${esc(opt||'')}">${esc(v)}</textarea>`;
+    return `<label for="uf_${k}">${esc(label)}</label><input id="uf_${k}" data-field="${k}" value="${esc(v)}" placeholder="${esc(opt||'')}">`;
+  };
+  const itemHtml = (it) => {
+    const st = itemState(u, it); let i = 0;
+    const own = it[4];
+    const txt = esc(it[1]).replace(/\[([^\]]+)\]/g, (m0, d) => { const idx = i++; const v = st.vals && st.vals[idx] != null ? st.vals[idx] : d; return `<input class="iv" data-item="${it[0]}" data-vi="${idx}" value="${esc(v)}" size="${Math.max(4, Math.min(22, String(v).length+1))}">`; });
+    return `<div class="ri ${st.on?'':'off'}" data-id="${it[0]}">
+      <button type="button" class="rchk" data-act="tog" aria-label="Include">${svg('check',3)}</button>
+      <div class="rtxt">${txt}<div class="rmeta"><button type="button" class="prc ${PRC[st.pr]}" data-act="pr">${U.priorities[st.pr].label}</button><span class="vtag">${it[3]}</span>${own?`<button type="button" class="rdel" data-act="del">Remove</button>`:''}</div></div>
+    </div>`;
+  };
+  const secs = ursSections(u);
+  return `<div class="wrap" id="ursEd" data-id="${u.id}">
+    <div class="card" style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+      <div class="dic">${svg(m.icon||'tool')}</div><div style="min-width:0;flex:1"><div class="muted small">Template</div><b>${esc(m.name)}</b></div>
+    </div>
+    <div class="progress"><div id="uProg"></div></div><p class="muted small" id="uProgT" style="margin:4px 0 12px"></p>
+
+    <details class="usec" open><summary><span class="snum">0</span><div><b>Document information</b><small>Title, numbers and signatures</small></div></summary>
+      <div class="form usbody">
+        ${inp('project','Project / machine title','e.g. New vial filling line – Line 3')}
+        <div class="two">${inp('company','Company')}${inp('site','Site / plant')}</div>
+        <div class="two">${inp('docNo','URS number')}${inp('rev','Revision')}</div>
+        <div class="two">${inp('dept','Department')}${inp('author','Prepared by')}</div>
+        <div class="two">${inp('reviewer','Reviewed by','e.g. Engineering manager')}${inp('approver','Approved by (QA)','e.g. QA manager')}</div>
+      </div></details>
+
+    ${secs.map(({s, items}, n) => `
+    <details class="usec" data-sec="${s.id}"><summary><span class="snum">${n+1}</span><div><b>${esc(s.title)}</b><small><span data-cnt="${s.id}"></span></small></div></summary>
+      <div class="usbody">
+        <p class="why">${esc(s.why)}</p>
+        ${s.fields.length ? `<div class="form">${s.fields.map(field).join('')}</div>` : ''}
+        <div class="rlist">${items.map(itemHtml).join('')}</div>
+        <div class="addreq"><textarea rows="2" placeholder="Add your own requirement… (use “shall”)" data-add="${s.id}"></textarea><button type="button" class="btn line" data-addbtn="${s.id}">${svg('send')}Add</button></div>
+      </div></details>`).join('')}
+
+    <div class="legend">${Object.entries(U.priorities).map(([k,p]) => `<span><span class="prc ${PRC[k]}">${p.label}</span> ${esc(p.d)}</span>`).join('')}<span class="muted small">Tap a priority to change it. Tap the box to include or exclude a point.</span></div>
+    <div class="ubar"><a class="btn line" href="#urs-guide-rules">${svg('book')}Guide</a><a class="btn gold" href="#urs-doc-${u.id}">${svg('doc')}Create document</a></div>
+    <button type="button" class="btn line block" id="uDel" style="margin-top:22px;color:#b42318">Delete this URS</button>
+  </div>`;
+}
+
+function bindUrsEdit(){
+  const root = $('#ursEd'); if(!root) return;
+  const id = root.dataset.id;
+  const u = ursGet(id);
+  const save = () => ursSave(u);
+  const counts = () => {
+    ursSections(u).forEach(({s, items}) => {
+      const on = items.filter(it => itemState(u,it).on).length;
+      const el = root.querySelector(`[data-cnt="${s.id}"]`); if(el) el.textContent = `${on} of ${items.length} requirements included`;
+    });
+    const allFields = ['project','company','docNo','author','approver'].map(k => u.info[k]).concat(U.sections.flatMap(s => s.fields.map(f => u.fields[f[0]])));
+    const pct = Math.round(100 * allFields.filter(Boolean).length / allFields.length);
+    $('#uProg').style.width = pct + '%'; $('#uProgT').textContent = `${pct}% of key information filled in · saved automatically`;
+  };
+  counts();
+  root.addEventListener('input', e => {
+    const t = e.target;
+    if(t.dataset.info){ u.info[t.dataset.info] = t.value; if(t.dataset.info==='docNo') setBar(t.value || 'URS'); }
+    else if(t.dataset.field){ u.fields[t.dataset.field] = t.value; }
+    else if(t.classList.contains('iv')){ const st = (u.items[t.dataset.item] = u.items[t.dataset.item] || {}); st.vals = st.vals || []; st.vals[+t.dataset.vi] = t.value; t.size = Math.max(4, Math.min(22, t.value.length+1)); }
+    else return;
+    save(); counts();
+  });
+  root.addEventListener('change', e => { if(e.target.dataset.field){ u.fields[e.target.dataset.field] = e.target.value; save(); counts(); } });
+  root.addEventListener('click', e => {
+    const b = e.target.closest('[data-act]');
+    if(b){
+      const row = b.closest('.ri'), iid = row.dataset.id;
+      const it = ursSections(u).flatMap(x => x.items).find(x => x[0] === iid);
+      const st = (u.items[iid] = Object.assign({}, u.items[iid] || {}));
+      const cur = itemState(u, it);
+      if(b.dataset.act === 'tog'){ st.on = !cur.on; u.items[iid] = st; row.classList.toggle('off', !st.on); }
+      if(b.dataset.act === 'pr'){ const nx = {M:'D', D:'O', O:'M'}[cur.pr]; st.pr = nx; u.items[iid] = st; b.className = 'prc ' + PRC[nx]; b.textContent = U.priorities[nx].label; }
+      if(b.dataset.act === 'del'){ u.custom = u.custom.filter(c => c.id !== iid); delete u.items[iid]; row.remove(); }
+      save(); counts(); return;
+    }
+    const add = e.target.closest('[data-addbtn]');
+    if(add){
+      const sec = add.dataset.addbtn, ta = root.querySelector(`[data-add="${sec}"]`), txt = ta.value.trim();
+      if(!txt) { ta.focus(); return; }
+      const c = { id: 'c' + Date.now().toString(36), sec, text: txt.replace(/[\[\]]/g,''), pr: 'M', ver: 'OQ' };
+      u.custom.push(c); save();
+      const it = [c.id, c.text, c.pr, c.ver, true];
+      root.querySelector(`[data-sec="${sec}"] .rlist`).insertAdjacentHTML('beforeend', `<div class="ri" data-id="${c.id}"><button type="button" class="rchk" data-act="tog">${svg('check',3)}</button><div class="rtxt">${esc(c.text)}<div class="rmeta"><button type="button" class="prc pm" data-act="pr">Mandatory</button><span class="vtag">OQ</span><button type="button" class="rdel" data-act="del">Remove</button></div></div></div>`);
+      ta.value = ''; counts();
+    }
+  });
+  let delArmed = false;
+  $('#uDel').addEventListener('click', e => {
+    if(!delArmed){ delArmed = true; e.target.textContent = 'Tap again to delete permanently'; setTimeout(() => { delArmed = false; e.target.textContent = 'Delete this URS'; }, 4000); return; }
+    store.set('nova.urs', ursAll().filter(x => x.id !== id)); location.hash = 'urs';
+  });
+}
+
+/* ---- the document ---- */
+function ursDocBody(u){
+  const m = machineById(u.machine), I = u.info, F = u.fields;
+  const d = new Date(u.updated);
+  let n = 0, total = 0;
+  const secs = ursSections(u).map(({s, items}) => {
+    n++;
+    const fieldRows = s.fields.filter(f => F[f[0]]).map(f => `<tr><th>${esc(f[1])}</th><td>${esc(F[f[0]]).replace(/\n/g,'<br>')}</td></tr>`).join('');
+    const inc = items.filter(it => itemState(u,it).on);
+    total += inc.length;
+    const rows = inc.map((it, k) => { const st = itemState(u,it); return `<tr><td class="rid">URS-${n}.${String(k+1).padStart(2,'0')}</td><td>${esc(fillText(it[1], st.vals))}</td><td class="c">${st.pr}</td><td class="c">${it[3]}</td></tr>`; }).join('');
+    return `<h2>${n}. ${esc(s.title)}</h2>${fieldRows ? `<table class="kv2">${fieldRows}</table>` : ''}
+      ${rows ? `<table class="req"><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verified by</th></tr></thead><tbody>${rows}</tbody></table>` : '<p class="na">No requirements selected for this section.</p>'}`;
+  }).join('');
+  return { total, html: `
+  <div class="dhead1"><div><div class="dt">USER REQUIREMENT SPECIFICATION</div><h1>${esc(I.project || m.name)}</h1><div class="sub">${esc(I.company || '')}${I.site ? ' · ' + esc(I.site) : ''}</div></div></div>
+  <table class="meta"><tr><th>Document no.</th><td>${esc(I.docNo||'')}</td><th>Revision</th><td>${esc(I.rev||'0')}</td></tr>
+  <tr><th>Equipment type</th><td>${esc(m.name)}</td><th>Date</th><td>${d.toLocaleDateString()}</td></tr>
+  <tr><th>Department</th><td>${esc(I.dept||'')}</td><th>Requirements</th><td>${total}</td></tr></table>
+
+  <h2>Approval</h2>
+  <table class="sig"><thead><tr><th>Role</th><th>Name</th><th>Signature</th><th>Date</th></tr></thead><tbody>
+  <tr><td>Prepared by</td><td>${esc(I.author||'')}</td><td></td><td></td></tr>
+  <tr><td>Reviewed by</td><td>${esc(I.reviewer||'')}</td><td></td><td></td></tr>
+  <tr><td>Approved by (QA)</td><td>${esc(I.approver||'')}</td><td></td><td></td></tr></tbody></table>
+
+  <h2>Purpose and use of this document</h2>
+  <p>This URS defines the requirements of ${esc(I.company || 'the customer')} for the equipment described. It is the reference for supplier offers, design qualification (DQ), factory and site acceptance tests (FAT/SAT) and qualification (IQ/OQ/PQ), in line with EU GMP Annex 15. The supplier shall answer each requirement in a compliance matrix (complies / partly / does not comply, with comments).</p>
+  <p><b>Priority:</b> M = Mandatory (must be met) · D = Desirable (deviation needs written agreement) · O = Optional (may be quoted as an option).<br>
+  <b>Verified by:</b> DQ = design qualification · FAT/SAT = factory/site acceptance test · IQ/OQ/PQ = installation/operational/performance qualification · DOC = document review.</p>
+  ${secs}
+  <h2>Revision history</h2><table class="sig"><thead><tr><th>Rev.</th><th>Date</th><th>Description</th><th>By</th></tr></thead><tbody><tr><td>${esc(I.rev||'0')}</td><td>${d.toLocaleDateString()}</td><td>First issue</td><td>${esc(I.author||'')}</td></tr></tbody></table>
+  <p class="foot2">Prepared with the NOVA Engineering URS Builder · www.nova-egi.com · ${esc(C.sales)}</p>` };
+}
+const DOC_CSS = `body{font-family:Arial,Helvetica,sans-serif;font-size:10.5pt;color:#111;margin:18mm 16mm;line-height:1.4}
+h1{font-size:18pt;margin:2px 0 4px;color:#24306a}h2{font-size:12.5pt;color:#24306a;border-bottom:2px solid #c8a75e;padding-bottom:3px;margin:20px 0 8px;page-break-after:avoid}
+.dt{font-size:9pt;letter-spacing:2px;color:#8a6d2b;font-weight:bold}.sub{color:#444}
+table{width:100%;border-collapse:collapse;margin:6px 0 10px}th,td{border:1px solid #bbb;padding:5px 6px;vertical-align:top;text-align:left}
+th{background:#eef0f6;font-weight:bold}.meta th{width:18%}.kv2 th{width:32%;background:#f6f7fa}
+.req thead th{background:#24306a;color:#fff}.req td.rid{white-space:nowrap;font-weight:bold;width:72px}.req td.c{text-align:center;width:52px}
+.req tr{page-break-inside:avoid}.sig td{height:26px}.na{color:#777;font-style:italic}.foot2{margin-top:26px;color:#777;font-size:8.5pt;text-align:center}
+@page{size:A4;margin:12mm}`;
+function ursDocFull(u){
+  const b = ursDocBody(u);
+  return `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>${esc(u.info.docNo || 'URS')}</title><style>${DOC_CSS}</style></head><body>${b.html}</body></html>`;
+}
+const b64utf8 = s => btoa(unescape(encodeURIComponent(s)));
+
+function ursDoc(id){
+  const u = ursGet(id);
+  if(!u){ setBar('URS'); return `<div class="wrap"><div class="empty">Not found. <a href="#urs">Open URS Builder</a></div></div>`; }
+  setBar(u.info.docNo || 'URS document'); setTab('');
+  const m = machineById(u.machine);
+  const b = ursDocBody(u);
+  const missing = [['project','title'],['company','company'],['author','prepared by'],['approver','QA approver']].filter(([k]) => !u.info[k]).map(x => x[1]);
+  return `<div class="wrap">
+    ${store.get('nova.quoteReturn', false) ? `<div class="qret"><div><b>Attach this URS to your proposal request?</b><small>You started a request in the Proposal Desk.</small></div><button class="qbtn gold" id="uAttach">Attach & continue</button></div>` : ''}
+    ${missing.length ? `<div class="note2">Still missing: ${missing.join(', ')}. <a href="#urs-edit-${u.id}">Complete it</a></div>` : ''}
+    <div class="uact">
+      <button class="btn navy" id="uPdf">${svg('doc')}Save as PDF</button>
+      <button class="btn line" id="uShare">${svg('send')}Share Word file</button>
+    </div>
+    <button class="btn gold block" id="uNova" style="margin-top:10px">${svg('send')}Request a proposal with this URS</button>
+    <a class="btn line block" style="margin-top:10px" href="#urs-edit-${u.id}">${svg('tool')}Edit requirements</a>
+    ${m.partners ? `<div class="card" style="margin-top:12px"><div class="eyebrow">NOVA partners for this machine</div><div class="strip" style="margin:6px 0 0;padding:0">${m.partners.map(pById).filter(Boolean).map(p => `<a href="#p-${p.id}"><img src="img/logo_${p.id}.jpg" alt="${esc(p.name)}"></a>`).join('')}</div></div>` : ''}
+    <div class="eyebrow" style="margin:20px 0 8px">Preview · ${b.total} requirements</div>
+    <div class="docprev">${b.html}</div>
+  </div>`;
+}
+function bindUrsDoc(){
+  const id = location.hash.split('urs-doc-')[1]; const u = ursGet(id); if(!u) return;
+  const name = (u.info.docNo || 'URS').replace(/[^\w.-]+/g,'_');
+  const html = ursDocFull(u);
+  $('#uPdf').addEventListener('click', () => {
+    if(window.NovaApp && NovaApp.printHtml){ NovaApp.printHtml(name, html); return; }
+    const w = window.open('', '_blank'); if(w){ w.document.write(html); w.document.close(); w.focus(); w.print(); }
+  });
+  $('#uShare').addEventListener('click', () => {
+    if(window.NovaApp && NovaApp.shareFile){ NovaApp.shareFile(JSON.stringify({ name: name + '.doc', mime: 'application/msword', data: b64utf8(html), subject: `${u.info.docNo} – ${u.info.project || 'URS'}` })); return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], {type:'application/msword'})); a.download = name + '.doc'; a.click();
+  });
+  $('#uNova').addEventListener('click', () => { store.set('nova.quoteReturn', false); location.hash = 'quote-urs-' + u.id; });
+  const at = $('#uAttach');
+  if(at) at.addEventListener('click', () => { store.set('nova.quoteReturn', false); location.hash = 'quote-urs-' + u.id; });
+}
+
+/* ---------- proposal desk (request a quote) ---------- */
+const APPS = [
+  { id:'inj',   t:'Sterile injectables',            s:'Vials, ampoules, syringes, IV bags',          icon:'drop',     urs:'filling',    partners:['steriline','tema','pluemat','zirbus','ocmi','mpa','tm'] },
+  { id:'solid', t:'Tablets & capsules',             s:'Granulation, compression, coating',           icon:'pill',     urs:'tablet',     partners:['freund','kikusui','cadmach'] },
+  { id:'semi',  t:'Liquids, creams & ointments',    s:'Processing skids, tube & bottle filling',     icon:'flask',    urs:'vessel',     partners:['adam','tgm','siempharma'] },
+  { id:'soft',  t:'Softgels',                       s:'Encapsulation & preparation',                 icon:'pill',     urs:'generic',    partners:['pharmagel'] },
+  { id:'pow',   t:'Powders, sachets & stick packs', s:'Dosing, transfer, packaging',                 icon:'box',      urs:'sachet',     partners:['omag','cora','andock'] },
+  { id:'pack',  t:'Packaging & serialisation',      s:'Blister, cartoning, track & trace',           icon:'box',      urs:'blister',    partners:['famartec','siempharma','antares','prisma'] },
+  { id:'cont',  t:'Containment & aseptic barriers', s:'Isolators, RABS, transfer ports',             icon:'shield',   urs:'isolator',   partners:['tema','abc','andock','am'] },
+  { id:'util',  t:'Water, HVAC & utilities',        s:'PW/WFI, air handling, filtration',            icon:'wind',     urs:'water',      partners:['elettracqua','cdz','generalfilter','hfiltration'] },
+  { id:'fac',   t:'Cleanrooms & turnkey facilities',s:'Design, build, panels, floors, lighting',     icon:'building', urs:'hvac',       partners:['techniconsult','delta','ipm','inexport'] },
+  { id:'mon',   t:'Monitoring & inspection',        s:'EMS, particle counters, check weighers',      icon:'chart',    urs:'inspection', partners:['rigel','am','prisma','antares'] },
+  { id:'spare', t:'Spare parts & revamping',        s:'Original parts, upgrades, repairs',           icon:'tool',     urs:'generic',    partners:['sorgente','mpa'] }
+];
+const Q_SCALE = ['R&D / laboratory','Pilot / clinical','Commercial production','Complete turnkey line'];
+const Q_HAZ = ['Standard products','Potent / OEB 3–5','Cytotoxic / hormones','Flammable solvents'];
+const Q_TYPE = ['New line','Replacement','Capacity expansion','Upgrade / revamping'];
+const Q_TIME = ['Within 3 months','3–6 months','6–12 months','Budget planning'];
+/* Application-specific advisor questions and technical data sheet.
+   scope: [label, partner ids]  ·  qs: [key, label, options, multi?]  ·  tech: [key, label, placeholder, required] */
+const NS = 'Not sure — advise me';
+const QP = {
+  inj: { h:'Sterile injectables', common:['scale','type','time'],
+    scope:[['Vial filling & stoppering',['steriline']],['Ampoule filling & sealing',['steriline']],['Syringe / cartridge filling',['steriline']],['IV bags & bottles (FFS)',['pluemat']],['Washing & depyrogenation',['steriline']],['Capping / crimping',['steriline']],['Isolator or RABS',['tema','steriline']],['Freeze-dryer',['zirbus']],['Autoclave / sterilisation',['zirbus']],['Inspection & leak testing',['antares']],['Labelling & cartoning',['siempharma']],['Glass vial / ampoule forming',['ocmi']],[NS,[]]],
+    qs:[['route','Sterilisation route',['Aseptic processing','Terminal sterilisation','Both',NS]],
+        ['form','Product form',['Liquid solution','Suspension / emulsion','Lyophilised','Sterile powder']],
+        ['barrier','Barrier technology',['Isolator','Closed RABS','Open RABS / LAF','NOVA to advise']],
+        ['haz','Product hazard',['Standard products','Potent / OEB 3–5','Cytotoxic / hormones','Biologic / live virus']],
+        ['regs','Target GMP approvals',['Egypt EDA','EU GMP Annex 1','US FDA','WHO / PIC/S'],1]],
+    tech:[['cont','Container type & sizes','e.g. 2R–20R glass vials · 1–10 mL ampoules · 1 mL long PFS',1],
+          ['fill','Fill volume range & accuracy','e.g. 0.5–10 mL, ±1 %',1],
+          ['out','Required output','e.g. 120 vials/min, 2 shifts',1],
+          ['batch','Batch size & changeovers','e.g. 50 000 vials · 2 products per week',1],
+          ['close','Closure system','e.g. 20 mm rubber stopper + flip-off aluminium cap',0],
+          ['room','Room grade & space available','e.g. Grade A in Grade B · 12 × 6 m · ceiling 3.2 m',1],
+          ['decon','Sterilisation & decontamination','e.g. VHP cycle, SIP of product path, single-use fluid path',0],
+          ['ccs','Annex 1 / CCS needs','e.g. 100 % in-process weighing, CCIT, integrated EM, glove testing',0]],
+    tip:'EU GMP Annex 1 (2022) expects a Contamination Control Strategy, RABS or isolator barriers for aseptic filling, glove integrity testing and continuous Grade A monitoring. Tell us where you stand so the line is sized correctly.' },
+
+  solid: { h:'Tablets & capsules', common:['scale','type','time'],
+    scope:[['Granulation (high-shear / fluid bed)',['freund']],['Drying & coating',['freund']],['Roller compaction',['freund','cadmach']],['Milling & sieving',['cadmach','freund']],['Blending & IBC handling',['freund']],['Tablet compression',['kikusui','cadmach']],['Bi-layer / tri-layer tablets',['kikusui','cadmach']],['Deduster & metal detector',['kikusui']],['Contained powder transfer',['andock','cora']],['Blister packing',['famartec']],[NS,[]]],
+    qs:[['route','Process route',['Wet granulation','Dry granulation','Direct compression',NS]],
+        ['tab','Tablet type',['Single layer','Bi-layer','Tri-layer / tablet-in-tablet','Film / sugar coated']],
+        ['haz','Product hazard',['Standard products','Potent / OEB 3–5','Cytotoxic / hormones','Flammable solvents']],
+        ['clean','Cleaning concept',['Manual cleaning','Wash-in-place (WIP)','Full CIP',NS]]],
+    tech:[['api','API & formulation behaviour','e.g. Metformin 500 mg · poor flow · hygroscopic',1],
+          ['batch','Batch size','e.g. 200 kg granulation batch',1],
+          ['out','Required output','e.g. 150 000 tablets/h',1],
+          ['tab','Tablet size, shape & weight','e.g. 18 × 8 mm oval, 900 mg, scored',1],
+          ['tool','Tooling standard','e.g. EU-D / EU-B / use existing tooling',0],
+          ['solv','Solvents & ATEX zone','e.g. aqueous binder · ethanol coating, zone 1',0],
+          ['room','Room size & ceiling height','e.g. 8 × 6 m, 4 m clear height',0]],
+    tip:'Share flow and compression data if you have it (bulk/tapped density, particle size). It decides wet vs dry granulation and the size of the tablet press.' },
+
+  semi: { h:'Liquids, creams & ointments', common:['scale','type','time'],
+    scope:[['Process vessels & skids',['adam']],['CIP / SIP system',['adam','elettracqua']],['Tube filling',['tgm']],['Bottle filling & capping',['siempharma','tgm']],['Labelling',['siempharma']],['Cartoning & case packing',['siempharma','tgm']],[NS,[]]],
+    qs:[['prod','Product',['Syrup / oral liquid','Cream / ointment / gel','Suspension','Lotion / shampoo']],
+        ['visc','Viscosity',['Water-thin','Medium','High (paste)',NS]],
+        ['cont','Container',['Glass bottles','Plastic bottles','Laminate / aluminium tubes','Jars & others']],
+        ['cond','Process conditions',['Ambient','Heated / cooled','Vacuum homogenising',NS]]],
+    tech:[['batch','Batch size','e.g. 2 000 L syrup / 500 kg cream',1],
+          ['visc','Viscosity, density & temperature','e.g. 20 000 cP, 1.1 g/mL, filled at 40 °C',0],
+          ['cont','Container sizes','e.g. 60–150 mL PET bottles · 15–100 g tubes',1],
+          ['out','Required output','e.g. 60 bottles/min · 80 tubes/min',1],
+          ['close','Closure','e.g. ROPP 28 mm · child-resistant · flip-top',0],
+          ['clean','Cleaning','e.g. CIP with PW, hot water 80 °C',0]],
+    tip:'Viscosity and temperature range decide the mixer, pumps and filling technology — estimates are fine.' },
+
+  soft: { h:'Softgels', common:['scale','type','time'],
+    scope:[['Gelatin melting & preparation',['pharmagel']],['Encapsulation machine',['pharmagel']],['Tumble & tray drying',['pharmagel']],['Inspection & sorting',['pharmagel']],[NS,[]]],
+    qs:[['shell','Shell material',['Bovine gelatin','Porcine / halal gelatin','Plant-based',NS]],
+        ['fill','Fill material',['Oil solution','Suspension','Paste / semi-solid',NS]]],
+    tech:[['fill','Fill formulation','e.g. Vitamin D3 in MCT oil · omega-3 suspension',1],
+          ['size','Capsule size, shape & fill weight','e.g. 10 oval, 500 mg fill',1],
+          ['out','Required output','e.g. 60 000 capsules/h',1],
+          ['batch','Batch size','e.g. 1 000 000 capsules',0],
+          ['room','Room temperature & humidity','e.g. 22 °C, 25 % RH available',0]],
+    tip:'Softgel drying needs controlled rooms (about 20–24 °C and 20–30 % RH). Tell us what your HVAC can deliver.' },
+
+  pow: { h:'Powders, sachets & stick packs', common:['scale','type','time'],
+    scope:[['Sachet / stick-pack machine',['omag']],['Complete line with cartoning',['omag']],['Powder valves & transfer',['cora']],['Big-bag & drum emptying',['cora']],['Contained docking',['andock']],['Dosing system',['cora']],[NS,[]]],
+    qs:[['prod','Product',['Free-flowing powder','Poor-flowing / sticky powder','Granules','Liquid / gel']],
+        ['pack','Pack type',['3/4-side seal sachet','Stick pack','Both','Bulk containers']],
+        ['haz','Product hazard',['Standard products','Potent / OEB 3–5','Explosive dust (ATEX)','Hygroscopic']]],
+    tech:[['prod','Product properties','e.g. ORS powder, bulk density 0.6 g/mL, hygroscopic',1],
+          ['dose','Dose weight & accuracy','e.g. 5 g ± 2 %',1],
+          ['fmt','Pack size & lanes','e.g. 70 × 90 mm sachet · 20 × 120 mm stick, 6 lanes',1],
+          ['out','Required output','e.g. 300 sachets/min',1],
+          ['film','Packaging material','e.g. PET/AL/PE laminate',0]],
+    tip:'Powder flow and bulk density decide the dosing system (auger, volumetric cups or vacuum). A small sample sent to NOVA lets the supplier run trials.' },
+
+  pack: { h:'Packaging & serialisation', common:['scale','type','time'],
+    scope:[['Blister machine',['famartec']],['Cartoner',['famartec','siempharma']],['Case packer & bundler',['famartec','siempharma']],['Serialisation & aggregation',['antares']],['Checkweigher / X-ray',['prisma','antares']],['Labelling',['siempharma']],[NS,[]]],
+    qs:[['prod','Product to pack',['Tablets / capsules','Vials / ampoules / syringes','Bottles','Sachets / tubes']],
+        ['blis','Blister material',['PVC / PVDC','Alu-Alu (cold form)','Not blister',NS]],
+        ['tt','Track & trace',['Egypt EDA serialisation','EU FMD / US DSCSA','Aggregation to pallet','Not needed']]],
+    tech:[['prod','Product sizes','e.g. 18 mm oval tablets · 10 mL vials',1],
+          ['fmt','Blister / carton formats','e.g. 2 × 10 tablets per blister, 3 blisters per carton',1],
+          ['out','Required output','e.g. 300 blisters/min · 150 cartons/min',1],
+          ['leaf','Leaflet & coding','e.g. folded leaflet, emboss + inkjet batch/expiry',0],
+          ['line','Existing line to integrate with','e.g. Uhlmann blister, manual end-of-line',0]],
+    tip:'For Egypt track & trace each pack needs a GS1 DataMatrix (GTIN, serial, batch, expiry) and aggregation to case and pallet. Tell us your current line layout.' },
+
+  cont: { h:'Containment & aseptic barriers', common:['scale','type','time'],
+    scope:[['Isolator',['tema']],['RABS',['tema']],['Rapid transfer ports & bags',['abc']],['Split butterfly valves',['andock']],['Pass-box with VHP',['am','tema']],['LAF / weighing booths',['am']],['Glove integrity testing',['tema']],[NS,[]]],
+    qs:[['purp','Main purpose',['Aseptic (product protection)','Containment (operator protection)','Both']],
+        ['haz','Containment band',['Standard products','Potent / OEB 3–5','Cytotoxic / hormones','Biologic / live virus']],
+        ['decon','Decontamination',['Automatic VHP','Manual wipe-down',NS]],
+        ['press','Pressure regime',['Positive','Negative',NS]]],
+    tech:[['proc','Process inside the barrier','e.g. sterility testing · dispensing of HPAPI · vial filling',1],
+          ['oel','OEL / OEB value','e.g. OEL 1 µg/m³ (OEB 4)',0],
+          ['equip','Equipment to integrate','e.g. balance, filling machine, peristaltic pump',1],
+          ['size','Room & space available','e.g. 5 × 4 m, ceiling 3 m, Grade C background',1],
+          ['xfer','Transfer needs','e.g. 1 × 190 mm RTP + 1 pass-box',0]],
+    tip:'An OEL value (or an estimate from toxicology) lets us choose between RABS, a flexible containment solution and a full isolator.' },
+
+  util: { h:'Water, HVAC & utilities', common:['scale','type','time'],
+    scope:[['Purified water (PW)',['elettracqua']],['Water for injection (WFI)',['elettracqua']],['Pure steam',['elettracqua','zirbus']],['Storage & distribution loops',['elettracqua']],['Air handling units',['cdz']],['HEPA & air filters',['generalfilter']],['Dust / fume / VOC extraction',['hfiltration']],[NS,[]]],
+    qs:[['qual','Water quality',['PW','HPW','WFI','Not water / HVAC only']],
+        ['feed','Feed water',['Municipal','Well water','Desalinated',NS]],
+        ['loop','Loop temperature',['Ambient','Hot (80 °C)','Cold WFI',NS]]],
+    tech:[['flow','Demand','e.g. PW 2 m³/h, peak 4 m³/h · WFI 500 L/h',1],
+          ['pou','Points of use','e.g. 12 PoU, 3 rooms, 2 hot',1],
+          ['feed','Feed water analysis','e.g. conductivity 800 µS/cm, hardness 300 ppm',0],
+          ['hvac','Air volumes & room grades (HVAC)','e.g. 15 000 m³/h, Grade C/D, 100 % fresh air',0],
+          ['space','Plant-room space','e.g. 8 × 5 m, ceiling 4 m',0]],
+    tip:'A recent feed-water analysis is the most useful document for PW/WFI design. For HVAC, a room list with grades and pressures is enough to start.' },
+
+  fac: { h:'Cleanrooms & turnkey facilities', common:['scale','type','time'],
+    scope:[['Concept & basic design',['techniconsult']],['Detail design & EPCM',['techniconsult']],['Cleanroom panels, doors & windows',['delta']],['Resin flooring',['ipm']],['Cleanroom lighting',['inexport']],['HVAC',['cdz','generalfilter']],['Commissioning & qualification',['techniconsult']],[NS,[]]],
+    qs:[['proj','Project',['Greenfield','Expansion / brownfield','Room revamp','Single room']],
+        ['grade','Highest room grade',['Grade A / B','Grade C / D','CNC','Mixed']],
+        ['prod','Products',['Sterile','Non-sterile solids','Liquids & semi-solids','Biotech']]],
+    tech:[['area','Area','e.g. 1 200 m² production, 400 m² warehouse',1],
+          ['rooms','Rooms & grades','e.g. 6 rooms Grade C, 2 Grade B, airlocks',1],
+          ['prod','Products & capacity','e.g. 30 M tablets/year, 5 M vials/year',1],
+          ['h','Ceiling height & building status','e.g. existing building, 5 m clear',0],
+          ['reg','Approvals targeted','e.g. EDA + EU GMP',0]],
+    tip:'A sketch of the layout (even hand-drawn) and the product list speed up the concept design. Upload them in step 3.' },
+
+  mon: { h:'Monitoring & inspection', common:['scale','type','time'],
+    scope:[['Portable particle counters',['rigel','am']],['Microbial air samplers',['rigel']],['Continuous EMS / BMS',['rigel','am']],['Visual inspection & leak testing',['antares']],['Checkweighers & X-ray',['prisma']],['Calibration & service',['rigel']],[NS,[]]],
+    qs:[['what','What to monitor',['Cleanroom environment','Product inspection','Both']],
+        ['sys','System type',['Portable instruments','Continuous system','Both',NS]],
+        ['data','Data integrity',['21 CFR Part 11 required','Stand-alone OK',NS]]],
+    tech:[['pts','Rooms & sampling points','e.g. 4 Grade A points, 10 Grade B, 20 Grade C',1],
+          ['par','Parameters','e.g. particles 0.5/5 µm, viable, T, RH, ΔP',1],
+          ['prod','Products to inspect (if any)','e.g. 2–10 mL vials, 300/min',0],
+          ['int','Integration','e.g. connect to existing SCADA / BMS',0]],
+    tip:'Annex 1 requires continuous particle monitoring in Grade A and a risk-based sampling plan. If you have one, upload it in step 3.' },
+
+  spare: { h:'Spare parts & revamping', common:['time'],
+    scope:[['Original spare parts',['sorgente']],['Change parts / format parts',['mpa']],['Machine upgrade / revamping',['sorgente']],['Service visit',['sorgente']],[NS,[]]],
+    qs:[['urg','Urgency',['Line stopped','Planned maintenance','Stock / safety spares']]],
+    tech:[['mach','Machine brand & model','e.g. Bosch FLC 3000',1],
+          ['sn','Serial number & year','e.g. SN 12345, 2014',1],
+          ['parts','Part numbers / description','e.g. 10 × filling needle P/N 123-456',1],
+          ['qty','Quantities','e.g. 2 sets',0]],
+    tip:'Photos of the part and the machine nameplate save a lot of time — upload them in step 3.' }
+};
+const Q_COMMON_TECH = [['utilities','Utilities available','e.g. 380 V 50 Hz, compressed air 6 bar, PW, pure steam',0],
+                       ['special','Other requirements','e.g. 21 CFR Part 11, Arabic HMI, budget range',0]];
+const qProf = () => QP[Q.app] || QP.spare;
+const spKey = k => Q.app + '.' + k;
+const spGet = k => (Q.sp || {})[spKey(k)];
+function qTechFields(){ const P = qProf(); return P.tech.map(f => [Q.app + '_' + f[0], f[1], f[2], f[3]]).concat(Q_COMMON_TECH); }
+function qSpecLines(){ const P = qProf(), sc = spGet('scope') || [];
+  return [['Scope', sc.join(', ')]].concat(P.qs.map(q => { const v = spGet(q[0]); return [q[1], Array.isArray(v) ? v.join(', ') : v]; })).filter(r => r[1]); }
+let Q = null, Qfiles = [];
+const QSTEPS = ['Application','Advisor','Technical basis','Your details','Review'];
+
+function qLoad(){ if(!Q) Q = store.get('nova.quote', null) || { app:'', scale:'', haz:'', type:'', time:'', pick:[], nova:true, basis:'', ursId:'', tech:{}, c:{} }; Q.sp = Q.sp || {}; return Q; }
+function qSave(){ store.set('nova.quote', Q); }
+function qApp(){ return APPS.find(a => a.id === Q.app); }
+function qRecs(){
+  const a = qApp(); if(!a) return [];
+  const sc = spGet('scope') || [], fromScope = qProf().scope.filter(o => sc.includes(o[0])).flatMap(o => o[1]);
+  let ids = fromScope.length ? fromScope : a.partners.slice();
+  Q.haz = spGet('haz') || '';
+  if(/Potent|Cytotoxic/.test(Q.haz)) ids = ids.concat(['tema','andock','abc']);
+  if(/Flammable|ATEX/.test(Q.haz)) ids = ids.concat(['cora']);
+  if(Q.scale === 'Complete turnkey line') ids = ids.concat(['techniconsult']);
+  return [...new Set(ids)].map(pById).filter(Boolean);
+}
+function qBasisOk(){
+  if(Q.basis === 'upload') return Qfiles.length > 0;
+  if(Q.basis === 'urs') return !!(Q.ursId && ursGet(Q.ursId));
+  if(Q.basis === 'tech') return qTechFields().filter(f => f[3]).every(f => (Q.tech[f[0]]||'').trim());
+  return false;
+}
+function qAdvOk(){ const P = qProf(); if(!P) return false;
+  if(!(spGet('scope') || []).length) return false;
+  if(!P.common.every(k => Q[k])) return false;
+  return P.qs.every(q => { const v = spGet(q[0]); return q[3] ? (v || []).length : !!v; });
+}
+function qContactOk(){ const c = Q.c; return c.name && c.company && c.phone && c.email && /^\S+@\S+\.\S+$/.test(c.email); }
+function qStepOk(n){ return n===1 ? !!Q.app : n===2 ? qAdvOk() : n===3 ? qBasisOk() : n===4 ? !!qContactOk() : true; }
+
+/* entry: #quote, #quote-p-<partner>, #quote-urs-<id>, #quote-s<N>, #quote-done */
+function quote(a){
+  qLoad();
+  if(a.startsWith('p-')){ const [pid, ref] = a.slice(2).split('~'), p = pById(pid); if(p){ Q.prod = ''; if(ref){ const [gi, ii] = ref.split('.'), g = catOf(pid)[+gi], x = g && g[1][+ii]; if(x) Q.prod = p.name + ' – ' + x[0]; } const ap = APPS.find(x => x.partners.includes(p.id)); if(ap){ Q.app = ap.id; Q.sp = Q.sp || {}; const sc = QP[ap.id].scope.filter(z => z[1].includes(p.id)).map(z => z[0]); if(sc.length) Q.sp[ap.id + '.scope'] = sc; } Q.pick = [p.id]; Q.nova = false; } qSave(); location.replace('#quote-s1'); return ''; }
+  if(a.startsWith('urs-')){ const u = ursGet(a.slice(4)); if(u){ Q.basis = 'urs'; Q.ursId = u.id; const ap = APPS.find(x => x.urs === u.machine); if(ap && !Q.app) Q.app = ap.id; if(!Q.c.company) Q.c.company = u.info.company; if(!Q.c.name) Q.c.name = u.info.author; } qSave(); location.replace('#quote-s' + (!qStepOk(1) ? 1 : !qStepOk(2) ? 2 : 3)); return ''; }
+  if(a === 'done') return qDone();
+  let n = +(a.replace('s','')) || 1;
+  for(let i = 1; i < n; i++) if(!qStepOk(i)){ location.replace('#quote-s' + i); return ''; }   // can't skip ahead of an incomplete step
+  return qShell(n);
+}
+function qShell(n){
+  setTab('');
+  const body = [null, qS1, qS2, qS3, qS4, qS5][n]();
+  return `<div class="qx" id="qx" data-step="${n}">
+    <div class="qtop"><a class="qclose" href="#home" aria-label="Close">${svg('x',2.2)}</a>
+      <div class="qtitle"><span>Proposal Desk</span><b>${QSTEPS[n-1]}</b></div><span class="qcount">${n}<i>/5</i></span></div>
+    <div class="qrail">${QSTEPS.map((s,i) => `<span class="${i<n?'on':''}"></span>`).join('')}</div>
+    <div class="qbody">${body}</div>
+    <div class="qnav">
+      ${n>1 ? `<a class="qbtn ghost" href="#quote-s${n-1}">${svg('back',2.2)}</a>` : `<span></span>`}
+      ${n<5 ? `<button class="qbtn gold" id="qNext" ${qStepOk(n)?'':'disabled'}>Continue ${svg('chev',2.4)}</button>`
+            : `<button class="qbtn gold" id="qSubmit">Submit request ${svg('send',2.2)}</button>`}
+    </div>
+  </div>`;
+}
+const qChips = (key, list) => `<div class="qchips" data-key="${key}">${list.map(x => `<button type="button" class="qchip ${Q[key]===x?'on':''}" data-v="${esc(x)}">${esc(x)}</button>`).join('')}</div>`;
+
+function qS1(){
+  return `<div class="qhead"><div class="qeye">Step one</div><h1>What are you<br>building?</h1>
+    <p>Choose the application. Our engineers match it with the right technology from 29+ partners.</p></div>
+    <div class="qapps">${APPS.map(a => `<button type="button" class="qapp ${Q.app===a.id?'on':''}" data-app="${a.id}">
+      <span class="qai">${svg(a.icon)}</span><b>${esc(a.t)}</b><small>${esc(a.s)}</small></button>`).join('')}</div>`;
+}
+function qS2(){
+  const a = qApp(), P = qProf(), recs = qRecs(), sc = spGet('scope') || [];
+  const spChips = (k, list, multi) => { const v = spGet(k); return `<div class="qchips" data-skey="${k}" ${multi ? 'data-multi="1"' : ''}>${list.map(x => `<button type="button" class="qchip ${(multi ? (v||[]).includes(x) : v === x) ? 'on' : ''}" data-v="${esc(x)}">${esc(x)}</button>`).join('')}</div>`; };
+  const common = { scale:['Scale', Q_SCALE], type:['Project type', Q_TYPE], time:['Timeline', Q_TIME] };
+  return `<div class="qhead"><div class="qeye">Solution advisor · ${esc(a.t)}</div><h1>Let's find your<br>perfect fit.</h1>
+    <p>Questions tailored to ${esc(a.t.toLowerCase())} — so we recommend the right solution, not just a machine.</p></div>
+    <div class="qq"><label>What do you need? <em>· select all that apply</em></label>${spChips('scope', P.scope.map(o => o[0]), 1)}</div>
+    ${P.qs.map(q => `<div class="qq"><label>${esc(q[1])}${q[3] ? ' <em>· select all that apply</em>' : ''}</label>${spChips(q[0], q[2], q[3])}</div>`).join('')}
+    <div class="qsep"></div>
+    ${P.common.map(k => `<div class="qq"><label>${common[k][0]}</label>${qChips(k, common[k][1])}</div>`).join('')}
+    <div class="qrec"><div class="qeye">Recommended for you</div>
+      <label class="qnova ${Q.nova?'on':''}"><input type="checkbox" id="qNova" ${Q.nova?'checked':''}><span class="qtick">${svg('check',3)}</span><div><b>Let NOVA engineers recommend</b><small>We compare technologies and propose the best match for your URS.</small></div></label>
+      <div class="qpartners">${recs.map(p => `<button type="button" class="qp ${Q.pick.includes(p.id)?'on':''}" data-p="${p.id}">
+        <span class="qplogo"><img src="img/logo_${p.id}.jpg" alt=""></span>
+        <span class="qptxt"><b>${esc(p.name)}</b><small>${esc(p.about[0])}</small></span><span class="qtick">${svg('check',3)}</span></button>`).join('')}</div>
+      <p class="qhint">${sc.length && !sc.includes(NS) ? 'Matched to the scope you selected. ' : ''}Optional: tap partners you'd like included in the proposal.</p>
+    </div>`;
+}
+function qS3(){
+  const a = qApp(), drafts = ursAll();
+  const opt = (id, title, sub, icon, inner) => `<div class="qopt ${Q.basis===id?'on':''}" data-basis="${id}">
+    <button type="button" class="qoh" data-basis-btn="${id}"><span class="qai">${svg(icon)}</span><span><b>${title}</b><small>${sub}</small></span><span class="qradio"></span></button>
+    <div class="qoi">${inner}</div></div>`;
+  return `<div class="qhead"><div class="qeye">Required</div><h1>Your technical<br>basis.</h1>
+    <p>An accurate proposal starts with accurate requirements. Choose one way to share yours — this step is required.</p></div>
+    ${qProf() ? `<div class="qtip"><span class="qai">${svg('shield',2)}</span><div><b>What we need for ${esc(qProf().h.toLowerCase())}</b><small>${esc(qProf().tip)}</small></div></div>` : ''}
+
+    ${opt('upload','Upload my URS or datasheets','PDF, Word, Excel or photos · up to 5 files','doc', `
+      <div class="qfiles" id="qFiles"></div>
+      <label class="qdrop" for="qFile">${svg('send',2)}<span>Choose files</span></label>
+      <input id="qFile" type="file" multiple hidden accept=".pdf,.doc,.docx,.xls,.xlsx,.txt,image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">`)}
+
+    ${opt('urs','Use a URS from the URS Builder', drafts.length ? `${drafts.length} saved on this phone` : 'Create a complete URS in minutes','book', `
+      ${drafts.length ? `<div class="qurs">${drafts.map(d => `<button type="button" class="qursi ${Q.ursId===d.id?'on':''}" data-urs="${d.id}"><b>${esc(d.info.project || machineById(d.machine).name)}</b><small>${esc(d.info.docNo)} · rev ${esc(d.info.rev)}</small><span class="qtick">${svg('check',3)}</span></button>`).join('')}</div>` : ''}
+      <button type="button" class="qbtn line" id="qBuild">${svg('doc')}Create a new URS${a ? ' for ' + esc(a.t.toLowerCase()) : ''}</button>
+      <p class="qhint">You'll come straight back here with the URS attached.</p>`)}
+
+    ${opt('tech','No URS yet — fill a technical data sheet', `${esc(a ? a.t : 'Project')} essentials, in two minutes`,'chart', `
+      ${qTechFields().map(f => `<label class="qlab" for="qt_${f[0]}">${esc(f[1])}${f[3]?' <i>*</i>':''}</label><textarea class="qin" rows="1" id="qt_${f[0]}" data-tech="${f[0]}" placeholder="${esc(f[2])}">${esc(Q.tech[f[0]]||'')}</textarea>`).join('')}`)}
+
+    <p class="qhint center">${svg('shield',2)} Your documents go only to NOVA's sales engineering team.</p>`;
+}
+function qS4(){
+  const c = Q.c, prof = store.get('nova.profile', {});
+  const f = (k, label, type, ac, ph) => `<div class="qfield"><input class="qin2" id="qc_${k}" data-c="${k}" type="${type}" autocomplete="${ac}" placeholder=" " value="${esc(c[k] || prof[k] || '')}"><label for="qc_${k}">${label}</label></div>`;
+  ['name','company','phone','email'].forEach(k => { if(!c[k] && prof[k]) c[k] = prof[k]; });
+  return `<div class="qhead"><div class="qeye">Step four</div><h1>Who should we<br>talk to?</h1><p>A NOVA application engineer will contact you personally.</p></div>
+    <div class="qform">
+      ${f('name','Full name *','text','name')}${f('role','Position','text','organization-title')}
+      ${f('company','Company *','text','organization')}${f('country','Country / city','text','country-name')}
+      ${f('phone','Phone / WhatsApp *','tel','tel')}${f('email','Email *','email','email')}
+    </div>
+    <div class="qq"><label>Preferred contact</label><div class="qchips" data-ckey="pref">${['Call','WhatsApp','Email','Site visit'].map(x => `<button type="button" class="qchip ${(c.pref||'Call')===x?'on':''}" data-v="${x}">${x}</button>`).join('')}</div></div>
+    <div class="qfield"><textarea class="qin2" id="qc_note" data-c="note" rows="3" placeholder=" ">${esc(c.note||'')}</textarea><label for="qc_note">Anything else we should know?</label></div>`;
+}
+function qBasisLabel(){
+  if(Q.basis === 'upload') return Qfiles.map(f => f.name).join(', ');
+  if(Q.basis === 'urs'){ const u = ursGet(Q.ursId); return u ? `${u.info.docNo} — ${u.info.project || machineById(u.machine).name}` : ''; }
+  if(Q.basis === 'tech') return 'Technical data sheet';
+  return '';
+}
+function qS5(){
+  const a = qApp(), c = Q.c;
+  const picks = Q.pick.map(pById).filter(Boolean);
+  const row = (k, v, step) => `<div class="qsum"><span>${k}</span><b>${esc(v||'—')}</b><a href="#quote-s${step}">Edit</a></div>`;
+  return `<div class="qhead"><div class="qeye">Final check</div><h1>Ready for your<br>proposal.</h1><p>Review your request. Your email app opens with everything attached — tap Send to submit.</p></div>
+    <div class="qcard">
+      ${Q.prod ? row('Product of interest', Q.prod, 2) : ''}
+      ${row('Application', a.t, 1)}
+      ${qSpecLines().map(r => row(r[0], r[1], 2)).join('')}
+      ${row('Project', [Q.scale, Q.type, Q.time].filter(Boolean).join(' · '), 2)}
+      ${row('Technology', (Q.nova ? 'NOVA to recommend' : '') + (picks.length ? (Q.nova ? ' · incl. ' : '') + picks.map(p => p.name).join(', ') : ''), 2)}
+      ${row('Technical basis', qBasisLabel(), 3)}
+      ${row('Contact', `${c.name} · ${c.company}`, 4)}
+      ${row('Reach me by', `${c.pref || 'Call'} · ${c.phone}`, 4)}
+    </div>
+    <div class="qnext"><div class="qeye">What happens next</div>
+      ${[['Requirement review','An application engineer studies your URS or data.'],['Solution call','We discuss options and recommend the best-fit technology.'],['Technical & commercial proposal','A detailed offer with a compliance matrix against your requirements.'],['FAT & delivery','Factory acceptance test, installation, qualification and training.']].map((s,i) => `<div class="qns"><span>${i+1}</span><div><b>${s[0]}</b><small>${s[1]}</small></div></div>`).join('')}
+    </div>`;
+}
+function qDone(){
+  setTab('');
+  const last = store.get('nova.quotes', [])[0];
+  return `<div class="qx qdone"><div class="qtop"><a class="qclose" href="#home" aria-label="Close">${svg('x',2.2)}</a><div class="qtitle"><span>Proposal Desk</span><b>Request prepared</b></div><span></span></div>
+    <div class="qbody center">
+      <div class="qseal">${svg('check',2.4)}</div>
+      <div class="qeye">Reference</div><div class="qref">${esc(last ? last.ref : '')}</div>
+      <h1>Thank you${last && last.name ? ', ' + esc(last.name.split(' ')[0]) : ''}.</h1>
+      <p>Your email app opened with the request${last && last.files ? ' and ' + last.files + ' attachment' + (last.files>1?'s':'') : ''}. <b>Tap Send</b> there to deliver it to our sales engineering team.</p>
+      <p class="qhint">Not sent? You can also reach us directly:</p>
+      <div class="qdirect"><a class="qbtn line" href="tel:${C.mobile}">${svg('phone')}Call</a><a class="qbtn line" href="https://wa.me/${C.mobile.replace('+','')}?text=${encodeURIComponent('Hello NOVA, regarding my proposal request ' + (last ? last.ref : ''))}">${svg('chat')}WhatsApp</a></div>
+      <a class="qbtn gold wide" href="#home">Back to home</a>
+    </div></div>`;
+}
+
+function bindQuote(){
+  const root = $('#qx'); if(!root || root.classList.contains('qdone')) return;
+  const n = +root.dataset.step;
+  const refresh = () => { const b = $('#qNext'); if(b) b.disabled = !qStepOk(n); };
+  root.addEventListener('click', e => {
+    const t = e.target;
+    const app = t.closest('[data-app]');
+    if(app){ Q.app = app.dataset.app; Q.pick = Q.pick.filter(id => qApp().partners.includes(id)); qSave();
+      root.querySelectorAll('.qapp').forEach(x => x.classList.toggle('on', x===app)); refresh(); return; }
+    const chip = t.closest('.qchip');
+    if(chip){ const box = chip.parentElement; if(!box.dataset.multi) box.querySelectorAll('.qchip').forEach(x => x.classList.toggle('on', x===chip));
+      if(box.dataset.key){ Q[box.dataset.key] = chip.dataset.v;
+        if(box.dataset.key==='scale'){ qSave(); const sc = root.querySelector('.qbody').scrollTop; root.outerHTML = qShell(2); bindQuote(); $('#qx .qbody').scrollTop = sc; return; } }
+      if(box.dataset.skey){ const k = spKey(box.dataset.skey);
+        if(box.dataset.multi){ let v = Q.sp[k] || []; const x = chip.dataset.v;
+          v = v.includes(x) ? v.filter(y => y !== x) : (x === NS ? [NS] : v.filter(y => y !== NS).concat(x));
+          Q.sp[k] = v; box.querySelectorAll('.qchip').forEach(b => b.classList.toggle('on', v.includes(b.dataset.v))); }
+        else Q.sp[k] = chip.dataset.v;
+        if(box.dataset.skey === 'scope' || box.dataset.skey === 'haz'){ const pids = qRecs().map(p => p.id); Q.pick = Q.pick.filter(id => pids.includes(id)); qSave(); const sc = root.querySelector('.qbody').scrollTop; root.outerHTML = qShell(2); bindQuote(); $('#qx .qbody').scrollTop = sc; return; } }
+      if(box.dataset.ckey) Q.c[box.dataset.ckey] = chip.dataset.v;
+      qSave(); refresh(); return; }
+    const p = t.closest('[data-p]');
+    if(p){ const id = p.dataset.p; Q.pick = Q.pick.includes(id) ? Q.pick.filter(x => x!==id) : Q.pick.concat(id); p.classList.toggle('on'); qSave(); return; }
+    const ob = t.closest('[data-basis-btn]');
+    if(ob){ Q.basis = ob.dataset.basisBtn; qSave(); root.querySelectorAll('.qopt').forEach(x => x.classList.toggle('on', x.dataset.basis===Q.basis)); refresh(); return; }
+    const ui = t.closest('[data-urs]');
+    if(ui){ Q.ursId = ui.dataset.urs; Q.basis = 'urs'; qSave(); root.querySelectorAll('.qursi').forEach(x => x.classList.toggle('on', x===ui)); refresh(); return; }
+    if(t.closest('#qBuild')){ Q.basis = 'urs'; qSave(); store.set('nova.quoteReturn', true); location.hash = 'urs-create-' + (qApp() ? qApp().urs : 'generic'); return; }
+    const rm = t.closest('[data-rmf]');
+    if(rm){ Qfiles.splice(+rm.dataset.rmf, 1); qDrawFiles(); refresh(); return; }
+    if(t.closest('#qNext')){ if(qStepOk(n)) location.hash = 'quote-s' + (n+1); return; }
+    if(t.closest('#qSubmit')){ qSubmit(); return; }
+  });
+  root.addEventListener('change', e => {
+    if(e.target.id === 'qNova'){ Q.nova = e.target.checked; e.target.closest('.qnova').classList.toggle('on', Q.nova); qSave(); }
+    if(e.target.id === 'qFile'){ qAddFiles([...e.target.files]).then(() => { e.target.value = ''; refresh(); }); }
+  });
+  root.addEventListener('input', e => {
+    const t = e.target;
+    if(t.dataset.tech){ Q.tech[t.dataset.tech] = t.value; t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; }
+    if(t.dataset.c){ Q.c[t.dataset.c] = t.value; }
+    qSave(); refresh();
+  });
+  root.querySelectorAll('textarea.qin').forEach(t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; });
+  if(n === 3) qDrawFiles();
+}
+async function qAddFiles(files){
+  for(const f of files){
+    if(Qfiles.length >= 5) break;
+    const total = Qfiles.reduce((s,x) => s + x.size, 0);
+    if(total + f.size > 12*1024*1024){ alertBox('Files are too large. Keep the total under 12 MB, or send large files by email.'); break; }
+    const data = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result).split(',')[1]); r.onerror = rej; r.readAsDataURL(f); });
+    Qfiles.push({ name: f.name || 'document', size: f.size, mime: f.type || 'application/octet-stream', data });
+  }
+  if(Qfiles.length){ Q.basis = 'upload'; qSave(); }
+  qDrawFiles();
+}
+function alertBox(msg){ const h = $('#qFiles'); if(h) h.insertAdjacentHTML('afterend', `<p class="qerr">${esc(msg)}</p>`); }
+function qDrawFiles(){
+  const h = $('#qFiles'); if(!h) return;
+  const kb = s => s > 1048576 ? (s/1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(s/1024)) + ' KB';
+  h.innerHTML = Qfiles.map((f,i) => `<div class="qf"><span class="qfi">${esc((f.name.split('.').pop()||'').slice(0,4).toUpperCase())}</span><div><b>${esc(f.name)}</b><small>${kb(f.size)}</small></div><button type="button" data-rmf="${i}" aria-label="Remove">${svg('x',2.2)}</button></div>`).join('');
+}
+
+function qSubmit(){
+  const a = qApp(), c = Q.c, d = new Date(), pad = x => String(x).padStart(2,'0');
+  const ref = `QT${String(d.getFullYear()).slice(2)}${pad(d.getMonth()+1)}${pad(d.getDate())}-${Math.floor(1000+Math.random()*9000)}`;
+  const picks = Q.pick.map(pById).filter(Boolean).map(p => p.name);
+  const files = Qfiles.map(f => ({ name: f.name, mime: f.mime, data: f.data }));
+  let basisText = '';
+  if(Q.basis === 'urs'){ const u = ursGet(Q.ursId); if(u){ const nm = (u.info.docNo || 'URS').replace(/[^\w.-]+/g,'_') + '.doc'; files.push({ name: nm, mime: 'application/msword', data: b64utf8(ursDocFull(u)) }); basisText = `URS attached: ${nm} (${u.info.docNo}, rev ${u.info.rev}, built with the NOVA URS Builder)`; } }
+  if(Q.basis === 'upload') basisText = 'Customer documents attached: ' + Qfiles.map(f => f.name).join(', ');
+  if(Q.basis === 'tech') basisText = 'TECHNICAL DATA SHEET\n' + qTechFields().map(f => `- ${f[1]}: ${Q.tech[f[0]] || '-'}`).join('\n');
+  const subject = `Proposal request ${ref} – ${a.t} – ${c.company}`;
+  const body =
+`PROPOSAL REQUEST ${ref}
+${d.toLocaleString()}
+
+APPLICATION
+${a.t}
+${qSpecLines().map(r => r[0] + ': ' + r[1]).join('\n')}
+${Q.scale ? 'Scale: ' + Q.scale + '\n' : ''}${Q.type ? 'Project type: ' + Q.type + '\n' : ''}Timeline: ${Q.time}
+Technology: ${Q.nova ? 'NOVA to recommend the best solution' : 'Customer selection'}${picks.length ? '\nPreferred partners: ' + picks.join(', ') : ''}${Q.prod ? '\nProduct of interest: ' + Q.prod : ''}
+
+TECHNICAL BASIS
+${basisText}
+
+CONTACT
+${c.name}${c.role ? ' – ' + c.role : ''}
+${c.company}${c.country ? ', ' + c.country : ''}
+Phone / WhatsApp: ${c.phone}
+Email: ${c.email}
+Preferred contact: ${c.pref || 'Call'}
+${c.note ? '\nNotes:\n' + c.note + '\n' : ''}
+— Sent from the NOVA Engineering app · Proposal Desk`;
+
+  let sent = false;
+  try{ if(window.NovaApp && NovaApp.sendEmail){ NovaApp.sendEmail(JSON.stringify({ to: C.sales, subject, body, images: [], files })); sent = true; } }catch(e){}
+  if(!sent) location.href = `mailto:${C.sales}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body + (files.length ? '\n\n(Please attach: ' + files.map(f => f.name).join(', ') + ')' : ''))}`;
+
+  store.set('nova.quotes', [{ ref, at: d.toISOString(), app: a.t, name: c.name, files: files.length }, ...store.get('nova.quotes', [])].slice(0, 30));
+  store.set('nova.profile', Object.assign(store.get('nova.profile', {}), { name: c.name, company: c.company, phone: c.phone, email: c.email }));
+  Q = null; Qfiles = []; store.set('nova.quote', null);
+  setTimeout(() => { location.hash = 'quote-done'; }, 350);
+}
+
+/* ---------- router ---------- */
+function route(){
+  const h = (location.hash || '#home').slice(1), cut = h.indexOf('-');
+  const r = cut < 0 ? h : h.slice(0, cut), a = cut < 0 ? '' : h.slice(cut + 1);
+  let html, after;
+  if(r === 'partners'){ html = partners(a && catById(a) ? a : ''); after = () => bindPartners(a && catById(a) ? a : ''); }
+  else if(r === 'p'){ html = partner(a); }
+  else if(r === 'prod'){ html = product(a); }
+  else if(r === 'events'){ html = events(); }
+  else if(r === 'event'){ html = eventItem(a); }
+  else if(r === 'company'){ html = company(a); }
+  else if(r === 'library'){ html = library(); after = bindLibrary; }
+  else if(r === 'lib'){ html = libItem(a); }
+  else if(r === 'urs'){
+    const [k, ...rest] = a.split('-'), v = rest.join('-');
+    if(k === 'new'){ html = ursNew(); }
+    else if(k === 'create'){ html = ursCreate(v); }
+    else if(k === 'edit'){ html = ursEdit(v); after = bindUrsEdit; }
+    else if(k === 'doc'){ html = ursDoc(v); after = bindUrsDoc; }
+    else if(k === 'guide'){ html = ursGuide(v); }
+    else { html = ursHub(); }
+  }
+  else if(r === 'support'){ html = support(a); after = bindSupport; }
+  else if(r === 'ticket'){ html = ticket(a); }
+  else if(r === 'contact'){ html = contact(); }
+  else if(r === 'quote'){ html = quote(a); after = bindQuote; }
+  else { html = home(); }
+  const app = $('#app');
+  app.innerHTML = `<div class="view">${html}</div>`;
+  if(!(r === 'company' && a)) window.scrollTo(0, 0);
+  after && after();
+  try{ if(!document.getElementById('intro') && window.NovaApp && NovaApp.setBars) NovaApp.setBars(r === 'quote'); }catch(e){}
+}
+window.addEventListener('hashchange', route);
+route();
+})();
+</script>
+<script>if('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(function(){});</script>
+</body>
+</html>
