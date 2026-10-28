@@ -155,19 +155,30 @@ window.NOVA = {
       ] },
 
     // ---------- NON-STERILE ----------
-    { id: "freund", name: "Freund", cat: "nonsterile", country: "Italy / USA", since: "1964",
+    { id: "freund", name: "Freund", cat: "nonsterile", country: "Japan / USA / Italy", since: "1964",
       url: "https://www.freundglobal.com/",
-      about: ["Global Italian / American leader since 1964.",
-              "Develops advanced equipment for powders, granules, pellets, and tablets.",
-              "Customized solutions and technical support including lab services, process development, and scale-up."],
-      products: ["Granulation Suite: Fluid Bed Dryer + High Shear Mixer", "Tablet Coaters", "Roller Compaction", "Spray Dryers", "Powder Handling", "COMPU™ Automated Control System"] },
+      about: ["World-class coating and granulation equipment and service provider, serving clients since 1964 (60th anniversary in 2024).",
+              "Supplies equipment, system engineering, process support, training, servicing and spare parts — with lifetime support.",
+              "Process laboratories in Marion (USA), Villasanta (Italy), Hamamatsu and Kanagawa (Japan) and Shanghai (China) for trials, scale-up and contract manufacturing.",
+              "All systems available with Smart-Safe™ containment down to 10 ng/m³ and EcoClean™ CIP."],
+      groups: [
+        { t: "Granulation & coating", items: ["FLO-COATER® fluid beds 200 mL – 1,900 L (top spray, Wurster, GRANUREX®)", "GRANUMEIST® high shear mixers 1 – 2,000 L", "Granulation suites, vertical or horizontal", "HI-COATER® tablet coaters 0.05 – 1,800 L"] },
+        { t: "Dry granulation & drying", items: ["GRANUFORCE™ roll compactors up to 700 kg/h", "GENESIS™ spray dryers 0.5 – 50 kg/h evaporation"] },
+        { t: "Powder handling", items: ["IBCs, drums and washing", "Bin, V and double-cone blenders", "Lifts, mills, sifters and vacuum conveyors"] },
+        { t: "Process support", items: ["PAT (NIR, particle probes)", "Containment and CIP", "Process labs and Full Circle Service™"] }
+      ] },
 
     { id: "omag", name: "OMAG", cat: "nonsterile", country: "Italy", since: "1973",
       url: "https://www.omag-pack.com/en/",
-      about: ["Italian packaging machinery manufacturer since 1973, specializing in sachets, stick packs, and pouches.",
-              "Customized, high-quality solutions for food, pharma, cosmetic, and chemical industries.",
-              "Made in Italy with strong R&D and a global support network."],
-      products: ["Sachet Packaging Machines (3-side, 4-side)", "Stick Pack & Doy-Pack Machines", "Horizontal Sachet Machines", "Complete Packaging Lines"] },
+      about: ["Italian specialist in sachet and stick-pack packaging since 1973 — every machine designed and built at its headquarters in Italy.",
+              "Designed its first pharmaceutical machine in the early 2000s; pharma is now its main focus.",
+              "Two production plants making and assembling each component, with in-house mechanical, electronic and PLC engineering teams.",
+              "Clean, simple design, easy access and operator-friendly solutions; remote assistance 24/7."],
+      groups: [
+        { t: "Sachet & stick-pack machines", items: ["C3 continuous and CP intermittent sachet machines", "CS and CSJ stick-pack machines", "CO horizontal sachet and doy-pack machine"] },
+        { t: "Complete lines", items: ["Robotic counting and stacking", "Horizontal cartoners, carton former & closer"] },
+        { t: "Components", items: ["Auger, cup, pump, tablet and vial dosing", "Ink-jet, laser, thermal, embossing coding", "21 CFR Part 11 controls and 100 % check-weighing"] }
+      ] },
 
     { id: "tgm", name: "TGM", cat: "nonsterile", country: "Italy", since: "40+ years",
       url: "https://tgm.it/ENG/",
@@ -178,24 +189,43 @@ window.NOVA = {
 
     { id: "kikusui", name: "Kikusui", cat: "nonsterile", country: "Japan / Italy", since: "1910",
       url: "https://kikusui.com/en/Home",
-      about: ["Japanese technology since 1910, with Italian manufacturing of high-precision pharmaceutical and industrial processing equipment.",
-              "Specializes in rotary tablet presses and solid processing systems.",
-              "Efficiency, safety, and high-quality output from lab to large-scale production."],
-      products: ["Rotary Tablet Presses", "Containment & WIP", "Ancillary Equipment: Dedusters, Metal Detectors, etc."] },
+      about: ["Kikusui Seisakusho Ltd. — leaders in high-speed, technologically advanced pharmaceutical and industrial tablet presses since 1910.",
+              "Privately held; about 210 employees; turnover about JPY 6,000 million (USD 60 million).",
+              "Office and plant in Kyoto, branch in Tokyo; subsidiaries Kikusui USA (Lakewood, NJ) and Kikusui Europe Srl plant (Muggio, Italy).",
+              "Firsts include high-speed RTM presses (1957), automatic weight control (1981), the water-washable AQUARIUS (1990) and the high-containment AQUARIUS C (2001).",
+              "Serves pharma, nutraceutical, electronic, powder-metal and chemical industries."],
+      groups: [
+        { t: "Production presses", items: ["AQUARIUS G-J / G-K", "NEW GEMINI 1545 high tonnage", "AQUARIUS C high containment"] },
+        { t: "Multi-layer & dry-coated", items: ["Bi-layer and dry-coating modules", "LIBRA2-3L and NEW GEMINI-3L tri-layer", "CLEANPRESS Correct series"] },
+        { t: "Lab & control", items: ["VELA G and AQUARIUS LD lab presses", "PCD-2 automatic weight control", "TAS-2 monitoring (21 CFR Part 11), PTOLEMY"] }
+      ] },
 
     { id: "pharmagel", name: "Pharmagel", cat: "nonsterile", country: "Italy", since: "1962",
       url: "https://www.phartech.it/",
-      about: ["Italian leader in softgel production machinery and encapsulation technology since 1962.",
-              "Customized turnkey solutions for small- and large-scale pharmaceutical production.",
-              "Global support and technical expertise for optimized production lines."],
-      products: ["Soft Encapsulation Machines", "Preparation Equipment", "Inspection & Printing Equipment", "R&D Equipment", "In-Process Control Equipment"] },
+      about: ["Pharmagel Technology S.r.l. (Italy) — complete softgel technology, from gel and fill preparation to encapsulation, drying, inspection and printing.",
+              "GK and HT encapsulation lines from lab (HT30) and pilot (HT50) to large-scale production (HT120, up to about 564,000 softgels/h).",
+              "Own R&D division focused on softgel quality — Pharmavisiomatic camera inspection and ink-free UV laser printing.",
+              "Equipment built to FDA 21 CFR Part 11, CE and GMP requirements."],
+      groups: [
+        { t: "Encapsulation", items: ["GK72 / GK76 lines", "HT76 / HT83 / HT100 / HT120 lines", "HT50 pilot and HT30 lab lines", "Service trolleys and lift"] },
+        { t: "Preparation", items: ["Speedygel gel mass 250 – 2,000 L", "Speedymix fill 250 – 2,000 L", "Mixing heads 60 – 300 L, R&D 15 – 100 L"] },
+        { t: "Drying", items: ["Single, double-deck and twin tumble dryers", "Drying tunnels and sub-batch cabins", "Basket and tray washing"] },
+        { t: "Inspection & printing", items: ["Pharmasort diameter sorters", "Pharmavisiomatic visual inspection", "UV laser printer"] }
+      ] },
 
     { id: "cadmach", name: "Cadmach", cat: "nonsterile", country: "India", since: "50+ years",
       url: "https://cadmach.com/",
-      about: ["Indian manufacturer of pharmaceutical machinery with 50+ years of experience.",
-              "Serves pharmaceutical, nutraceutical, Ayurvedic, food, and chemical industries globally.",
-              "High-precision equipment, customer support, and spare parts worldwide."],
-      products: ["Tablet Presses (R&D scale to production)", "Coating Machines & Roller Compactors", "Metal Detectors & Dedusters"] },
+      about: ["Indian tablet press specialist for more than 53 years — over 14,000 installations in 35+ countries on five continents.",
+              "Market share of over 70% in India and about 15% in the USA; found in almost every pharmaceutical plant in India.",
+              "Complete range from R&D presses to torque-driven i-series presses up to 948,000 tablets/h, plus roller compactors, mills and tooling.",
+              "Also serves veterinary, Ayurvedic, nutraceutical, food, chemical, API, silica, ferrite and defence industries.",
+              "Cadmach Technology Center in Ahmedabad with mechatronics-qualified service engineers."],
+      groups: [
+        { t: "Tablet presses", items: ["i-series torque-driven: C 300i, C 200i, C 100i", "C-series: C 300, C 200, C 100", "CTX A, CTX, CTX IIA, CTX IIIA", "Cadpress V, IV, IIA and CADPRO (double-sided)"] },
+        { t: "Classic & special presses", items: ["CMB5, CMB4, CMD4, CMD3, CMB3, CU", "CPC-20 press coat (tablet-in-tablet)", "CRPP heavy-duty bolus press"] },
+        { t: "Granulation & milling", items: ["Roll compactors 50 – 1,000 kg/h", "Oscillating granulator, Cizermill, Cadmill"] },
+        { t: "Allied", items: ["Colloid mill", "Punches & dies", "Service and technology center"] }
+      ] },
 
     // ---------- PACKAGING / T&T ----------
     { id: "famartec", name: "FamarTec (Curti Group)", cat: "packaging", country: "Italy", since: "1969",
@@ -214,26 +244,41 @@ window.NOVA = {
 
     { id: "antares", name: "Antares Vision Group", cat: "packaging", country: "Italy",
       url: "https://antaresvisiongroup.com/",
-      about: ["Connecting the physical and digital world with an integrated value chain — from raw materials and production to warehouse, logistics, pharmacy and patient.",
-              "Inspection, serialization and aggregation for full track & trace compliance."],
-      products: ["Inspection Systems", "Serialization", "Aggregation", "Track & Trace Software"] },
+      about: ["Italian leader in inspection, serialization, aggregation and track & trace software for the pharmaceutical industry.",
+              "Print & Check serialization machines up to 400 pcs/min, built from printer, laser, camera, checkweigher, tamper-evident and labelling modules.",
+              "Aggregation from manual stations to fully automatic print & apply for bundles, cases and pallets.",
+              "DIAMIND software ecosystem from line (L2) to plant, warehouse, enterprise and regulator (L5) — ready for Egypt's track & trace requirements.",
+              "Visual inspection and container closure integrity testing for vials, ampoules, syringes, cartridges and bottles."],
+      groups: [
+        { t: "Serialization – Print & Check", items: ["SP, EVO, Advanced, CW, 3T S, AIO XS, FLEX", "Flat Carton off-line serialization", "Up to 400 pcs/min"] },
+        { t: "Aggregation", items: ["Omnivision bottle station", "Semi-automatic case packer", "Print & Apply for bundle and case", "Sentinel, Matrix and manual stations"] },
+        { t: "DIAMIND software", items: ["DIAMIND Line (L2)", "Factory, Warehouse and Enterprise (L3–L5)", "Smart Clearance"] },
+        { t: "Inspection", items: ["Vials, ampoules, cartridges, syringes, bottles, BFS", "Visual inspection and leak testing"] }
+      ] },
 
     { id: "siempharma", name: "Siempharma", cat: "packaging", country: "Italy",
       url: "https://www.siempharma.com/",
-      about: ["Italian manufacturer of primary, secondary and end-of-line packaging machinery for pharma."],
+      about: ["Italian designer and manufacturer of packaging machines for the pharmaceutical and nutraceutical industries.",
+              "Covers primary, secondary and end-of-line packaging, inspection of whole lines, PLC software, vision systems and robotics.",
+              "Machines built to GMP, CE, 21 CFR Part 11 and Industry 4.0, with SIEMPHARMA software and OPC UA connectivity."],
       groups: [
-        { t: "Primary Packaging", items: ["Liquid Filling-Capping Machines", "Tablet & Capsule Counting-Capping Machines", "Capping Machines"] },
-        { t: "Secondary Packaging", items: ["Automatic Labelling Machines", "Continuous-Motion Rotary Labellers", "Automatic Print & Apply", "Automatic Cartoners", "Vertical Intermittent-Motion Cartoners", "Automatic Bundling Machines", "Labelling & Plunger Rod Insertion"] },
-        { t: "Tertiary – End of Line", items: ["Case Packers (automatic / semi-automatic)", "Automatic Palletizing Systems"] },
-        { t: "Ancillary", items: ["Automatic Cleaning Machine", "Automatic Renester", "Automatic Denester", "Desiccant Pouch Inserter", "Automatic Inspection Machine"] }
+        { t: "Primary packaging", items: ["FS-4 and LFRC-8 liquid filling-capping", "CM-50 counting-capping", "RCM-200 MT / DT rotary cappers", "BC-135 SR blister machine"] },
+        { t: "Labelling & cartoning", items: ["ETF-150, ETF-300, ETFR-150 labellers", "P&A-30 print & apply, ETFS-300 syringe labeller", "C-100, C-140, C-260 / C-400, C-70, VC-40 cartoners", "FA-38 bundler"] },
+        { t: "End of line", items: ["INC-6 SA / 6A / 10A / 6 AF / 10 AF case packers", "PB cobot palletisers"] },
+        { t: "Ancillary", items: ["TS-1200 bottle cleaner, DPI-120 desiccant inserter", "AD-300 / AR-300 syringe denester and renester", "TI-250 inspection"] }
       ] },
 
-    { id: "cora", name: "CO.RA.", cat: "packaging", country: "Italy",
+    { id: "cora", name: "CO.RA.", cat: "packaging", country: "Italy", since: "1985",
       url: "https://coraitaly.net/en/",
-      about: ["Italian company specializing in industrial valves and integrated systems for pharma, chemical, food, and cosmetic industries.",
-              "Custom systems, engineering support, installation, and maintenance services.",
-              "ATEX 2014/34/UE and PED 2014/68/UE certified products."],
-      products: ["Dosing Systems", "Actuation Systems", "Industrial Lifting Equipment", "Flexible Connections", "Crushing Systems", "Valves"] },
+      about: ["Italian specialist (Altopascio, Lucca) in connection and interface systems \"between machine A and machine B\" for pharmaceutical and chemical solid handling.",
+              "Inventor of the SOLE VALVE® (patented 1992), TABLET VALVE and STERI LIFT®; about 50 staff.",
+              "Elastomer parts made in its own clean room; full material traceability; ATEX 2014/34/UE and PED 2014/68/UE.",
+              "Exports 75% of production (36% EU, 39% outside EU); Technology Center for product tests and training; after-sales response within 30 minutes."],
+      groups: [
+        { t: "Valves", items: ["SOLE VALVE®, TABLET VALVE, ROTARY VALVE (+ Tablet)", "DOUBLE VALVE®, VR8V®, sanitary rotary valve", "HR CRUSHER"] },
+        { t: "Systems", items: ["STERI LIFT® and DUK lifting", "Dosing systems, TIP containment (OEL 1 µg/m³)", "SANI FLOW, tablet recovery, bag emptiers"] },
+        { t: "Components & services", items: ["Actuators, AQR / AFSB, MF clamps", "SIL COMP, SIL HOSE, SIL CAP", "Revamping, re-polishing, tests"] }
+      ] },
 
     { id: "andock", name: "Andocksysteme", cat: "packaging", country: "Germany", since: "2000s",
       url: "https://andocksysteme.de/en/",
@@ -301,10 +346,17 @@ window.NOVA = {
     // ---------- CLEANROOMS ----------
     { id: "techniconsult", name: "Techniconsult Group", cat: "cleanroom", country: "Italy", since: "1987",
       url: "https://tcfirenze.com/en/",
-      about: ["Italian engineering and construction company since 1987, specializing in turnkey solutions for life sciences and high-tech industries.",
-              "Founded in Florence, it manages the entire project lifecycle — from design and engineering to construction, commissioning, and maintenance.",
-              "200+ clients, 1,600+ projects, 50+ turnkey projects."],
-      products: ["Consulting & Planning", "Design & Engineering", "Process Design", "Construction – Turnkey Solutions", "Commissioning & Qualification", "Maintenance"] },
+      about: ["Florence-based engineering and construction group working only in life sciences for over 35 years — from engineering to construction, from maintenance to excellence.",
+              "Group: Techniconsult (engineering, C&Q), TECMA (general contracting, construction, maintenance) and AQE (automation engineering and validation).",
+              "200+ clients, 1,600+ projects, 50+ turnkey projects, about 150 staff; 2023 group production € 24.8 M.",
+              "ISO 9001 and ISO 45001; Benefit Corporation since 2022; EcoVadis Bronze; FOYA 2020 award (GSK project, EPCM contractor).",
+              "Projects across Europe, the Middle East and beyond; local partner with MoU in Egypt. Part of a strategic federation with PQE Group."],
+      groups: [
+        { t: "Engineering", items: ["Consultancy, design & BIM", "Process engineering and safety", "Automation & CSV, energy & sustainability"] },
+        { t: "Construction & C&Q", items: ["TECMA general contracting (turnkey)", "Commissioning & qualification", "Containment testing, maintenance"] },
+        { t: "Digital tools", items: ["BIM, laser scanning, CDE", "Process simulation and CFD", "AR / VR, modular solutions, AI"] },
+        { t: "References", items: ["Menarini, GSK, Chiesi, Merck, Novartis, BMS, Helsinn"] }
+      ] },
 
     { id: "delta", name: "Delta 2000", cat: "cleanroom", country: "Italy",
       url: "https://www.delta-2000.com/en/",
@@ -316,24 +368,43 @@ window.NOVA = {
     // ---------- EMS / CONTAINMENT ----------
     { id: "tema", name: "Tema Sinergie", cat: "ems", country: "Italy", since: "1985",
       url: "https://www.temasinergie.com",
-      about: ["Italian engineering company since 1985, specializing in advanced containment and aseptic processing for pharma, biotech, and life sciences.",
-              "Designs and manufactures isolators, RABS, and barrier systems for product sterility, operator safety, and compliance.",
-              "Compliance: Annex 1, EU Guidelines, cGMP, GAMP 5, FDA 21 CFR Part 11."],
-      products: ["Aseptic & Containment Isolators", "RABS", "Glove Integrity Testers", "Pass-Through Chambers", "Aseptic Filling & Capping Machines"] },
+      about: ["Italian company established in 1985 and a world leader in shielded isolators for nuclear medicine.",
+              "Barrier Isolation Technology unit: customized AISI 316L isolators and RABS for aseptic and containment processes in pharma and chemicals.",
+              "Full engineering from concept to P&ID, Siemens PLC control, cGMP / FDA, 21 CFR Part 11 and GAMP 5 software.",
+              "Complete validation packages (FAT, SAT, IQ/OQ/PQ); 24/7 online support and VPN remote service.",
+              "Quality system certified ISO 9001 (since 2000) and ISO 13485 (since 2013)."],
+      groups: [
+        { t: "Aseptic isolators", items: ["AP-IS aseptic processing", "ST-IS sterility testing", "CLF-IS hospital pharmacy", "Cell therapy isolators"] },
+        { t: "Containment", items: ["HC-IS ≤ 50 ng/m³", "AC-IS aseptic containment", "Multi-stage isolators, downflow booths"] },
+        { t: "RABS, transfer & filling", items: ["Open / closed RABS", "AB-PTC bio-decon pass box", "AseptiFill filling & capping"] },
+        { t: "Testing & radiopharma", items: ["AGLTS automatic glove tester", "Hot cells and radiopharma lines"] }
+      ] },
 
     { id: "rigel", name: "Rigel Life Sciences", cat: "ems", country: "Italy", since: "2008",
       url: "https://www.rigellifesciences.com/",
-      about: ["Founded in Italy in 2008, specializing in contamination control for controlled and cleanroom environments.",
-              "Built on expertise from Ascotec (CLiMET dealer), CTP System (GMP validation), and the Italian National Research Council (CNR).",
-              "Sampling instruments, particle and microbiological monitoring, and HEPA/ULPA filter testing."],
-      products: ["EMS, CMS & BMS (IEMS Next®)", "Portable Particle Counters", "Microbial Air Samplers", "Leak Testing (photometer, aerosol generator)"] },
+      about: ["\"Contamination Control Specialists\" — Italian company founded in 2008 for contamination monitoring and validation solutions.",
+              "Key product IEMS Next: real-time environmental monitoring of viable and total particles, compliant with EU GMP Annex 1, 21 CFR Part 11 and Annex 11.",
+              "Exclusive CLiMET Instruments dealer for Italy, North Africa, the Middle East and Eastern Europe; partnership with Biolog.",
+              "Accredited calibration laboratory (ACCREDIA LAT 305T) to ISO 21501-4:2018.",
+              "Offices in Milan, Rome, Montecatini, Lyon, Budapest, Istanbul and Dubai."],
+      groups: [
+        { t: "Monitoring systems", items: ["IEMS Next / EMS Next", "Dual Sampler, inertial impactor", "PLC control center (S7-1500)"] },
+        { t: "Portable instruments", items: ["CLiMET particle counters CI-170 to CI-1070", "CLiMET CI-97 air sampler"] },
+        { t: "Leak testing & services", items: ["RI7001 photometer, aerosol generators", "Accredited calibration, customer support team"] }
+      ] },
 
     { id: "abc", name: "ABC Transfer", cat: "ems", country: "France", since: "2019",
       url: "https://abctransfer.fr/",
-      about: ["French company specializing in sterile transfer solutions for pharmaceutical and biotech manufacturing.",
-              "Founded in 2019, focused on Rapid Transfer Systems (RTP/RTS) for aseptic environments.",
-              "Supports contamination control and regulatory compliance through an international distributor network."],
-      products: ["Alpha-Beta Containers", "Alpha-Beta Ports", "Single-Use Transfer Solutions"] },
+      about: ["French maker (Chambray-lès-Tours) of ultraclean sterile transfer solutions — Rapid Transfer Systems for the global biopharmaceutical industry.",
+              "Founded by Thierry Girard and Jean-Luc Schneider, formerly of the transfer-technology market leader, and co-developed with pharma and isolator companies.",
+              "A feasibility study found 70+ improvement opportunities in RTPs: GMP, sterility, cleaning, ergonomics, maintenance and lifecycle cost.",
+              "Products compatible with conventional RTP brands; Annex 1 gloveless solutions; 50% less plastic, 30% less steel, 100% recyclable, carbon offset with Reforest'Action.",
+              "Nova Engineering is ABC Transfer's agent in Egypt."],
+      groups: [
+        { t: "Alpha Ports", items: ["Alpha Port (internal opening)", "Gloveless Alpha Port (external opening)", "Double-wall isolator assembly"] },
+        { t: "Beta Containers", items: ["Beta Container 190 / 270", "Container and bag trolleys"] },
+        { t: "Single-use & gloveless", items: ["Betacleanbag™ ported bags", "ABC Transfer® Ultra™ gloveless system"] }
+      ] },
 
     // ---------- GLASS ----------
     { id: "ocmi", name: "OCMI Group", cat: "glass", country: "Italy", since: "1921",
