@@ -576,6 +576,99 @@ ul.dots li{margin:4px 0}
 .ttPoint{margin-top:10px;background:var(--gold-soft);border:1px solid var(--gold);border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.45}
 .ttSt{display:inline-block;font-size:10.5px;font-weight:700;color:var(--c);border:1px solid var(--c);border-radius:999px;padding:1px 7px;margin-top:4px}
 .ttMk .ttSt{display:table;margin-top:6px}
+/* ---------- T&T whiteboard ---------- */
+.wb{position:relative;margin:4px 0 0;border-radius:22px;overflow:hidden;background:#0b1028;border:1px solid rgba(231,196,114,.35);
+  box-shadow:0 18px 50px rgba(8,12,40,.45),inset 0 1px 0 rgba(255,255,255,.06);transition:box-shadow .2s}
+.wb.hot{box-shadow:0 0 0 3px #e7c472,0 18px 50px rgba(8,12,40,.45)}
+.wb.full{position:fixed;inset:0;z-index:900;border-radius:0;margin:0}
+.wbV{height:min(62vh,560px);overflow:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  background:radial-gradient(1200px 500px at 20% -10%,rgba(200,167,94,.18),transparent 60%),radial-gradient(900px 600px at 110% 120%,rgba(70,120,255,.18),transparent 60%),#0b1028}
+.wb.full .wbV{height:100vh}
+.wbV::-webkit-scrollbar{display:none}
+.wbC{position:relative}
+.wbS{position:absolute;left:0;top:0;width:1700px;height:920px;transform-origin:0 0;
+  background-image:radial-gradient(rgba(255,255,255,.13) 1.2px,transparent 1.3px);background-size:26px 26px}
+.wbLane{position:absolute;left:0;right:0;pointer-events:auto}
+.wbLane span{position:absolute;left:24px;top:14px;font:700 13px/1 Inter,system-ui,sans-serif;letter-spacing:.24em;color:rgba(231,196,114,.55)}
+.wbLane.sw{top:30px;height:230px;border-top:1px dashed rgba(95,211,255,.18);border-bottom:1px dashed rgba(95,211,255,.18);background:linear-gradient(180deg,rgba(95,211,255,.05),transparent)}
+.wbLane.sw span{color:rgba(95,211,255,.6)}
+.wbLane.ln{top:310px;height:340px;background:linear-gradient(180deg,rgba(231,196,114,.05),transparent)}
+.wbL{position:absolute;left:0;top:0;overflow:visible}
+.wbL path{fill:none;stroke-width:4;cursor:pointer;pointer-events:stroke}
+.wbL path.fw{stroke:url(#gF);stroke-dasharray:14 10;animation:wbFlow 1.2s linear infinite;filter:drop-shadow(0 0 6px rgba(231,196,114,.55))}
+.wbL path.dt{stroke:#5fd3ff;stroke-width:2.5;stroke-dasharray:4 8;animation:wbFlow 1.6s linear infinite;filter:drop-shadow(0 0 5px rgba(95,211,255,.6))}
+.wbL path.sel{stroke-width:7}
+@keyframes wbFlow{to{stroke-dashoffset:-24}}
+.wbN{position:absolute;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;color:#fff;font-family:Inter,system-ui,sans-serif;
+  border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.18);transition:box-shadow .2s,transform .15s;animation:wbIn .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes wbIn{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.wbN.drag{cursor:grabbing;transform:scale(1.05);box-shadow:0 24px 50px rgba(0,0,0,.6),0 0 0 2px #e7c472;z-index:5;transition:none}
+.wbN.sel{box-shadow:0 0 0 3px #e7c472,0 0 40px rgba(231,196,114,.55),0 14px 34px rgba(0,0,0,.45)}
+.wbN.con{box-shadow:0 0 0 3px #5fd3ff,0 0 40px rgba(95,211,255,.6)}
+.wbN.bad{border-color:#ff6b6b}
+.wbN b{display:block;font-size:14px;font-weight:700;letter-spacing:.01em}
+.wbN small{display:block;font-size:11.5px;color:rgba(255,255,255,.7);margin-top:2px}
+.wbN em{display:inline-block;font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#1a2350;background:linear-gradient(120deg,#f4d58d,#c8a75e);padding:3px 8px;border-radius:999px;margin-top:6px}
+.wbN .pt{position:absolute;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:#0b1028;border:2px solid #e7c472;box-shadow:0 0 10px rgba(231,196,114,.8)}
+.wbN .pt.l{left:-7px}.wbN .pt.r{right:-7px}
+.wbN.mc{width:170px;height:178px;padding:8px 10px 10px;text-align:center}
+.wbN.mc .im{height:104px;margin:0 -2px 6px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,.75) 60%,rgba(255,255,255,.2) 100%)}
+.wbN.mc img{max-width:92%;max-height:96px;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(0,0,0,.35));pointer-events:none}
+.wbN.mc b{font-size:13px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbN.st{width:150px;height:64px;padding:10px 14px 10px 46px;border-radius:999px;background:linear-gradient(120deg,#0f8a5f,#2fbf86);border-color:rgba(255,255,255,.3)}
+.wbN.st .gl{position:absolute;left:10px;top:14px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:12px}
+.wbN.pal,.wbN.cl{width:170px;height:110px;padding:12px 14px;text-align:center}
+.wbN.pal{background:linear-gradient(150deg,rgba(247,161,44,.35),rgba(247,161,44,.08));border-color:rgba(247,161,44,.6)}
+.wbN.pal .gl{font-size:26px;display:block}
+.wbN.cl{background:linear-gradient(150deg,rgba(95,211,255,.32),rgba(95,211,255,.06));border-color:rgba(95,211,255,.6)}
+.wbN.cl .gl{color:#5fd3ff;display:block}
+.wbN.sw{width:170px;height:92px;padding:12px 14px 10px 54px;background:linear-gradient(150deg,rgba(95,211,255,.22),rgba(255,255,255,.04));border-color:rgba(95,211,255,.45)}
+.wbN.sw .gl{position:absolute;left:12px;top:16px;width:34px;height:34px;border-radius:10px;background:rgba(95,211,255,.18);color:#5fd3ff;display:flex;align-items:center;justify-content:center}
+.wbN.sw b{font-size:13px;line-height:1.2}
+.wbN.sw em{background:linear-gradient(120deg,#9be7ff,#5fd3ff)}
+.wbEmpty{position:absolute;left:520px;top:440px;color:rgba(255,255,255,.55);font:600 22px/1.4 Inter,system-ui,sans-serif;text-align:center}
+.wbEmpty small{font-size:15px;font-weight:500}
+.wbBar{display:flex;align-items:center;gap:8px;padding:10px 10px 10px 10px;background:linear-gradient(180deg,#121a3f,#0e1534);border-bottom:1px solid rgba(231,196,114,.22)}
+.wbBar .wbHud,.wbBar .wbTools{position:static;background:none;border:0;-webkit-backdrop-filter:none;backdrop-filter:none;padding:0}
+.wbBar .wbHud{flex:1;min-width:0}.wbBar .wbHud small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbBar .wbTools{gap:4px}
+.wbBar .wbTools button{min-width:34px;height:34px;padding:0 6px;font-size:15px}
+.wbCol{position:absolute;top:0;bottom:0}
+.wbCol span{position:absolute;left:18px;top:8px;font:700 12px/1 Inter,system-ui,sans-serif;letter-spacing:.22em;color:rgba(231,196,114,.55)}
+.wbCol.ln{left:0;width:250px;background:linear-gradient(90deg,rgba(231,196,114,.05),transparent)}
+.wbCol.sw{left:270px;right:0;border-left:1px dashed rgba(95,211,255,.2);background:linear-gradient(90deg,rgba(95,211,255,.05),transparent)}
+.wbCol.sw span{color:rgba(95,211,255,.6)}
+.wb.vert .wbLane{display:none}
+.wbN .pt.t{left:50%;top:-7px;margin:0 0 0 -6px}.wbN .pt.b{left:50%;top:auto;bottom:-7px;margin:0 0 0 -6px}
+.wb.vert .wbN .pt.l,.wb.vert .wbN .pt.r{display:none}
+.wb:not(.vert) .wbN .pt.t,.wb:not(.vert) .wbN .pt.b{display:none}
+.ttHalf.erp{border-top-color:#2f78c4}
+.wbN.erp{width:170px;height:110px;padding:12px 14px;text-align:center;background:linear-gradient(150deg,rgba(47,120,196,.45),rgba(47,120,196,.1));border-color:rgba(120,180,255,.6)}
+.wbN.erp .gl{display:block;color:#9cc8ff}
+.wbHud{position:absolute;left:12px;top:12px;z-index:3;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:999px;color:#fff;
+  background:rgba(11,16,40,.72);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.wbHud .ring{--p:0;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;position:relative;background:conic-gradient(#e7c472 calc(var(--p)*1%),rgba(255,255,255,.15) 0)}
+.wbHud .ring span{font-size:10px;letter-spacing:-.02em}
+.wbHud .ring:before{content:"";position:absolute;inset:4px;border-radius:50%;background:#0b1028}.wbHud .ring span{position:relative}
+.wbHud b{display:block;font-size:13px}.wbHud small{font-size:11px;color:rgba(255,255,255,.65)}
+.wbTools{position:absolute;right:12px;top:12px;z-index:3;display:flex;align-items:center;gap:4px;padding:4px;border-radius:14px;background:rgba(11,16,40,.72);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.wbTools button{border:0;background:rgba(255,255,255,.08);color:#fff;min-width:32px;height:32px;border-radius:10px;font:600 14px/1 inherit;cursor:pointer;padding:0 8px}
+.wbTools button.on{background:linear-gradient(120deg,#f4d58d,#c8a75e);color:#1a2350}
+.wbTools span{color:rgba(255,255,255,.7);font-size:11px;min-width:34px;text-align:center}
+@media (max-width:420px){.wbHud small{display:none}.wbTools span{display:none}}
+.wbI{position:absolute;left:12px;right:12px;bottom:12px;z-index:4;display:flex;align-items:center;gap:6px;padding:8px;border-radius:16px;color:#fff;
+  background:rgba(11,16,40,.85);border:1px solid rgba(231,196,114,.45);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(0,0,0,.4);animation:ttPop .3s both}
+.wbI .t{flex:1;min-width:0}.wbI .t b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbI .t span{font-size:11.5px;color:rgba(255,255,255,.65)}
+.wbI select{margin-top:3px;width:100%;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:5px 6px;font:inherit;font-size:12px}
+.wbI select option{color:#000}
+.wbI button{border:0;background:rgba(255,255,255,.1);color:#fff;height:36px;padding:0 12px;border-radius:10px;font:600 12.5px/1 inherit;cursor:pointer;white-space:nowrap}
+.wbI button.on{background:#5fd3ff;color:#0b1028}.wbI button.dz{background:rgba(255,90,90,.2);color:#ffb3b3}
+.wbFullB .ttTray{z-index:950;bottom:0}
+.wb.full .wbI{bottom:auto;top:60px}
+.wbFullB{overflow:hidden}
 /* ---------- Track & Trace builder ---------- */
 .ttHot{display:flex;align-items:center;gap:12px;margin:16px 0 0;padding:16px 14px 14px;border-radius:18px;color:#fff;position:relative;overflow:hidden;isolation:isolate;
   background:linear-gradient(120deg,#a50f2a,#e23a2a 50%,#f7a12c);box-shadow:0 0 0 2px rgba(255,210,120,.65),0 12px 30px rgba(230,60,40,.45);animation:ttGlowB 2.2s ease-in-out infinite}
@@ -2387,6 +2480,7 @@ const TT_REQ = {
   agg_pallet:   ['Pallet aggregation (SSCC)', 'Manual: operators scan cases with handheld scanners and print the pallet label'],
   l2:     ['Line software (Level 2)', 'Manages serial numbers and work orders on the line'],
   rep:    ['Reporting to the authority (L3 – L5)', 'Plant / enterprise software that sends events to the national system'],
+  erp:    ['ERP / SAP integration (Level 3 – 4)', 'Master data, work orders and serial events exchanged with your ERP'],
   crypto: ['Crypto codes from the operator', 'Codes are issued by the system operator and must be imported into the line software']
 };
 const TT_MOD = [
@@ -2408,7 +2502,7 @@ const TT_MOD = [
   ['man',  '1.7', 'Manual Station',          ['carton','bundle','case','supercase'], ['agg']],
   ['mms',  '1.8', 'Multiple Manual Station', ['case','supercase'], ['agg']],
   ['dl',   '2.0', 'DIAMIND Line (L2)',       ['sw'], ['l2']],
-  ['eco',  '2.1', 'DIAMIND L3 – L5',         ['sw'], ['rep','crypto']],
+  ['eco',  '2.1', 'DIAMIND L3 – L5',         ['sw'], ['rep','crypto','erp']],
   ['clr',  '2.2', 'Smart Clearance',         ['sw'], []]
 ];
 const TT_CATS = [['Serialisation', ['sp','evo','adv','cw','3ts','aio','flex','fc','omni','sent']], ['Aggregation', ['pab','mat','scp','pac','mtv','man','mms']], ['Software', ['dl','eco','clr']]];
@@ -2439,6 +2533,7 @@ const ttL = () => TT.lines[TT.cur];
 function ttReqs(L){
   L = L || ttL(); const need = new Set();
   TT.markets.forEach(id => { const m = ttMk(id); m && m.req.forEach(r => { if(r === 'agg') L.levels.forEach(l => need.add('agg_' + l)); else need.add(r); }); });
+  if((TT.erp||{}).has === 'yes') need.add('erp');
   return [...need];
 }
 function ttCaps(L){
@@ -2498,7 +2593,7 @@ function ttBadges(){
     const ok = r.every(k => have.has(k)); return `<span class="ttBadge ${ok?'ok':''}">${m.fl} ${esc(m.t)}${ok?' ✓':''}</span>`; });
   return sel.length > 8 ? sel.slice(0, 8).join('') + `<span class="ttBadge">+${sel.length - 8} more</span>` : sel.join('') || '<span class="ttBadge">Pick your markets</span>';
 }
-const ttDone = n => n === 1 ? TT.lines.every(L => L.setup && (L.setup === 'alone' || L.oem.name) && (!L.levels.some(l => l !== 'pallet') || L.aggSetup === 'alone' || (L.aggSetup === 'oem' && (L.aggOem||{}).name))) : n === 2 ? TT.markets.length > 0 : n === 3 ? TT.lines.every(L => ttScore(L).pct === 100) : false;
+const ttDone = n => n === 1 ? !!(TT.erp||{}).has && TT.lines.every(L => L.setup && (L.setup === 'alone' || L.oem.name) && (!L.levels.some(l => l !== 'pallet') || L.aggSetup === 'alone' || (L.aggSetup === 'oem' && (L.aggOem||{}).name))) : n === 2 ? TT.markets.length > 0 : n === 3 ? TT.lines.every(L => ttScore(L).pct === 100) : false;
 function ttLineBar(){
   return `<div class="ttLines">${TT.lines.map((L,i) => { const p = ttScore(L).pct;
     return `<button class="${i===TT.cur?'on':''}" data-line="${i}">${esc(L.name)}<small>${p}%</small></button>`; }).join('')}
@@ -2507,7 +2602,9 @@ function ttLineBar(){
 function tt(a){
   setBar('Track & Trace Builder'); setTab('home');
   TT = ttState(); const n = +a; if(n >= 1 && n <= 4){ TT.step = n; ttSave(); }
-  const L = ttL(), o = L.oem, ao = L.aggOem || {}, v = k => esc(o[k] || '');
+  TT.lines.forEach(ttFlow);
+  document.body.classList.toggle('wbFullB', TT.step === 3 && !!TT.full);
+  const L = ttL(), o = L.oem, ao = L.aggOem || {}, E = TT.erp || {}, v = k => esc(o[k] || '');
   let body = '';
   if(TT.step === 1){
     body = `${ttLineBar()}<div class="ttSec">
@@ -2547,6 +2644,22 @@ function tt(a){
         </div>` : ''}
         <p class="muted small" style="margin:10px 0 0">${L.levels.length ? 'Hierarchy: ' + esc([L.pack].concat(L.levels.map(ttLaneT)).join(' → ')) : 'No aggregation selected — serialisation only.'}</p>
         ${L.levels.includes('pallet') ? '<div class="ttPoint">📦 Pallet aggregation is done manually: operators scan the cases with handheld scanners and print the SSCC pallet label. It is included automatically.</div>' : ''}
+      </div>
+      <div class="ttHalf erp"><div class="ttHalfH"><span>③</span><b>ERP / SAP connection</b><small>Level 3 – 4 · all lines</small></div>
+        <p class="muted small" style="margin:0 0 10px">Should the T&T system exchange data with your ERP (product master data, batch / work orders, serial and shipping events)?</p>
+        <div class="ttOpt">
+          <button data-erp="yes" class="${E.has==='yes'?'on':''}"><span class="em">🔌</span><b>Yes, connect ERP</b><span>Automatic exchange of master data, orders and events</span></button>
+          <button data-erp="no" class="${E.has==='no'?'on':''}"><span class="em">🗂️</span><b>No ERP link</b><span>Data entered in the T&T software (L3) only</span></button>
+        </div>
+        <div class="form" style="${E.has==='yes'?'':'display:none'}">
+          <label>ERP system</label><div class="qchips" style="margin:0">${['SAP S/4HANA','SAP ECC','SAP Business One','Oracle','Microsoft Dynamics','Odoo','Other'].map(x => `<button type="button" class="qchip ${E.sys===x?'on':''}" data-erps="${x}">${x}</button>`).join('')}</div>
+          ${E.sys === 'Other' ? `<label>Which ERP?</label><input data-e="other" value="${esc(E.other||'')}">` : ''}
+          ${/SAP/.test(E.sys||'') ? `<label>SAP serialisation module</label><select data-e="attp">${['','SAP ATTP in use','SAP ICH / OER','No SAP serialisation module','Not sure'].map(x => `<option ${E.attp===x?'selected':''}>${x}</option>`).join('')}</select>` : ''}
+          <label>Integration method</label><select data-e="method">${['','Standard connector / web service (API)','SAP IDoc','OData / REST API','File exchange (XML / CSV)','Middleware (SAP PI/PO, CPI, MuleSoft…)','To be defined with NOVA'].map(x => `<option ${E.method===x?'selected':''}>${x}</option>`).join('')}</select>
+          <label>Data to exchange</label><div class="qchips" style="margin:0">${['Product master (GTIN)','Batch / work orders','Serial number requests','Commissioning & aggregation events','Shipping / delivery (SSCC)','Returns & decommissioning'].map(x => `<button type="button" class="qchip ${(E.data||[]).includes(x)?'on':''}" data-erpd="${x}">${x}</button>`).join('')}</div>
+          <label>Hosting</label><select data-e="host">${['','On-premise','Cloud','Hybrid','Not sure'].map(x => `<option ${E.host===x?'selected':''}>${x}</option>`).join('')}</select>
+          <label>IT contact (name / email)</label><input data-e="contact" value="${esc(E.contact||'')}">
+        </div>
       </div></div>`;
   } else if(TT.step === 2){
     const q = (TT.q||'').toLowerCase();
@@ -2560,24 +2673,21 @@ function tt(a){
       <p class="muted small" style="margin-top:10px">Summaries from authority documents and industry overviews (2023 – 2026). Rules change often — confirm with the authority before design freeze.</p>
       ${ttEdaCard()}</div>`;
   } else if(TT.step === 3){
-    const used = new Set(Object.values(L.line).flat());
-    const lanes = TT_LANES.filter(l => l.id === 'unit' || l.id === 'sw' || L.levels.includes(l.id));
-    body = `${ttLineBar()}<div class="ttSec"><div class="eyebrow">Step 3 · Build · ${esc(L.name)}</div><h3 style="margin:0 0 4px">Drag machines and software onto your line</h3>
-      <p class="muted small" style="margin:0 0 6px">Drag a card up from the tray onto a level, or tap it to place it automatically. Tap ✕ to remove.</p>
-      <div class="ttBoard" id="ttBoard">${lanes.map((l,i) => `
-        <div class="ttLane" data-lane="${l.id}"><div class="ttLaneH"><span class="n">${l.id==='sw'?'L2+':i+1}</span>${l.t}<small>${l.s}</small></div>
-        <div class="ttDrop">${(L.line[l.id]||[]).map(k => `<span class="ttChip">${esc(ttMod(k)[2])}<button data-rm="${l.id}:${k}" aria-label="Remove">✕</button></span>`).join('') || '<span class="hint">Drop here</span>'}</div></div>`).join('')}
-        ${L.levels.includes('pallet') ? `<div class="ttPoint">📦 <b>Pallet aggregation</b> — manual with handheld scanners and an SSCC label printer. Included automatically.</div>` : ''}</div>
+    const used = new Set(L.nodes.map(n => n.k));
+    body = `${ttLineBar()}<div class="ttSec"><div class="eyebrow">Step 3 · Build · ${esc(L.name)}</div><h3 style="margin:0 0 4px">Design your line on the whiteboard</h3>
+      <p class="muted small" style="margin:0 0 8px">Drag machines from the tray onto the board, move them freely, tap a unit to change its level or connect it. ✨ Smart arranges and wires the flow for you.</p>
+      ${ttBoard()}
       <div class="card" style="margin-top:12px"><div class="eyebrow">Requirements</div><ul class="ttReq" id="ttReq">${ttReqList()}</ul></div>
       <p class="muted small" style="margin-top:10px">Library from the <a href="#p-antares">Antares Vision catalogue</a>. Open Partners → Antares Vision for full specs.</p></div>
-      <div class="ttTray"><div class="ttTabs">${TT_CATS.map(([c],i) => `<button class="${(TT.cat||0)===i?'on':''}" data-cat="${i}">${c}</button>`).join('')}<span>↑ drag up</span></div>
-        <div class="ttLib">${TT_CATS[TT.cat||0][1].map(k => { const m = ttMod(k), p = ttProd(m);
-        return `<div class="ttTile ${used.has(k)?'used':''}" data-mod="${k}">${p && p[4] ? `<img src="img/${p[4]}" alt="">` : `<div class="ph">${(TT.cat||0)===2?'💻':'📦'}</div>`}<b>${esc(m[2])}</b></div>`; }).join('')}</div></div>`;
+      <div class="ttTray"><div class="ttTabs">${TT_CATS.map(([c],i) => `<button class="${(TT.cat||0)===i?'on':''}" data-cat="${i}">${c}</button>`).join('')}<span>↑ drag onto the board</span></div>
+        <div class="ttLib">${TT_CATS[TT.cat||0][1].map(k => { const m = ttMod(k), im = ttImg(k);
+        return `<div class="ttTile ${used.has(k)?'used':''}" data-mod="${k}">${im ? `<img src="${im}" alt="" draggable="false">` : `<div class="ph">💻</div>`}<b>${esc(m[2])}</b></div>`; }).join('')}</div></div>`;
   } else {
     const c = Object.assign({}, store.get('nova.profile', {}), TT.c);
     const open = TT.lines.reduce((n, x) => { const s = ttScore(x); return n + s.req.length - s.met.length; }, 0);
     body = `<div class="ttSec"><div class="eyebrow">Step 4 · Your T&T requirement</div><h3 style="margin:0 0 8px">${open ? 'Almost there — ' + open + ' requirement(s) still open' : 'All lines meet every selected requirement 🎉'}</h3>
-      <div class="card"><div class="eyebrow">Markets</div><p style="margin:0">${TT.markets.map(id => { const m = ttMk(id); return m.fl + ' ' + esc(m.t); }).join(', ') || '—'}</p></div>
+      <div class="card"><div class="eyebrow">ERP / SAP (Level 3 – 4)</div><p style="margin:0">${(TT.erp||{}).has === 'yes' ? esc([TT.erp.sys === 'Other' ? TT.erp.other : TT.erp.sys, TT.erp.attp, TT.erp.method, TT.erp.host].filter(Boolean).join(' · ') || 'Yes') + ((TT.erp.data||[]).length ? '<br><span class="muted small">' + esc(TT.erp.data.join(', ')) + '</span>' : '') : (TT.erp||{}).has === 'no' ? 'No ERP connection' : '—'}</p></div>
+      <div class="card" style="margin-top:10px"><div class="eyebrow">Markets</div><p style="margin:0">${TT.markets.map(id => { const m = ttMk(id); return m.fl + ' ' + esc(m.t); }).join(', ') || '—'}</p></div>
       ${TT.lines.map(x => { const s = ttScore(x); return `<div class="card" style="margin-top:10px"><div class="eyebrow">${esc(x.name)} · ${s.pct}%</div>
         <p style="margin:0 0 6px"><b>Serialisation:</b> ${x.setup==='oem' ? 'Integrated with OEM — ' + esc([x.oem.name,x.oem.type,x.oem.model].filter(Boolean).join(', ')) : x.setup==='alone' ? 'Stand-alone' : '—'} · ${esc(x.pack)}${x.speed ? ' · ' + esc(x.speed) + ' packs/min' : ''}</p>
         <p style="margin:0 0 6px"><b>Aggregation:</b> ${x.levels.length ? esc(x.levels.map(ttLaneT).join(' → ')) + (x.aggSetup==='oem' ? ' · integrated with OEM — ' + esc([(x.aggOem||{}).name,(x.aggOem||{}).type].filter(Boolean).join(', ')) : x.aggSetup==='alone' ? ' · stand-alone stations' : '') + (x.levels.includes('pallet') ? ' (pallet manual, handheld scanners)' : '') : 'None'}</p>
@@ -2606,27 +2716,14 @@ function ttEdaCard(){
 function ttReqList(text, L){
   L = L || ttL(); const s = ttScore(L);
   if(!s.req.length) return '<li><span class="muted">Select at least one market in step 2.</span></li>';
-  const sugg = r => r === 'tamper' ? '3ts' : r === 'agg_bundle' ? 'pab' : r === 'agg_carton' ? 'mat' : r === 'agg_case' ? 'pac' : r === 'agg_supercase' ? 'mms' : r === 'l2' ? 'dl' : (r === 'rep' || r === 'crypto') ? 'eco' : 'evo';
+  const sugg = r => r === 'tamper' ? '3ts' : r === 'agg_bundle' ? 'pab' : r === 'agg_carton' ? 'mat' : r === 'agg_case' ? 'pac' : r === 'agg_supercase' ? 'mms' : r === 'l2' ? 'dl' : (r === 'rep' || r === 'crypto' || r === 'erp') ? 'eco' : 'evo';
   return s.req.map(r => { const ok = s.have.has(r);
     const who = TT.markets.filter(id => { const m = ttMk(id); return m.req.includes(r) || (r.startsWith('agg_') && m.req.includes('agg')); }).map(id => ttMk(id).fl);
     const w = who.length > 6 ? who.slice(0, 6).join(' ') + ' +' + (who.length - 6) : who.join(' ');
     const fix = !ok && !text && r !== 'agg_pallet' ? `<button class="fix" data-fix="${r}:${sugg(r)}">+ ${esc(ttMod(sugg(r))[2])}</button>` : '';
     return `<li class="${ok?'ok':''}"><span class="st">${ok?'✓':'!'}</span><span style="flex:1"><b>${esc(TT_REQ[r][0])} ${w}</b><span>${esc(TT_REQ[r][1])}</span></span>${fix}</li>`; }).join('');
 }
-function ttPlace(lane, k){
-  const m = ttMod(k), L = ttL(); if(!m) return false;
-  const okLane = l => l === 'unit' || l === 'sw' || L.levels.includes(l);
-  if(!lane || !m[3].includes(lane) || !okLane(lane)) lane = m[3].find(okLane);
-  if(!lane){ ttToast('Add the ' + m[3].map(ttLaneT).join(' / ') + ' level in step 1 first'); return false; }
-  L.line[lane] = L.line[lane] || [];
-  if(L.line[lane].includes(k)){ ttToast(m[2] + ' is already on ' + ttLaneT(lane)); return false; }
-  const before = ttScore().pct;
-  L.line[lane].push(k); ttSave();
-  const after = ttScore();
-  ttToast('+10 XP · ' + m[2] + ' → ' + ttLaneT(lane) + (after.req.length ? ' · ' + after.pct + '%' : ''));
-  if(after.pct === 100 && before < 100) ttConfetti();
-  return true;
-}
+function ttPlace(lane, k){ return ttAddNode(k, null, null, lane); }
 function ttToast(t){ const o = document.querySelector('.ttToast'); o && o.remove(); const d = document.createElement('div'); d.className = 'ttToast'; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 1800); }
 function ttConfetti(){
   const w = document.createElement('div'); w.className = 'ttConf';
@@ -2644,6 +2741,10 @@ function bindTT(){
   const nm = $('#ttName'); nm && nm.addEventListener('input', () => { L.name = nm.value || 'Line'; ttSave(); const b = document.querySelector('[data-line="' + TT.cur + '"]'); if(b) b.firstChild.textContent = L.name; });
   document.querySelectorAll('[data-setup]').forEach(b => b.addEventListener('click', () => { L.setup = b.dataset.setup; ttSave(); rerender(); }));
   document.querySelectorAll('[data-o]').forEach(i => i.addEventListener('input', () => { L.oem[i.dataset.o] = i.value; ttSave(); }));
+  document.querySelectorAll('[data-erp]').forEach(b => b.addEventListener('click', () => { TT.erp = Object.assign(TT.erp || {}, { has: b.dataset.erp }); TT.lines.forEach(ttFlow); ttSave(); rerender(); }));
+  document.querySelectorAll('[data-erps]').forEach(b => b.addEventListener('click', () => { TT.erp.sys = b.dataset.erps; ttSave(); rerender(); }));
+  document.querySelectorAll('[data-erpd]').forEach(b => b.addEventListener('click', () => { const d = TT.erp.data = TT.erp.data || [], x = b.dataset.erpd; d.includes(x) ? d.splice(d.indexOf(x), 1) : d.push(x); ttSave(); b.classList.toggle('on'); }));
+  document.querySelectorAll('[data-e]').forEach(i => i.addEventListener(i.tagName === 'SELECT' ? 'change' : 'input', () => { TT.erp[i.dataset.e] = i.value; ttSave(); }));
   document.querySelectorAll('[data-aggsetup]').forEach(b => b.addEventListener('click', () => { L.aggSetup = b.dataset.aggsetup; L.aggOem = L.aggOem || {}; ttSave(); rerender(); }));
   document.querySelectorAll('[data-ao]').forEach(i => i.addEventListener('input', () => { L.aggOem = L.aggOem || {}; L.aggOem[i.dataset.ao] = i.value; ttSave(); }));
   document.querySelectorAll('[data-c]').forEach(i => i.addEventListener('input', () => { TT.c[i.dataset.c] = i.value; ttSave(); }));
@@ -2659,28 +2760,7 @@ function bindTT(){
   document.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => { TT.cat = +b.dataset.cat; ttSave(); rerender(); }));
   document.querySelectorAll('[data-rm]').forEach(b => b.addEventListener('click', () => { const [l,k] = b.dataset.rm.split(':'); L.line[l] = (L.line[l]||[]).filter(x => x !== k); ttSave(); rerender(); }));
   document.querySelectorAll('[data-fix]').forEach(b => b.addEventListener('click', () => { const [r,k] = b.dataset.fix.split(':'); const lane = r.startsWith('agg_') ? r.slice(4) : null; if(ttPlace(lane, k)) rerender(); }));
-  document.querySelectorAll('.ttTile').forEach(t => t.addEventListener('pointerdown', e => {
-    const k = t.dataset.mod, sx = e.clientX, sy = e.clientY; let ghost = null, hot = null;
-    const lanes = [...document.querySelectorAll('.ttLane')];
-    const laneAt = (x, y) => lanes.find(l => { const r = l.getBoundingClientRect(); return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom; });
-    const move = ev => {
-      if(!ghost && Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
-      if(!ghost){ ghost = t.cloneNode(true); ghost.classList.add('ttGhost'); document.body.appendChild(ghost);
-        const ok = ttMod(k)[3]; lanes.forEach(l => l.classList.toggle('bad', !ok.includes(l.dataset.lane))); }
-      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
-      const l = laneAt(ev.clientX, ev.clientY); if(l !== hot){ hot && hot.classList.remove('hot'); hot = l; hot && hot.classList.add('hot'); }
-      if(ev.clientY < 90) window.scrollBy(0, -14); else if(ev.clientY > innerHeight - 260 && ev.clientY < innerHeight - 200) window.scrollBy(0, 10);
-    };
-    const up = ev => {
-      document.removeEventListener('pointermove', move); document.removeEventListener('pointerup', up); document.removeEventListener('pointercancel', up);
-      lanes.forEach(l => l.classList.remove('hot','bad'));
-      if(ghost){ ghost.remove(); const l = laneAt(ev.clientX, ev.clientY);
-        if(l){ const lane = l.dataset.lane; if(!ttMod(k)[3].includes(lane)){ ttToast(ttMod(k)[2] + ' belongs on: ' + ttMod(k)[3].map(ttLaneT).join(' / ')); return; }
-          if(ttPlace(lane, k)) rerender(); } }
-      else if(ev.type === 'pointerup' && ttPlace(null, k)) rerender();
-    };
-    document.addEventListener('pointermove', move); document.addEventListener('pointerup', up); document.addEventListener('pointercancel', up);
-  }));
+  bindBoard(rerender);
   const doc = () => ttDoc(), fn = () => 'TT-Requirement_' + (TT.c.company || 'NOVA').replace(/[^\w.-]+/g,'_');
   const pdf = $('#ttPdf'); pdf && pdf.addEventListener('click', () => { const h = doc();
     if(window.NovaApp && NovaApp.printHtml){ NovaApp.printHtml(fn(), h); return; }
@@ -2699,7 +2779,8 @@ function bindTT(){
   const rs = $('#ttReset'); rs && rs.addEventListener('click', () => { store.set('nova.tt', { c: TT.c }); TT = null; location.hash = 'tt-1'; route(); });
 }
 function ttText(){
-  const out = [`MARKETS: ${TT.markets.map(id => { const m = ttMk(id); return m.t + ' (' + m.s + ')'; }).join(', ')}`];
+  const E = TT.erp || {};
+  const out = [E.has === 'yes' ? `ERP: ${[E.sys === 'Other' ? E.other : E.sys, E.attp, E.method, E.host].filter(Boolean).join(' | ')}${(E.data||[]).length ? ' | Data: ' + E.data.join(', ') : ''}${E.contact ? ' | IT contact: ' + E.contact : ''}` : 'ERP: no connection', `MARKETS: ${TT.markets.map(id => { const m = ttMk(id); return m.t + ' (' + m.s + ')'; }).join(', ')}`];
   TT.lines.forEach(L => { const o = L.oem, s = ttScore(L);
     out.push('', `=== ${L.name} — compliance ${s.pct}% (${s.met.length}/${s.req.length}) ===`,
       `SERIALISATION: ${L.setup==='oem' ? 'Integrated with OEM' : L.setup==='alone' ? 'Stand-alone' : '-'} | Pack: ${L.pack}${L.speed ? ' | ' + L.speed + ' packs/min' : ''}`,
@@ -2707,6 +2788,7 @@ function ttText(){
       `AGGREGATION: ${L.levels.length ? L.levels.map(ttLaneT).join(' > ') + (L.levels.includes('pallet') ? ' (pallet manual with handheld scanners)' : '') : 'none'}`,
       L.aggSetup ? `AGGREGATION SET-UP: ${L.aggSetup==='oem' ? 'Integrated with OEM' : 'Stand-alone stations'}` : '',
       L.aggSetup==='oem' ? `AGG OEM: ${(L.aggOem||{}).name||'-'} | Type: ${(L.aggOem||{}).type||'-'} | Model: ${(L.aggOem||{}).model||'-'} | Levels: ${(L.aggOem||{}).levels||'-'} | Interface: ${(L.aggOem||{}).iface||'-'} | Read/label: ${(L.aggOem||{}).where||'-'} | Reject: ${(L.aggOem||{}).reject||'-'}` : '',
+      `FLOW: ${ttMain(L).map(n => n.k === '@start' ? 'Product in' : n.k === '@pallet' ? 'Pallet (manual)' : ttMod(n.k)[2]).join(' → ')}`,
       'EQUIPMENT:', ...Object.entries(L.line).filter(([,a]) => a && a.length).map(([l,a]) => ` - ${ttLaneT(l)}: ${a.map(k => ttMod(k)[2]).join(', ')}`),
       'REQUIREMENTS:', ...s.req.map(r => ` [${s.have.has(r)?'OK':'OPEN'}] ${TT_REQ[r][0]}`)); });
   return out.filter(x => x !== '').join('\n').replace(/\n===/g, '\n\n===');
@@ -2717,11 +2799,13 @@ function ttDoc(){
   return `<html><head><meta charset="utf-8"><title>Track & Trace requirement</title><style>body{font-family:Arial,sans-serif;font-size:11pt;color:#1a2350;margin:24px}h1{font-size:18pt;margin:0}h2{font-size:13pt;border-bottom:2px solid #c8a75e;padding-bottom:4px;margin-top:22px}h3{font-size:12pt;margin:16px 0 6px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #cfd3e3;padding:6px 8px;vertical-align:top;text-align:left}th{background:#24306a;color:#fff}.ok{color:#1f8a55;font-weight:bold}.open{color:#b3122e;font-weight:bold}small{color:#666}</style></head><body>
   <h1>Track & Trace — User Requirements</h1><small>Prepared with the NOVA Engineering app · ${d.toLocaleDateString()} · ${esc(c.company||'')}</small>
   <h2>1. Project</h2><table>${row('Company', esc(c.company||'-'))}${row('Contact', esc([c.name,c.phone,c.email].filter(Boolean).join(' · ')||'-'))}${row('Number of lines', String(TT.lines.length))}${c.note ? row('Notes', esc(c.note)) : ''}</table>
-  <h2>2. Target markets</h2><table><tr><th>Market</th><th>Requirements</th></tr>${TT.markets.map(id => { const m = ttMk(id); return `<tr><td><b>${esc(m.t)}</b><br><small>${esc(m.s)}</small></td><td><ul style="margin:0;padding-left:16px">${m.facts.map(f => `<li>${esc(f)}</li>`).join('')}</ul></td></tr>`; }).join('')}</table>
+  <h2>2. ERP / SAP connection (Level 3 – 4)</h2><table>${(TT.erp||{}).has === 'yes' ? row('ERP system', esc(TT.erp.sys === 'Other' ? (TT.erp.other||'Other') : (TT.erp.sys||'-'))) + (TT.erp.attp ? row('SAP serialisation module', esc(TT.erp.attp)) : '') + row('Integration method', esc(TT.erp.method||'-')) + row('Data to exchange', esc((TT.erp.data||[]).join(', ') || '-')) + row('Hosting', esc(TT.erp.host||'-')) + row('IT contact', esc(TT.erp.contact||'-')) : row('ERP connection', 'Not required')}</table>
+  <h2>2b. Target markets</h2><table><tr><th>Market</th><th>Requirements</th></tr>${TT.markets.map(id => { const m = ttMk(id); return `<tr><td><b>${esc(m.t)}</b><br><small>${esc(m.s)}</small></td><td><ul style="margin:0;padding-left:16px">${m.facts.map(f => `<li>${esc(f)}</li>`).join('')}</ul></td></tr>`; }).join('')}</table>
   ${TT.lines.map((L, i) => { const o = L.oem, s = ttScore(L); return `<h2>${3 + i}. ${esc(L.name)}</h2>
     <h3>Serialisation</h3><table>${row('Configuration', L.setup==='oem' ? 'Integrated into an OEM machine' : L.setup==='alone' ? 'Stand-alone serialisation unit' : '-')}${row('Saleable pack', esc(L.pack))}${row('Line speed', esc((L.speed||'-') + ' packs/min'))}${L.setup==='oem' ? row('OEM manufacturer', esc(o.name||'-')) + row('Machine type', esc(o.type||'-')) + row('Model / serial no.', esc(o.model||'-')) + row('Communication interface', esc(o.iface||'-')) + row('Print / inspection position', esc(o.where||'-')) + row('Space available', esc((o.space||'-') + ' mm')) + row('Reject station', esc(o.reject||'-')) : ''}</table>
     <h3>Aggregation</h3><table>${row('Levels', L.levels.length ? esc([L.pack].concat(L.levels.map(ttLaneT)).join(' → ')) : 'None')}${L.aggSetup ? row('Configuration', L.aggSetup==='oem' ? 'Integrated into an OEM machine' : 'Stand-alone aggregation stations') : ''}${L.aggSetup==='oem' ? row('OEM manufacturer', esc((L.aggOem||{}).name||'-')) + row('Machine type', esc((L.aggOem||{}).type||'-')) + row('Model / serial no.', esc((L.aggOem||{}).model||'-')) + row('Levels handled', esc((L.aggOem||{}).levels||'-')) + row('Communication interface', esc((L.aggOem||{}).iface||'-')) + row('Read / label position', esc((L.aggOem||{}).where||'-')) + row('Reject / rework', esc((L.aggOem||{}).reject||'-')) : ''}${L.levels.includes('pallet') ? row('Pallet aggregation', 'Manual — handheld scanners and SSCC label printer') : ''}</table>
     <h3>Required functions</h3><table><tr><th>Requirement</th><th>Description</th><th>Status</th></tr>${s.req.map(r => `<tr><td>${esc(TT_REQ[r][0])}</td><td>${esc(TT_REQ[r][1])}</td><td class="${s.have.has(r)?'ok':'open'}">${s.have.has(r)?'Covered':'Open'}</td></tr>`).join('')}</table>
+    <h3>Line flow</h3><p>${esc(ttMain(L).map(n => n.k === '@start' ? 'Product in (' + L.pack + ')' : n.k === '@pallet' ? 'Pallet — manual, handheld scanners' : ttMod(n.k)[2]).join('  →  '))}</p>
     <h3>Proposed configuration (Antares Vision)</h3><table><tr><th>Level</th><th>Equipment / software</th></tr>${TT_LANES.filter(l => (L.line[l.id]||[]).length).map(l => `<tr><td>${esc(l.t)}</td><td>${L.line[l.id].map(k => { const p = ttProd(ttMod(k)); return '<b>' + esc(ttMod(k)[2]) + '</b>' + (p ? ' — ' + esc(p[1]) : ''); }).join('<br>')}</td></tr>`).join('')}${L.levels.includes('pallet') ? '<tr><td>Pallet</td><td>Manual aggregation with handheld scanners</td></tr>' : ''}</table>
     <p><b>Compliance coverage: ${s.pct}%</b> (${s.met.length} of ${s.req.length} requirements).</p>`; }).join('')}
   <h2>References</h2><ul>${TT_EDA.map(([,t,u]) => `<li>${esc(t)} — ${esc(u)}</li>`).join('')}</ul>
@@ -2730,6 +2814,192 @@ function ttDoc(){
 function bindHome(){
   const x = $('#ttFabX'); x && x.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); try{ sessionStorage.setItem('ttFabX','1'); }catch(err){} const f = $('#ttFab'); f && f.remove(); });
   ttBoom();
+}
+
+/* ---------- T&T whiteboard (flow chart) ---------- */
+let WB_W = 1700, WB_H = 920;
+const ttVert = () => TT.orient ? TT.orient === 'v' : (window.innerWidth < 700);
+function ttDims(L){ const v = ttVert(); WB_W = Math.max(v ? 560 : 1100, ...L.nodes.map(n => n.x + 260)); WB_H = Math.max(v ? 900 : 640, ...L.nodes.map(n => n.y + 260)); }
+const TT_ORDER = ['@start','unit','carton','bundle','case','supercase','@pallet'];
+const ttImg = k => ['sp','evo','adv','cw','3ts','aio','flex','fc','omni','sent','pab','mat','scp','pac','mtv','man','mms'].includes(k) ? `img/tt_${k}.png` : '';
+const ttIsSw = n => n.lane === 'sw' || n.k === '@cloud' || n.k === '@erp';
+const ttLaneOk = (L, lane) => lane === 'unit' || lane === 'sw' || L.levels.includes(lane);
+function ttFlow(L){
+  if(!Array.isArray(L.nodes)){
+    L.nodes = []; L.links = []; L.smart = true;
+    Object.entries(L.line || {}).forEach(([lane, keys]) => (keys||[]).forEach(k => { if(ttMod(k)) L.nodes.push({ id: 'n' + Math.random().toString(36).slice(2,8), k, lane, x:0, y:0 }); }));
+    L.arranged = false;
+  }
+  const has = k => L.nodes.some(n => n.k === k);
+  if(!has('@start')) L.nodes.unshift({ id:'start', k:'@start', lane:'@start', x:40, y:380 });
+  if(L.levels.includes('pallet') && !has('@pallet')) L.nodes.push({ id:'pallet', k:'@pallet', lane:'@pallet', x:0, y:380 });
+  if(!L.levels.includes('pallet')) L.nodes = L.nodes.filter(n => n.k !== '@pallet');
+  const needCloud = TT.markets.some(id => (ttMk(id)||{req:[]}).req.includes('rep')) || L.nodes.some(n => n.lane === 'sw');
+  if(needCloud && !has('@cloud')) L.nodes.push({ id:'cloud', k:'@cloud', lane:'sw', x:0, y:90 });
+  if(!needCloud) L.nodes = L.nodes.filter(n => n.k !== '@cloud');
+  const needErp = (TT.erp||{}).has === 'yes';
+  if(needErp && !has('@erp')) L.nodes.push({ id:'erp', k:'@erp', lane:'sw', x:0, y:0 });
+  if(!needErp) L.nodes = L.nodes.filter(n => n.k !== '@erp');
+  if(needErp && L.arranged !== false && !L.erpPlaced){ ttArrange(L); }
+  L.erpPlaced = needErp;
+  L.links = (L.links||[]).filter(l => L.nodes.some(n => n.id === l.a) && L.nodes.some(n => n.id === l.b));
+  if(L.arranged === false){ ttArrange(L); L.arranged = true; }
+  if(L.smart !== false) ttSmartLinks(L);
+  ttSync(L);
+}
+function ttSync(L){
+  L.line = {};
+  L.nodes.filter(n => !n.k.startsWith('@') && ttLaneOk(L, n.lane)).forEach(n => { (L.line[n.lane] = L.line[n.lane] || []).includes(n.k) || L.line[n.lane].push(n.k); });
+}
+function ttMain(L){ return L.nodes.filter(n => !ttIsSw(n)).sort((a, b) => (TT_ORDER.indexOf(a.lane) - TT_ORDER.indexOf(b.lane)) || (a.x - b.x)); }
+function ttSmartLinks(L){
+  const m = ttMain(L), links = [];
+  for(let i = 1; i < m.length; i++) links.push({ a: m[i-1].id, b: m[i].id });
+  const cloud = L.nodes.find(n => n.k === '@cloud');
+  L.nodes.filter(n => n.lane === 'sw' && !n.k.startsWith('@')).forEach(n => { cloud && links.push({ a: n.id, b: cloud.id, d: 1 }); });
+  const erp = L.nodes.find(n => n.k === '@erp');
+  if(erp){ const l3 = L.nodes.find(n => n.k === 'eco') || L.nodes.find(n => n.k === 'dl'); if(l3) links.push({ a: erp.id, b: l3.id, d: 1 }); }
+  const firstSw = L.nodes.find(n => n.lane === 'sw' && !n.k.startsWith('@')), firstUnit = m.find(n => n.lane === 'unit');
+  if(firstSw && firstUnit) links.push({ a: firstUnit.id, b: firstSw.id, d: 1 });
+  L.links = links;
+}
+function ttArrange(L){
+  const erp = L.nodes.find(n => n.k === '@erp'), sws = L.nodes.filter(n => n.lane === 'sw' && !n.k.startsWith('@'));
+  if(ttVert()){
+    let y = 30; ttMain(L).forEach(n => { n.x = n.k === '@start' ? 50 : 40; n.y = y; y += n.k === '@start' ? 110 : 230; });
+    const u = L.nodes.find(n => n.lane === 'unit'); let sy = u ? u.y + 40 : 140;
+    if(erp){ erp.x = 300; erp.y = 30; sy = Math.max(sy, 170); }
+    sws.forEach(n => { n.x = 300; n.y = sy; sy += 150; });
+    const c = L.nodes.find(n => n.k === '@cloud'); if(c){ c.x = 300; c.y = Math.max(sy + 20, y - 230); }
+    return;
+  }
+  let x = 40; ttMain(L).forEach(n => { n.x = x; n.y = n.k === '@start' ? 420 : 380; x += n.k === '@start' ? 190 : 230; });
+  let sx = erp ? 480 : 250; if(erp){ erp.x = 250; erp.y = 80; }
+  sws.forEach(n => { n.x = sx; n.y = 90; sx += 230; });
+  const c = L.nodes.find(n => n.k === '@cloud'); if(c){ c.x = Math.max(sx, x - 230, 640); c.y = 80; }
+}
+function ttNodeHtml(L, n){
+  const sel = TT.sel === n.id ? ' sel' : '', con = TT.conFrom === n.id ? ' con' : '';
+  const style = `left:${n.x}px;top:${n.y}px`;
+  if(n.k === '@start') return `<div class="wbN st${sel}${con}" data-n="${n.id}" style="${style}"><span class="gl">▶</span><b>Product in</b><small>${esc(L.pack)}${L.speed ? ' · ' + esc(L.speed) + '/min' : ''}</small><i class="pt r"></i><i class="pt b"></i></div>`;
+  if(n.k === '@pallet') return `<div class="wbN pal${sel}${con}" data-n="${n.id}" style="${style}"><i class="pt l"></i><i class="pt t"></i><span class="gl">📟</span><b>Pallet</b><small>Manual · handheld scanners</small><em>SSCC</em></div>`;
+  if(n.k === '@erp'){ const E = TT.erp || {}; return `<div class="wbN erp${sel}${con}" data-n="${n.id}" style="${style}"><i class="pt l"></i><i class="pt t"></i><span class="gl"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><b>${esc(E.sys === 'Other' ? (E.other || 'ERP') : (E.sys || 'ERP'))}</b><small>${esc(E.method ? E.method.replace(/ \(.*\)/,'') : 'ERP · Level 4')}</small><i class="pt r"></i><i class="pt b"></i></div>`; }
+  if(n.k === '@cloud') return `<div class="wbN cl${sel}${con}" data-n="${n.id}" style="${style}"><i class="pt l"></i><i class="pt t"></i><span class="gl"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H8a5 5 0 1 1 1-9.9A6 6 0 0 1 20.5 12 3.5 3.5 0 0 1 17.5 19z"/></svg></span><b>Authority</b><small>${TT.markets.slice(0,6).map(id => ttMk(id).fl).join(' ')}${TT.markets.length > 6 ? ' +' + (TT.markets.length - 6) : ''}</small></div>`;
+  const m = ttMod(n.k), img = ttImg(n.k), bad = !ttLaneOk(L, n.lane);
+  if(n.lane === 'sw') return `<div class="wbN sw${sel}${con}" data-n="${n.id}" style="${style}"><i class="pt l"></i><i class="pt t"></i><span class="gl"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><b>${esc(m[2])}</b><em>${n.k==='dl'?'L2 · Line':n.k==='eco'?'L3 – L5':'Module'}</em><i class="pt r"></i><i class="pt b"></i></div>`;
+  return `<div class="wbN mc${sel}${con}${bad?' bad':''}" data-n="${n.id}" style="${style}"><i class="pt l"></i><i class="pt t"></i><div class="im">${img ? `<img src="${img}" alt="" draggable="false">` : ''}</div><b>${esc(m[2])}</b><em>${esc(ttLaneT(n.lane))}${bad?' · level off':''}</em><i class="pt r"></i><i class="pt b"></i></div>`;
+}
+function ttLinksSvg(L){
+  const W = n => n.k === '@start' ? 150 : 170, H = n => n.k === '@start' ? 64 : n.lane === 'sw' ? 92 : n.k === '@pallet' || n.k === '@cloud' || n.k === '@erp' ? 110 : 178;
+  const byId = Object.fromEntries(L.nodes.map(n => [n.id, n]));
+  const paths = L.links.map((l, i) => { const a = byId[l.a], b = byId[l.b]; if(!a || !b) return '';
+    const ac = [a.x + W(a)/2, a.y + H(a)/2], bc = [b.x + W(b)/2, b.y + H(b)/2], dx = bc[0] - ac[0], dy = bc[1] - ac[1];
+    let d;
+    if(Math.abs(dy) > Math.abs(dx)){ const down = dy > 0; const x1 = ac[0], y1 = down ? a.y + H(a) : a.y, x2 = bc[0], y2 = down ? b.y : b.y + H(b), k = Math.max(40, Math.abs(y2 - y1) / 2) * (down ? 1 : -1);
+      d = `M${x1},${y1} C${x1},${y1 + k} ${x2},${y2 - k} ${x2},${y2}`; }
+    else { const right = dx > 0; const x1 = right ? a.x + W(a) : a.x, y1 = ac[1], x2 = right ? b.x : b.x + W(b), y2 = bc[1], k = Math.max(40, Math.abs(x2 - x1) / 2) * (right ? 1 : -1);
+      d = `M${x1},${y1} C${x1 + k},${y1} ${x2 - k},${y2} ${x2},${y2}`; }
+    return `<path class="${l.d?'dt':'fw'}${TT.selL===i?' sel':''}" data-l="${i}" d="${d}" marker-end="url(#${l.d?'arD':'arF'})"/>`; }).join('');
+  return `<svg class="wbL" width="${WB_W}" height="${WB_H}" viewBox="0 0 ${WB_W} ${WB_H}"><defs>
+    <linearGradient id="gF" x1="0" x2="1"><stop offset="0" stop-color="#f4d58d"/><stop offset="1" stop-color="#c8a75e"/></linearGradient>
+    <marker id="arF" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e7c472"/></marker>
+    <marker id="arD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5fd3ff"/></marker></defs>${paths}</svg>`;
+}
+const ttZoom = () => TT.zoom || (ttVert() ? Math.min(.72, Math.max(.4, (Math.min(window.innerWidth, 900) - 40) / 520)) : .62);
+function ttBoard(){
+  const L = ttL(), s = ttScore(); ttDims(L); const z = ttZoom();
+  const sel = L.nodes.find(n => n.id === TT.sel);
+  let insp = '';
+  if(sel){ const m = ttMod(sel.k);
+    const lanes = m ? m[3].filter(l => ttLaneOk(L, l)) : [];
+    insp = `<div class="wbI"><div class="t"><b>${esc(m ? m[2] : sel.k === '@start' ? 'Product in' : sel.k === '@pallet' ? 'Pallet (manual)' : sel.k === '@erp' ? 'ERP / SAP' : 'Authority')}</b>
+      ${m && lanes.length > 1 ? `<select id="wbLane">${lanes.map(l => `<option value="${l}" ${l===sel.lane?'selected':''}>${esc(ttLaneT(l))}</option>`).join('')}</select>` : m ? `<span>${esc(ttLaneT(sel.lane))}</span>` : ''}</div>
+      <button id="wbCon" class="${TT.conFrom?'on':''}">🔗 ${TT.conFrom ? 'Tap a target…' : 'Connect'}</button>
+      ${m ? `<button id="wbDel" class="dz">🗑</button>` : ''}<button id="wbX">✕</button></div>`; }
+  else if(TT.selL != null && L.links[TT.selL]) insp = `<div class="wbI"><div class="t"><b>Connection</b><span>${L.links[TT.selL].d ? 'Data link' : 'Product flow'}</span></div><button id="wbDelL" class="dz">🗑 Remove</button><button id="wbX">✕</button></div>`;
+  const v = ttVert();
+  return `<div class="wb ${TT.full?'full':''} ${v?'vert':''}" id="wb">
+    <div class="wbBar"><div class="wbHud"><div class="ring" style="--p:${s.pct}"><span>${s.pct}%</span></div><div><b>${esc(L.name)}</b><small>${s.met.length}/${s.req.length} req. · ${L.nodes.filter(n => !n.k.startsWith('@')).length} units</small></div></div>
+    <div class="wbTools"><button data-z="-1" aria-label="Zoom out">−</button><button data-z="1" aria-label="Zoom in">+</button><button id="wbFit" title="Fit to screen">⤢</button><button id="wbOr" title="Rotate flow">${v?'↔':'↕'}</button><button id="wbAuto" class="${L.smart!==false?'on':''}" title="Smart flow">✨</button><button id="wbFull" title="Full screen">${TT.full?'✕':'⛶'}</button></div></div>
+    <div class="wbV" id="wbV"><div class="wbC" style="width:${WB_W*z}px;height:${WB_H*z}px"><div class="wbS" id="wbS" style="transform:scale(${z});width:${WB_W}px;height:${WB_H}px">
+      ${v ? '<div class="wbCol ln"><span>PRODUCT FLOW ↓</span></div><div class="wbCol sw"><span>DATA · L2 – L5</span></div>' : '<div class="wbLane sw"><span>DATA LAYER · L2 – L5</span></div><div class="wbLane ln"><span>PACKAGING LINE · PRODUCT FLOW →</span></div>'}
+      ${ttLinksSvg(L)}${L.nodes.map(n => ttNodeHtml(L, n)).join('')}
+      ${L.nodes.filter(n => !n.k.startsWith('@')).length ? '' : `<div class="wbEmpty" style="${v?'left:40px;top:180px;width:440px':''}">Drag machines from the tray onto the board<br><small>or tap a card to place it automatically</small></div>`}
+    </div></div></div>${insp}</div>`;
+}
+function ttAddNode(k, x, y, hint){
+  const L = ttL(), m = ttMod(k); if(!m) return false;
+  const lanes = m[3].filter(l => ttLaneOk(L, l));
+  if(!lanes.length){ ttToast('Add the ' + m[3].map(ttLaneT).join(' / ') + ' level in step 1 first'); return false; }
+  const covered = new Set(L.nodes.map(n => n.lane));
+  const lane = (hint && lanes.includes(hint)) ? hint : (lanes.find(l => !covered.has(l)) || lanes[0]);
+  if(L.nodes.some(n => n.k === k && n.lane === lane)){ ttToast(m[2] + ' is already on ' + ttLaneT(lane)); return false; }
+  const before = ttScore().pct;
+  const n = { id: 'n' + Math.random().toString(36).slice(2, 8), k, lane, x: 0, y: 0 };
+  if(x == null && ttVert()){ L.nodes.push(n); L.arranged = false; ttArrange(L); L.nodes.pop(); }
+  else if(x == null){ if(lane === 'sw'){ const sw = L.nodes.filter(q => q.lane === 'sw' && q.k !== '@cloud'); n.x = 250 + sw.length * 210; n.y = 90; }
+    else { const prev = ttMain(L).filter(q => TT_ORDER.indexOf(q.lane) <= TT_ORDER.indexOf(lane)).pop(); n.x = prev ? prev.x + (prev.k === '@start' ? 170 : 210) : 220; n.y = 380;
+      L.nodes.filter(q => !ttIsSw(q) && TT_ORDER.indexOf(q.lane) > TT_ORDER.indexOf(lane)).forEach(q => q.x += 210); } }
+  else { n.x = Math.max(0, Math.round((x - 85) / 10) * 10); n.y = Math.max(0, Math.round((y - 80) / 10) * 10); }
+  L.nodes.push(n);
+  if(x == null && ttVert()) ttArrange(L);
+  if(TT.sel && !L.smart){ L.links.push({ a: TT.sel, b: n.id }); }
+  ttFlow(L); TT.sel = n.id; ttSave();
+  const after = ttScore();
+  ttToast('+10 XP · ' + m[2] + ' → ' + ttLaneT(lane) + (after.req.length ? ' · ' + after.pct + '%' : ''));
+  if(after.pct === 100 && before < 100) ttConfetti();
+  return true;
+}
+function bindBoard(rerender){
+  const L = ttL(), V = $('#wbV'), Sv = $('#wbS'); if(!V) return;
+  const z = ttZoom();
+  if(TT.scroll){ V.scrollLeft = TT.scroll[0]; V.scrollTop = TT.scroll[1]; }
+  V.addEventListener('scroll', () => { TT.scroll = [V.scrollLeft, V.scrollTop]; }, { passive: true });
+  const toCanvas = (cx, cy) => { const r = Sv.getBoundingClientRect(); return [(cx - r.left) / z, (cy - r.top) / z]; };
+  document.querySelectorAll('[data-z]').forEach(b => b.addEventListener('click', () => { TT.zoom = Math.max(.35, Math.min(1.2, +((z + (+b.dataset.z) * .1).toFixed(2)))); ttSave(); rerender(); }));
+  $('#wbFit').addEventListener('click', () => { const xs = L.nodes.map(n => n.x + 190), ys = L.nodes.map(n => n.y + 200); const w = Math.max(...xs, 400), h = Math.max(...ys, 300);
+    TT.zoom = Math.max(.35, Math.min(1.2, +Math.min(V.clientWidth / w, V.clientHeight / h).toFixed(2))); TT.scroll = [0, 0]; ttSave(); rerender(); });
+  $('#wbAuto').addEventListener('click', () => { L.smart = true; ttArrange(L); ttFlow(L); TT.sel = null; TT.selL = null; ttSave(); ttToast('✨ Smart flow: arranged and wired automatically'); rerender(); });
+  $('#wbFull').addEventListener('click', () => { TT.full = !TT.full; ttSave(); rerender(); });
+  $('#wbOr').addEventListener('click', () => { TT.orient = ttVert() ? 'h' : 'v'; TT.zoom = null; TT.scroll = [0, 0]; TT.lines.forEach(x => { ttArrange(x); ttFlow(x); }); ttSave(); rerender(); });
+  const x = $('#wbX'); x && x.addEventListener('click', () => { TT.sel = null; TT.selL = null; TT.conFrom = null; ttSave(); rerender(); });
+  const dl = $('#wbDel'); dl && dl.addEventListener('click', () => { L.nodes = L.nodes.filter(n => n.id !== TT.sel); TT.sel = null; TT.conFrom = null; ttFlow(L); ttSave(); rerender(); });
+  const dll = $('#wbDelL'); dll && dll.addEventListener('click', () => { L.links.splice(TT.selL, 1); L.smart = false; TT.selL = null; ttSave(); rerender(); });
+  const cn = $('#wbCon'); cn && cn.addEventListener('click', () => { TT.conFrom = TT.conFrom ? null : TT.sel; ttSave(); rerender(); });
+  const ln = $('#wbLane'); ln && ln.addEventListener('change', () => { const n = L.nodes.find(q => q.id === TT.sel); n.lane = ln.value; ttFlow(L); ttSave(); rerender(); });
+  document.querySelectorAll('.wbL path').forEach(p => p.addEventListener('click', e => { e.stopPropagation(); TT.selL = +p.dataset.l; TT.sel = null; ttSave(); rerender(); }));
+  Sv.addEventListener('click', e => { if(e.target === Sv || e.target.classList.contains('wbLane')){ if(TT.sel || TT.selL != null){ TT.sel = null; TT.selL = null; TT.conFrom = null; ttSave(); rerender(); } } });
+  document.querySelectorAll('.wbN').forEach(el => el.addEventListener('pointerdown', e => {
+    e.preventDefault(); const id = el.dataset.n, n = L.nodes.find(q => q.id === id); const [sx, sy] = [e.clientX, e.clientY]; const ox = n.x, oy = n.y; let moved = false;
+    el.setPointerCapture(e.pointerId);
+    const mv = ev => { const dx = (ev.clientX - sx) / z, dy = (ev.clientY - sy) / z; if(!moved && Math.hypot(dx, dy) < 5) return; moved = true; el.classList.add('drag');
+      n.x = Math.max(0, Math.round((ox + dx) / 10) * 10); n.y = Math.max(0, Math.round((oy + dy) / 10) * 10); el.style.left = n.x + 'px'; el.style.top = n.y + 'px';
+      const svg = Sv.querySelector('.wbL'); svg.outerHTML = ttLinksSvg(L); };
+    const up = () => { el.removeEventListener('pointermove', mv); el.removeEventListener('pointerup', up); el.removeEventListener('pointercancel', up);
+      if(moved){ if(L.smart !== false) ttFlow(L); ttSave(); rerender(); return; }
+      if(TT.conFrom && TT.conFrom !== id){ if(!L.links.some(l => l.a === TT.conFrom && l.b === id)){ const a = L.nodes.find(q => q.id === TT.conFrom); L.links.push({ a: TT.conFrom, b: id, d: (ttIsSw(a) || ttIsSw(n)) ? 1 : 0 }); L.smart = false; ttToast('🔗 Connected · manual wiring'); }
+        TT.conFrom = null; TT.sel = id; ttSave(); rerender(); return; }
+      TT.sel = TT.sel === id ? null : id; TT.selL = null; ttSave(); rerender(); };
+    el.addEventListener('pointermove', mv); el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+  }));
+  // tray → board
+  document.querySelectorAll('.ttTile').forEach(t => t.addEventListener('pointerdown', e => {
+    const k = t.dataset.mod, sx = e.clientX, sy = e.clientY; let ghost = null;
+    const overBoard = (cx, cy) => { const r = V.getBoundingClientRect(); return cx >= r.left && cx <= r.right && cy >= r.top && cy <= r.bottom; };
+    const move = ev => {
+      if(!ghost && Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
+      if(!ghost){ ghost = t.cloneNode(true); ghost.classList.add('ttGhost'); document.body.appendChild(ghost); }
+      ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+      $('#wb').classList.toggle('hot', overBoard(ev.clientX, ev.clientY));
+    };
+    const up = ev => {
+      document.removeEventListener('pointermove', move); document.removeEventListener('pointerup', up); document.removeEventListener('pointercancel', up);
+      const wb = $('#wb'); wb && wb.classList.remove('hot');
+      if(ghost){ ghost.remove(); if(overBoard(ev.clientX, ev.clientY)){ const [cx, cy] = toCanvas(ev.clientX, ev.clientY); if(ttAddNode(k, cx, cy)) rerender(); } }
+      else if(ev.type === 'pointerup' && ttAddNode(k)) rerender();
+    };
+    document.addEventListener('pointermove', move); document.addEventListener('pointerup', up); document.addEventListener('pointercancel', up);
+  }));
 }
 
 /* ---------- router ---------- */
