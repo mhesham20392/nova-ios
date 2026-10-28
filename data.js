@@ -203,11 +203,13 @@ window.NOVA = {
     { id: "andock", name: "Andocksysteme", cat: "packaging", country: "Germany", since: "2000s",
       url: "https://andocksysteme.de/en/",
       about: ["German leader since the 2000s and global expert in high-containment interfaces and safe powder handling.",
-              "Complete consultancy, customized engineering, modular technologies and lifecycle support including service, retrofit, and validation assistance."],
+              "Complete consultancy, customized engineering, modular technologies and lifecycle support including service, retrofit, and validation assistance.",
+              "Containment down to OEB 5 (below 1 µg/m³) with single-use, stainless steel and hybrid valves that dock to each other.",
+              "Every ball segment valve is built individually — ideal for new plants and for revamping existing dryers, blenders and reactors."],
       groups: [
-        { t: "Single-Use Technologies", items: ["AVAX Split Butterfly Valve", "APORT Hybrid Process Valve", "ACUBE Bulk Transfer Bags", "ACUBE-PRO FIBC Blending", "ACLAMP Clamp Fastener"] },
-        { t: "Multi-Use Technologies", items: ["ASBV Split Butterfly Valve", "ACPS Compensators"] },
-        { t: "Ball Segment Valves", items: ["BSV Ball Segment Valves"] }
+        { t: "Single-use containment", items: ["AVAX single-use split butterfly valve (OEB 5)", "ACUBE® containment bag system, 10–400 L", "ACUBE-PRO FIBC blending", "ACLAMP single-use clamp", "ACLIP TC-clip seal"] },
+        { t: "Split valves & process valves", items: ["ASBV split butterfly valve (< 1 µg/m³)", "ASBV with PTFE seals (SIP, powders & liquids)", "AVAX stainless steel valve", "APORT hybrid process valve (vacuum to 20 barg)", "BSV ball segment valve (to 10 bar)", "Compensators & bellows DN 100–300"] },
+        { t: "Sampling valves", items: ["BSS sampling valve – vacuum & pressure", "BSS sampling valve – atmospheric"] }
       ] },
 
     // ---------- UTILITIES ----------
