@@ -227,6 +227,30 @@ ul.dots li{margin:4px 0}
 @media (prefers-reduced-motion: reduce){.evBtn,.evBtn svg,.evBtn i{animation:none}}
 .infoBtn{margin-left:6px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;opacity:.85;flex:none}
 .infoBtn:active{background:rgba(255,255,255,.12)}
+/* accounts */
+.acctBtn{margin-left:6px}
+.acctBtn .av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#e2c987,#b8964c);color:#1a1a1a;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+nav.tabs a{position:relative}
+nav.tabs a.lk::after{content:"";position:absolute;top:2px;left:calc(50% + 7px);width:13px;height:13px;border-radius:50%;background:#b8964c url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'%3E%3Crect x='5' y='11' width='14' height='10' rx='2'/%3E%3Cpath d='M8 11V7a4 4 0 0 1 8 0v4'/%3E%3C/svg%3E") center/8px no-repeat;border:1.5px solid var(--card)}
+.auth{padding-top:6px}
+.authHero{text-align:center;padding:10px 6px 4px}
+.authHero .lk{width:58px;height:58px;border-radius:18px;margin:0 auto 10px;background:linear-gradient(150deg,var(--navy),var(--navy-2));color:#e2c987;display:flex;align-items:center;justify-content:center}
+.authHero .lk svg{width:28px;height:28px}
+.authHero h2{font-size:21px;margin:0 0 6px}
+.authHero p{margin:0;color:var(--muted);font-size:13.5px}
+.authPerks{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:12px 0 4px}
+.authPerks span{font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:999px;background:color-mix(in srgb,var(--gold) 16%,transparent);color:#7a5f22}
+.authSeg{display:flex;background:var(--line);border-radius:12px;padding:4px;margin:14px 0 12px}
+.authSeg button{flex:1;border:0;background:none;padding:10px;border-radius:9px;font:inherit;font-weight:600;font-size:14px;color:var(--muted)}
+.authSeg button.on{background:var(--card);color:var(--ink,#1a2350);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.authNote{font-size:12px;color:var(--muted);line-height:1.5;margin:12px 0 0}
+.authChk{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-top:14px;color:var(--muted)}
+.authChk input{width:18px;height:18px;margin-top:1px;flex:none;accent-color:var(--navy)}
+.authOk{background:#e8f6ee;color:#16683f;border-radius:10px;padding:10px 12px;font-size:13px;margin-top:10px}
+.linkBtn{border:0;background:none;color:var(--navy);font:inherit;font-weight:600;font-size:13px;padding:8px 0;text-decoration:underline}
+.acctCard{display:flex;gap:14px;align-items:center}
+.acctCard .av{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#e2c987,#b8964c);color:#1a1a1a;font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.btn.danger{background:#fff;color:#b3261e;border:1px solid #f0c4c0}
 /* library */
 .small{font-size:12px}
 .ltag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tc,#5d6480);background:color-mix(in srgb,var(--tc,#5d6480) 12%,transparent);border-radius:6px;padding:3px 8px}
@@ -974,6 +998,7 @@ ul.dots li{margin:4px 0}
   <a class="back" id="back" aria-label="Back" href="javascript:history.back()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></a>
   <div id="barContent"></div>
   <a class="evBtn" id="evBtn" href="#events" aria-label="Events"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><i></i><b>Events</b></a>
+  <a class="infoBtn acctBtn" id="acctBtn" href="#account" aria-label="My account"></a>
   <a class="infoBtn" href="#company" aria-label="About NOVA"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></a>
 </header>
 <main id="app"></main>
@@ -989,6 +1014,8 @@ const D = window.NOVA, C = D.contact, $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 const I = {
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/>',
+  lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
   home:'<path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
   grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
   info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
@@ -3003,11 +3030,174 @@ function bindBoard(rerender){
 }
 
 /* ---------- router ---------- */
+/* ===== Accounts: Firebase Authentication + Firestore (REST, no SDK) ===== */
+const FB = { key:'AIzaSyBhIitfgUu4wRln2sSBrQTyYBaJ6C37PvI', project:'nova-engineering-4eba9' };
+const LOCKED = ['library','lib','urs','tt','support','ticket'];
+const COUNTRIES = ['Egypt','Saudi Arabia','United Arab Emirates','Kuwait','Qatar','Bahrain','Oman','Jordan','Iraq','Lebanon','Libya','Sudan','Algeria','Morocco','Tunisia','Yemen','Italy','Other'];
+const AUTH_ERR = {
+  EMAIL_EXISTS:'An account with this email already exists. Please sign in instead.',
+  EMAIL_NOT_FOUND:'Wrong email or password.', INVALID_PASSWORD:'Wrong email or password.', INVALID_LOGIN_CREDENTIALS:'Wrong email or password.',
+  USER_DISABLED:'This account has been disabled. Please contact NOVA.',
+  TOO_MANY_ATTEMPTS_TRY_LATER:'Too many attempts. Please wait a few minutes and try again.',
+  WEAK_PASSWORD:'The password must be at least 6 characters.', INVALID_EMAIL:'Please enter a valid email address.',
+  MISSING_PASSWORD:'Please enter your password.', OPERATION_NOT_ALLOWED:'Sign-up is not switched on yet. Please contact NOVA.',
+  CREDENTIAL_TOO_OLD_LOGIN_AGAIN:'For your security, please sign out and sign in again first.', TOKEN_EXPIRED:'Your session expired. Please sign in again.'
+};
+const user = () => store.get('nova.user', null);
+const initials = n => (n || '?').trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+async function fbCall(url, body, opt){
+  let r;
+  try{ r = await fetch(url, Object.assign({ method:'POST', headers:{'Content-Type':'application/json'}, body: body && JSON.stringify(body) }, opt || {})); }
+  catch(e){ throw new Error('No internet connection. Please connect and try again.'); }
+  const j = await r.json().catch(() => ({}));
+  if(!r.ok){ const c = String((j.error || {}).message || (j.error || {}).status || r.status).split(/[ :]/)[0]; const e = new Error(AUTH_ERR[c] || 'Something went wrong (' + c + '). Please try again.'); e.code = c; throw e; }
+  return j;
+}
+const idt = (m, b) => fbCall('https://identitytoolkit.googleapis.com/v1/accounts:' + m + '?key=' + FB.key, b);
+function saveSession(j, extra){
+  const u = Object.assign(user() || {}, { uid: j.localId, email: j.email, idToken: j.idToken, refreshToken: j.refreshToken, exp: Date.now() + (+j.expiresIn || 3600) * 1000 }, extra || {});
+  store.set('nova.user', u); return u;
+}
+async function fbToken(){
+  const u = user(); if(!u) throw new Error('Please sign in.');
+  if(Date.now() < u.exp - 60000) return u.idToken;
+  const j = await fbCall('https://securetoken.googleapis.com/v1/token?key=' + FB.key, { grant_type:'refresh_token', refresh_token: u.refreshToken });
+  u.idToken = j.id_token; u.refreshToken = j.refresh_token; u.exp = Date.now() + (+j.expires_in || 3600) * 1000; store.set('nova.user', u); return u.idToken;
+}
+const FS = () => 'https://firestore.googleapis.com/v1/projects/' + FB.project + '/databases/(default)/documents/users/';
+const fsVal = v => v instanceof Date ? { timestampValue: v.toISOString() } : typeof v === 'boolean' ? { booleanValue: v } : { stringValue: String(v == null ? '' : v) };
+async function fsSave(data, merge){
+  const u = user(), t = await fbToken();
+  const mask = merge ? '?' + Object.keys(data).map(k => 'updateMask.fieldPaths=' + k).join('&') : '';
+  await fbCall(FS() + u.uid + mask, { fields: Object.fromEntries(Object.entries(data).map(([k, v]) => [k, fsVal(v)])) }, { method:'PATCH', headers:{ 'Content-Type':'application/json', Authorization:'Bearer ' + t } });
+}
+async function fsLoad(){
+  const u = user(), t = await fbToken();
+  const j = await fbCall(FS() + u.uid, null, { method:'GET', body: undefined, headers:{ Authorization:'Bearer ' + t } });
+  const o = {}; Object.entries(j.fields || {}).forEach(([k, v]) => o[k] = v.stringValue != null ? v.stringValue : v.booleanValue != null ? v.booleanValue : v.timestampValue); return o;
+}
+function useProfile(pr){
+  const u = user(); if(!u) return; u.profile = Object.assign(u.profile || {}, pr); store.set('nova.user', u);
+  const old = store.get('nova.profile', {});
+  store.set('nova.profile', Object.assign(old, { name: pr.name || old.name, company: pr.company || old.company, phone: pr.phone || old.phone, email: u.email || old.email }));
+}
+async function syncProfile(){   // retry a profile save that failed (e.g. no internet at sign-up)
+  const u = user(); if(!u || !u.pending) return;
+  try{ await fsSave(Object.assign({}, u.profile, { email: u.email, createdAt: new Date(), lastLogin: new Date(), device: STATS_DEV })); u.pending = false; store.set('nova.user', u); }catch(e){}
+}
+function updAuthUi(){
+  const u = user(), b = document.getElementById('acctBtn');
+  if(b) b.innerHTML = u ? `<span class="av">${esc(initials((u.profile || {}).name || u.email))}</span>` : svg('user');
+  document.querySelectorAll('#tabs a').forEach(a => a.classList.toggle('lk', !u && LOCKED.includes(a.dataset.r)));
+}
+function authPage(mode, next){
+  setBar(); setTab('');
+  const up = mode === 'up', back = esc(next || '');
+  const prof = store.get('nova.profile', {}), v = k => esc(prof[k] || '');
+  const lockedName = { library:'the Library', lib:'this article', urs:'the URS Builder', tt:'the Track & Trace Builder', support:'Support', ticket:'your tickets' }[(next || '').split('-')[0]];
+  return `<div class="wrap auth">
+    <div class="authHero"><div class="lk">${svg('lock')}</div>
+      <h2>${lockedName ? 'Sign in to open ' + lockedName : (up ? 'Create your NOVA account' : 'Sign in to NOVA')}</h2>
+      <p>A free account unlocks all the engineering tools.</p>
+      <div class="authPerks"><span>URS Builder</span><span>Track &amp; Trace</span><span>Library</span><span>Support tickets</span></div></div>
+    <div class="authSeg"><button data-am="in" class="${up ? '' : 'on'}">Sign in</button><button data-am="up" class="${up ? 'on' : ''}">Create account</button></div>
+    <form id="authF" class="card form" novalidate data-mode="${up ? 'up' : 'in'}" data-next="${back}">
+      ${up ? `<label for="aName">Full name *</label><input id="aName" autocomplete="name" value="${v('name')}">
+      <label for="aCompany">Company *</label><input id="aCompany" autocomplete="organization" value="${v('company')}">
+      <label for="aJob">Job title</label><input id="aJob" autocomplete="organization-title" placeholder="e.g. Production Manager">
+      <div class="two"><div><label for="aPhone">Mobile / WhatsApp *</label><input id="aPhone" type="tel" autocomplete="tel" value="${v('phone')}"></div>
+      <div><label for="aCountry">Country *</label><select id="aCountry">${COUNTRIES.map(c => `<option ${c === 'Egypt' ? 'selected' : ''}>${c}</option>`).join('')}</select></div></div>` : ''}
+      <label for="aEmail">Email *</label><input id="aEmail" type="email" autocomplete="email" autocapitalize="off" value="${v('email')}">
+      <label for="aPass">Password *</label><input id="aPass" type="password" autocomplete="${up ? 'new-password' : 'current-password'}" placeholder="${up ? 'At least 6 characters' : ''}">
+      ${up ? `<label class="authChk"><input type="checkbox" id="aOk"><span>I agree that NOVA Engineering stores these details to give me access to the app and to contact me about my requests. I can delete my account at any time from My account.</span></label>` : `<button type="button" class="linkBtn" id="aForgot">Forgot password?</button>`}
+      <div class="err" id="aErr" hidden></div><div class="authOk" id="aMsg" hidden></div>
+      <button class="btn gold block" type="submit" id="aGo" style="margin-top:14px">${up ? 'Create account' : 'Sign in'}</button>
+    </form>
+    <p class="authNote">Home, Partners and Contact stay open without an account. Your account is secured by Google Firebase.</p>
+  </div>`;
+}
+function bindAuth(){
+  const f = $('#authF'); if(!f) return;
+  const next = f.dataset.next, up = f.dataset.mode === 'up';
+  const err = m => { const e = $('#aErr'); e.textContent = m; e.hidden = !m; };
+  const val = id => ($('#' + id) || {}).value ? $('#' + id).value.trim() : '';
+  document.querySelectorAll('[data-am]').forEach(b => b.addEventListener('click', () => { $('#app').innerHTML = `<div class="view">${authPage(b.dataset.am, next)}</div>`; bindAuth(); }));
+  const fg = $('#aForgot'); fg && fg.addEventListener('click', async () => {
+    err(''); const em = val('aEmail'); if(!/\S+@\S+\.\S+/.test(em)) return err('Type your email above first, then tap "Forgot password?" again.');
+    try{ await idt('sendOobCode', { requestType:'PASSWORD_RESET', email: em }); const m = $('#aMsg'); m.textContent = 'If an account exists for ' + em + ', we have emailed a link to reset the password.'; m.hidden = false; }catch(e){ err(e.message); }
+  });
+  f.addEventListener('submit', async ev => {
+    ev.preventDefault(); err('');
+    const email = val('aEmail'), pass = $('#aPass').value;
+    if(up){
+      if(!val('aName') || !val('aCompany') || !val('aPhone')) return err('Please fill in your name, company and mobile number.');
+      if(!$('#aOk').checked) return err('Please tick the box to agree before creating your account.');
+    }
+    if(!/\S+@\S+\.\S+/.test(email)) return err('Please enter a valid email address.');
+    if(pass.length < 6) return err('The password must be at least 6 characters.');
+    const go = $('#aGo'); go.disabled = true; go.textContent = up ? 'Creating account…' : 'Signing in…';
+    try{
+      if(up){
+        const j = await idt('signUp', { email, password: pass, returnSecureToken: true });
+        const pr = { name: val('aName'), company: val('aCompany'), job: val('aJob'), phone: val('aPhone'), country: val('aCountry') };
+        saveSession(j, { profile: pr, pending: true }); useProfile(pr);
+        idt('update', { idToken: j.idToken, displayName: pr.name, returnSecureToken: false }).catch(() => {});
+        idt('sendOobCode', { requestType:'VERIFY_EMAIL', idToken: j.idToken }).catch(() => {});
+        await syncProfile();
+        stat('/signup/' + STATS_DEV, 'New account (' + STATS_DEV + ')');
+      } else {
+        const j = await idt('signInWithPassword', { email, password: pass, returnSecureToken: true });
+        saveSession(j, { pending: false });
+        try{ useProfile(await fsLoad()); fsSave({ lastLogin: new Date(), device: STATS_DEV }, true).catch(() => {}); }
+        catch(e){ if(e.code === 'NOT_FOUND' || e.code === '404'){ const u = user(); u.profile = { name: j.displayName || '' }; u.pending = true; store.set('nova.user', u); } }
+        stat('/signin/' + STATS_DEV, 'Sign in (' + STATS_DEV + ')');
+      }
+      updAuthUi(); ttToast && ttToast(up ? 'Welcome to NOVA! Your account is ready.' : 'Signed in. Welcome back!');
+      const to = next ? '#' + next : '#home'; if(location.hash === to) route(); else location.hash = to;
+    }catch(e){ err(e.message); go.disabled = false; go.textContent = up ? 'Create account' : 'Sign in'; }
+  });
+}
+function account(){
+  const u = user(); if(!u) return authPage('in', '');
+  setBar(); setTab('');
+  const p = u.profile || {};
+  return `<div class="wrap">
+    <div class="card acctCard"><span class="av">${esc(initials(p.name || u.email))}</span><div style="min-width:0"><b style="font-size:17px">${esc(p.name || 'NOVA user')}</b><div class="muted small" style="overflow-wrap:anywhere">${esc(u.email)}</div>${p.company ? `<div class="small" style="margin-top:2px">${esc(p.company)}</div>` : ''}</div></div>
+    <div class="card" style="margin-top:12px">
+      ${[['Job title', p.job], ['Mobile', p.phone], ['Country', p.country]].map(([k, x]) => `<div class="kv"><span>${k}</span><b>${esc(x || '—')}</b></div>`).join('')}
+      <div class="kv" style="border:0"><span>Email</span><b id="vState">Checking…</b></div>
+      <button class="linkBtn" id="vSend" hidden>Send the verification email again</button>
+    </div>
+    <button class="btn ghost block" id="aOut" style="margin-top:14px;color:var(--navy);border-color:var(--line)">Sign out</button>
+    <button class="btn danger block" id="aDel" style="margin-top:10px">Delete my account</button>
+    <div class="err" id="aErr" hidden style="margin-top:10px"></div>
+    <p class="authNote">Deleting your account removes your login and your profile from NOVA's system. URS documents and tickets saved on this phone stay on the phone.</p>
+  </div>`;
+}
+function bindAccount(){
+  if(!user()){ bindAuth(); return; }
+  const err = m => { const e = $('#aErr'); e.textContent = m; e.hidden = !m; };
+  (async () => { try{ const t = await fbToken(); const j = await idt('lookup', { idToken: t }); const ok = ((j.users || [])[0] || {}).emailVerified;
+    $('#vState').textContent = ok ? 'Verified ✓' : 'Not verified yet'; $('#vSend').hidden = !!ok; }catch(e){ $('#vState').textContent = navigator.onLine ? '—' : 'Offline'; } })();
+  $('#vSend').addEventListener('click', async () => { try{ await idt('sendOobCode', { requestType:'VERIFY_EMAIL', idToken: await fbToken() }); $('#vSend').textContent = 'Sent. Check your inbox (and spam).'; }catch(e){ err(e.message); } });
+  $('#aOut').addEventListener('click', () => { store.set('nova.user', null); try{ localStorage.removeItem('nova.user'); }catch(e){} updAuthUi(); location.hash = '#home'; });
+  const del = $('#aDel'); let armed = false;
+  del.addEventListener('click', async () => {
+    if(!armed){ armed = true; del.textContent = 'Tap again to permanently delete'; setTimeout(() => { armed = false; del.textContent = 'Delete my account'; }, 5000); return; }
+    del.disabled = true; del.textContent = 'Deleting…';
+    try{ const t = await fbToken(); await fbCall(FS() + user().uid, null, { method:'DELETE', body: undefined, headers:{ Authorization:'Bearer ' + t } }).catch(() => {}); await idt('delete', { idToken: t });
+      try{ localStorage.removeItem('nova.user'); }catch(e){} updAuthUi(); location.hash = '#home'; }
+    catch(e){ err(e.message); del.disabled = false; del.textContent = 'Delete my account'; armed = false; }
+  });
+}
 function route(){
   const h = (location.hash || '#home').slice(1), cut = h.indexOf('-');
   const r = cut < 0 ? h : h.slice(0, cut), a = cut < 0 ? '' : h.slice(cut + 1);
   let html, after;
-  if(r === 'partners'){ html = partners(a && catById(a) ? a : ''); after = () => bindPartners(a && catById(a) ? a : ''); }
+  if(LOCKED.includes(r) && !user()){ html = authPage('in', h); after = bindAuth; }
+  else if(r === 'login'){ html = authPage(a === 'up' ? 'up' : 'in', ''); after = bindAuth; }
+  else if(r === 'account'){ html = account(); after = bindAccount; }
+  else if(r === 'partners'){ html = partners(a && catById(a) ? a : ''); after = () => bindPartners(a && catById(a) ? a : ''); }
   else if(r === 'p'){ html = partner(a); }
   else if(r === 'prod'){ html = product(a); }
   else if(r === 'events'){ html = events(); }
@@ -3037,6 +3227,7 @@ function route(){
   try{ if(!document.getElementById('intro') && window.NovaApp && NovaApp.setBars) NovaApp.setBars(r === 'quote'); }catch(e){}
 }
 window.addEventListener('hashchange', route);
+updAuthUi(); setTimeout(syncProfile, 3000);
 // Anonymous usage counter (GoatCounter). Sends only the screen name and device type; no personal data.
 const STATS_CODE = 'nova-engineering';
 const STATS_DEV = (() => { const ua = navigator.userAgent, app = location.protocol === 'file:'; return /Android/.test(ua) ? (app ? 'android' : 'android-web') : /iPhone|iPad|iPod|Macintosh/.test(ua) && 'ontouchend' in document ? (app ? 'iphone-app' : 'iphone-web') : 'web'; })();
