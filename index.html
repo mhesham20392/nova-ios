@@ -3037,6 +3037,25 @@ function route(){
   try{ if(!document.getElementById('intro') && window.NovaApp && NovaApp.setBars) NovaApp.setBars(r === 'quote'); }catch(e){}
 }
 window.addEventListener('hashchange', route);
+// Anonymous usage counter (GoatCounter). Sends only the screen name and device type; no personal data.
+const STATS_CODE = 'nova-engineering';
+const STATS_DEV = (() => { const ua = navigator.userAgent, app = location.protocol === 'file:'; return /Android/.test(ua) ? (app ? 'android' : 'android-web') : /iPhone|iPad|iPod|Macintosh/.test(ua) && 'ontouchend' in document ? (app ? 'iphone-app' : 'iphone-web') : 'web'; })();
+let statsLast = '';
+function stat(path, title){
+  try{
+    if(!navigator.onLine) return;
+    const q = new URLSearchParams({ p: path, t: title || path, r: STATS_DEV, s: screen.width + ',' + screen.height + ',' + (window.devicePixelRatio || 1), rnd: Math.random().toString(36).slice(2) });
+    new Image().src = 'https://' + STATS_CODE + '.goatcounter.com/count?' + q;
+  }catch(e){}
+}
+function statRoute(){
+  const r = (location.hash.slice(1) || 'home').split('-')[0];
+  if(r === statsLast) return; statsLast = r;
+  stat('/' + STATS_DEV + '/' + r, r);
+}
+setTimeout(() => { stat('/open/' + STATS_DEV, 'App opened (' + STATS_DEV + ')'); statRoute(); }, 1500);
+window.addEventListener('hashchange', statRoute);
+
 route();
 })();
 </script>
