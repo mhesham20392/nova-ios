@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NOVA AI Test</title>
+<style>
+:root{--bg:#0a1140;--ink:#f4f6ff;--muted:#a9b0d6;--card:#141c55}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif;padding:20px 16px}
+h1{font-size:20px;margin:0 0 6px}p{color:var(--muted);margin:0 0 16px}
+button{width:100%;height:52px;border:0;border-radius:14px;background:linear-gradient(90deg,#ecdcaa,#d6b46a);color:#1a1204;font-weight:700;font-size:16px}
+pre{white-space:pre-wrap;word-break:break-word;background:var(--card);border-radius:12px;padding:12px;font-size:12.5px;margin-top:14px}
+</style></head><body>
+<h1>NOVA AI connection test</h1>
+<p>Tap the button and send me a screenshot of the result.</p>
+<button id="go">Test AI now</button>
+<pre id="out">Not run yet.</pre>
+<script>
+const KEY='AIzaSyBhIitfgUu4wRln2sSBrQTyYBaJ6C37PvI', P='nova-engineering-4eba9';
+const MODELS=['gemini-3.5-flash-lite','gemini-2.5-flash-lite','gemini-2.5-flash','gemini-3.6-flash'];
+document.getElementById('go').onclick=async()=>{
+  const o=document.getElementById('out'); o.textContent='Testing…\n';
+  for(const m of MODELS){
+    try{
+      const r=await fetch(`https://firebasevertexai.googleapis.com/v1beta/projects/${P}/models/${m}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':KEY},body:JSON.stringify({contents:[{role:'user',parts:[{text:'Say OK'}]}]})});
+      const t=await r.text();
+      o.textContent+=`\n${m} → HTTP ${r.status}\n${t.slice(0,500)}\n`;
+      if(r.ok) break;
+    }catch(e){ o.textContent+=`\n${m} → network error: ${e.message}\n`; }
+  }
+};
+</script></body></html>
