@@ -881,7 +881,7 @@ nav.tabs a.on{color:var(--gold)}
 .acctBtn{padding:0}.acctBtn .av{width:38px;height:38px;border:2px solid rgba(255,255,255,.25)}
 .evBtn{border-radius:13px}
 /* floating tab bar */
-main{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+main{padding-bottom:calc(170px + env(safe-area-inset-bottom))}
 nav.tabs{left:14px;right:14px;bottom:calc(12px + env(safe-area-inset-bottom));padding:8px 6px;border-radius:24px;background:rgba(14,20,62,.62);
   -webkit-backdrop-filter:blur(28px) saturate(1.4);backdrop-filter:blur(28px) saturate(1.4);border:1px solid rgba(255,255,255,.14);box-shadow:0 18px 40px rgba(0,0,0,.45)}
 nav.tabs a{color:rgba(255,255,255,.5);font-size:10.5px;gap:3px}
@@ -1031,6 +1031,26 @@ nav.tabs a.lk::after{border-color:#121a52}
 .aiIn button svg{width:20px;height:20px}
 .aiSug[hidden]{display:none}
 .aiNote{font-size:11px;color:rgba(255,255,255,.4);text-align:center;padding:0 14px 6px}
+
+/* ---- admin requests ---- */
+.admTabs{display:flex;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:4px}
+.admTabs a{flex:1;text-align:center;padding:10px 6px;border-radius:12px;font-weight:600;font-size:14px;color:var(--muted)}
+.admTabs a.on{background:#fff;color:#0a1140}
+.admTabs a i{font-style:normal;font-size:11px;background:#ff6b5a;color:#fff;border-radius:10px;padding:1px 6px;margin-left:3px}
+.adm .stat2 button{flex:1;text-align:left;font:inherit;color:inherit;background:var(--glass);border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:10px 12px}
+.adm .stat2 button b{display:block;font-size:20px;color:var(--c)}.adm .stat2 button span{font-size:11.5px;color:var(--muted)}
+.adm .stat2 button.on{border-color:var(--c);box-shadow:0 0 0 1px var(--c) inset}
+.rqRow{display:flex;gap:12px;align-items:flex-start;background:var(--glass);border:1px solid rgba(255,255,255,.13);border-radius:18px;padding:12px;margin-top:8px}
+.rqIc{width:40px;height:40px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--c) 22%,transparent);color:var(--c)}
+.rqIc svg{width:20px;height:20px}
+.rqTop{display:flex;justify-content:space-between;align-items:center;gap:8px}.rqTop small{font-size:11.5px;color:var(--muted);font-weight:600}
+.rqRow b{display:block;font-size:14.5px;margin-top:2px}.rqRow .m{font-size:12px;color:var(--muted)}
+.rqSt{align-self:center;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:9px;white-space:nowrap;color:var(--c)!important;background:color-mix(in srgb,var(--c) 18%,transparent)}
+.rqBody{white-space:pre-wrap;font-size:13px;line-height:1.55;color:rgba(255,255,255,.85);overflow-wrap:anywhere;margin-top:6px}
+.rqFile{display:flex;align-items:center;gap:10px;width:100%;text-align:left;font:inherit;color:inherit;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 12px;margin-top:8px}
+.rqFile svg{width:18px;height:18px;color:var(--gold-hi);flex:none}.rqFile span{flex:1;min-width:0;overflow-wrap:anywhere;font-size:13.5px}.rqFile small{color:var(--muted);font-size:11.5px}
+.uAct a.ca{background:linear-gradient(135deg,#3446c9,#5e5cff)}
+.form .bad,.form input.bad,.form select.bad,.form textarea.bad{background:rgba(255,90,80,.12)!important;border-color:#ff6b5a!important}
 </style>
 </head>
 <body>
@@ -1603,7 +1623,7 @@ let ticketPhotos = [];   // {name, data(dataURL)}
 
 function support(machineId){
   setBar(); setTab('support');
-  const prof = store.get('nova.profile', {});
+  const U = user() || {}, prof = Object.assign({}, U.profile || {}, U.email ? { email: U.email } : {}, store.get('nova.profile', {}));
   const draft = store.get('nova.draft', {});
   const tickets = store.get('nova.tickets', []);
   const pre = machineId && pById(machineId) ? pById(machineId).name : (draft.machine || '');
@@ -1655,7 +1675,7 @@ function support(machineId){
 
       <div class="err" id="tErr" hidden></div>
       <button class="btn gold block" type="submit" style="margin-top:18px">${svg('send')}Submit ticket</button>
-      <p class="muted" style="font-size:12px;margin:8px 0 0;text-align:center">The ticket opens in your email app addressed to ${esc(C.support)}. Tap Send there to submit it.</p>
+      <p class="muted" style="font-size:12px;margin:8px 0 0;text-align:center">The ticket goes straight to the NOVA service team. Track its status in My account.</p>
     </form>
 
     ${tickets.length ? `<div class="sec" style="margin:24px 0 0"><div class="sec-h"><h2>My tickets</h2><span class="muted" style="font-size:12.5px">on this phone</span></div>
@@ -1674,7 +1694,7 @@ function shrink(file){  // resize photos so the email stays small
     const r = new FileReader();
     r.onerror = rej;
     r.onload = () => { const im = new Image(); im.onerror = rej; im.onload = () => {
-      const k = Math.min(1, 1600 / Math.max(im.width, im.height));
+      const k = Math.min(1, 1280 / Math.max(im.width, im.height));
       const c = document.createElement('canvas'); c.width = Math.round(im.width*k); c.height = Math.round(im.height*k);
       c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
       res({ name: file.name || 'photo.jpg', data: c.toDataURL('image/jpeg', .82) });
@@ -1755,20 +1775,17 @@ ${t.desc}
 Photos attached: ${t.photos}
 — Sent from the NOVA Engineering app`;
 
-    let withPhotos = false;
-    try{
-      if(window.NovaApp && NovaApp.sendEmail){
-        NovaApp.sendEmail(JSON.stringify({to:C.support, cc:C.sales, subject, body, images: ticketPhotos.map(p => p.data.split(',')[1])}));
-        withPhotos = true;
-      }
-    }catch(e){}
-    if(!withPhotos) location.href = `mailto:${C.support}?cc=${encodeURIComponent(C.sales)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    t.attached = withPhotos;
-
-    store.set('nova.tickets', [t, ...store.get('nova.tickets', [])].slice(0, 50));
-    store.set('nova.profile', {company:t.company, name:t.name, phone:t.phone, email:t.email, site:t.site});
-    store.set('nova.draft', {});
-    setTimeout(() => { location.hash = 'ticket-' + t.id; }, 400);
+    const go = f.querySelector('button[type=submit]'); go.disabled = true; go.textContent = 'Sending…';
+    const files = ticketPhotos.map((ph, i) => ({ name: 'photo-' + (i + 1) + '.jpg', mime: 'image/jpeg', data: ph.data.split(',')[1] }));
+    reqSend({ type:'support', ref: t.id, title: t.subject, priority: t.priority, summary: body, name: t.name, company: t.company, phone: t.phone, contactEmail: t.email, machine: t.machine }, files)
+      .then(st => {
+        t.sent = st;
+        store.set('nova.tickets', [t, ...store.get('nova.tickets', [])].slice(0, 50));
+        store.set('nova.profile', Object.assign(store.get('nova.profile', {}), {company:t.company, name:t.name, phone:t.phone, email:t.email, site:t.site}));
+        store.set('nova.draft', {}); ticketPhotos = [];
+        location.hash = 'ticket-' + t.id;
+      })
+      .catch(e2 => { go.disabled = false; go.innerHTML = svg('send') + 'Submit ticket'; err.textContent = 'Could not send: ' + e2.message; err.hidden = false; });
   });
   drawPhotos();
 }
@@ -1782,9 +1799,8 @@ function ticket(id){
   return `<div class="wrap">
     ${fresh ? `<div class="done-card">
       <div class="tick">${svg('check', 2.6)}</div>
-      <h2>Ticket ${esc(t.id)} is ready</h2>
-      <p>Your email app opened with the ticket${t.photos ? (t.attached ? ' and ' + t.photos + ' photo' + (t.photos>1?'s':'') + ' attached' : '') : ''}. <b>Tap Send</b> there to submit it to our service team.</p>
-      ${t.photos && !t.attached ? `<p style="margin-top:6px">Please attach your ${t.photos} photo${t.photos>1?'s':''} to the email before sending.</p>` : ''}
+      <h2>Ticket ${esc(t.id)} ${t.sent === 'queued' ? 'is saved' : 'was sent'}</h2>
+      <p>${t.sent === 'queued' ? 'You are offline. The ticket is saved on your phone and will be sent to our service team automatically when you are back online.' : 'Our service team has received your ticket' + (t.photos ? ' with ' + t.photos + ' photo' + (t.photos>1?'s':'') : '') + ' and will contact you by ' + esc((t.contactBy || 'phone').toLowerCase()) + '.'}</p>
     </div>` : ''}
     <div class="card" style="margin-top:12px">
       <div class="tags" style="margin:0 0 10px"><span class="tag pt pr-${t.priority.toLowerCase()}">${esc(t.priority)}</span><span class="tag">${esc(t.type)}</span></div>
@@ -2362,7 +2378,9 @@ function qSpecLines(){ const P = qProf(), sc = spGet('scope') || [];
 let Q = null, Qfiles = [];
 const QSTEPS = ['Application','Advisor','Technical basis','Your details','Review'];
 
-function qLoad(){ if(!Q) Q = store.get('nova.quote', null) || { app:'', scale:'', haz:'', type:'', time:'', pick:[], nova:true, basis:'', ursId:'', tech:{}, c:{} }; Q.sp = Q.sp || {}; return Q; }
+function qLoad(){ if(!Q) Q = store.get('nova.quote', null) || { app:'', scale:'', haz:'', type:'', time:'', pick:[], nova:true, basis:'', ursId:'', tech:{}, c:{} }; Q.sp = Q.sp || {}; Q.c = Q.c || {};
+  const U = user(); if(U){ const p = U.profile || {}; [['name','name'],['company','company'],['phone','phone'],['country','country'],['role','job']].forEach(([k, f]) => { if(!Q.c[k] && p[f]) Q.c[k] = p[f]; }); if(!Q.c.email) Q.c.email = U.email; }
+  return Q; }
 function qSave(){ store.set('nova.quote', Q); }
 function qApp(){ return APPS.find(a => a.id === Q.app); }
 function qRecs(){
@@ -2505,13 +2523,13 @@ function qS5(){
 function qDone(){
   setTab('');
   const last = store.get('nova.quotes', [])[0];
-  return `<div class="qx qdone"><div class="qtop"><a class="qclose" href="#home" aria-label="Close">${svg('x',2.2)}</a><div class="qtitle"><span>Proposal Desk</span><b>Request prepared</b></div><span></span></div>
+  return `<div class="qx qdone"><div class="qtop"><a class="qclose" href="#home" aria-label="Close">${svg('x',2.2)}</a><div class="qtitle"><span>Proposal Desk</span><b>Request sent</b></div><span></span></div>
     <div class="qbody center">
       <div class="qseal">${svg('check',2.4)}</div>
       <div class="qeye">Reference</div><div class="qref">${esc(last ? last.ref : '')}</div>
       <h1>Thank you${last && last.name ? ', ' + esc(last.name.split(' ')[0]) : ''}.</h1>
-      <p>Your email app opened with the request${last && last.files ? ' and ' + last.files + ' attachment' + (last.files>1?'s':'') : ''}. <b>Tap Send</b> there to deliver it to our sales engineering team.</p>
-      <p class="qhint">Not sent? You can also reach us directly:</p>
+      <p>${last && last.sent === 'queued' ? 'You are offline. Your request is saved on your phone and will be sent to our sales engineering team automatically when you are back online.' : 'Your request' + (last && last.files ? ' with ' + last.files + ' attachment' + (last.files>1?'s':'') : '') + ' was sent to our sales engineering team. We will contact you shortly — track it in My account.'}</p>
+      <p class="qhint">Need us sooner? Reach us directly:</p>
       <div class="qdirect"><a class="qbtn line" href="tel:${C.mobile}">${svg('phone')}Call</a><a class="qbtn line" href="https://wa.me/${C.mobile.replace('+','')}?text=${encodeURIComponent('Hello NOVA, regarding my proposal request ' + (last ? last.ref : ''))}">${svg('chat')}WhatsApp</a></div>
       <a class="qbtn gold wide" href="#home">Back to home</a>
     </div></div>`;
@@ -2582,6 +2600,7 @@ function qDrawFiles(){
 }
 
 function qSubmit(){
+  if(!user()){ needSignIn(location.hash.slice(1)); return; }
   const a = qApp(), c = Q.c, d = new Date(), pad = x => String(x).padStart(2,'0');
   const ref = `QT${String(d.getFullYear()).slice(2)}${pad(d.getMonth()+1)}${pad(d.getDate())}-${Math.floor(1000+Math.random()*9000)}`;
   const picks = Q.pick.map(pById).filter(Boolean).map(p => p.name);
@@ -2613,14 +2632,15 @@ Preferred contact: ${c.pref || 'Call'}
 ${c.note ? '\nNotes:\n' + c.note + '\n' : ''}
 — Sent from the NOVA Engineering app · Proposal Desk`;
 
-  let sent = false;
-  try{ if(window.NovaApp && NovaApp.sendEmail){ NovaApp.sendEmail(JSON.stringify({ to: C.sales, subject, body, images: [], files })); sent = true; } }catch(e){}
-  if(!sent) location.href = `mailto:${C.sales}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body + (files.length ? '\n\n(Please attach: ' + files.map(f => f.name).join(', ') + ')' : ''))}`;
-
-  store.set('nova.quotes', [{ ref, at: d.toISOString(), app: a.t, name: c.name, files: files.length }, ...store.get('nova.quotes', [])].slice(0, 30));
-  store.set('nova.profile', Object.assign(store.get('nova.profile', {}), { name: c.name, company: c.company, phone: c.phone, email: c.email }));
-  Q = null; Qfiles = []; store.set('nova.quote', null);
-  setTimeout(() => { location.hash = 'quote-done'; }, 350);
+  const btn = document.getElementById('qSubmit'); if(btn){ btn.disabled = true; btn.dataset.t = btn.innerHTML; btn.textContent = 'Sending…'; }
+  reqSend({ type:'quote', ref, title: a.t + (picks.length ? ' · ' + picks.join(', ') : ''), summary: body, name: c.name, company: c.company, phone: c.phone, contactEmail: c.email, country: c.country || '', job: c.role || '' }, files)
+    .then(st => {
+      store.set('nova.quotes', [{ ref, at: d.toISOString(), app: a.t, name: c.name, files: files.length, sent: st }, ...store.get('nova.quotes', [])].slice(0, 30));
+      store.set('nova.profile', Object.assign(store.get('nova.profile', {}), { name: c.name, company: c.company, phone: c.phone, email: c.email }));
+      Q = null; Qfiles = []; store.set('nova.quote', null);
+      location.hash = 'quote-done';
+    })
+    .catch(e => { if(btn){ btn.disabled = false; btn.innerHTML = btn.dataset.t; } alertBox('Could not send your request: ' + e.message); });
 }
 
 // [id, flag, name, region, status, system/authority, data elements, aggregation(yes|no|check), reporting, date, note, crypto?]
@@ -3000,11 +3020,13 @@ function bindTT(){
   const sd = $('#ttSend'); sd && sd.addEventListener('click', () => {
     const c = TT.c; if(!c.name || !c.company){ ttToast('Please add your name and company'); document.querySelector('[data-c="' + (!c.name?'name':'company') + '"]').focus(); return; }
     store.set('nova.profile', Object.assign(store.get('nova.profile', {}), { name:c.name, company:c.company, phone:c.phone||'', email:c.email||'' }));
-    const subject = 'Track & Trace requirement – ' + c.company;
-    const body = `TRACK & TRACE REQUIREMENT (NOVA app builder)\n\n${ttText()}\n\nCONTACT\n${c.name}\n${c.company}\n${c.phone||''}\n${c.email||''}\n${c.note ? '\nNotes:\n' + c.note : ''}\n\n— Sent from the NOVA Engineering app · Track & Trace Builder`;
-    let sent = false; try{ if(window.NovaApp && NovaApp.sendEmail){ NovaApp.sendEmail(JSON.stringify({ to:C.sales, subject, body, images:[], files:[{ name: fn() + '.doc', mime:'application/msword', data: b64utf8(doc()) }] })); sent = true; } }catch(e){}
-    if(!sent) location.href = `mailto:${C.sales}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    ttToast('Thank you — NOVA will contact you'); });
+    if(!user()){ needSignIn(location.hash.slice(1)); return; }
+    const body = `TRACK & TRACE REQUIREMENT (NOVA app builder)\n\n${ttText()}\n\nCONTACT\n${c.name}\n${c.company}\n${c.phone||''}\n${c.email||''}\n${c.note ? '\nNotes:\n' + c.note : ''}`;
+    sd.disabled = true; const old = sd.innerHTML; sd.textContent = 'Sending…';
+    reqSend({ type:'tt', ref: reqRef('TT'), title: 'Track & Trace – ' + TT.lines.length + ' line' + (TT.lines.length > 1 ? 's' : '') + ' · ' + TT.markets.map(id => (ttMk(id) || {}).t).filter(Boolean).slice(0, 4).join(', '), summary: body, name: c.name, company: c.company, phone: c.phone || '', contactEmail: c.email || '' }, [{ name: fn() + '.doc', mime: 'application/msword', data: b64utf8(doc()) }])
+      .then(st => ttToast(st === 'queued' ? 'Saved — it will be sent when you are online' : 'Sent to NOVA — we will contact you'))
+      .catch(e => ttToast('Could not send: ' + e.message))
+      .then(() => { sd.disabled = false; sd.innerHTML = old; }); });
   const rs = $('#ttReset'); rs && rs.addEventListener('click', () => { store.set('nova.tt', { c: TT.c }); TT = null; location.hash = 'tt-1'; route(); });
 }
 function ttText(){
@@ -3371,7 +3393,8 @@ function account(){
       <div class="kv" style="border:0"><span>Email</span><b id="vState">Checking…</b></div>
       <button class="linkBtn" id="vSend" hidden>Send the verification email again</button>
     </div>
-    ${isAdmin() ? `<a class="btn navy block" href="#admin" style="margin-top:14px">${svg('user')}Admin · registered users</a>` : ''}
+    ${isAdmin() ? `<a class="btn navy block" href="#admin" style="margin-top:14px">${svg('user')}Admin · requests &amp; users</a>` : ''}
+    <div class="card" style="margin-top:12px"><div class="eyebrow">My requests</div><div id="myR" class="muted small">Loading…</div></div>
     <button class="btn ghost block" id="aOut" style="margin-top:14px">Sign out</button>
     <button class="btn danger block" id="aDel" style="margin-top:10px">Delete my account</button>
     <div class="err" id="aErr" hidden style="margin-top:10px"></div>
@@ -3383,8 +3406,11 @@ function bindAccount(){
   const err = m => { const e = $('#aErr'); e.textContent = m; e.hidden = !m; };
   (async () => { try{ const t = await fbToken(); const j = await idt('lookup', { idToken: t }); const ok = ((j.users || [])[0] || {}).emailVerified;
     $('#vState').textContent = ok ? 'Verified ✓' : 'Not verified yet'; $('#vSend').hidden = !!ok; }catch(e){ $('#vState').textContent = navigator.onLine ? '—' : 'Offline'; } })();
+  myReqs().then(L => { const b = $('#myR'); if(!b) return; b.classList.remove('muted','small');
+    b.innerHTML = L.length ? L.map(r => `<div class="kv"><span style="min-width:0">${esc((REQ_TYPES[r.type] || [r.type])[0])}<br><b style="font-weight:600;color:var(--ink)">${esc(r.title || r.ref)}</b><br><small class="muted">${esc(r.ref)} · ${fmtD(r.createdAt)}</small></span>${stPill(r.status)}</div>`).join('') : '<span class="muted small">No requests yet.</span>'; })
+    .catch(e => { const b = $('#myR'); b && (b.textContent = e.offline ? 'Offline' : '—'); });
   $('#vSend').addEventListener('click', async () => { try{ await idt('sendOobCode', { requestType:'VERIFY_EMAIL', idToken: await fbToken() }); $('#vSend').textContent = 'Sent. Check your inbox (and spam).'; }catch(e){ err(e.message); } });
-  $('#aOut').addEventListener('click', () => { ADM = { list: null, q: '', err: '' }; store.set('nova.user', null); try{ localStorage.removeItem('nova.user'); }catch(e){} updAuthUi(); location.hash = '#home'; });
+  $('#aOut').addEventListener('click', () => { ADM = { list: null, q: '', err: '', reqs: null, rq: '', rt: '', rs: '', rerr: '', team: null, terr: '' }; store.set('nova.user', null); try{ localStorage.removeItem('nova.user'); }catch(e){} updAuthUi(); location.hash = '#home'; });
   const del = $('#aDel'); let armed = false;
   del.addEventListener('click', async () => {
     if(!armed){ armed = true; del.textContent = 'Tap again to permanently delete'; setTimeout(() => { armed = false; del.textContent = 'Delete my account'; }, 5000); return; }
@@ -3394,29 +3420,110 @@ function bindAccount(){
     catch(e){ err(e.message); del.disabled = false; del.textContent = 'Delete my account'; armed = false; }
   });
 }
-/* ===== Admin (hidden; only the NOVA admin account) ===== */
+/* ===== Firestore helpers ===== */
+const FSB = () => 'https://firestore.googleapis.com/v1/projects/' + FB.project + '/databases/(default)/documents/';
+function fsEnc(v){
+  if(v instanceof Date) return { timestampValue: v.toISOString() };
+  if(Array.isArray(v)) return { arrayValue: { values: v.map(fsEnc) } };
+  if(v && typeof v === 'object') return { mapValue: { fields: fsFields(v) } };
+  if(typeof v === 'boolean') return { booleanValue: v };
+  if(typeof v === 'number') return Number.isInteger(v) ? { integerValue: String(v) } : { doubleValue: v };
+  return { stringValue: String(v == null ? '' : v) };
+}
+const fsFields = o => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== undefined).map(([k, v]) => [k, fsEnc(v)]));
+function fsDec(v){
+  if(!v) return null;
+  if('stringValue' in v) return v.stringValue; if('timestampValue' in v) return v.timestampValue;
+  if('booleanValue' in v) return v.booleanValue; if('integerValue' in v) return +v.integerValue; if('doubleValue' in v) return v.doubleValue;
+  if('arrayValue' in v) return (v.arrayValue.values || []).map(fsDec);
+  if('mapValue' in v) return Object.fromEntries(Object.entries(v.mapValue.fields || {}).map(([k, x]) => [k, fsDec(x)]));
+  return null;
+}
+const fsDoc = d => Object.assign({ _id: decodeURIComponent(d.name.split('/').pop()) }, Object.fromEntries(Object.entries(d.fields || {}).map(([k, v]) => [k, fsDec(v)])));
+async function fsReq(method, path, body, retried){
+  const t = await fbToken(); let r;
+  try{ r = await fetch((path[0] === ':' ? FSB().replace(/\/$/, '') : FSB()) + path, { method, headers:{ 'Content-Type':'application/json', Authorization:'Bearer ' + t }, body: body ? JSON.stringify(body) : undefined }); }
+  catch(e){ const er = new Error('No internet connection.'); er.offline = true; throw er; }
+  const j = await r.json().catch(() => ({}));
+  if(r.status === 403 && !retried){ const u = user(); if(u){ u.exp = 0; store.set('nova.user', u); } return fsReq(method, path, body, true); }   // refresh token claims (e.g. email just verified)
+  if(!r.ok){ const er = new Error(r.status === 403 ? 'Access denied.' : ((j.error || {}).message || ('Error ' + r.status))); er.status = r.status; throw er; }
+  return j;
+}
+
+/* ===== Requests: support tickets, proposals, URS and T&T are stored in Firestore (no email) ===== */
+const REQ_TYPES = { support:['Support ticket','#e0584f','tool'], quote:['Proposal request','#d6b46a','send'], tt:['Track & Trace','#5fd3ff','chip'] };
+const REQ_ST = [['new','New','#ff8a65'], ['progress','In progress','#9db7ff'], ['done','Done','#4fd18b']];
+const CHUNK = 700000;
+async function reqUpload(r, files){
+  const u = user(), pr = (u && u.profile) || {};
+  const doc = Object.assign({ status:'new', note:'', createdAt: new Date(), uid: u.uid, email: u.email, name: pr.name || '', company: pr.company || '', phone: pr.phone || '', country: pr.country || '', job: pr.job || '', device: STATS_DEV,
+    files: files.map(f => ({ name: f.name, mime: f.mime, size: Math.round(f.data.length * .75) })) }, r);
+  await fsReq('POST', 'requests?documentId=' + encodeURIComponent(r.ref), { fields: fsFields(doc) });
+  for(let i = 0; i < files.length; i++){
+    const f = files[i], n = Math.max(1, Math.ceil(f.data.length / CHUNK));
+    for(let k = 0; k < n; k++)
+      await fsReq('POST', 'requests/' + encodeURIComponent(r.ref) + '/files?documentId=' + i + '-' + k, { fields: fsFields({ name: f.name, mime: f.mime, i, k, n, data: f.data.slice(k * CHUNK, (k + 1) * CHUNK) }) });
+  }
+}
+let OUTBOX = [];   // requests waiting for internet (kept in memory and, when small enough, on the phone)
+function outboxLoad(){ try{ OUTBOX = JSON.parse(localStorage.getItem('nova.outbox') || '[]'); }catch(e){ OUTBOX = []; } }
+function outboxSave(){ try{ localStorage.setItem('nova.outbox', JSON.stringify(OUTBOX)); }catch(e){ try{ localStorage.setItem('nova.outbox', JSON.stringify(OUTBOX.map(x => Object.assign({}, x, { files: [] })))); }catch(e2){} } }
+async function reqSend(r, files){   // → 'sent' | 'queued'
+  try{ await reqUpload(r, files); stat('/request/' + r.type + '/' + STATS_DEV, 'Request: ' + r.type); return 'sent'; }
+  catch(e){ if(!e.offline) throw e; OUTBOX.push({ r: Object.assign({}, r), files }); outboxSave(); return 'queued'; }
+}
+async function outboxFlush(){
+  if(!OUTBOX.length || !user() || !navigator.onLine) return;
+  const left = []; let off = false;
+  for(const x of OUTBOX){ if(off){ left.push(x); continue; } try{ await reqUpload(x.r, x.files || []); }catch(e){ left.push(x); if(e.offline) off = true; } }
+  OUTBOX = left; outboxSave();
+  if(!OUTBOX.length) try{ ttToast('Your saved requests were sent to NOVA'); }catch(e){}
+}
+outboxLoad(); addEventListener('online', outboxFlush); setTimeout(outboxFlush, 4000);
+async function reqFile(ref, i){
+  const j = await fsReq('GET', 'requests/' + encodeURIComponent(ref) + '/files?pageSize=300');
+  const parts = (j.documents || []).map(fsDoc).filter(x => x.i === i).sort((a, b) => a.k - b.k);
+  if(!parts.length) throw new Error('File not found.');
+  return { name: parts[0].name, mime: parts[0].mime, data: parts.map(x => x.data).join('') };
+}
+function openFile(f){
+  if(window.NovaApp && NovaApp.shareFile){ NovaApp.shareFile(JSON.stringify({ name: f.name, mime: f.mime, data: f.data, subject: f.name })); return; }
+  const bin = atob(f.data), u8 = new Uint8Array(bin.length); for(let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([u8], { type: f.mime })); a.download = f.name; a.target = '_blank'; a.click();
+}
+const reqRef = p => { const d = new Date(), z = n => String(n).padStart(2, '0'); return p + String(d.getFullYear()).slice(2) + z(d.getMonth() + 1) + z(d.getDate()) + '-' + Math.floor(1000 + Math.random() * 9000); };
+function needSignIn(back){ $('#app').innerHTML = `<div class="view">${authPage('in', back)}</div>`; bindAuth(); scrollTo(0, 0); }
+
+/* ===== Admin (hidden): owner + team members the owner adds ===== */
 const ADMIN_EMAIL = 'm.hesham@nova-egi.com';
-const isAdmin = () => { const u = user(); return !!u && String(u.email || '').toLowerCase() === ADMIN_EMAIL; };
-let ADM = { list: null, q: '', err: '' };
-async function admLoad(retry){
-  const t = await fbToken(); let out = [], tok = '';
-  do{
-    let r;
-    try{ r = await fetch(FS().replace(/\/$/, '') + '?pageSize=300' + (tok ? '&pageToken=' + encodeURIComponent(tok) : ''), { headers:{ Authorization:'Bearer ' + t } }); }
-    catch(e){ throw new Error('No internet connection. The user list needs internet.'); }
-    const j = await r.json().catch(() => ({}));
-    if(r.status === 403 && !retry){ const u = user(); u.exp = 0; store.set('nova.user', u); return admLoad(true); }   // refresh token (e.g. email just verified)
-    if(!r.ok) throw new Error(r.status === 403 ? 'Access denied. Make sure your email is verified (My account) and the admin Firestore rules are published.' : 'Could not load users (' + r.status + ').');
-    (j.documents || []).forEach(d => { const o = { uid: d.name.split('/').pop() }; Object.entries(d.fields || {}).forEach(([k, v]) => o[k] = v.stringValue != null ? v.stringValue : v.timestampValue != null ? v.timestampValue : v.booleanValue); out.push(o); });
-    tok = j.nextPageToken || '';
-  } while(tok);
+const isOwner = () => { const u = user(); return !!u && String(u.email || '').toLowerCase() === ADMIN_EMAIL; };
+const isAdmin = () => isOwner() || !!(user() && user().staff);
+async function staffCheck(){
+  const u = user(); if(!u || isOwner()) return;
+  let ok = false; try{ const d = fsDoc(await fsReq('GET', 'config/staff')); ok = (d.emails || []).map(x => String(x).toLowerCase()).includes(String(u.email).toLowerCase()); }catch(e){ if(e.offline) return; }
+  const v = user(); if(v && !!v.staff !== ok){ v.staff = ok; store.set('nova.user', v); if(location.hash === '#account') route(); }
+}
+setTimeout(staffCheck, 2500);
+let ADM = { list: null, q: '', err: '', reqs: null, rq: '', rt: '', rs: '', rerr: '', team: null, terr: '' };
+async function admLoad(){
+  let out = [], tok = '';
+  do{ const j = await fsReq('GET', 'users?pageSize=300' + (tok ? '&pageToken=' + encodeURIComponent(tok) : ''));
+    (j.documents || []).forEach(d => { const o = fsDoc(d); o.uid = o._id; out.push(o); }); tok = j.nextPageToken || ''; } while(tok);
   return out.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+}
+async function admLoadReqs(){
+  let out = [], tok = '';
+  do{ const j = await fsReq('GET', 'requests?pageSize=300&orderBy=createdAt%20desc' + (tok ? '&pageToken=' + encodeURIComponent(tok) : ''));
+    (j.documents || []).forEach(d => out.push(fsDoc(d))); tok = j.nextPageToken || ''; } while(tok);
+  return out;
 }
 const DEVN = { 'android':'Android app', 'iphone-app':'iPhone app', 'iphone-web':'iPhone (web link)', 'android-web':'Android (web link)', 'web':'Computer' };
 const fmtD = d => { if(!d) return '—'; const x = new Date(d); return isNaN(x) ? '—' : x.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' }); };
+const fmtDT = d => { if(!d) return '—'; const x = new Date(d); return isNaN(x) ? '—' : x.toLocaleString('en-GB', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' }); };
 const waNum = (ph, c) => { let d = String(ph || '').replace(/[^\d+]/g, ''); if(d.startsWith('+')) return d.slice(1); if(d.startsWith('00')) return d.slice(2);
   const cc = { 'Egypt':'20','Saudi Arabia':'966','United Arab Emirates':'971','Kuwait':'965','Qatar':'974','Bahrain':'973','Oman':'968','Jordan':'962','Iraq':'964','Lebanon':'961','Libya':'218','Sudan':'249','Algeria':'213','Morocco':'212','Tunisia':'216','Yemen':'967','Italy':'39' }[c];
   return cc && d.startsWith('0') ? cc + d.slice(1) : cc && !d.startsWith(cc) ? cc + d : d; };
+const actBtns = (phone, email, country) => `${phone ? `<a class="ca" href="tel:${esc(String(phone).replace(/[^\d+]/g, ''))}">${svg('phone')}Call</a><a class="wa" href="https://wa.me/${esc(waNum(phone, country))}">${svg('chat')}WhatsApp</a>` : ''}${email ? `<a href="mailto:${esc(email)}">${svg('mail')}Email</a>` : ''}`;
 function admFiltered(){
   const q = ADM.q.trim().toLowerCase(); if(!ADM.list) return [];
   return q ? ADM.list.filter(u => ['name','company','job','phone','country','email','device'].some(k => String(u[k] || '').toLowerCase().includes(q))) : ADM.list;
@@ -3424,40 +3531,137 @@ function admFiltered(){
 function admRows(){
   const L = admFiltered();
   if(!L.length) return `<p class="muted" style="text-align:center;margin:24px 0">${ADM.q ? 'No users match your search.' : 'No users yet.'}</p>`;
-  return L.map(u => { const w = waNum(u.phone, u.country);
-    return `<div class="uRow" data-u="${esc(u.uid)}"><div class="h"><span class="av">${esc(initials(u.name || u.email))}</span><div style="min-width:0"><b>${esc(u.name || '—')}</b><div class="m">${esc([u.job, u.company].filter(Boolean).join(' · ') || '—')}</div><div class="m">${esc([u.country, DEVN[u.device] || u.device].filter(Boolean).join(' · '))}</div></div><div class="d">${fmtD(u.createdAt)}</div></div>
+  return L.map(u => `<div class="uRow" data-u="${esc(u.uid)}"><div class="h"><span class="av">${esc(initials(u.name || u.email))}</span><div style="min-width:0"><b>${esc(u.name || '—')}</b><div class="m">${esc([u.job, u.company].filter(Boolean).join(' · ') || '—')}</div><div class="m">${esc([u.country, DEVN[u.device] || u.device].filter(Boolean).join(' · '))}</div></div><div class="d">${fmtD(u.createdAt)}</div></div>
       <div class="m" style="margin-top:6px">${esc(u.email || '')}${u.phone ? ' · ' + esc(u.phone) : ''}</div>
-      <div class="uAct">${u.phone ? `<a class="ca" href="tel:${esc(String(u.phone).replace(/[^\d+]/g, ''))}">${svg('phone')}Call</a><a class="wa" href="https://wa.me/${esc(w)}">${svg('chat')}WhatsApp</a>` : ''}${u.email ? `<a href="mailto:${esc(u.email)}">${svg('mail')}Email</a>` : ''}</div></div>`; }).join('');
+      <div class="uAct">${actBtns(u.phone, u.email, u.country)}</div></div>`).join('');
 }
-function admin(){
-  setBar(); setTab('');
-  if(!isAdmin()) return `<div class="wrap"><p class="muted" style="text-align:center;margin-top:40px">This page is not available.</p></div>`;
-  const L = ADM.list || [], wk = L.filter(u => u.createdAt && Date.now() - new Date(u.createdAt) < 7 * 864e5).length;
+function reqFiltered(){
+  const q = ADM.rq.trim().toLowerCase(); let L = ADM.reqs || [];
+  if(ADM.rt) L = L.filter(r => r.type === ADM.rt);
+  if(ADM.rs) L = L.filter(r => (r.status || 'new') === ADM.rs);
+  return q ? L.filter(r => ['ref','title','name','company','phone','email','summary'].some(k => String(r[k] || '').toLowerCase().includes(q))) : L;
+}
+const stPill = st => { const s = REQ_ST.find(x => x[0] === (st || 'new')) || REQ_ST[0]; return `<span class="rqSt" style="--c:${s[2]}">${s[1]}</span>`; };
+function reqRows(){
+  const L = reqFiltered();
+  if(!L.length) return `<p class="muted" style="text-align:center;margin:24px 0">${ADM.reqs && ADM.reqs.length ? 'No requests match.' : 'No requests yet.'}</p>`;
+  return L.map(r => { const t = REQ_TYPES[r.type] || [r.type, '#999', 'doc'];
+    return `<a class="rqRow" href="#adm-${encodeURIComponent(r._id)}"><span class="rqIc" style="--c:${t[1]}">${svg(t[2])}</span><div style="min-width:0;flex:1"><div class="rqTop"><small>${esc(t[0])}${r.priority ? ' · ' + esc(r.priority) : ''}</small>${stPill(r.status)}</div><b>${esc(r.title || r.ref)}</b><div class="m">${esc([r.name, r.company].filter(Boolean).join(' · '))}</div><div class="m">${esc(r.ref)} · ${fmtDT(r.createdAt)}${(r.files || []).length ? ' · 📎 ' + r.files.length : ''}</div></div></a>`; }).join('');
+}
+function admTabs(cur){
+  return `<div class="admTabs"><a href="#admin" class="${cur === 'req' ? 'on' : ''}">Requests${ADM.reqs && ADM.reqs.some(r => (r.status || 'new') === 'new') ? ` <i>${ADM.reqs.filter(r => (r.status || 'new') === 'new').length}</i>` : ''}</a><a href="#admin-users" class="${cur === 'users' ? 'on' : ''}">Users</a>${isOwner() ? `<a href="#admin-team" class="${cur === 'team' ? 'on' : ''}">Team</a>` : ''}</div>`;
+}
+const notAvail = () => `<div class="wrap"><p class="muted" style="text-align:center;margin-top:40px">This page is not available.</p></div>`;
+function admin(a){
+  setBar('Admin'); setTab('');
+  if(!isAdmin()) return notAvail();
+  if(a === 'users'){
+    const L = ADM.list || [], wk = L.filter(u => u.createdAt && Date.now() - new Date(u.createdAt) < 7 * 864e5).length;
+    return `<div class="wrap adm">${admTabs('users')}
+      <div class="stat2"><div><b>${ADM.list ? L.length : '…'}</b><span>Total users</span></div><div><b>${ADM.list ? wk : '…'}</b><span>New this week</span></div><div><b>${ADM.list ? L.filter(u => /android/.test(u.device || '')).length : '…'}</b><span>Android</span></div></div>
+      <div class="form" style="display:flex;gap:8px"><input id="admQ" placeholder="Search name, company, phone, country…" value="${esc(ADM.q)}" style="flex:1"><button class="btn gold" id="admX" style="flex:none;padding:0 14px">${svg('doc')}Excel</button></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span class="muted small" id="admN">${ADM.list ? admFiltered().length + ' shown' : ''}</span><button class="linkBtn" id="admR">Refresh</button></div>
+      <div class="err" id="admE" ${ADM.err ? '' : 'hidden'}>${esc(ADM.err)}</div>
+      <div id="admL">${ADM.list ? admRows() : '<p class="muted" style="text-align:center;margin:24px 0">Loading users…</p>'}</div></div>`;
+  }
+  if(a === 'team'){
+    if(!isOwner()) return notAvail();
+    const T = ADM.team;
+    return `<div class="wrap adm">${admTabs('team')}
+      <div class="card" style="margin-top:12px"><b>Team access</b><p class="muted small" style="margin:4px 0 0">People you add here can open this Admin area: all requests and the user list. They must sign up in the app with the same email and verify it. Only you can add or remove members.</p></div>
+      <form class="form" id="tmF" style="display:flex;gap:8px;margin-top:12px"><input id="tmE" type="email" placeholder="colleague@nova-egi.com" autocapitalize="off" style="flex:1"><button class="btn gold" style="flex:none;padding:0 16px">Add</button></form>
+      <div class="err" id="tmErr" ${ADM.terr ? '' : 'hidden'}>${esc(ADM.terr)}</div>
+      <div id="tmL" style="margin-top:8px">${T == null ? '<p class="muted" style="text-align:center;margin:20px 0">Loading…</p>' : !T.length ? '<p class="muted" style="text-align:center;margin:20px 0">No team members yet.</p>' : T.map((e, i) => `<div class="uRow" style="display:flex;align-items:center;gap:10px"><span class="av" style="width:36px;height:36px">${esc(initials(e))}</span><b style="flex:1;min-width:0;overflow-wrap:anywhere;font-size:14px">${esc(e)}</b><button class="linkBtn" data-rm="${i}" style="color:#ff8a80">Remove</button></div>`).join('')}</div>
+      <div class="uRow" style="display:flex;align-items:center;gap:10px;opacity:.75"><span class="av" style="width:36px;height:36px">MH</span><b style="flex:1;font-size:14px">${ADMIN_EMAIL}</b><span class="muted small">Owner</span></div></div>`;
+  }
+  const L = ADM.reqs || [], cnt = st => L.filter(r => (r.status || 'new') === st).length;
+  return `<div class="wrap adm">${admTabs('req')}
+    <div class="stat2">${REQ_ST.map(([k, n, c]) => `<button class="${ADM.rs === k ? 'on' : ''}" data-rs="${k}" style="--c:${c}"><b>${ADM.reqs ? cnt(k) : '…'}</b><span>${n}</span></button>`).join('')}</div>
+    <div class="chips" id="rqT" style="margin:0 0 10px">${[['', 'All'], ['support', 'Support'], ['quote', 'Proposals'], ['tt', 'Track & Trace']].map(([k, n]) => `<button class="chip ${ADM.rt === k ? 'on' : ''}" data-rt="${k}">${n}</button>`).join('')}</div>
+    <div class="form"><input id="rqQ" placeholder="Search ref, company, name, text…" value="${esc(ADM.rq)}"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span class="muted small" id="rqN">${ADM.reqs ? reqFiltered().length + ' shown' : ''}</span><button class="linkBtn" id="rqR">Refresh</button></div>
+    <div class="err" ${ADM.rerr ? '' : 'hidden'}>${esc(ADM.rerr)}</div>
+    <div id="rqL">${ADM.reqs ? reqRows() : '<p class="muted" style="text-align:center;margin:24px 0">Loading requests…</p>'}</div></div>`;
+}
+function bindAdmin(a){
+  if(!isAdmin()) return;
+  const again = h => { if(location.hash === h) route(); };
+  if(a === 'users'){
+    if(!ADM.list && !ADM.err) admLoad().then(l => { ADM.list = l; }).catch(e => { ADM.err = e.message; }).then(() => again('#admin-users'));
+    $('#admR').addEventListener('click', () => { ADM.list = null; ADM.err = ''; route(); });
+    $('#admQ').addEventListener('input', e => { ADM.q = e.target.value; $('#admL').innerHTML = admRows(); $('#admN').textContent = admFiltered().length + ' shown'; });
+    $('#admL').addEventListener('click', e => { if(e.target.closest('a')) return; const r = e.target.closest('.uRow'); r && r.classList.toggle('open'); });
+    $('#admX').addEventListener('click', () => {
+      const L = admFiltered().map(u => Object.assign({}, u, { deviceName: DEVN[u.device] || u.device || '' })); if(!L.length) return ttToast('No users to export');
+      const cols = [['Name','name'],['Company','company'],['Job title','job'],['Mobile','phone'],['Country','country'],['Email','email'],['Device','deviceName'],['Signed up','createdAt'],['Last sign-in','lastLogin']];
+      const q = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+      const csv = '﻿' + cols.map(c => q(c[0])).join(',') + '\r\n' + L.map(u => cols.map(([, k]) => q(/At$|lastLogin/.test(k) && u[k] ? new Date(u[k]).toLocaleString('en-GB') : u[k])).join(',')).join('\r\n');
+      openFile({ name: 'NOVA-app-users_' + new Date().toISOString().slice(0, 10) + '.csv', mime: 'text/csv', data: b64utf8(csv) });
+    });
+    return;
+  }
+  if(a === 'team'){
+    if(!isOwner()) return;
+    if(ADM.team == null && !ADM.terr) fsReq('GET', 'config/staff').then(d => { ADM.team = fsDoc(d).emails || []; }).catch(e => { if(e.status === 404) ADM.team = []; else ADM.terr = e.message; }).then(() => again('#admin-team'));
+    const save = async list => { ADM.terr = ''; try{ await fsReq('PATCH', 'config/staff', { fields: fsFields({ emails: list, updatedAt: new Date() }) }); ADM.team = list; }catch(e){ ADM.terr = e.message; } route(); };
+    $('#tmF').addEventListener('submit', e => { e.preventDefault(); const v = $('#tmE').value.trim().toLowerCase();
+      if(!/^\S+@\S+\.\S+$/.test(v)){ ADM.terr = 'Please enter a valid email.'; route(); return; }
+      const L = (ADM.team || []).slice(); if(!L.includes(v) && v !== ADMIN_EMAIL) L.push(v); save(L); });
+    $('#tmL').addEventListener('click', e => { const b = e.target.closest('[data-rm]'); if(!b) return; const L = (ADM.team || []).slice(); L.splice(+b.dataset.rm, 1); save(L); });
+    return;
+  }
+  if(!ADM.reqs && !ADM.rerr) admLoadReqs().then(l => { ADM.reqs = l; }).catch(e => { ADM.rerr = e.status === 403 ? 'Access denied. Check that your email is verified and the Firestore rules are published.' : e.message; }).then(() => again('#admin'));
+  $('#rqR').addEventListener('click', () => { ADM.reqs = null; ADM.rerr = ''; route(); });
+  document.querySelectorAll('[data-rs]').forEach(b => b.addEventListener('click', () => { ADM.rs = ADM.rs === b.dataset.rs ? '' : b.dataset.rs; route(); }));
+  document.querySelectorAll('[data-rt]').forEach(b => b.addEventListener('click', () => { ADM.rt = b.dataset.rt; route(); }));
+  $('#rqQ').addEventListener('input', e => { ADM.rq = e.target.value; $('#rqL').innerHTML = reqRows(); $('#rqN').textContent = reqFiltered().length + ' shown'; });
+}
+let ADMR = null;
+function admReq(id){
+  setBar('Request'); setTab('');
+  if(!isAdmin()) return notAvail();
+  const r = (ADM.reqs || []).find(x => x._id === id) || (ADMR && ADMR._id === id ? ADMR : null);
+  if(!r) return `<div class="wrap"><p class="muted" style="text-align:center;margin-top:40px" id="arL">Loading…</p></div>`;
+  const t = REQ_TYPES[r.type] || [r.type, '#999', 'doc'];
   return `<div class="wrap adm">
-    <div class="eyebrow">Admin</div><h2 style="font-size:21px;margin:0">Registered users</h2>
-    <div class="stat2"><div><b>${ADM.list ? L.length : '…'}</b><span>Total users</span></div><div><b>${ADM.list ? wk : '…'}</b><span>New this week</span></div><div><b>${ADM.list ? L.filter(u => /android/.test(u.device || '')).length : '…'}</b><span>Android</span></div></div>
-    <div class="form" style="display:flex;gap:8px"><input id="admQ" placeholder="Search name, company, phone, country…" value="${esc(ADM.q)}" style="flex:1"><button class="btn gold" id="admX" style="flex:none;padding:0 14px">${svg('doc')}Excel</button></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span class="muted small" id="admN">${ADM.list ? admFiltered().length + ' shown' : ''}</span><button class="linkBtn" id="admR">Refresh</button></div>
-    <div class="err" id="admE" ${ADM.err ? '' : 'hidden'}>${esc(ADM.err)}</div>
-    <div id="admL">${ADM.list ? admRows() : '<p class="muted" style="text-align:center;margin:24px 0">Loading users…</p>'}</div>
+    <div class="card"><div class="rqTop"><small style="color:${t[1]}">${esc(t[0])}${r.priority ? ' · ' + esc(r.priority) : ''}</small>${stPill(r.status)}</div>
+      <h2 style="font-size:19px;margin:6px 0 2px">${esc(r.title || r.ref)}</h2><div class="muted small">${esc(r.ref)} · ${fmtDT(r.createdAt)} · ${esc(DEVN[r.device] || r.device || '')}</div></div>
+    <div class="card" style="margin-top:10px"><div class="eyebrow">Customer</div><b style="font-size:16px">${esc(r.name || '—')}</b><div class="muted small">${esc([r.job, r.company, r.country].filter(Boolean).join(' · '))}</div>
+      <div class="muted small" style="margin-top:4px;overflow-wrap:anywhere">${esc([r.phone, r.email, r.contactEmail && r.contactEmail !== r.email ? r.contactEmail : ''].filter(Boolean).join(' · '))}</div>
+      <div class="uAct" style="display:flex">${actBtns(r.phone, r.contactEmail || r.email, r.country)}</div></div>
+    ${(r.files || []).length ? `<div class="card" style="margin-top:10px"><div class="eyebrow">Attachments</div>${r.files.map((f, i) => `<button class="rqFile" data-f="${i}">${svg(/^image/.test(f.mime) ? 'camera' : 'doc')}<span>${esc(f.name)}</span><small>${f.size > 1048576 ? (f.size / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(f.size / 1024)) + ' KB'}</small></button>`).join('')}<div class="err" id="arFE" hidden></div></div>` : ''}
+    <div class="card" style="margin-top:10px"><div class="eyebrow">Request</div><div class="rqBody">${esc(r.summary || '')}</div></div>
+    <div class="card form" style="margin-top:10px"><div class="eyebrow">Follow-up</div>
+      <div class="chips" id="arS" style="margin:6px 0 4px">${REQ_ST.map(([k, n]) => `<button type="button" class="chip ${(r.status || 'new') === k ? 'on' : ''}" data-s="${k}">${n}</button>`).join('')}</div>
+      <label for="arN">Internal note</label><textarea id="arN" placeholder="e.g. Called customer, visit on Sunday">${esc(r.note || '')}</textarea>
+      ${r.updatedBy ? `<div class="muted small" style="margin-top:6px">Last update: ${esc(r.updatedBy)} · ${fmtDT(r.updatedAt)}</div>` : ''}
+      <div class="err" id="arE" hidden></div>
+      <button class="btn gold block" id="arSave" style="margin-top:12px">Save</button></div>
   </div>`;
 }
-function bindAdmin(){
+function bindAdmReq(id){
   if(!isAdmin()) return;
-  const load = async () => { ADM.err = ''; try{ ADM.list = await admLoad(); }catch(e){ ADM.err = e.message; } if(location.hash === '#admin') route(); };
-  if(!ADM.list && !ADM.err) load();
-  $('#admR').addEventListener('click', () => { ADM.list = null; ADM.err = ''; route(); });
-  $('#admQ').addEventListener('input', e => { ADM.q = e.target.value; $('#admL').innerHTML = admRows(); $('#admN').textContent = admFiltered().length + ' shown'; });
-  $('#admL').addEventListener('click', e => { if(e.target.closest('a')) return; const r = e.target.closest('.uRow'); r && r.classList.toggle('open'); });
-  $('#admX').addEventListener('click', () => {
-    const L = admFiltered().map(u => Object.assign({}, u, { deviceName: DEVN[u.device] || u.device || '' })); if(!L.length) return ttToast('No users to export');
-    const cols = [['Name','name'],['Company','company'],['Job title','job'],['Mobile','phone'],['Country','country'],['Email','email'],['Device','deviceName'],['Signed up','createdAt'],['Last sign-in','lastLogin']];
-    const q = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
-    const csv = '﻿' + cols.map(c => q(c[0])).join(',') + '\r\n' + L.map(u => cols.map(([, k]) => q(/At$|lastLogin/.test(k) && u[k] ? new Date(u[k]).toLocaleString('en-GB') : u[k])).join(',')).join('\r\n');
-    const name = 'NOVA-app-users_' + new Date().toISOString().slice(0, 10) + '.csv';
-    if(window.NovaApp && NovaApp.shareFile){ NovaApp.shareFile(JSON.stringify({ name, mime:'text/csv', data: b64utf8(csv), subject:'NOVA app users' })); return; }
-    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type:'text/csv;charset=utf-8' })); a.download = name; a.click();
+  const r = (ADM.reqs || []).find(x => x._id === id) || (ADMR && ADMR._id === id ? ADMR : null);
+  if(!r){ fsReq('GET', 'requests/' + encodeURIComponent(id)).then(d => { ADMR = fsDoc(d); route(); }).catch(e => { const l = $('#arL'); l && (l.textContent = e.message); }); return; }
+  let st = r.status || 'new';
+  $('#arS').addEventListener('click', e => { const b = e.target.closest('[data-s]'); if(!b) return; st = b.dataset.s; document.querySelectorAll('#arS .chip').forEach(x => x.classList.toggle('on', x === b)); });
+  $('#arSave').addEventListener('click', async () => {
+    const b = $('#arSave'), note = $('#arN').value.trim(), by = ((user().profile || {}).name || user().email);
+    b.disabled = true; b.textContent = 'Saving…';
+    try{ await fsReq('PATCH', 'requests/' + encodeURIComponent(id) + '?updateMask.fieldPaths=status&updateMask.fieldPaths=note&updateMask.fieldPaths=updatedAt&updateMask.fieldPaths=updatedBy', { fields: fsFields({ status: st, note, updatedAt: new Date(), updatedBy: by }) });
+      Object.assign(r, { status: st, note, updatedAt: new Date().toISOString(), updatedBy: by }); ttToast('Saved'); route(); }
+    catch(e){ const er = $('#arE'); er.textContent = e.message; er.hidden = false; b.disabled = false; b.textContent = 'Save'; }
   });
+  document.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', async () => {
+    const lb = b.querySelector('span'), old = lb.textContent; lb.textContent = 'Opening…';
+    try{ openFile(await reqFile(id, +b.dataset.f)); }catch(e){ const er = $('#arFE'); er.textContent = e.message; er.hidden = false; }
+    lb.textContent = old;
+  }));
+}
+async function myReqs(){
+  const u = user();
+  const j = await fsReq('POST', ':runQuery', { structuredQuery: { from: [{ collectionId: 'requests' }], where: { fieldFilter: { field: { fieldPath: 'uid' }, op: 'EQUAL', value: { stringValue: u.uid } } }, limit: 50 } });
+  return (Array.isArray(j) ? j : []).filter(x => x.document).map(x => fsDoc(x.document)).sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
 }
 /* ===== NOVA AI assistant (Gemini via Firebase AI Logic; offline search fallback) ===== */
 const AI_MODELS = ['gemini-3.5-flash-lite', 'gemini-2.5-flash-lite', 'gemini-2.5-flash'];
@@ -3605,7 +3809,8 @@ function route(){
   if(LOCKED.includes(r) && !user()){ html = authPage('in', h); after = bindAuth; }
   else if(r === 'login'){ html = authPage(a === 'up' ? 'up' : 'in', ''); after = bindAuth; }
   else if(r === 'account'){ html = account(); after = bindAccount; }
-  else if(r === 'admin'){ html = admin(); after = bindAdmin; }
+  else if(r === 'admin'){ html = admin(a); after = () => bindAdmin(a); }
+  else if(r === 'adm'){ const id = decodeURIComponent(a); html = admReq(id); after = () => bindAdmReq(id); }
   else if(r === 'partners'){ html = partners(a && catById(a) ? a : ''); after = () => bindPartners(a && catById(a) ? a : ''); }
   else if(r === 'p'){ html = partner(a); }
   else if(r === 'prod'){ html = product(a); }
