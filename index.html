@@ -251,6 +251,18 @@ nav.tabs a.lk::after{content:"";position:absolute;top:2px;left:calc(50% + 7px);w
 .acctCard{display:flex;gap:14px;align-items:center}
 .acctCard .av{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#e2c987,#b8964c);color:#1a1a1a;font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
 .btn.danger{background:#fff;color:#b3261e;border:1px solid #f0c4c0}
+.adm .stat2{display:flex;gap:8px;margin:10px 0}
+.adm .stat2 div{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.adm .stat2 b{display:block;font-size:20px}.adm .stat2 span{font-size:11.5px;color:var(--muted)}
+.uRow{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:8px}
+.uRow .h{display:flex;gap:10px;align-items:center}
+.uRow .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#e2c987,#b8964c);color:#1a1a1a;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.uRow b{font-size:14.5px}.uRow .m{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.uRow .d{margin-left:auto;text-align:right;font-size:11px;color:var(--muted);flex:none}
+.uAct{display:none;gap:8px;margin-top:10px}.uRow.open .uAct{display:flex}
+.uAct a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;height:40px;border-radius:10px;font-size:13px;font-weight:600;background:var(--line);color:var(--navy)}
+.uAct a svg{width:16px;height:16px}
+.uAct a.wa{background:#e3f7ea;color:#14753c}.uAct a.ca{background:var(--navy);color:#fff}
 /* library */
 .small{font-size:12px}
 .ltag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tc,#5d6480);background:color-mix(in srgb,var(--tc,#5d6480) 12%,transparent);border-radius:6px;padding:3px 8px}
@@ -3168,6 +3180,7 @@ function account(){
       <div class="kv" style="border:0"><span>Email</span><b id="vState">Checking…</b></div>
       <button class="linkBtn" id="vSend" hidden>Send the verification email again</button>
     </div>
+    ${isAdmin() ? `<a class="btn navy block" href="#admin" style="margin-top:14px">${svg('user')}Admin · registered users</a>` : ''}
     <button class="btn ghost block" id="aOut" style="margin-top:14px;color:var(--navy);border-color:var(--line)">Sign out</button>
     <button class="btn danger block" id="aDel" style="margin-top:10px">Delete my account</button>
     <div class="err" id="aErr" hidden style="margin-top:10px"></div>
@@ -3180,7 +3193,7 @@ function bindAccount(){
   (async () => { try{ const t = await fbToken(); const j = await idt('lookup', { idToken: t }); const ok = ((j.users || [])[0] || {}).emailVerified;
     $('#vState').textContent = ok ? 'Verified ✓' : 'Not verified yet'; $('#vSend').hidden = !!ok; }catch(e){ $('#vState').textContent = navigator.onLine ? '—' : 'Offline'; } })();
   $('#vSend').addEventListener('click', async () => { try{ await idt('sendOobCode', { requestType:'VERIFY_EMAIL', idToken: await fbToken() }); $('#vSend').textContent = 'Sent. Check your inbox (and spam).'; }catch(e){ err(e.message); } });
-  $('#aOut').addEventListener('click', () => { store.set('nova.user', null); try{ localStorage.removeItem('nova.user'); }catch(e){} updAuthUi(); location.hash = '#home'; });
+  $('#aOut').addEventListener('click', () => { ADM = { list: null, q: '', err: '' }; store.set('nova.user', null); try{ localStorage.removeItem('nova.user'); }catch(e){} updAuthUi(); location.hash = '#home'; });
   const del = $('#aDel'); let armed = false;
   del.addEventListener('click', async () => {
     if(!armed){ armed = true; del.textContent = 'Tap again to permanently delete'; setTimeout(() => { armed = false; del.textContent = 'Delete my account'; }, 5000); return; }
@@ -3190,6 +3203,71 @@ function bindAccount(){
     catch(e){ err(e.message); del.disabled = false; del.textContent = 'Delete my account'; armed = false; }
   });
 }
+/* ===== Admin (hidden; only the NOVA admin account) ===== */
+const ADMIN_EMAIL = 'm.hesham@nova-egi.com';
+const isAdmin = () => { const u = user(); return !!u && String(u.email || '').toLowerCase() === ADMIN_EMAIL; };
+let ADM = { list: null, q: '', err: '' };
+async function admLoad(retry){
+  const t = await fbToken(); let out = [], tok = '';
+  do{
+    let r;
+    try{ r = await fetch(FS().replace(/\/$/, '') + '?pageSize=300' + (tok ? '&pageToken=' + encodeURIComponent(tok) : ''), { headers:{ Authorization:'Bearer ' + t } }); }
+    catch(e){ throw new Error('No internet connection. The user list needs internet.'); }
+    const j = await r.json().catch(() => ({}));
+    if(r.status === 403 && !retry){ const u = user(); u.exp = 0; store.set('nova.user', u); return admLoad(true); }   // refresh token (e.g. email just verified)
+    if(!r.ok) throw new Error(r.status === 403 ? 'Access denied. Make sure your email is verified (My account) and the admin Firestore rules are published.' : 'Could not load users (' + r.status + ').');
+    (j.documents || []).forEach(d => { const o = { uid: d.name.split('/').pop() }; Object.entries(d.fields || {}).forEach(([k, v]) => o[k] = v.stringValue != null ? v.stringValue : v.timestampValue != null ? v.timestampValue : v.booleanValue); out.push(o); });
+    tok = j.nextPageToken || '';
+  } while(tok);
+  return out.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+}
+const DEVN = { 'android':'Android app', 'iphone-app':'iPhone app', 'iphone-web':'iPhone (web link)', 'android-web':'Android (web link)', 'web':'Computer' };
+const fmtD = d => { if(!d) return '—'; const x = new Date(d); return isNaN(x) ? '—' : x.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' }); };
+const waNum = (ph, c) => { let d = String(ph || '').replace(/[^\d+]/g, ''); if(d.startsWith('+')) return d.slice(1); if(d.startsWith('00')) return d.slice(2);
+  const cc = { 'Egypt':'20','Saudi Arabia':'966','United Arab Emirates':'971','Kuwait':'965','Qatar':'974','Bahrain':'973','Oman':'968','Jordan':'962','Iraq':'964','Lebanon':'961','Libya':'218','Sudan':'249','Algeria':'213','Morocco':'212','Tunisia':'216','Yemen':'967','Italy':'39' }[c];
+  return cc && d.startsWith('0') ? cc + d.slice(1) : cc && !d.startsWith(cc) ? cc + d : d; };
+function admFiltered(){
+  const q = ADM.q.trim().toLowerCase(); if(!ADM.list) return [];
+  return q ? ADM.list.filter(u => ['name','company','job','phone','country','email','device'].some(k => String(u[k] || '').toLowerCase().includes(q))) : ADM.list;
+}
+function admRows(){
+  const L = admFiltered();
+  if(!L.length) return `<p class="muted" style="text-align:center;margin:24px 0">${ADM.q ? 'No users match your search.' : 'No users yet.'}</p>`;
+  return L.map(u => { const w = waNum(u.phone, u.country);
+    return `<div class="uRow" data-u="${esc(u.uid)}"><div class="h"><span class="av">${esc(initials(u.name || u.email))}</span><div style="min-width:0"><b>${esc(u.name || '—')}</b><div class="m">${esc([u.job, u.company].filter(Boolean).join(' · ') || '—')}</div><div class="m">${esc([u.country, DEVN[u.device] || u.device].filter(Boolean).join(' · '))}</div></div><div class="d">${fmtD(u.createdAt)}</div></div>
+      <div class="m" style="margin-top:6px">${esc(u.email || '')}${u.phone ? ' · ' + esc(u.phone) : ''}</div>
+      <div class="uAct">${u.phone ? `<a class="ca" href="tel:${esc(String(u.phone).replace(/[^\d+]/g, ''))}">${svg('phone')}Call</a><a class="wa" href="https://wa.me/${esc(w)}">${svg('chat')}WhatsApp</a>` : ''}${u.email ? `<a href="mailto:${esc(u.email)}">${svg('mail')}Email</a>` : ''}</div></div>`; }).join('');
+}
+function admin(){
+  setBar(); setTab('');
+  if(!isAdmin()) return `<div class="wrap"><p class="muted" style="text-align:center;margin-top:40px">This page is not available.</p></div>`;
+  const L = ADM.list || [], wk = L.filter(u => u.createdAt && Date.now() - new Date(u.createdAt) < 7 * 864e5).length;
+  return `<div class="wrap adm">
+    <div class="eyebrow">Admin</div><h2 style="font-size:21px;margin:0">Registered users</h2>
+    <div class="stat2"><div><b>${ADM.list ? L.length : '…'}</b><span>Total users</span></div><div><b>${ADM.list ? wk : '…'}</b><span>New this week</span></div><div><b>${ADM.list ? L.filter(u => /android/.test(u.device || '')).length : '…'}</b><span>Android</span></div></div>
+    <div class="form" style="display:flex;gap:8px"><input id="admQ" placeholder="Search name, company, phone, country…" value="${esc(ADM.q)}" style="flex:1"><button class="btn gold" id="admX" style="flex:none;padding:0 14px">${svg('doc')}Excel</button></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span class="muted small" id="admN">${ADM.list ? admFiltered().length + ' shown' : ''}</span><button class="linkBtn" id="admR">Refresh</button></div>
+    <div class="err" id="admE" ${ADM.err ? '' : 'hidden'}>${esc(ADM.err)}</div>
+    <div id="admL">${ADM.list ? admRows() : '<p class="muted" style="text-align:center;margin:24px 0">Loading users…</p>'}</div>
+  </div>`;
+}
+function bindAdmin(){
+  if(!isAdmin()) return;
+  const load = async () => { ADM.err = ''; try{ ADM.list = await admLoad(); }catch(e){ ADM.err = e.message; } if(location.hash === '#admin') route(); };
+  if(!ADM.list && !ADM.err) load();
+  $('#admR').addEventListener('click', () => { ADM.list = null; ADM.err = ''; route(); });
+  $('#admQ').addEventListener('input', e => { ADM.q = e.target.value; $('#admL').innerHTML = admRows(); $('#admN').textContent = admFiltered().length + ' shown'; });
+  $('#admL').addEventListener('click', e => { if(e.target.closest('a')) return; const r = e.target.closest('.uRow'); r && r.classList.toggle('open'); });
+  $('#admX').addEventListener('click', () => {
+    const L = admFiltered().map(u => Object.assign({}, u, { deviceName: DEVN[u.device] || u.device || '' })); if(!L.length) return ttToast('No users to export');
+    const cols = [['Name','name'],['Company','company'],['Job title','job'],['Mobile','phone'],['Country','country'],['Email','email'],['Device','deviceName'],['Signed up','createdAt'],['Last sign-in','lastLogin']];
+    const q = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const csv = '﻿' + cols.map(c => q(c[0])).join(',') + '\r\n' + L.map(u => cols.map(([, k]) => q(/At$|lastLogin/.test(k) && u[k] ? new Date(u[k]).toLocaleString('en-GB') : u[k])).join(',')).join('\r\n');
+    const name = 'NOVA-app-users_' + new Date().toISOString().slice(0, 10) + '.csv';
+    if(window.NovaApp && NovaApp.shareFile){ NovaApp.shareFile(JSON.stringify({ name, mime:'text/csv', data: b64utf8(csv), subject:'NOVA app users' })); return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type:'text/csv;charset=utf-8' })); a.download = name; a.click();
+  });
+}
 function route(){
   const h = (location.hash || '#home').slice(1), cut = h.indexOf('-');
   const r = cut < 0 ? h : h.slice(0, cut), a = cut < 0 ? '' : h.slice(cut + 1);
@@ -3197,6 +3275,7 @@ function route(){
   if(LOCKED.includes(r) && !user()){ html = authPage('in', h); after = bindAuth; }
   else if(r === 'login'){ html = authPage(a === 'up' ? 'up' : 'in', ''); after = bindAuth; }
   else if(r === 'account'){ html = account(); after = bindAccount; }
+  else if(r === 'admin'){ html = admin(); after = bindAdmin; }
   else if(r === 'partners'){ html = partners(a && catById(a) ? a : ''); after = () => bindPartners(a && catById(a) ? a : ''); }
   else if(r === 'p'){ html = partner(a); }
   else if(r === 'prod'){ html = product(a); }
