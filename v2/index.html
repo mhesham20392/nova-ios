@@ -880,6 +880,15 @@ nav.tabs a.on{color:var(--gold)}
 .infoBtn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:13px;opacity:1}
 .acctBtn{padding:0}.acctBtn .av{width:38px;height:38px;border:2px solid rgba(255,255,255,.25)}
 .evBtn{border-radius:13px}
+.rgBadge{display:flex;align-items:center;gap:5px;height:34px;padding:0 9px;border-radius:13px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);color:#fff;font:700 12px/1 inherit;font-family:inherit;flex:none;margin-left:6px;cursor:default}
+.rgBadge[hidden]{display:none}.rgBadge .fl{font-size:17px;line-height:1}.rgBadge b{font-weight:700;letter-spacing:.02em}.rgBadge i{font-style:normal;opacity:.6;font-size:10px}
+.rgBadge.chg{cursor:pointer;border-color:rgba(214,180,106,.55)}
+.bar.sub .rgBadge{display:none}
+.rgMenu{position:fixed;top:60px;right:10px;z-index:90;min-width:190px;border-radius:16px;background:rgba(14,20,60,.96);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(18px);box-shadow:0 14px 40px rgba(0,0,0,.5);overflow:hidden}
+.rgMenu small{display:block;padding:10px 14px 6px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#d6b46a;font-weight:700}
+.rgMenu button{width:100%;height:46px;display:flex;align-items:center;gap:10px;padding:0 14px;background:none;border:0;border-top:1px solid rgba(255,255,255,.08);color:#fff;font:500 15px inherit;font-family:inherit;cursor:pointer;text-align:left}
+.rgMenu button.on{background:rgba(214,180,106,.16)}.rgMenu button b{font-size:19px}
+
 /* floating tab bar */
 main{padding-bottom:calc(170px + env(safe-area-inset-bottom))}
 nav.tabs{left:14px;right:14px;bottom:calc(12px + env(safe-area-inset-bottom));padding:8px 6px;border-radius:24px;background:rgba(14,20,62,.62);
@@ -944,6 +953,8 @@ nav.tabs a.lk::after{border-color:#121a52}
 
 /* ---- Home (Concept C) ---- */
 .hc{padding:18px 18px 4px;position:relative}
+.rgChip{float:right;margin-top:-2px;height:32px;padding:0 12px;border-radius:16px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;font:600 13px/1 inherit;font-family:inherit;cursor:pointer}
+.rgChip i{font-style:normal;opacity:.6;margin-left:4px}
 .hcHi small{display:block;font-size:13.5px;color:var(--muted);font-weight:500}
 .hcHi h1{font-size:31px;line-height:1.08;margin-top:4px;font-weight:700;color:#fff}
 .hcHi h1 span{background:linear-gradient(90deg,#9db7ff,#ecdcaa);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -965,6 +976,23 @@ nav.tabs a.lk::after{border-color:#121a52}
 .b1 .go svg{width:20px;height:20px}
 .b1.land{animation:hcLand .8s cubic-bezier(.2,1.6,.4,1)}
 @keyframes hcLand{0%{transform:scale(.9)}60%{transform:scale(1.03)}100%{transform:none}}
+.b1.hotT{padding:0;min-height:290px}.b1.hotT:before{display:none}
+.hotT .hbg{position:absolute;inset:0;z-index:-2}.hotT .hbg svg,.hotHero .hbg svg{width:100%;height:100%;display:block}
+.hotT .hsh{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.72))}
+.hotT .hx{position:absolute;left:14px;right:12px;bottom:16px;display:block}
+.hotT .pill{background:rgba(255,255,255,.18);color:#fff;box-shadow:none;animation:none;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.08em;font-size:9.5px}
+.hotT b{font-size:21px;margin-top:10px;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.hotT small{color:rgba(255,255,255,.85)}
+.hotT .go{left:auto;right:12px;top:12px;bottom:auto;width:38px;height:38px}
+.hotHero{position:relative;min-height:290px;overflow:hidden;isolation:isolate}
+.hotHero .hbg{position:absolute;inset:0;z-index:-2}.hotHero .hsh{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.05) 20%,rgba(5,8,28,.88))}
+.hotHero .hx{position:absolute;left:18px;right:18px;bottom:20px}
+.hotHero .hk{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#f4e3b0}
+.hotHero h1{font-family:"InterD","InterT",sans-serif;font-size:32px;line-height:1.04;letter-spacing:-.03em;margin:8px 0 8px;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.hotHero p{font-size:14px;line-height:1.45;color:rgba(255,255,255,.88);margin:0}
+.hotCard{position:relative;overflow:hidden}.hotNo{position:absolute;right:14px;top:6px;font:800 54px/1 "InterD","InterT",sans-serif;color:rgba(255,255,255,.07)}
+.hotWhen{display:inline-flex;align-items:center;gap:8px;margin-top:4px;padding:7px 12px;border-radius:12px;background:rgba(214,180,106,.16);color:var(--gold-hi,#ecdcaa);font-size:13px;font-weight:600}
+.hotWhen svg{width:16px;height:16px;flex:none}
 .b2{padding:14px}
 .b2 small{font-size:11.5px;color:rgba(255,255,255,.6);font-weight:500}
 .b2 .n{font-family:"InterD","InterT",sans-serif;font-size:34px;font-weight:700;letter-spacing:-.04em;line-height:1.1}
@@ -1099,7 +1127,21 @@ nav.tabs a.lk::after{border-color:#121a52}
 #intro .flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(200,167,94,.45),transparent 55%);opacity:0;pointer-events:none}
 #intro.lit .flash{animation:flash 1s ease-out}
 @keyframes flash{0%{opacity:0}15%{opacity:1}100%{opacity:0}}
-@media (prefers-reduced-motion: reduce){#intro .p{animation:none!important;opacity:1;transform:none;filter:none}}
+#intro.pick .stage{transform:translateY(-24vh) scale(.58)}
+#intro.pick .tap{opacity:0!important;pointer-events:none}
+#intro .rg{position:absolute;left:50%;top:46%;width:min(86vw,380px);transform:translateX(-50%) translateY(14px);opacity:0;pointer-events:none;transition:opacity .7s ease .55s,transform .7s ease .55s;text-align:center}
+#intro.pick .rg{opacity:1;pointer-events:auto;transform:translateX(-50%)}
+#intro .rg h2{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#c8a75e;font-weight:600;margin:0 0 14px}
+#intro .rgBtn{width:100%;height:56px;border-radius:16px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.09);color:#fff;font:600 16px system-ui,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:0 18px;cursor:pointer;backdrop-filter:blur(14px)}
+#intro .rgBtn i{font-style:normal;transition:transform .25s;opacity:.7}
+#intro .rg.open .rgBtn i{transform:rotate(180deg)}
+#intro .rgList{margin-top:8px;border-radius:16px;border:1px solid rgba(255,255,255,.16);background:rgba(14,20,60,.82);backdrop-filter:blur(18px);overflow:hidden;max-height:0;opacity:0;transition:max-height .35s ease,opacity .25s}
+#intro .rg.open .rgList{max-height:300px;opacity:1}
+#intro .rgList button{width:100%;height:54px;display:flex;align-items:center;gap:12px;padding:0 18px;background:none;border:0;border-top:1px solid rgba(255,255,255,.08);color:#fff;font:500 16px system-ui,sans-serif;cursor:pointer;text-align:left}
+#intro .rgList button:first-child{border-top:0}
+#intro .rgList button:active{background:rgba(255,255,255,.1)}
+#intro .rgList b{font-size:22px}
+@media (prefers-reduced-motion: reduce){#intro .p{animation:none!important;opacity:1;transform:none;filter:none}#intro .stage,#intro .rg{transition:none}}
 </style>
 
 <div id="intro" role="button" aria-label="Enter NOVA Engineering app" tabindex="0">
@@ -1199,8 +1241,28 @@ nav.tabs a.lk::after{border-color:#121a52}
   requestAnimationFrame(() => intro.classList.add('go'));
   setTimeout(finish, reduce ? 50 : 2950);
 
+  function hasRegion(){ try{ const r = window.NovaRegion && NovaRegion.auto(); if(r){ NovaRegion.set(r, true); return true; } }catch(e){} return false; }   // guests are asked on every launch; signed-in users use their account country
+  function showPick(){
+    if(intro.classList.contains('pick')) return;
+    const R = (window.NOVA && NOVA.regions) || [];
+    const box = document.createElement('div'); box.className = 'rg';
+    box.innerHTML = '<h2>Choose your region</h2><button type="button" class="rgBtn"><span>Select your region</span><i>▼</i></button><div class="rgList">' +
+      R.map(r => '<button type="button" data-r="' + r.id + '"><b>' + r.flag + '</b>' + r.name + '</button>').join('') + '</div>';
+    box.addEventListener('click', e => {
+      e.stopPropagation();
+      const o = e.target.closest('[data-r]');
+      if(o){ try{ window.NovaRegion.set(o.dataset.r); }catch(x){} leave(); return; }
+      if(e.target.closest('.rgBtn')) box.classList.toggle('open');
+    });
+    intro.appendChild(box); requestAnimationFrame(() => intro.classList.add('pick'));
+    setTimeout(() => box.classList.add('open'), 1300);
+  }
   function enter(){
     if(!ready){ finish(); return; }          // first tap during the animation skips to the finished logo
+    if(!hasRegion()){ showPick(); return; }  // first launch: logo moves up and the user picks a region
+    leave();
+  }
+  function leave(){
     if(left) return; left = true;
     intro.classList.add('leave','gone');
     try{ window.NovaApp && NovaApp.introDone(); }catch(e){}
@@ -1216,6 +1278,7 @@ nav.tabs a.lk::after{border-color:#121a52}
   <a class="back" id="back" aria-label="Back" href="javascript:history.back()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></a>
   <div id="barContent"></div>
   <a class="evBtn" id="evBtn" href="#events" aria-label="Events"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><i></i><b>Events</b></a>
+  <a class="rgBadge" id="rgBadge" hidden></a>
   <a class="infoBtn acctBtn" id="acctBtn" href="#account" aria-label="My account"></a>
   <a class="infoBtn" href="#company" aria-label="About NOVA"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></a>
 </header>
@@ -1226,9 +1289,50 @@ nav.tabs a.lk::after{border-color:#121a52}
 <script src="library.js"></script>
 <script src="urs.js"></script>
 <script src="products.js"></script>
+<script src="regions.js"></script>
 <script>
 (function(){
 const D = window.NOVA, C = D.contact, $ = s => document.querySelector(s);
+/* ===== Regions: the chosen region decides which partners the user can see ===== */
+const REGIONS = D.regions || [];
+let REGION = ''; try{ REGION = localStorage.getItem('nova.region') || ''; }catch(e){}
+D.all = D.partners.slice();
+function applyRegion(){
+  const ids = D.regionMap && D.regionMap[REGION];
+  D.partners.length = 0; D.all.forEach(p => { if(!ids || ids.includes(p.id)) D.partners.push(p); });
+  if(D.company && D.company.stats && D.company.stats[0]) D.company.stats[0].n = D.partners.length + '+';
+}
+applyRegion();
+const regionObj = () => REGIONS.find(r => r.id === REGION) || {};
+const hiddenNames = () => D.all.filter(p => !D.partners.includes(p)).flatMap(p => { const w = p.name.split(/\s+/)[0]; return [p.name, w.length > 3 ? w : '', p.id === 'cora' ? 'co.ra' : ''].filter(Boolean); });
+const mentionsHidden = t => { const l = String(t || '').toLowerCase(); return hiddenNames().some(n => l.includes(n.toLowerCase())); };
+const evTxt = t => mentionsHidden(t) ? String(t).replace(/\s+(?:and|with)?\s*(?:hosted\s+)?partners\b.*$/i, '').replace(/[.\s]+$/, '') + '.' : t;
+const hotItems = () => (D.hot && D.hot[REGION]) || [];
+const TT_ON = () => D.partners.some(p => p.id === 'antares');
+window.NovaRegion = {
+  get: () => REGION,
+  set: (id, stay) => { try{ localStorage.setItem('nova.region', id); }catch(e){} REGION = id; applyRegion(); AI_KB = ''; updRegionBadge(); if(!stay && location.hash && location.hash !== '#') location.hash = ''; route(); },
+  auto: () => userRegion(),
+  reset: () => { try{ localStorage.removeItem('nova.region'); }catch(e){} location.reload(); }
+};
+const regionOfCountry = c => { const l = String(c || '').toLowerCase(); return /egypt|مصر/.test(l) ? 'egypt' : /emirates|uae/.test(l) ? 'uae' : /saudi|ksa/.test(l) ? 'ksa' : /iraq|العراق/.test(l) ? 'iraq' : ''; };
+const userRegion = () => { try{ const u = JSON.parse(localStorage.getItem('nova.user') || 'null'); return u ? regionOfCountry((u.profile || {}).country) : ''; }catch(e){ return ''; } };
+{ const ur = userRegion(); if(ur){ REGION = ur; applyRegion(); } }
+function updRegionBadge(){
+  const b = document.getElementById('rgBadge'); if(!b) return;
+  const o = regionObj(); const staff = typeof isAdmin === 'function' && isAdmin();
+  b.hidden = !o.id; b.innerHTML = `<span class="fl">${o.flag || ''}</span>${staff ? '<i>▾</i>' : ''}`; b.title = o.name || ''; b.setAttribute('aria-label', 'Region: ' + (o.name || ''));
+  b.classList.toggle('chg', !!staff);
+}
+function regionMenu(){
+  const old = document.getElementById('rgMenu'); if(old){ old.remove(); return; }
+  const m = document.createElement('div'); m.id = 'rgMenu'; m.className = 'rgMenu';
+  m.innerHTML = '<small>Company view — change region</small>' + REGIONS.map(r => `<button type="button" data-r="${r.id}" class="${r.id === REGION ? 'on' : ''}"><b>${r.flag}</b>${esc(r.name)}</button>`).join('');
+  m.addEventListener('click', e => { const o = e.target.closest('[data-r]'); if(o){ m.remove(); window.NovaRegion.set(o.dataset.r, true); } });
+  document.body.appendChild(m);
+  setTimeout(() => document.addEventListener('click', function h(e){ if(!e.target.closest('#rgMenu,#rgBadge')){ m.remove(); document.removeEventListener('click', h); } }), 0);
+}
+document.addEventListener('click', e => { if(e.target.closest && e.target.closest('#rgBadge.chg')) regionMenu(); });
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 const I = {
@@ -1294,7 +1398,7 @@ function home(){
     <div class="hcHi"><small>${esc(hcGreet())}</small><h1>What are we <span>building</span><br>today?</h1></div>
     <form class="hcSearch" id="hcS">${svg('search')}<input id="hcQ" type="search" placeholder="Search machines, partners…" enterkeyhint="search" autocomplete="off"></form>
     <div class="bento">
-      <a class="bx b1" href="#tt" id="ttHot"><span class="pill">🔥 HOT · EDA</span><b>Track &amp; Trace<br>Builder</b><small>Serialisation &amp;<br>aggregation lines</small><img src="img/tt_evo.png" alt=""><span class="go">${svg('ne', 2.2)}</span></a>
+      ${TT_ON() ? `<a class="bx b1" href="#tt" id="ttHot"><span class="pill">🔥 HOT · EDA</span><b>Track &amp; Trace<br>Builder</b><small>Serialisation &amp;<br>aggregation lines</small><img src="img/tt_evo.png" alt=""><span class="go">${svg('ne', 2.2)}</span></a>` : (hotItems().length ? `<a class="bx b1 hotT" href="#hot" id="ttHot"><span class="hbg">${hotArt(REGION)}</span><span class="hsh"></span><span class="hx"><span class="pill">${(D.hotTheme[REGION]||{}).flag || ''} ${esc((D.hotTheme[REGION]||{}).pill || '')}</span><b>${esc((D.hotTheme[REGION]||{}).tile || '')}</b><small>${esc((D.hotTheme[REGION]||{}).tsub || '')}</small></span><span class="go">${svg('ne',2)}</span></a>` : `<a class="bx b1" href="#partners"><span class="pill">${esc(regionObj().name || 'NOVA')}</span><b>Machines<br>&amp; Lines</b><small>Technology partners<br>for your region</small></a>`)}
       <div class="bx b2"><small>${esc(D.company.stats[1].l)}</small><div class="n">${esc(D.company.stats[1].n)}</div><div class="ch"><span>${esc(D.company.stats[2].n)} jobs</span><span class="g">${esc(D.company.stats[3].n)} offices</span></div></div>
       <a class="bx b3" href="#urs"><span class="ic">${svg('doc')}</span><div><b>URS Builder</b><span>Step by step</span></div></a>
       <a class="bx b4" href="#partners"><span class="ic">${svg('grid')}</span><div><b>${D.partners.length} technology partners</b><small>Sterile · Solids · Packaging · Utilities</small></div><span class="ar">${svg('chev')}</span></a>
@@ -1336,12 +1440,12 @@ function home(){
     </a>
   </div>
 
-  <div class="sec">
+  ${D.partners.some(p => p.id === 'sorgente') ? `  <div class="sec">
     <div class="card" style="display:flex;gap:14px;align-items:center">
       <div style="flex:1"><div class="eyebrow">Presence in Europe</div><b>Sister company SORGENTE SRL in Milan</b><p class="muted" style="margin:4px 0 0;font-size:13px">Original spare parts, 0% customs, fast delivery.</p></div>
       <a class="btn line" href="#p-sorgente">${svg('chev')}</a>
     </div>
-  </div>
+  </div>` : ''}
   <p class="foot">© ${new Date().getFullYear()} NOVA Engineering · New Cairo, Egypt</p>`;
 }
 
@@ -1403,7 +1507,7 @@ function partner(id){
   const body = `Hello NOVA team,\n\nI'm interested in ${p.name} equipment.\n\nProduct / machine:\nCompany:\nCountry:\nPhone:\n\nThank you.`;
   return `
   <div class="dhero">
-    ${p.id !== 'techniconsult' ? `<div class="photo"><img src="img/photo_${p.id}.jpg" alt="${esc(p.name)} equipment"></div>` : ''}
+    ${p.id !== 'techniconsult' && !p.nophoto ? `<div class="photo"><img src="img/photo_${p.id}.jpg" alt="${esc(p.name)} equipment"></div>` : ''}
   </div>
   <div class="dhead">
     <div class="lg"><img src="img/logo_${p.id}.jpg" alt=""></div>
@@ -1428,6 +1532,55 @@ function partner(id){
   </div>`;
 }
 
+
+function hotArt(id){
+  const stars = n => Array.from({length:n},(_,i)=>`<circle cx="${(i*83+30)%400}" cy="${(i*47+12)%150}" r="${i%3?1:1.6}" fill="#fff" opacity="${.35+(i%4)*.15}"/>`).join('');
+  const palm = (x,y,k=1) => `<g transform="translate(${x} ${y}) scale(${k})" fill="#04150e"><path d="M-2 0 Q-1 -50 3 -92 L6 -92 Q2 -50 4 0z"/><path d="M4 -92 Q-30 -112 -52 -92 Q-28 -104 4 -88z M4 -92 Q30 -118 58 -98 Q30 -106 4 -88z M4 -92 Q-12 -128 -40 -134 Q-8 -126 4 -88z M4 -92 Q16 -130 44 -136 Q14 -124 4 -88z M4 -92 Q4 -122 6 -140 Q10 -120 4 -88z"/></g>`;
+  const dune = (c,y,a) => `<path d="M0 ${y} Q80 ${y-a} 170 ${y-a/3} T400 ${y-a/2} V400 H0z" fill="${c}"/>`;
+  if(id === 'ksa') return `<svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#03281a"/><stop offset=".55" stop-color="#0a6a44"/><stop offset="1" stop-color="#d9b25f"/></linearGradient><radialGradient id="gks" cx=".7" cy=".62" r=".5"><stop offset="0" stop-color="#ffe9a8" stop-opacity=".95"/><stop offset="1" stop-color="#ffe9a8" stop-opacity="0"/></radialGradient></defs>
+    <rect width="400" height="400" fill="url(#gk)"/><rect width="400" height="400" fill="url(#gks)"/>${stars(26)}
+    <text x="200" y="210" text-anchor="middle" font-family="InterD,Inter,sans-serif" font-weight="700" font-size="150" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2">2030</text>
+    <g fill="#052a1b" opacity=".9"><rect x="40" y="250" width="22" height="80"/><rect x="66" y="228" width="18" height="102"/><rect x="88" y="262" width="26" height="68"/><rect x="262" y="240" width="20" height="90"/><rect x="286" y="206" width="16" height="124"/><rect x="306" y="256" width="28" height="74"/></g>
+    ${dune('#0b3d2a',318,34)}${dune('#082e20',345,26)}${dune('#04180f',372,18)}${palm(72,330,.9)}${palm(338,338,1.1)}</svg>`;
+  if(id === 'uae') return `<svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a1140"/><stop offset=".5" stop-color="#4b2f86"/><stop offset=".78" stop-color="#e2704a"/><stop offset="1" stop-color="#ffc16b"/></linearGradient><linearGradient id="gus" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb35c" stop-opacity=".55"/><stop offset="1" stop-color="#0a1140"/></linearGradient></defs>
+    <rect width="400" height="400" fill="url(#gu)"/>${stars(30)}
+    <g fill="#0a0c2e"><rect x="20" y="238" width="30" height="110"/><rect x="54" y="214" width="24" height="134"/><rect x="82" y="252" width="34" height="96"/><path d="M140 348 V190 L148 120 L152 74 L156 120 L164 190 V348z"/><rect x="170" y="226" width="26" height="122"/><rect x="200" y="196" width="22" height="152"/><rect x="226" y="246" width="34" height="102"/><rect x="266" y="210" width="26" height="138"/><rect x="296" y="238" width="30" height="110"/><rect x="330" y="224" width="24" height="124"/><rect x="358" y="256" width="34" height="92"/></g>
+    <g fill="#ffd98a" opacity=".75">${Array.from({length:46},(_,i)=>`<rect x="${24+(i*37)%360}" y="${230+(i*53)%110}" width="2.4" height="3"/>`).join('')}</g>
+    <rect y="348" width="400" height="52" fill="url(#gus)"/><g stroke="#ffd98a" stroke-opacity=".35" stroke-width="1.5" fill="none"><path d="M10 366 H390"/><path d="M60 378 H340"/><path d="M110 389 H290"/></g></svg>`;
+  if(id === 'iraq') return `<svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gi" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b2e45"/><stop offset=".5" stop-color="#1c7a86"/><stop offset=".8" stop-color="#f1b765"/><stop offset="1" stop-color="#e58a43"/></linearGradient><radialGradient id="gis" cx=".5" cy=".7" r=".42"><stop offset="0" stop-color="#fff2c4"/><stop offset=".5" stop-color="#ffd27a" stop-opacity=".7"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient></defs>
+    <rect width="400" height="400" fill="url(#gi)"/><rect width="400" height="400" fill="url(#gis)"/>${stars(14)}
+    <g fill="#2a1a0c" opacity=".92"><path d="M96 318 H304 V292 H284 V268 H264 V244 H244 V222 H156 V244 H136 V268 H116 V292 H96z"/><path d="M186 222 V204 H214 V222z"/></g>
+    <rect y="318" width="400" height="82" fill="#3b2412"/>
+    <g fill="none" stroke="#7fd0e0" stroke-width="3" stroke-linecap="round" opacity=".85"><path d="M-10 350 Q60 330 140 352 T300 350 T420 344"/><path d="M-10 376 Q80 358 170 378 T330 374 T420 368" stroke="#bfeaf2"/></g>
+    ${palm(52,322,1)}${palm(352,322,.9)}</svg>`;
+  return '';
+}
+
+function hotPage(){
+  const th = (D.hotTheme || {})[REGION] || {};
+  setBar(th.bar || 'Insights'); setTab('home');
+  const it = hotItems(), wa = 'https://wa.me/' + C.mobile.replace('+','') + '?text=' + encodeURIComponent('Hello NOVA, I saw the ' + (regionObj().name || '') + ' page in the app and I would like to discuss.');
+  return `
+  <section class="hotHero"><div class="hbg">${hotArt(REGION)}</div><div class="hsh"></div>
+    <div class="hx"><span class="hk">${th.flag || ''} ${esc(th.eyebrow || '')}</span><h1>${esc(th.slogan || 'Insights & events')}</h1><p>${esc(th.line || '')}</p></div></section>
+  <div class="wrap" style="padding-top:14px">
+    ${it.map((x, n) => `<div class="card hotCard">
+      <div class="hotNo">0${n + 1}</div>
+      <div class="eyebrow">${esc(x.tag)}</div><h3 style="margin:0 0 6px;font-size:20px;line-height:1.15">${esc(x.t)}</h3>
+      ${x.when ? `<div class="hotWhen">${svg('cal')}<span>${esc(x.when)}${x.where ? ' · ' + esc(x.where) : ''}</span></div>` : ''}
+      <p class="pdov" style="margin-top:8px">${esc(x.d)}</p>
+      <ul class="dots">${x.pts.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+      <p class="muted small" style="margin:8px 0 0">Source: ${esc(x.src)}</p>
+    </div>`).join('')}
+    <div class="pdcta">
+      <h3>NOVA is with you after the sale and on every project</h3>
+      <p>${esc(D.hotSupport || '')}</p>
+      <a class="btn gold" href="#quote">${svg('send')}Request a proposal</a>
+      <div class="row2"><a class="btn" href="#support">${svg('tool')}After-sales support</a><a class="btn" href="${wa}">${svg('chat')}WhatsApp</a></div>
+    </div>
+  </div>`;
+}
+
 function product(a){
   const [pid, gi, ii] = (a || '').split('.'), p = pById(pid), g = catOf(pid)[+gi], x = g && g[1][+ii];
   if(!p || !x) return partner(pid);
@@ -1442,7 +1595,7 @@ function product(a){
     <h1>${esc(x[0])}</h1>
     ${x[1] ? `<p>${esc(x[1])}</p>` : ''}
   </div>
-  ${x[4] ? `<div class="pdph pdimg${x[4].startsWith('prod_andock') ? ' dark' : ''}"><img src="img/${x[4]}" alt="${esc(x[0])}"></div>` : p.id !== 'techniconsult' ? `<div class="pdph"><img src="img/photo_${p.id}.jpg" alt="${esc(p.name)} equipment"></div>` : ''}
+  ${x[4] ? `<div class="pdph pdimg${x[4].startsWith('prod_andock') ? ' dark' : ''}"><img src="img/${x[4]}" alt="${esc(x[0])}"></div>` : p.id !== 'techniconsult' && !p.nophoto ? `<div class="pdph"><img src="img/photo_${p.id}.jpg" alt="${esc(p.name)} equipment"></div>` : ''}
   <div class="wrap">
     ${d.o ? `<div class="card"><div class="eyebrow">Overview</div><p class="pdov">${esc(d.o)}</p></div>` : ''}
     ${d.f && d.f.length ? `<div class="card"><div class="eyebrow">Key features</div><ul class="pdf">${d.f.map((f, i) => `<li><i>${i + 1}</i><span>${esc(f)}</span></li>`).join('')}</ul></div>` : ''}
@@ -1504,7 +1657,7 @@ function events(){
             <div class="evMeta">${svg('cal')}${esc(evRange(e))}</div><div class="evMeta">${svg('pin')}${esc(e.venue)}, ${esc(e.city)}</div>
             ${e.booth ? `<div class="evMeta">${svg('grid')}${esc(e.booth)}</div>` : ''}
             <span class="evChip">${svg('clock')}${evLive(e) ? 'Happening now' : n === 0 ? 'Starts today' : `In ${n} day${n===1?'':'s'}`}</span>
-            <p class="small" style="margin:10px 0 0">${esc(e.summary)}</p>
+            <p class="small" style="margin:10px 0 0">${esc(evTxt(e.summary))}</p>
             <div class="evAct"><a href="${evGcal(e)}">${svg('cal')}Add to calendar</a><a href="${evWa(e)}">${svg('chat')}Book a meeting</a><a href="${evMap(e)}">${svg('pin')}Directions</a></div>
           </div></div>`; }).join('')}` : ''}
       ${past.length ? `<div class="sec-h" style="margin-top:18px"><h2>Where we've been</h2></div>${past.map(e => `
@@ -1512,8 +1665,8 @@ function events(){
           ${e.img ? `<div class="ph" style="background-image:url('img/${e.img}')"><em>${esc(e.kind)}</em></div>` : `<div class="ph none">${esc(e.t)}<em>${esc(e.kind)}</em></div>`}
           <div class="bd"><h3>${esc(e.t)}</h3><div class="evMeta">${svg('cal')}${esc(evRange(e))} · ${esc(e.city)}</div>
             ${e.booth ? `<div class="evMeta">${svg('grid')}${esc(e.booth)}</div>` : ''}
-            <p class="small" style="margin:8px 0 0">${esc(e.summary)}</p>
-            ${(e.partners||[]).length ? `<div class="evLogos">${e.partners.map(id => `<img src="img/logo_${id}.jpg" alt="">`).join('')}</div>` : ''}
+            <p class="small" style="margin:8px 0 0">${esc(evTxt(e.summary))}</p>
+            ${(e.partners||[]).length ? `<div class="evLogos">${e.partners.filter(pById).map(id => `<img src="img/logo_${id}.jpg" alt="">`).join('')}</div>` : ''}
           </div></a>`).join('')}` : ''}
       <a class="card" href="${esc(C.linkedin)}" style="display:flex;gap:12px;align-items:center;margin-top:6px">
         <div style="flex:1"><div class="eyebrow">Latest news</div><b>Follow NOVA Engineering on LinkedIn for event announcements, booth news and photos.</b></div><span class="btn line">${svg('ext')}</span></a>
@@ -1528,8 +1681,8 @@ function eventItem(id){
       <span class="evTag">${esc(e.kind)}</span><h2 style="font-size:22px;margin:0 0 6px">${esc(e.t)}</h2>
       <div class="evMeta">${svg('cal')}${esc(evRange(e))}</div><div class="evMeta">${svg('pin')}${esc(e.venue)}, ${esc(e.city)}</div>
       ${e.booth ? `<div class="evMeta">${svg('grid')}${esc(e.booth)}</div>` : ''}
-      <div class="card" style="margin-top:14px"><p class="pdov">${esc(e.summary)}</p></div>
-      ${(e.highlights||[]).length ? `<div class="card"><div class="eyebrow">Highlights</div><ul class="pdf">${e.highlights.map((h,i) => `<li><i>${i+1}</i><span>${esc(h)}</span></li>`).join('')}</ul></div>` : ''}
+      <div class="card" style="margin-top:14px"><p class="pdov">${esc(evTxt(e.summary))}</p></div>
+      ${(e.highlights||[]).length ? `<div class="card"><div class="eyebrow">Highlights</div><ul class="pdf">${e.highlights.filter(h => !mentionsHidden(h)).map((h,i) => `<li><i>${i+1}</i><span>${esc(h)}</span></li>`).join('')}</ul></div>` : ''}
       ${(e.gallery||[]).length ? `<div class="evGal">${e.gallery.map(g => `<img src="img/${g}" alt="">`).join('')}</div>` : ''}
       ${ps.length ? `<div class="card"><div class="eyebrow">Partners with NOVA</div><div class="plist">${ps.map(p => `<a class="prow" href="#p-${p.id}"><div class="lg"><img src="img/logo_${p.id}.jpg" alt=""></div><div style="min-width:0"><b>${esc(p.name)}</b><span>${esc(p.country)}</span></div><span class="chev">${svg('chev')}</span></a>`).join('')}</div></div>` : ''}
       <a class="btn navy block" href="#events">${svg('cal')}All events</a>
@@ -1562,17 +1715,17 @@ function company(section){
 
     <div class="sec" style="margin:24px 0 0" id="services"><div class="sec-h"><h2>Technical Support & Services</h2></div>
       <p class="muted" style="margin:0 0 12px">We keep track of every detail. Our after-sales and technical support departments work around the clock to serve every project.</p>
-      <div class="svc">${co.services.map((s,i) => `<div class="card"><div class="num">${i+1}</div><b>${esc(s.t)}</b><p>${esc(s.d)}</p></div>`).join('')}</div>
+      <div class="svc">${co.services.map((s,i) => `<div class="card"><div class="num">${i+1}</div><b>${esc(s.t)}</b><p>${esc(mentionsHidden(s.d) ? s.d.replace(/our sister company SORGENTE SRL/i, 'our Italian sister company') : s.d)}</p></div>`).join('')}</div>
       <a class="btn navy block" style="margin-top:12px" href="#support">${svg('tool')}Open a support ticket</a>
     </div>
 
-    <div class="sec" style="margin:24px 0 0" id="europe"><div class="sec-h"><h2>Strategic Partnership</h2></div>
+    ${D.partners.some(p => p.id === 'sorgente') ? `    <div class="sec" style="margin:24px 0 0" id="europe"><div class="sec-h"><h2>Strategic Partnership</h2></div>
       <div class="card">
         <div class="eyebrow">Our sister company in Milano, Italy</div>
         <div class="partnerLogos"><div class="lg"><img src="img/nova_logo.jpg" alt="NOVA"></div><div class="lg"><img src="img/logo_sorgente.jpg" alt="Sorgente"></div></div>
         ${co.sorgente.map(t=>`<p>${esc(t)}</p>`).join('')}
       </div>
-    </div>
+    </div>`:''}
 
     <div class="sec" style="margin:24px 0 0"><div class="sec-h"><h2>Markets we serve</h2></div>
       <div class="chips" style="flex-wrap:wrap;margin:0">${co.markets.map(m=>`<span class="chip">${esc(m)}</span>`).join('')}</div>
@@ -1598,7 +1751,7 @@ function contact(){
     <a class="qcta" href="#quote">
       <span class="qeye">Proposal Desk</span>
       <b>Request a tailored proposal</b>
-      <span>Share your URS or technical data. Our engineers recommend the right solution from 29+ technology partners.</span>
+      <span>Share your URS or technical data. Our engineers recommend the right solution from ${D.partners.length} technology partners.</span>
       <span class="qcta-go">Start ${svg('chev',2.4)}</span>
     </a>
     <div class="clist" style="margin-top:14px">${rows.map(([i,l,v,h]) => `
@@ -2436,7 +2589,7 @@ const qChips = (key, list) => `<div class="qchips" data-key="${key}">${list.map(
 
 function qS1(){
   return `<div class="qhead"><div class="qeye">Step one</div><h1>What are you<br>building?</h1>
-    <p>Choose the application. Our engineers match it with the right technology from 29+ partners.</p></div>
+    <p>Choose the application. Our engineers match it with the right technology from ${D.partners.length} partners.</p></div>
     <div class="qapps">${APPS.map(a => `<button type="button" class="qapp ${Q.app===a.id?'on':''}" data-app="${a.id}">
       <span class="qai">${svg(a.icon)}</span><b>${esc(a.t)}</b><small>${esc(a.s)}</small></button>`).join('')}</div>`;
 }
@@ -2767,6 +2920,7 @@ const TT_EDA = [
 const ttNewLine = n => ({ id: 'L' + Date.now().toString(36) + Math.floor(Math.random()*99), name: 'Line ' + n, setup:'', oem:{}, aggSetup:'', aggOem:{}, pack:'Carton', speed:'', levels:['case','pallet'], line:{} });
 function ttState(){
   const s = Object.assign({ step:1, cur:0, markets:['eg'], c:{}, cat:0, reg:'all', q:'' }, store.get('nova.tt', {}));
+  const U = user(); if(U){ const p = U.profile || {}; s.c = s.c || {}; [['name','name'],['company','company'],['phone','phone']].forEach(([k, f]) => { if(!s.c[k] && p[f]) s.c[k] = p[f]; }); if(!s.c.email) s.c.email = U.email; }
   if(!Array.isArray(s.lines) || !s.lines.length){
     const L = ttNewLine(1);
     if(s.setup){ L.setup = s.setup; L.oem = s.oem || {}; L.pack = s.pack || 'Carton';
@@ -2799,16 +2953,19 @@ function ttScore(L){
 }
 const ttRank = p => p >= 100 ? 'Compliance Master 🏆' : p >= 75 ? 'Expert' : p >= 40 ? 'Line Builder' : p > 0 ? 'Rookie' : 'Start building';
 function ttHome(){
+  if(!TT_ON()) return '';
   return `<a class="ttHot" href="#tt" id="ttHot"><span class="glow"></span>
     <span class="rib">🔥 HOT · NEW</span>
     <span class="fl"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20v.01M17 20h4M20 17v3"/></svg><i class="bolt">⚡</i></span>
     <span class="tx"><b>Track & Trace Builder</b><span>EDA serialisation is live in Egypt. Build your compliant line in minutes.</span><em>Start now →</em></span></a>`;
 }
 function ttFab(){
+  if(!TT_ON()) return '';
   try{ if(sessionStorage.getItem('ttFabX')) return ''; }catch(e){}
   return `<a class="ttFab" id="ttFab" href="#tt"><span class="ttRingO"></span><span class="ttRingO p2"></span><span class="e">🔥</span><span><small>HOT TOPIC</small>Track & Trace</span><span class="x" id="ttFabX" aria-label="Hide">✕</span></a>`;
 }
 function ttBoom(){
+  if(!TT_ON()) return;
   try{ if(sessionStorage.getItem('ttBoom')) return; sessionStorage.setItem('ttBoom','1'); }catch(e){}
   if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const go = () => {
@@ -3258,7 +3415,7 @@ function bindBoard(rerender){
 /* ===== Accounts: Firebase Authentication + Firestore (REST, no SDK) ===== */
 const FB = { key:'AIzaSyBhIitfgUu4wRln2sSBrQTyYBaJ6C37PvI', project:'nova-engineering-4eba9' };
 const LOCKED = ['library','lib','urs','tt','support','ticket'];
-const COUNTRIES = ['Egypt','Saudi Arabia','United Arab Emirates','Kuwait','Qatar','Bahrain','Oman','Jordan','Iraq','Lebanon','Libya','Sudan','Algeria','Morocco','Tunisia','Yemen','Italy','Other'];
+const COUNTRIES = ['Egypt','United Arab Emirates','Saudi Arabia','Iraq']
 const AUTH_ERR = {
   EMAIL_EXISTS:'An account with this email already exists. Please sign in instead.',
   EMAIL_NOT_FOUND:'Wrong email or password.', INVALID_PASSWORD:'Wrong email or password.', INVALID_LOGIN_CREDENTIALS:'Wrong email or password.',
@@ -3314,6 +3471,7 @@ function updAuthUi(){
   const u = user(), b = document.getElementById('acctBtn');
   if(b) b.innerHTML = u ? `<span class="av">${esc(initials((u.profile || {}).name || u.email))}</span>` : svg('user');
   document.querySelectorAll('#tabs a').forEach(a => a.classList.toggle('lk', !u && LOCKED.includes(a.dataset.r)));
+  updRegionBadge();
 }
 function authPage(mode, next){
   setBar(); setTab('');
@@ -3377,6 +3535,7 @@ function bindAuth(){
         catch(e){ if(e.code === 'NOT_FOUND' || e.code === '404'){ const u = user(); u.profile = { name: j.displayName || '' }; u.pending = true; store.set('nova.user', u); } }
         stat('/signin/' + STATS_DEV, 'Sign in (' + STATS_DEV + ')');
       }
+      { const ar = userRegion(); if(ar && ar !== REGION){ window.NovaRegion.set(ar, true); } }
       updAuthUi(); ttToast && ttToast(up ? 'Welcome to NOVA! Your account is ready.' : 'Signed in. Welcome back!');
       const to = next ? '#' + next : '#home'; if(location.hash === to) route(); else location.hash = to;
     }catch(e){ err(e.message); go.disabled = false; go.textContent = up ? 'Create account' : 'Sign in'; }
@@ -3470,14 +3629,18 @@ function outboxLoad(){ try{ OUTBOX = JSON.parse(localStorage.getItem('nova.outbo
 function outboxSave(){ try{ localStorage.setItem('nova.outbox', JSON.stringify(OUTBOX)); }catch(e){ try{ localStorage.setItem('nova.outbox', JSON.stringify(OUTBOX.map(x => Object.assign({}, x, { files: [] })))); }catch(e2){} } }
 async function reqSend(r, files){   // → 'sent' | 'queued'
   try{ await reqUpload(r, files); stat('/request/' + r.type + '/' + STATS_DEV, 'Request: ' + r.type); return 'sent'; }
-  catch(e){ if(!e.offline) throw e; OUTBOX.push({ r: Object.assign({}, r), files }); outboxSave(); return 'queued'; }
+  catch(e){ if(!e.offline) throw e; OUTBOX.push({ uid: user().uid, r: Object.assign({}, r), files }); outboxSave(); return 'queued'; }
 }
 async function outboxFlush(){
   if(!OUTBOX.length || !user() || !navigator.onLine) return;
-  const left = []; let off = false;
-  for(const x of OUTBOX){ if(off){ left.push(x); continue; } try{ await reqUpload(x.r, x.files || []); }catch(e){ left.push(x); if(e.offline) off = true; } }
+  const left = [], me = user().uid, done = []; let off = false;
+  for(const x of OUTBOX){ if(off || (x.uid && x.uid !== me)){ left.push(x); continue; }   // only send the signed-in user's own requests
+    try{ await reqUpload(x.r, x.files || []); done.push(x.r.ref); }catch(e){ left.push(x); if(e.offline) off = true; } }
   OUTBOX = left; outboxSave();
-  if(!OUTBOX.length) try{ ttToast('Your saved requests were sent to NOVA'); }catch(e){}
+  if(!done.length) return;
+  ['nova.tickets', 'nova.quotes'].forEach(k => store.set(k, store.get(k, []).map(t => done.includes(t.id || t.ref) ? Object.assign(t, { sent:'sent' }) : t)));
+  try{ ttToast(done.length === 1 ? 'Your saved request was sent to NOVA' : 'Your ' + done.length + ' saved requests were sent to NOVA'); }catch(e){}
+  const h = location.hash; if(/^#(ticket|account)/.test(h)) route();
 }
 outboxLoad(); addEventListener('online', outboxFlush); setTimeout(outboxFlush, 4000);
 async function reqFile(ref, i){
@@ -3501,7 +3664,7 @@ const isAdmin = () => isOwner() || !!(user() && user().staff);
 async function staffCheck(){
   const u = user(); if(!u || isOwner()) return;
   let ok = false; try{ const d = fsDoc(await fsReq('GET', 'config/staff')); ok = (d.emails || []).map(x => String(x).toLowerCase()).includes(String(u.email).toLowerCase()); }catch(e){ if(e.offline) return; }
-  const v = user(); if(v && !!v.staff !== ok){ v.staff = ok; store.set('nova.user', v); if(location.hash === '#account') route(); }
+  const v = user(); if(v && !!v.staff !== ok){ v.staff = ok; store.set('nova.user', v); updRegionBadge(); if(location.hash === '#account') route(); }
 }
 setTimeout(staffCheck, 2500);
 let ADM = { list: null, q: '', err: '', reqs: null, rq: '', rt: '', rs: '', rerr: '', team: null, terr: '' };
@@ -3687,7 +3850,7 @@ function aiKB(){
   });
   lines.push('LIBRARY ARTICLES: ' + L.articles.map(a => a.title + ' [lib-' + a.id + ']').join('; '));
   try{ const { up } = evLists(); if(up.length) lines.push('UPCOMING EVENTS: ' + up.map(e => e.t + ', ' + evRange(e) + ', ' + e.city + ' [events]').join('; ')); }catch(e){}
-  lines.push('APP TOOLS: URS Builder writes a User Requirement Specification [urs]; Track & Trace Builder designs serialisation/aggregation lines for Egypt (EDA) and 46 world markets [tt]; Support ticket for machine issues [support]; Request a proposal [quote]; Contact page [contact]; Library [library].');
+  lines.push('APP TOOLS: URS Builder writes a User Requirement Specification [urs]' + (TT_ON() ? '; Track & Trace Builder designs serialisation/aggregation lines for Egypt (EDA) and 46 world markets [tt]' : '') + '; Support ticket for machine issues [support]; Request a proposal [quote]; Contact page [contact]; Library [library].');
   return AI_KB = lines.join('\n');
 }
 function aiSystem(){
@@ -3699,7 +3862,7 @@ Rules:
 - For prices or quotations always point to [[quote|Request a proposal]] or sales (${C.sales}, WhatsApp ${C.mobileLabel}).
 - For a broken machine, point to [[support|Open a support ticket]] and, if production is stopped, the 24/7 mobile ${C.mobileLabel}.
 - General GMP / regulatory questions: answer briefly from well-established knowledge, mention it is general guidance, and link the relevant Library article if one exists.
-- Add links using exactly this format: [[link-id|short label]], where link-id is one of the ids shown in brackets in the catalog (e.g. [[p-steriline|Steriline]], [[prod-steriline.0.0|RA-RC washer]], [[lib-annex1|Annex 1 article]]). Use at most 4 links. Never write raw URLs for app pages.
+- Add links using exactly this format: [[link-id|short label]], where link-id is one of the ids shown in brackets in the catalog (e.g. [[p-${D.partners[0].id}|${D.partners[0].name}]], [[prod-${D.partners[0].id}.0.0|product name]], [[lib-annex1|Annex 1 article]]). Use at most 4 links. Never write raw URLs for app pages.
 - Plain text with **bold** and "- " bullet lists only. No tables, no headings.
 - Stay on topic (NOVA, pharma/chemical/cosmetics manufacturing, the app). Politely decline anything unrelated.
 ${pr.name ? `The user is ${pr.name}${pr.job ? ', ' + pr.job : ''}${pr.company ? ' at ' + pr.company : ''}${pr.country ? ' (' + pr.country + ')' : ''}.` : ''}
@@ -3805,8 +3968,9 @@ addEventListener('hashchange', aiFabSync);
 function route(){
   const h = (location.hash || '#home').slice(1), cut = h.indexOf('-');
   const r = cut < 0 ? h : h.slice(0, cut), a = cut < 0 ? '' : h.slice(cut + 1);
+  if(r === 'tt' && !TT_ON()){ location.replace('#home'); return; }
   let html, after;
-  if(LOCKED.includes(r) && !user()){ html = authPage('in', h); after = bindAuth; }
+  if((LOCKED.includes(r) || r === 'admin' || r === 'adm') && !user()){ html = authPage('in', h); after = bindAuth; }
   else if(r === 'login'){ html = authPage(a === 'up' ? 'up' : 'in', ''); after = bindAuth; }
   else if(r === 'account'){ html = account(); after = bindAccount; }
   else if(r === 'admin'){ html = admin(a); after = () => bindAdmin(a); }
@@ -3832,7 +3996,8 @@ function route(){
   else if(r === 'ticket'){ html = ticket(a); }
   else if(r === 'contact'){ html = contact(); }
   else if(r === 'quote'){ html = quote(a); after = bindQuote; }
-  else if(r === 'tt'){ html = tt(a); after = bindTT; }
+  else if(r === 'tt' && TT_ON()){ html = tt(a); after = bindTT; }
+  else if(r === 'hot' && hotItems().length){ html = hotPage(); }
   else { html = home(); after = bindHome; }
   const app = $('#app');
   app.innerHTML = `<div class="view">${html}</div>`;
