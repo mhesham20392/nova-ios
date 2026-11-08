@@ -15,7 +15,7 @@
     egypt:["adam","steriline","zirbus","tm","pluemat","mpa","am","freund","omag","tgm","kikusui","pharmagel","cadmach","famartec","prisma","antares","siempharma","cora","andock","elettracqua","cdz","generalfilter","ipm","hfiltration","inexport","sorgente","techniconsult","delta","tema","rigel","abc","ocmi"],
     uae:["steriline","delama","adam","tm","pluemat","mpa","omag","tgm","kikusui","pharmagel","cadmach","famartec","siempharma","cora","andock","elettracqua","cdz","generalfilter","ipm","hfiltration","inexport","sorgente","techniconsult","delta","rigel","abc","ocmi"],
     ksa:["adam","steriline","zirbus","tm","mpa","am","pharmagel","omag","tgm","kikusui","siempharma","famartec","stevanato","cora","andock","elettracqua","cdz","generalfilter","ipm","hfiltration","inexport","sorgente","techniconsult","delta","rigel","abc","ocmi"],
-    iraq:["solme","steriline","zirbus","tm","pluemat","mpa","omas","freund","kikusui","omag","famartec","prisma","metapack","arca","pieri","elettracqua","cdz","hfiltration","generalfilter","ipm","inexport","techniconsult","delta","rigel","abc","fourstars"]
+    iraq:["steriline","zirbus","tm","pluemat","mpa","omas","freund","kikusui","omag","famartec","prisma","arca","pieri","elettracqua","cdz","hfiltration","generalfilter","ipm","inexport","techniconsult","delta","rigel","abc","fourstars"]
   };
 
 
@@ -65,15 +65,6 @@
       { t:'Combined systems', items:['COMBO HyPerDekont® (H₂O₂ + steam)','DLOV/W sterilizer + washer'] },
       { t:'Washers, dryers & utilities', items:['GLP washer DLWM','Static dryers DLDR / DLDR-V','H₂O₂ pass-boxes DLVHP/DE','Steam generators DLSG','ZeroStop® continuous sterilization'] } ] },
 
-  { id:'solme', name:'So.l.me', cat:'sterile', country:'Italy', since:'1980', url:'https://www.solme.com/en/', nophoto:true,
-    about:[
-      'Founded in 1980 in San Biagio di Callalta (Treviso), Italy — stainless-steel process equipment for pharmaceutical, chemical and food industries.',
-      'Pharma tanks, preparation vessels, reactors, heat exchangers, sterile-filter housings and filter dryers, up to complete plants.',
-      'ISO 9001 since 2001; ASME Section VIII Div. 1 "U" stamp since 2016; PED, ATEX and EN 1090 capability.',
-      'Built to URS, cGMP and ASME BPE with mirror finishes down to Ra < 0.25 µm.' ],
-    groups:[
-      { t:'Pharma process equipment', items:['Tanks (PW, WFI, sterile solutions)','Preparation vessels, 2–50,000 L','Syrup & suspension plants','Reactors','Shell-and-tube heat exchangers','Sterile filter housings','Filter dryers'] } ] },
-
   { id:'omas', name:'OMAS Tecnosistemi', cat:'nonsterile', country:'Italy', since:'1973', url:'https://imagroup.com/brands/omas-tecnosistemi-s-p-a/', nophoto:true,
     about:[
       'Building machines since 1973 in Cerro Maggiore (Milan), Italy; 60% owned by IMA S.p.A. and part of the IMA Group since 2024.',
@@ -95,16 +86,6 @@
       { t:'Glass converting', items:['Vial forming lines','Ampoule forming line SAM30','Cartridge forming lines','Syringe forming lines','Tube loaders, annealing ovens, inline controls, packing, needle assembly'] },
       { t:'Assembly & packaging', items:['Assembly platforms (Benchtop, Pilot, Linear)','Secondary packaging lines & end-of-line'] },
       { t:'Visual inspection', items:['Automatic, semi-automatic and bench inspection systems','AI inspection & Vision Robot Unit (VRU)'] } ] },
-
-  { id:'metapack', name:'Metapack Engineering', cat:'packaging', country:'Italy', since:'2007', url:'https://www.metapack.it/', nophoto:true,
-    about:[
-      'Italian maker of print and vision systems for packaging and labelling machines, working on pharma serialization since 2007.',
-      'Certified System Integrator for Cognex vision.',
-      'Thermal-inkjet (TIJ), laser and drop-on-demand UV printing, each followed by camera verification of print and codes.',
-      'Track & Trace systems compliant with 21 CFR Part 11; worldwide on-site assistance.' ],
-    groups:[
-      { t:'Serialization & print', items:['Vericode TTE Mark & Verify','Print & vision systems','Decoding & print-quality inspection','Track & Trace L1–L2'] },
-      { t:'Inspection & handling', items:['LTT-80R labelling machine','MediaCount vial & ampoule counter','Glue & folding inspection','Alu micro-holes inspection'] } ] },
 
   { id:'arca', name:'Arca Etichette', cat:'packaging', country:'Italy', url:'https://www.arcaetichette.it/en/', nophoto:true,
     about:[
@@ -197,40 +178,6 @@
    ]]
   ];
 
-  P.solme = [
-   ['Process vessels',[
-    ['Pharmaceutical tanks','Hygienic tanks for PW, WFI and sterile solutions.','https://www.solme.com/en/pharmaceutical/tanks/',
-      S('Tanks for sterile liquid solutions such as eye drops and injectables, and for purified water and WFI. URS, cGMP and ASME BPE requirements apply from the commercial phase to final build.',
-        ['Single-wall or insulated with cladding','Atmospheric or pressure designs (PED and/or ASME)','Mechanical agitation, magnetic drive or both'],
-        [['Surface finish','Satin or mirror, Ra < 0.25 µm'],['Standards','URS, cGMP, ASME BPE, PED / ASME']],['Sterile solutions','PW','WFI'])],
-    ['Preparation vessels','Sterile and non-sterile preparation vessels, 2 to 50,000 L.','https://www.solme.com/en/pharmaceutical/preparation-vessels/',
-      S('Vessels for sterile and non-sterile production under strict cGMP, designed to EU cGMP and FDA requirements with ASME/PED certification.',
-        ['Mechanical agitator with double sanitary gas-flushed seal, or magnetic drive','Jacket or dimpled-coil heating and cooling','Welded stainless-steel insulation cladding','Fixed frame or on wheels','Electrical panel with on-board PLC'],
-        [['Capacity','2 – 50,000 L'],['Wetted parts','AISI 316L'],['Internal finish','Mirror, Ra up to 0.2 µm'],['Standards','EU cGMP, FDA, ASME/PED']],['Sterile production','Non-sterile liquids'])],
-    ['Syrup & suspension plants','Equipment and complete plants for syrups and suspensions.','https://www.solme.com/en/pharmaceutical/syrup-and-suspension/',
-      S('Individual machines up to complete integrated plants for syrup and suspension production, designed and built to customer specifications following cGMP and GEP.',
-        ['Same quality standard as sterile processes','From single equipment to complete plants'],[],['Syrups','Oral suspensions'])],
-    ['Pharmaceutical reactors','Reactors built to URS, ASME, BPE and cGMP.','https://www.solme.com/prodotti/farmaceutico/reattori/',
-      S('Reactors built to the client\'s URS with welded or flanged roof, integrated CIP/SIP and several heating and cooling options.',
-        ['Jacket, single or double half-pipe, or lamella coil','Mechanical and/or magnetic agitators','Stainless steel, duplex, super duplex or Hastelloy'],
-        [['Surface finish','Satin or mirror, Ra < 0.25 µm'],['Certifications','PED, ATEX, ASME']],['API','Chemical synthesis'])]
-   ]],
-   ['Heat transfer, filtration & drying',[
-    ['Pharma heat exchangers','Shell-and-tube exchangers to ASME BPE and cGMP.','https://www.solme.com/en/pharmaceutical/heat-exchangers-pharma/',
-      S('Shell-and-tube heat exchangers designed for pharmaceutical processes in several configurations.',
-        ['Fixed plate, floating head or extractable bundle','U-tube bundles, reboilers/kettles and tube-in-tube types','Tubes expanded, welded, or both'],
-        [['Finish','Satin or mirror, Ra < 0.25 µm'],['Certifications','PED, ATEX, ASME']],['Heating and cooling of process liquids'])],
-    ['Sterile filter housings','Cartridge and lenticular housings up to 1,000 mm.','https://www.solme.com/en/pharmaceutical/housing-for-sterile-filters/',
-      S('Housings for sterile filters, designed and built to each customer\'s specification.',
-        ['Cartridge or lenticular filters','Stainless steel, duplex, super duplex or Hastelloy'],
-        [['Max diameter','1,000 mm'],['Internal finish','F1, 2B, satin or mirror, Ra < 0.25 µm'],['External finish','F1, 2B, satin or mirror, Ra < 0.45 µm'],['Certifications','PED, ATEX, ASME']],['Sterile filtration'])],
-    ['Filter dryers','Filter dryers for frequent product changeover and sterile areas.','https://www.solme.com/en/pharmaceutical/filters-dryer/',
-      S('Filter dryers optimised for frequent production changes and operation in sterile environments, designed to PED and/or ASME and optionally ATEX.',
-        ['Vertical or horizontal cylindrical, welded or flanged bottom','Half-pipe jacket or microwave heating','CIP, SIP and UV cleaning','Two- or three-blade agitator, fixed or variable speed','Fabric, metal-mesh or sintered filtration media','PLC and hydraulic unit'],
-        [['Seals','Lip-seal, mechanical or bellows'],['Certifications','PED / ASME, optional ATEX']],['API drying','Filtration of crystals'])]
-   ]]
-  ];
-
   P.omas = [
    ['Processing',[
     ['Liquid & cream processing','Dissolver, mixer, pre-melter and Turbomix.','https://imagroup.com/technologies/liquid-cream-processing/',
@@ -288,37 +235,6 @@
     ['Visual inspection systems','Automatic, semi-automatic and bench systems for parenterals.','https://www.stevanatogroup.com/en/technologies-equipment/visual-inspection/',
       S('Inspection machines for ampoules, vials, microvials, cartridges, syringes and bottles, for water-like liquids, viscous and oily products, suspensions and lyophilised products.',
         ['AI platform combining deep-learning models with inspection expertise','Vision Robot Unit (VRU) combining vision and robotics','Solution for hazardous drugs bundling inspection, labelling and pre-sterilised vials'],[],['Ampoules','Vials','Cartridges','Syringes'])]
-   ]]
-  ];
-
-  P.metapack = [
-   ['Serialization & print',[
-    ['Vericode TTE Mark & Verify (top version)','Prints and verifies 2D codes on cartons at up to 400/min.','https://www.metapack.it/mark-and-verify-top-version/',
-      S('Metapack\'s most popular Mark & Verify machine for pharma carton serialization, combining in-line printing and verification of variable data and 2D codes for vignette and tamper-evident applications.',
-        ['Servo-driven flighted belts for positive transport','One HMI for print, camera, tamper-evident application and verification','Cognex vision supplied by Metapack as Certified System Integrator','L1–L2 management system connectable to third-party L3'],
-        [['Max speed','Up to 400 cartons/min'],['Print technologies','HP TIJ; laser and DOD UV supported'],['Regulatory','21 CFR Part 11 compliant']],
-        ['Serialization','Vignette','Tamper-evident'])],
-    ['Print & vision systems','TIJ or DOD-UV printing followed by camera inspection.','https://www.metapack.it/print-vision/',
-      S('Print and vision systems for packaging and labelling machines, mainly pharmaceutical serialization and variable-data printing.',
-        ['DOD-UV or thermal-inkjet printing','Camera inspection after every print system, with serial-code management','Image and logo inspection, up to seven cameras on high-grade machines','Late-stage customisation for cartons and labels'],[],['Cartons','Labels'])],
-    ['Decoding & print-quality inspection','Full print inspection and fast decoding in one system.','https://www.metapack.it/decoding-and-print-quality-inspection/',
-      S('A single system for full print-quality inspection and fast code decoding.',['Print-quality inspection and decoding in one unit'],[],['Serialized packaging'])],
-    ['Track & Trace (L1–L2)','Serialization and aggregation software and hardware.','https://www.metapack.it/pharma/serialization-and-aggregation/track-and-trace/',
-      S('Track & Trace systems for pharmaceutical serialization and aggregation, compliant with 21 CFR Part 11.',['Proprietary L1–L2 management','Connects to third-party L3'],[['Regulatory','21 CFR Part 11']],['Serialization','Aggregation'])]
-   ]],
-   ['Inspection & handling',[
-    ['LTT-80R labelling machine','Prints variable data on labels and applies them to vials and bottles.','https://www.metapack.it/labeling-machine/',
-      S('Prints variable data on adhesive labels and applies them to bottles or vials, with camera checks of print quality including OCR/OCV.',
-        ['DOD-UV or cartridge printing','Positive vial/bottle transport','Automatic rejection for print or application errors','Tool-free format changes','HMI and industrial PC; access designed for 21 CFR Part 11'],
-        [['Formats','Flexible bottle/vial sizes']],['Vials','Bottles'])],
-    ['MediaCount vial & ampoule counter','Counts and inspects containers in trays and prints a tray label.','https://www.metapack.it/vial-and-ampoule-counters/',
-      S('Free-standing counter: the operator loads metal or plastic trays, and the machine counts the containers, inspects them and produces a label and batch report. Can be configured for automatic in-line counting.',
-        ['Linear camera on a three-axis handling system','Vision software built on COGNEX technology','Optional checks for damaged containers and non-compliant caps','PDF or XML batch report','Touchscreen with password login and recipes'],
-        [['Tray types','Metal or plastic'],['Reports','PDF or XML']],['Vials','Ampoules'])],
-    ['Glue & folding inspection (Veribox)','Inspection of glue and folding on cartons.','https://www.metapack.it/veribox-glue-and-folding-inspection-system/',
-      S('Glue and folding inspection system for cartons.',['Glue and fold inspection'],[],['Carton converting'])],
-    ['Alu micro-holes inspection','Inspection of micro-holes in aluminium foil.','https://www.metapack.it/alu-microholes-inspection/',
-      S('Inspection system for micro-holes in aluminium foil.',['Micro-hole detection'],[],['Aluminium foil'])]
    ]]
   ];
 
